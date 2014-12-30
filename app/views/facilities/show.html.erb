@@ -1,0 +1,26 @@
+<%= render 'nav' %>
+<div id="index-main">
+<h3>Show page for <%= @facility.name %></h3>
+
+<p>Name: <%=@facility.name %></p>
+
+<p>Welcomes: <%=@facility.welcomes %></p>
+
+<p>Services: <%=@facility.services %></p>
+
+<p>Address: <%=@facility.address %></p>
+
+<p>Phone: <%=@facility.phone %></p>
+
+<p>Website: <%=@facility.website %></p>
+
+<p>Description: <%=@facility.description %></p>
+
+<p>Hours: <%=@facility.hours %></p>
+
+<p>Notes: <%=@facility.notes %></p>
+
+<%= link_to "All Facilities", facilities_path %>
+<%= link_to "Edit", edit_facility_path%>
+<%= link_to "Delete", @facility, method: :delete, data: {confirm: 'Are you sure?'}%>
+</div>

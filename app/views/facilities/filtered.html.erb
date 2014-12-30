@@ -1,0 +1,114 @@
+<%= render 'nav' %>
+<div class="toggle-group">
+
+<div class="container-prox">
+  <div class="btn-group btn-toggle prox">
+    <p>Sort By</p>
+    <p class="prox-toggle"></p>
+    <p class="open-toggle"></p>
+    <button class="btn btn-primary active" id="near">Near</button>
+    <button class="btn btn-default" id="name">Name</button>
+  </div>
+</div>
+
+<div class="container-open">
+  <div class="btn-group btn-toggle open"> 
+    <p>Open Now</p> 
+    <button class="btn btn-primary active">Yes</button>
+    <button class="btn btn-default">No</button>
+  </div>
+</div>
+
+<div class="container-search">
+  <div class="btn-group btn-toggle">
+    <p><span style="color:white">.</span></p>
+    <%= link_to "Options", root_path, class: 'btn btn-default' %>
+  </div>
+</div>
+
+</div>
+
+<div id="index">
+<br>
+<br>
+<br>
+<br>
+
+
+<div id="block-index">
+<% @facilities.each do |f| %>
+	<strong><%= link_to f.name, f%></strong><br>
+	<%=f.description%><br>
+	<%=f.services%>
+  <hr>
+<% end %>
+</div>
+<div id="block-name-index">
+<% @facilities_name.each do |f| %>
+  <strong><%= link_to f.name, f%></strong><br>
+  <%=f.description%><br>
+  <%=f.services%>
+  <hr>
+<% end %>
+</div>
+
+
+</div>
+
+
+<!--REFACTOR: references to content_tag can probably be removed since we're just toggling. Keep for now until sure. -->
+<%= content_tag :div, class: "temp_information", data: {jsfacilities: @facilities, jsfacilitiesname: @facilities_name} do %>
+<% end %>
+
+
+<script>
+
+var jsfacilities = $('.temp_information').data('jsfacilities');
+var jsfacilitiesname = $('.temp_information').data('jsfacilitiesname');
+var bi = document.getElementById("block-index");
+var bni = document.getElementById("block-name-index");
+
+
+bni.style.display = 'none';
+bi.style.display = 'block;'
+
+$('.prox').click(function() {
+    $(this).find('.btn').toggleClass('active');  
+    $(this).find('.btn').toggleClass('btn-primary');
+    $(this).find('.btn').toggleClass('btn-default');
+
+    $('.prox-toggle').toggle();
+
+        if ( bni.style.display == 'none' ){
+          bi.style.display = 'none';
+          bni.style.display = 'block';
+        }else{
+            bi.style.display = 'block';
+            bni.style.display = 'none';
+        }
+
+});
+
+$('.open').click(function() {
+    $(this).find('.btn').toggleClass('active');  
+    $(this).find('.btn').toggleClass('btn-primary');
+    $(this).find('.btn').toggleClass('btn-default');
+
+    $('.open-toggle').toggle();
+
+    if ($('.open-toggle').is(':visible')){
+      alert("Open is selected");
+    }
+
+});
+
+
+
+
+//function create_query() {
+  //document.getElementById("block-index").innerHTML = "Hello World";
+  //window.location = "<%=filtered_facilities_path(:Name)%>";
+//}
+
+
+</script>

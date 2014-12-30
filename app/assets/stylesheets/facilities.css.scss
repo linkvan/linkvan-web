@@ -1,0 +1,109 @@
+// Place all the styles related to the facilities controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+nav {
+	height: 60px;
+	background-color: white;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 200;
+	padding: 8px 0 4px;
+	border-bottom: 1px solid #DDD;
+
+	.nav-container .logo img{
+		width: 40px;
+		float: left;
+		margin-top: 5px;
+		margin-left: 230px;
+		display: block
+
+	}
+
+	.container-nav-search{
+		float: left;
+		margin-top: 5px;
+		margin-left: 350px;
+	}
+}
+
+#index-main{
+	margin-top: 75px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 650px;
+	width:90%;
+
+	.btn {
+
+		align-items: flex-start;
+		box-sizing: border-box;
+		-webkit-user-select: none;
+		background-color: #fff;
+		background-image: -webkit-linear-gradient(white, #EBEBEB);
+		border: 1px solid #B8B8B8;
+		border-radius: 4px;
+		font-size: 20px;
+		font-weight: 700;
+		text-align: left;
+		cursor: pointer;
+		padding-top: 10px;
+		padding-right: 0px;
+		padding-bottom: 10px;
+		padding-left: 50px;
+		width: 100%;
+
+	}
+
+	.btn:hover {
+  		background: #b4b7b8;
+  		text-decoration: none;
+	}
+	
+}
+
+#index {
+	
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 650px;
+	width:90%;
+	
+
+	
+}
+
+.toggle-group{
+	margin-top: 75px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 650px;
+	width:90%;
+
+	p {
+		color: #929292;
+	}
+
+	.container-prox{
+		float: left;
+		margin-left:0;
+		width: 120px;
+	}
+
+	.container-open{
+		float: left;
+		margin-left: 150px;
+		width: 93px;
+	
+	}
+
+	.container-search{
+		float: left;
+		margin-left: 175px;
+		width: 71px;
+		
+	}
+}
