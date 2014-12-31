@@ -72,22 +72,51 @@ Count facilities: <%=@facilities.count%></br>
   <hr>
 <% end %>
 </div>
+<div id="no-results">
+  <strong>Sorry, no search results found.</strong><br>
+</div>
 
 
 </div>
 
+<%= content_tag :div, class: "temp_information", data: {nearyescheck: @facilities_near_yes.count, nearnocheck: @facilities_near_no.count} do %>
+<% end %>
+
 
 <script>
-
+var nearyescheck = $('.temp_information').data('nearyescheck');
+var nearnocheck = $('.temp_information').data('nearnocheck');
 var nearyes = document.getElementById("near-yes");
 var nearno = document.getElementById("near-no");
 var nameyes = document.getElementById("name-yes");
 var nameno = document.getElementById("name-no");
+var noresults = document.getElementById("no-results");
 
-nearyes.style.display = 'block';
-nearno.style.display = 'none';
-nameyes.style.display = 'none';
-nameno.style.display = 'none';
+if ((nearyescheck == 0) && (nearnocheck != 0)){
+  $('.open').find('.btn').toggleClass('active');  
+  $('.open').find('.btn').toggleClass('btn-primary');
+  $('.open').find('.btn').toggleClass('btn-default');
+  $('.prox-toggle').toggle();
+  nearyes.style.display = 'none';
+  nearno.style.display = 'block';
+  nameyes.style.display = 'none';
+  nameno.style.display = 'none';
+  nameno.style.display = 'none';
+  noresults.style.display = 'none';
+}else if ((nearyescheck == 0) && (nearnocheck == 0)){
+  nearyes.style.display = 'none';
+  nearno.style.display = 'none';
+  nameyes.style.display = 'none';
+  nameno.style.display = 'none';
+  noresults.style.display = 'block';
+}else{
+  nearyes.style.display = 'block';
+  nearno.style.display = 'none';
+  nameyes.style.display = 'none';
+  nameno.style.display = 'none';
+  noresults.style.display = 'none';
+}
+
 
 $('.prox').click(function() {
     $(this).find('.btn').toggleClass('active');  
