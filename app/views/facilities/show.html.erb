@@ -1,4 +1,7 @@
 <%= render 'nav' %>
+
+
+
 <div id="index-main">
 <h3>Show page for <%= @facility.name %></h3>
 
@@ -7,6 +10,8 @@
 <p>Welcomes: <%=@facility.welcomes %></p>
 
 <p>Services: <%=@facility.services %></p>
+<div id="map-canvas"></div>
+
 
 <p>Address: <%=@facility.address %></p>
 
@@ -30,3 +35,37 @@
 <%= link_to "Edit", edit_facility_path%>
 <%= link_to "Delete", @facility, method: :delete, data: {confirm: 'Are you sure?'}%>
 </div>
+
+
+
+<%= content_tag :div, class: "temp_information", data: {jsevent: @facility} do %>
+<% end %>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+var jsevent = $('.temp_information').data('jsevent');
+var map;
+function initialize() {
+  var myLocation = new google.maps.LatLng(jsevent.lat, jsevent.long);
+      
+        var mapOptions = {
+          center: myLocation,
+          zoom: 13
+        };
+
+        var marker = new google.maps.Marker({
+      		position: myLocation,
+      		animation: google.maps.Animation.DROP,
+      		title: jsevent.name});
+
+        
+
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  marker.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+    
