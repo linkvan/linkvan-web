@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141224055900) do
+ActiveRecord::Schema.define(version: 20141231025951) do
 
   create_table "facilities", force: true do |t|
     t.string   "name"
@@ -23,10 +23,23 @@ ActiveRecord::Schema.define(version: 20141224055900) do
     t.string   "phone"
     t.string   "website"
     t.text     "description"
-    t.text     "hours"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.time     "startsmon_at"
+    t.time     "endsmon_at"
+    t.time     "startstues_at"
+    t.time     "endstues_at"
+    t.time     "startswed_at"
+    t.time     "endswed_at"
+    t.time     "startsthurs_at"
+    t.time     "endsthurs_at"
+    t.time     "startsfri_at"
+    t.time     "endsfri_at"
+    t.time     "startssat_at"
+    t.time     "endssat_at"
+    t.time     "startssun_at"
+    t.time     "endssun_at"
   end
 
 end

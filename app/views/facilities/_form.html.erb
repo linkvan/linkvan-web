@@ -28,9 +28,68 @@
     <%= f.text_area :description, cols: 40, rows: 7 %>
   </p>
   <p>
-    <%= f.label :hours %><br/>
-    <%= f.text_area :hours, cols: 40, rows: 7 %>
+    <%= f.label :startsmon_at %><br/>
+    <%= f.time_select :startsmon_at, default: 8.hours.ago  %>
   </p>
+  <p>
+    <%= f.label :endsmon_at %><br/>
+    <%= f.time_select :endsmon_at, default: 8.hours.ago  %>
+  </p>
+
+  <p>
+    <%= f.label :startstues_at %><br/>
+    <%= f.time_select :startstues_at, default: 8.hours.ago  %>
+  </p>
+  <p>
+    <%= f.label :endstues_at %><br/>
+    <%= f.time_select :endstues_at, default: 8.hours.ago  %>
+  </p>
+
+  <p>
+    <%= f.label :startswed_at %><br/>
+    <%= f.time_select :startswed_at, default: 8.hours.ago  %>
+  </p>
+  <p>
+    <%= f.label :endswed_at %><br/>
+    <%= f.time_select :endswed_at, default: 8.hours.ago  %>
+  </p>
+
+  <p>
+    <%= f.label :startsthurs_at %><br/>
+    <%= f.time_select :startsthurs_at, default: 8.hours.ago  %>
+  </p>
+  <p>
+    <%= f.label :endsthurs_at %><br/>
+    <%= f.time_select :endsthurs_at, default: 8.hours.ago  %>
+  </p>
+
+  <p>
+    <%= f.label :startsfri_at %><br/>
+    <%= f.time_select :startsfri_at, default: 8.hours.ago  %>
+  </p>
+  <p>
+    <%= f.label :endsfri_at %><br/>
+    <%= f.time_select :endsfri_at, default: 8.hours.ago  %>
+  </p>
+
+  <p>
+    <%= f.label :startssat_at %><br/>
+    <%= f.time_select :startssat_at, default: 8.hours.ago  %>
+  </p>
+  <p>
+    <%= f.label :endssat_at %><br/>
+    <%= f.time_select :endssat_at, default: 8.hours.ago  %>
+  </p>
+
+  <p>
+    <%= f.label :startssun_at %><br/>
+    <%= f.time_select :startssun_at, default: 8.hours.ago  %>
+  </p>
+  <p>
+    <%= f.label :endssun_at %><br/>
+    <%= f.time_select :endssun_at, default: 8.hours.ago  %>
+  </p>
+
   <p>
     <%= f.label :notes %><br/>
     <%= f.text_area :notes, cols: 40, rows: 7 %>

@@ -1,6 +1,6 @@
 Linkvan::Application.routes.draw do
   get "facilities/filter/:scope" => "facilities#filtered", as: :filtered_facilities
-  #get "facilities/filter/:scope/prox" => "facilities#prox", as: :filtered_facilities_prox
+  get 'facilities/filter/:scope/:latitude&:longitude', to: 'facilities#filtered', as: :coords_facilities
   root 'facilities#index'
   resources :facilities
 

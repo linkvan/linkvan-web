@@ -34,17 +34,38 @@
 <br>
 <br>
 
+Count nearyes: <%=@facilities_near_yes.count%><br>
+Count nearno: <%=@facilities_near_no.count%><br>
+Count nameyes: <%=@facilities_name_yes.count%><br>
+Count nameno: <%=@facilities_name_no.count%><br>
+Count facilities: <%=@facilities.count%></br>
 
-<div id="block-index">
-<% @facilities.each do |f| %>
-	<strong><%= link_to f.name, f%></strong><br>
-	<%=f.description%><br>
-	<%=f.services%>
+<div id="near-yes">
+<% @facilities_near_yes.each do |f| %>
+  <strong><%= link_to f.name, f%></strong><br>
+  <%=f.description%><br>
+  <%=f.services%>
   <hr>
 <% end %>
 </div>
-<div id="block-name-index">
-<% @facilities_name.each do |f| %>
+<div id="near-no">
+<% @facilities_near_no.each do |f| %>
+  <strong><%= link_to f.name, f%></strong><br>
+  <%=f.description%><br>
+  <%=f.services%>
+  <hr>
+<% end %>
+</div>
+<div id="name-yes">
+<% @facilities_name_yes.each do |f| %>
+  <strong><%= link_to f.name, f%></strong><br>
+  <%=f.description%><br>
+  <%=f.services%>
+  <hr>
+<% end %>
+</div>
+<div id="name-no">
+<% @facilities_name_no.each do |f| %>
   <strong><%= link_to f.name, f%></strong><br>
   <%=f.description%><br>
   <%=f.services%>
@@ -56,36 +77,46 @@
 </div>
 
 
-<!--REFACTOR: references to content_tag can probably be removed since we're just toggling. Keep for now until sure. -->
-<%= content_tag :div, class: "temp_information", data: {jsfacilities: @facilities, jsfacilitiesname: @facilities_name} do %>
-<% end %>
-
-
 <script>
 
-var jsfacilities = $('.temp_information').data('jsfacilities');
-var jsfacilitiesname = $('.temp_information').data('jsfacilitiesname');
-var bi = document.getElementById("block-index");
-var bni = document.getElementById("block-name-index");
+var nearyes = document.getElementById("near-yes");
+var nearno = document.getElementById("near-no");
+var nameyes = document.getElementById("name-yes");
+var nameno = document.getElementById("name-no");
 
-
-bni.style.display = 'none';
-bi.style.display = 'block;'
+nearyes.style.display = 'block';
+nearno.style.display = 'none';
+nameyes.style.display = 'none';
+nameno.style.display = 'none';
 
 $('.prox').click(function() {
     $(this).find('.btn').toggleClass('active');  
     $(this).find('.btn').toggleClass('btn-primary');
     $(this).find('.btn').toggleClass('btn-default');
 
-    $('.prox-toggle').toggle();
+    $('.open-toggle').toggle();
 
-        if ( bni.style.display == 'none' ){
-          bi.style.display = 'none';
-          bni.style.display = 'block';
-        }else{
-            bi.style.display = 'block';
-            bni.style.display = 'none';
-        }
+    if (($('.open-toggle').is(':visible')) && ($('.prox-toggle').is(':visible'))){
+      nearyes.style.display = 'block';
+      nearno.style.display = 'none';
+      nameyes.style.display = 'none';
+      nameno.style.display = 'none';
+    }else if (($('.open-toggle').is(':visible')) && ($('.prox-toggle').is(':hidden'))){
+      nearyes.style.display = 'none';
+      nearno.style.display = 'block';
+      nameyes.style.display = 'none';
+      nameno.style.display = 'none';
+    }else if (($('.open-toggle').is(':hidden')) && ($('.prox-toggle').is(':visible'))){
+      nearyes.style.display = 'none';
+      nearno.style.display = 'none';
+      nameyes.style.display = 'block';
+      nameno.style.display = 'none';
+    }else if (($('.open-toggle').is(':hidden')) && ($('.prox-toggle').is(':hidden'))){
+      nearyes.style.display = 'none';
+      nearno.style.display = 'none';
+      nameyes.style.display = 'none';
+      nameno.style.display = 'block';
+    }
 
 });
 
@@ -94,13 +125,33 @@ $('.open').click(function() {
     $(this).find('.btn').toggleClass('btn-primary');
     $(this).find('.btn').toggleClass('btn-default');
 
-    $('.open-toggle').toggle();
+    $('.prox-toggle').toggle();
 
-    if ($('.open-toggle').is(':visible')){
-      alert("Open is selected");
+    if (($('.open-toggle').is(':visible')) && ($('.prox-toggle').is(':visible'))){
+      nearyes.style.display = 'block';
+      nearno.style.display = 'none';
+      nameyes.style.display = 'none';
+      nameno.style.display = 'none';
+    }else if (($('.open-toggle').is(':visible')) && ($('.prox-toggle').is(':hidden'))){
+      nearyes.style.display = 'none';
+      nearno.style.display = 'block';
+      nameyes.style.display = 'none';
+      nameno.style.display = 'none';
+    }else if (($('.open-toggle').is(':hidden')) && ($('.prox-toggle').is(':visible'))){
+      nearyes.style.display = 'none';
+      nearno.style.display = 'none';
+      nameyes.style.display = 'block';
+      nameno.style.display = 'none';
+    }else if (($('.open-toggle').is(':hidden')) && ($('.prox-toggle').is(':hidden'))){
+      nearyes.style.display = 'none';
+      nearno.style.display = 'none';
+      nameyes.style.display = 'none';
+      nameno.style.display = 'block';
     }
 
 });
+
+
 
 
 

@@ -3,11 +3,94 @@
 <div id="index-main">
 	<h3>What service are you looking for?</h3>
 
-		<%= button_to "Shelter", filtered_facilities_path(:Shelter), :method => "get", class: 'btn' %><br>
-		<%= button_to "Food", filtered_facilities_path(:Food), :method => "get", class: 'btn' %><br>
-		<%= button_to "Medical", filtered_facilities_path(:Medical), :method => "get", class: 'btn' %><br>
-		<%= button_to "Hygiene", filtered_facilities_path(:Hygiene), :method => "get", class: 'btn' %><br>
-		<%= button_to "Technology", filtered_facilities_path(:Technology), :method => "get", class: 'btn' %>
 </div>
 
 <p><%= link_to "Add New Facility", new_facility_path %></p>
+<p id="demo"></p>
+
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+<script>
+var latitude, longitude;
+
+var x = document.getElementById("demo");
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude; 
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+}
+
+setTimeout(function(){
+    //Create Shelter
+    var divid = document.getElementById("index-main");
+    var bshelter = document.createElement("button");
+    var tshelter = document.createTextNode("Shelter2"); 
+    bshelter.appendChild(tshelter);
+    bshelter.setAttribute("class", "btn");
+    bshelter.onclick = function() { // Note this is a function
+        window.location = "/facilities/filter/Shelter/?latitude=" + latitude + "&longitude="+longitude;
+    };
+
+    divid.appendChild(bshelter);
+
+//Create Food
+    var bfood = document.createElement("button");
+    var tfood = document.createTextNode("Food2"); 
+    bfood.appendChild(tfood);
+    bfood.setAttribute("class", "btn");
+    bfood.onclick = function() { // Note this is a function
+        window.location = "/facilities/filter/Food/?latitude=" + latitude + "&longitude="+longitude;
+    };
+
+    divid.appendChild(bfood);
+
+//Create Medical
+    var bmedical = document.createElement("button");
+    var tmedical = document.createTextNode("Medical2"); 
+    bmedical.appendChild(tmedical);
+    bmedical.setAttribute("class", "btn");
+    bmedical.onclick = function() { // Note this is a function
+        window.location = "/facilities/filter/Medical/?latitude=" + latitude + "&longitude="+longitude;
+    };
+
+    divid.appendChild(bmedical);
+
+//Create Hygiene
+    var bhygiene = document.createElement("button");
+    var thygiene = document.createTextNode("Hygiene2"); 
+    bhygiene.appendChild(thygiene);
+    bhygiene.setAttribute("class", "btn");
+    bhygiene.onclick = function() { // Note this is a function
+        window.location = "/facilities/filter/Hygiene/?latitude=" + latitude + "&longitude="+longitude;
+    };
+
+    divid.appendChild(bhygiene);
+
+//Create Technology
+    var btech = document.createElement("button");
+    var ttech = document.createTextNode("Technology2"); 
+    btech.appendChild(ttech);
+    btech.setAttribute("class", "btn");
+    btech.onclick = function() { // Note this is a function
+        window.location = "/facilities/filter/Technology/?latitude=" + latitude + "&longitude="+longitude;
+    };
+
+    divid.appendChild(btech);
+}, 800);
+
+
+
+
+
+    
+</script>
