@@ -3,33 +3,84 @@
 
 
 <div id="index-main">
-<h3>Show page for <%= @facility.name %></h3>
-
-<p>Name: <%=@facility.name %></p>
-
-<p>Welcomes: <%=@facility.welcomes %></p>
-
-<p>Services: <%=@facility.services %></p>
-<div id="map-canvas"></div>
+<h1><%=@facility.name %></h1>
 
 
-<p>Address: <%=@facility.address %></p>
+<h2>Welcome</h2>
+<div class="inset">
+  <p><%=@facility.welcomes %></p>
+</div>
 
-<p>Phone: <%=@facility.phone %></p>
 
-<p>Website: <%=@facility.website %></p>
+<h2>Services</h2>
+<div class="inset">
+  <p><%=@facility.services %></p>
+</div>
 
-<p>Description: <%=@facility.description %></p>
+<div class="inset-gmap">
+  <div id="map-canvas"></div>
+  <p><%=@facility.address %></p>
+</div>
 
-<p>Monday: <%=@facility.startsmon_at %> to <%=@facility.endsmon_at %></p>
-<p>Tuesday: <%=@facility.startstues_at %> to <%=@facility.endstues_at %></p>
-<p>Wednesday: <%=@facility.startswed_at %> to <%=@facility.endswed_at %></p>
-<p>Thursday: <%=@facility.startsthurs_at %> to <%=@facility.endsthurs_at %></p>
-<p>Friday: <%=@facility.startsfri_at %> to <%=@facility.endsfri_at %></p>
-<p>Saturday: <%=@facility.startssat_at %> to <%=@facility.endssat_at %></p>
-<p>Sunday: <%=@facility.startssun_at %> to <%=@facility.endssun_at %></p>
 
-<p>Notes: <%=@facility.notes %></p>
+
+  <div class="inset-call">
+    <p>Call <%=@facility.phone %></p>
+  </div> <!--ends inset-call -->
+
+<div class="inset-website">
+  <p>Website <%= link_to @facility.website, "http://" + @facility.website  %></p>
+</div>
+
+<div id="inset-directions">
+</div>
+
+<div class="description">
+  <h2>Description</h2>
+  <p><%=@facility.description %></p>
+
+  <h2>Hours</h2>
+
+<table>
+  <tr>
+    <td>Monday:</td>
+    <td>&nbsp;&nbsp;<%=@facility.startsmon_at.strftime("%I:%M%p") %> to <%=@facility.endsmon_at.strftime("%I:%M%p") %> </td>
+  </tr>
+  <tr>
+    <td>Tuesday:</td>
+    <td>&nbsp;&nbsp;<%=@facility.startstues_at.strftime("%I:%M%p") %> to <%=@facility.endstues_at.strftime("%I:%M%p") %> </td>
+  </tr>
+  <tr>
+    <td>Wednesday:</td>
+    <td>&nbsp;&nbsp;<%=@facility.startswed_at.strftime("%I:%M%p") %> to <%=@facility.endswed_at.strftime("%I:%M%p") %> </td>
+  </tr>
+  <tr>
+    <td>Thursday:</td>
+    <td>&nbsp;&nbsp;<%=@facility.startsthurs_at.strftime("%I:%M%p") %> to <%=@facility.endsthurs_at.strftime("%I:%M%p") %> </td>
+  </tr>
+  <tr>
+    <td>Friday:</td>
+    <td>&nbsp;&nbsp;<%=@facility.startsfri_at.strftime("%I:%M%p") %> to <%=@facility.endsfri_at.strftime("%I:%M%p") %> </td>
+  </tr>
+  <tr>
+    <td>Saturday:</td>
+    <td>&nbsp;&nbsp;<%=@facility.startssat_at.strftime("%I:%M%p") %> to <%=@facility.endssat_at.strftime("%I:%M%p") %> </td>
+  </tr>
+  <tr>
+    <td>Sunday:</td>
+    <td>&nbsp;&nbsp;<%=@facility.startssun_at.strftime("%I:%M%p") %> to <%=@facility.endssun_at.strftime("%I:%M%p") %> </td>
+  </tr>
+</table>
+
+<div class="notes">
+  <strong>Notes:</strong><br>
+  <p><%= @facility.notes %></p>
+</div>
+
+
+</div>
+
+
 
 <%= link_to "All Facilities", facilities_path %>
 <%= link_to "Edit", edit_facility_path%>
@@ -38,13 +89,21 @@
 
 
 
+
 <%= content_tag :div, class: "temp_information", data: {jsevent: @facility} do %>
 <% end %>
-
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-    <script>
+    
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script>
 var jsevent = $('.temp_information').data('jsevent');
 var map;
+var latitude, longitude;
+
+
+
+
 function initialize() {
   var myLocation = new google.maps.LatLng(jsevent.lat, jsevent.long);
       
@@ -67,5 +126,25 @@ function initialize() {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+
+setTimeout(function(){
+var divid = document.getElementById("inset-directions");
+var bdirections = document.createElement("button");
+var tdirections = document.createTextNode("Directions"); 
+bdirections.appendChild(tdirections);
+bdirections.setAttribute("class", "btn");
+bdirections.onclick = function() { // Note this is a function
+  window.location = "/facilities/directions/" + jsevent.id
+    };
+
+divid.appendChild(bdirections);
+}, 800);
+
+
+
+
 </script>
     

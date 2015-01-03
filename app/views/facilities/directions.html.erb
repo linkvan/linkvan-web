@@ -1,0 +1,129 @@
+<!--<h1>Directions</h1>
+<div id="flat"><p>flat</p></div><br>
+<div id="flong"><p>flong</p></div><br>
+<div id="tlat"><p>tlat</p></div><br>
+<div id="tlong"><p>tlong</p></div><br>-->
+<div id="panel">
+    <b>Mode of Travel: </b>
+    <select id="mode" onchange="calcRoute();">
+      <option value="WALKING">Walking</option>
+      <option value="TRANSIT">Transit</option>
+      <option value="BICYCLING">Bicycling</option>
+      <option value="DRIVING">Driving</option>
+    </select>
+    </div>
+
+<div id="map-canvas-dir"></div>
+
+<%= content_tag :div, class: "temp_information", data: {jsevent: @facility} do %>
+<% end %>
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script>
+var jsevent = $('.temp_information').data('jsevent');
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var flat = jsevent.lat;
+var flong = jsevent.long; 
+var map, tlat, tlong, start, end;
+
+var x = document.getElementById("demo");
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+function showPosition(position) {
+    tlat = position.coords.latitude;
+    tlong = position.coords.longitude;
+}
+
+function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  start = new google.maps.LatLng(tlat, tlong);
+  end = new google.maps.LatLng(flat, flong);
+  var mapOptions = {
+    zoom:10,
+    center: start
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas-dir'), mapOptions);
+
+  directionsDisplay.setMap(map);
+
+}//ends initialize
+
+function initCalcRoute() {
+  var request = {
+      origin: start,
+      destination: end,
+      // Note that Javascript allows us to access the constant
+      // using square brackets and a string value as its
+      // "property."
+      travelMode: google.maps.TravelMode.WALKING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+function calcRoute() {
+  selectedMode = document.getElementById('mode').value;
+  var request = {
+      origin: start,
+      destination: end,
+      // Note that Javascript allows us to access the constant
+      // using square brackets and a string value as its
+      // "property."
+      travelMode: google.maps.TravelMode[selectedMode]
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+//click listener needed for map to appear
+google.maps.event.addDomListener(window, 'click', initialize);
+$("#map-canvas-dir").click();
+google.maps.event.clearListeners(window, 'click');
+//clear click listener right after click
+
+google.maps.event.addDomListener(window, 'load', calcRoute);
+
+
+
+
+
+
+
+/*
+setTimeout(function(){
+	var divflat = document.getElementById("flat");
+	var textflat = document.createTextNode(flat); 
+	divflat.appendChild(textflat);
+
+	var divflong = document.getElementById("flong");
+	var textflong = document.createTextNode(flong); 
+	divflong.appendChild(textflong);
+
+	var divtlat = document.getElementById("tlat");
+	var texttlat = document.createTextNode(tlat); 
+	divtlat.appendChild(texttlat);
+
+	var divtlong = document.getElementById("tlong");
+	var texttlong = document.createTextNode(tlong); 
+	divtlong.appendChild(texttlong);
+
+}, 800);*/
+
+    </script>

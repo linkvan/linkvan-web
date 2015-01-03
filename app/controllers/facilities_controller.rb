@@ -44,6 +44,11 @@ class FacilitiesController < ApplicationController
    
 	  end
 
+  def directions
+    @facility = Facility.find(params[:id])
+
+  end
+
 
 	def show
 		@facility = Facility.find(params[:id])
