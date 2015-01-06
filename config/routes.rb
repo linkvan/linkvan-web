@@ -1,9 +1,10 @@
 Linkvan::Application.routes.draw do
   
-  #get 'facilities/filter/:scope/:flatitude&:flongitude&:tlatitude&:tlongitude', to: 'facilities#index', as: :directions_facilities
+  get 'facilities/options', to: 'facilities#options'
   get 'facilities/directions/:id', to: 'facilities#directions'
   get "facilities/filter/:scope" => "facilities#filtered", as: :filtered_facilities
-  get 'facilities/filter/:scope/:latitude&:longitude', to: 'facilities#filtered', as: :coords_facilitiess
+  get 'facilities/filter/:scope/:latitude&:longitude', to: 'facilities#filtered', as: :coords_facilities
+  get 'facilities/filter/:scope/:latitude&:longitude&:sortby&:hours&:services&:suitable&:welcome', to: 'facilities#filtered', as: :searched_facilities
 
   root 'facilities#index'
   resources :facilities

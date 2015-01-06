@@ -33,6 +33,19 @@ class FacilitiesController < ApplicationController
         @facilities_near_no = Facility.contains_service("Technology", "Near", "No", @latitude, @longitude)
         @facilities_name_yes = Facility.contains_service("Technology", "Name", "Yes", @latitude, @longitude)
         @facilities_name_no = Facility.contains_service("Technology", "Name", "No", @latitude, @longitude)
+      when 'Search'
+        @sortby = params[:sortby]
+        @hours = params[:hours]
+        @services = params[:services]
+        @suitable = params[:suitable]
+        @welcome = params[:welcome]
+
+        
+
+        @facilities_near_yes = []
+        @facilities_near_no = []
+        @facilities_name_yes = []
+        @facilities_name_no = []
       else
         @facilities_near_yes = Facility.all
         @facilities_near_no = Facility.all
@@ -46,7 +59,9 @@ class FacilitiesController < ApplicationController
 
   def directions
     @facility = Facility.find(params[:id])
+  end
 
+  def options
   end
 
 

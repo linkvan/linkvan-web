@@ -1,0 +1,400 @@
+<%= render 'nav' %>
+<div class="toggle-group-options">
+<p class="prox-toggle"></p>
+<p class="open-toggle"></p>
+<div class="container-prox">
+  <div class="btn-group btn-toggle prox">
+    <h1>Sort By</h1>
+    <button class="btn btn-primary active" id="near">Near</button>
+    <button class="btn btn-default" id="name">Name</button>
+  </div>
+</div>
+
+<div class="container-open">
+  <div class="btn-group btn-toggle open"> 
+    <h1>Hours</h1> 
+    <button class="btn btn-primary active">Yes</button>
+    <button class="btn btn-default">No</button>
+  </div>
+</div>
+
+
+</div>
+
+<div id="index-main-options">
+    <h1>Services</h1>
+    <div id="services-div"></div>
+    <h1>Suitable For</h1>
+    <div id="suitable-div"></div> 
+    <h1>Welcomes</h1>
+    <div id="welcomes-div"></div>
+    <div id="search-div"></div>
+</div>
+
+<p><%= link_to "Add New Facility", new_facility_path %></p>
+<p id="demo"></p>
+
+<div class="tog">
+<p class="sortby-o" id="sortby-o"></p>
+<p class="hours-o" id="hours-o"></p>
+<p class="shelter-o" id="shelter-o"></p>
+<p class="food-o" id="food-o"></p>
+<p class="medical-o" id="medical-o"></p>
+<p class="hygiene-o" id="hygiene-o"></p>
+<p class="technology-o" id="technology-o"></p>
+<p class="children-o" id="children-o"></p>
+<p class="youth-o" id="youth-o"></p>
+<p class="adults-o" id="adults-o"></p>
+<p class="seniors-o" id="seniors-o"></p>
+<p class="all-welcome-o" id="all-welcome-o"></p>
+<p class="men-o" id="men-o"></p>
+<p class="women-o" id="women-o"></p>
+</div>
+
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+<script>
+var sortby="&sortby=";
+var hours="&hours=";
+var services="&services=";
+var suitable="&suitable=";
+var welcome="&welcome=";
+
+var allwelcomebtn = document.getElementById("all-welcome-btn");
+var menwelcomebtn = document.getElementById("men-welcome-btn");
+var womenwelcomebtn = document.getElementById("women-welcome-btn");
+
+var sortbyid = document.getElementById("sortby-o");
+var hoursid = document.getElementById("hours-o");
+var shelterid = document.getElementById("shelter-o");
+var foodid = document.getElementById("food-o");
+var medicalid = document.getElementById("medical-o");
+var hygieneid = document.getElementById("hygiene-o");
+var technologyid = document.getElementById("technology-o");
+var childrenid = document.getElementById("children-o");
+var youthid = document.getElementById("youth-o");
+var adultsid = document.getElementById("adults-o");
+var seniorsid = document.getElementById("seniors-o");
+var allwelcomeid = document.getElementById("all-welcome-o");
+var menid = document.getElementById("men-o");
+var womenid = document.getElementById("women-o");
+
+sortbyid.style.display = 'block';
+hoursid.style.display = 'block';
+shelterid.style.display = 'block';
+foodid.style.display = 'block';
+medicalid.style.display = 'block';
+hygieneid.style.display = 'block';
+technologyid.style.display = 'block';
+childrenid.style.display = 'block';
+youthid.style.display = 'block';
+adultsid.style.display = 'block';
+seniorsid.style.display = 'block';
+allwelcomeid.style.display = 'block';
+allwelcomeid.style.display = 'none';
+menid.style.display = 'block';
+womenid.style.display = 'block';
+
+$('.prox').click(function() {
+    $(this).find('.btn').toggleClass('active');  
+    $(this).find('.btn').toggleClass('btn-primary');
+    $(this).find('.btn').toggleClass('btn-default');
+
+    $('.sortby-o').toggle();
+    
+});
+
+$('.open').click(function() {
+    $(this).find('.btn').toggleClass('active');  
+    $(this).find('.btn').toggleClass('btn-primary');
+    $(this).find('.btn').toggleClass('btn-default');
+
+    $('.hours-o').toggle();
+
+
+});
+
+
+var latitude, longitude;
+
+var x = document.getElementById("demo");
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude; 
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+}
+
+setTimeout(function(){
+
+    //Create Shelter
+
+    var divid = document.getElementById("services-div");
+    var bshelter = document.createElement("button");
+    var tshelter = document.createTextNode("Shelter"); 
+    bshelter.appendChild(tshelter);
+    bshelter.setAttribute("class", "btn");
+    bshelter.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.shelter-o').toggle();
+    };
+
+    divid.appendChild(bshelter);
+
+//Create Food
+    var bfood = document.createElement("button");
+    var tfood = document.createTextNode("Food"); 
+    bfood.appendChild(tfood);
+    bfood.setAttribute("class", "btn");
+    bfood.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.food-o').toggle();
+    };
+
+    divid.appendChild(bfood);
+
+//Create Medical
+    var bmedical = document.createElement("button");
+    var tmedical = document.createTextNode("Medical"); 
+    bmedical.appendChild(tmedical);
+    bmedical.setAttribute("class", "btn");
+    bmedical.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.medical-o').toggle();
+    };
+
+    divid.appendChild(bmedical);
+
+//Create Hygiene
+    var bhygiene = document.createElement("button");
+    var thygiene = document.createTextNode("Hygiene"); 
+    bhygiene.appendChild(thygiene);
+    bhygiene.setAttribute("class", "btn");
+    bhygiene.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.hygiene-o').toggle();
+    };
+
+    divid.appendChild(bhygiene);
+
+//Create Technology
+    var btech = document.createElement("button");
+    var ttech = document.createTextNode("Technology"); 
+    btech.appendChild(ttech);
+    btech.setAttribute("class", "btn");
+    btech.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.technology-o').toggle();
+    };
+
+    divid.appendChild(btech);
+
+//Create Suitable-Children button
+    var suitabledivid = document.getElementById("suitable-div");
+
+    var bchildren = document.createElement("button");
+    var tchildren = document.createTextNode("Children"); 
+    bchildren.appendChild(tchildren);
+    bchildren.setAttribute("class", "btn");
+    bchildren.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.children-o').toggle();
+    };
+
+    suitabledivid.appendChild(bchildren);
+
+//Create Suitable-Youth button
+
+    var byouth = document.createElement("button");
+    var tyouth = document.createTextNode("Youth"); 
+    byouth.appendChild(tyouth);
+    byouth.setAttribute("class", "btn");
+    byouth.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.youth-o').toggle();
+    };
+
+    suitabledivid.appendChild(byouth);
+
+//Create Suitable-Adults button
+
+    var badults = document.createElement("button");
+    var tadults = document.createTextNode("Adults"); 
+    badults.appendChild(tadults);
+    badults.setAttribute("class", "btn");
+    badults.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.adults-o').toggle();
+    };
+
+    suitabledivid.appendChild(badults);
+
+//Create Suitable-Seniors button
+
+    var bseniors = document.createElement("button");
+    var tseniors = document.createTextNode("Seniors"); 
+    bseniors.appendChild(tseniors);
+    bseniors.setAttribute("class", "btn");
+    bseniors.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.seniors-o').toggle();
+    };
+
+    suitabledivid.appendChild(bseniors); 
+
+ //Create Welcome-All button
+    var welcomesdivid = document.getElementById("welcomes-div");
+    var bwall = document.createElement("button");
+    var twall = document.createTextNode("All"); 
+    bwall.appendChild(twall);
+    bwall.setAttribute("class", "btn all-welcome-btn highlight");
+
+
+    bwall.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.all-welcome-o').toggle();
+
+        if (menid.style.display == 'none'){
+            menid.style.display == 'block';
+            $('.men-welcome-btn').toggleClass( "highlight" );
+            $('.men-o').toggle();
+        }
+        if (womenid.style.display == 'none'){
+            womenid.style.display == 'block';
+            $('.women-welcome-btn').toggleClass( "highlight" );
+            $('.women-o').toggle();
+        }
+
+       
+
+    };
+
+    welcomesdivid.appendChild(bwall);
+
+//Create Welcomes-Men button
+    var bmen = document.createElement("button");
+    var tmen = document.createTextNode("Men"); 
+    bmen.appendChild(tmen);
+    bmen.setAttribute("class", "btn men-welcome-btn");
+    //bmen.setAttribute("id", "men-welcome-btn");
+    bmen.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.men-o').toggle();
+
+        if (allwelcomeid.style.display == 'none'){
+            allwelcomeid.style.display == 'block';
+            $('.all-welcome-btn').toggleClass( "highlight" );
+            $('.all-welcome-o').toggle();
+        }
+        if (womenid.style.display == 'none'){
+            womenid.style.display == 'block';
+            $('.women-welcome-btn').toggleClass( "highlight" );
+            $('.women-o').toggle();
+        }
+    };
+
+    welcomesdivid.appendChild(bmen);
+
+//Create Welcomes-Women button
+    var bwomen = document.createElement("button");
+    var twomen = document.createTextNode("Women"); 
+    bwomen.appendChild(twomen);
+    bwomen.setAttribute("class", "btn women-welcome-btn");
+    bwomen.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.women-o').toggle();
+
+        if (allwelcomeid.style.display == 'none'){
+            allwelcomeid.style.display == 'block';
+            $('.all-welcome-btn').toggleClass( "highlight" );
+            $('.all-welcome-o').toggle();
+        }
+        if (menid.style.display == 'none'){
+            menid.style.display == 'block';
+            $('.men-welcome-btn').toggleClass( "highlight" );
+            $('.men-o').toggle();
+        }
+    };
+
+    welcomesdivid.appendChild(bwomen); 
+
+//Create Search button
+    var searchdivid = document.getElementById("search-div");
+    var bsearch = document.createElement("button");
+    var tsearch = document.createTextNode("Search");
+    bsearch.appendChild(tsearch);
+    bsearch.setAttribute("class", "btn");
+
+
+    bsearch.onclick=function(){
+        if (sortbyid.style.display == 'none'){
+            sortby += "Name";
+        }else{
+            sortby += "Near";
+        }
+
+        if (hoursid.style.display == 'none'){
+            hours += "All";
+        }else{
+            hours += "Open";
+        }
+
+        if (shelterid.style.display == 'none'){
+            services += "Shelter,";
+        }
+        if (foodid.style.display == 'none'){
+            services += "Food,";
+        }
+        if (medicalid.style.display == 'none'){
+            services += "Medical,";
+        }
+        if (hygieneid.style.display == 'none'){
+            services += "Hygiene,";
+        }
+        if (technologyid.style.display == 'none'){
+            services += "Technology,";
+        }
+        //remove last comma
+        services = services.substring(0, services.length - 1);
+
+        if (childrenid.style.display == 'none'){
+            suitable += "Children,";
+        }
+        if (youthid.style.display == 'none'){
+            suitable += "Youth,";
+        }
+        if (adultsid.style.display == 'none'){
+            suitable += "Adults,";
+        }
+        if (seniorsid.style.display == 'none'){
+            suitable += "Seniors,";
+        }
+
+        //remove last comma
+        suitable = suitable.substring(0, suitable.length - 1);
+
+        if (allwelcomeid.style.display == 'none'){
+            welcome += "All";
+        }else if (menid.style.display == 'none'){
+            welcome += "Men";
+        }else if (womenid.style.display == 'none'){
+            welcome += "Women";
+        }
+
+
+        window.location = "/facilities/filter/Search/?latitude=" + latitude + "&longitude="+longitude+sortby+hours+services+suitable+welcome;
+        //window.location = "/facilities/filter/Search/?latitude=" + latitude + "&longitude="+longitude + "&sortby=Dist&hours=All&services=Shelter,Food&suitable=Youth&welcome=Women";
+    }; 
+
+    searchdivid.appendChild(bsearch);
+}, 800);
+</script>
