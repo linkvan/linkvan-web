@@ -40,12 +40,36 @@ class FacilitiesController < ApplicationController
         @suitable = params[:suitable]
         @welcome = params[:welcome]
 
-        
+        if !(@services.nil?)
+          servicesarr = @services.split(",")
+        else
+          servicesarr = ["Shelter", "Food", "Medical", "Hygiene", "Technology"]
+        end
+
+        #once search results are returned, on the filtered page, create button to allow to search all again?
+
 
         @facilities_near_yes = []
         @facilities_near_no = []
         @facilities_name_yes = []
         @facilities_name_no = []
+
+        servicesarr.each do |s|
+          @facilities_near_yes = @facilities_near_yes.concat Facility.contains_service(s, "Near", "Yes", @latitude, @longitude)
+          @facilities_near_no = @facilities_near_no.concat Facility.contains_service(s, "Near", "No", @latitude, @longitude)
+          @facilities_name_yes = @facilities_name_yes.concat Facility.contains_service(s, "Name", "Yes", @latitude, @longitude)
+          @facilities_name_no = @facilities_name_no.concat Facility.contains_service(s, "Name", "No", @latitude, @longitude)
+        end
+
+        @facilities_near_yes = Facility.redist_sort(@facilities_near_yes.uniq, @latitude, @longitude)
+        @facilities_near_no = Facility.redist_sort(@facilities_near_no.uniq, @latitude, @longitude)
+        @facilities_name_yes = Facility.rename_sort(@facilities_name_yes.uniq)
+        @facilities_name_no = Facility.rename_sort(@facilities_name_no.uniq)
+
+
+        #in filtered, pass in the selection from the options page in order to toggle the filtered buttons correctly
+        #****************i.e. use @hours and @sortby in the filtered page*************
+        
       else
         @facilities_near_yes = Facility.all
         @facilities_near_no = Facility.all

@@ -6,7 +6,6 @@ class Facility < ActiveRecord::Base
 	def self.contains_service(service_query, prox, open, ulat, ulong)
 		arr = Array.new
 		distarr = Array.new
-		sortedarr = Array.new
 		day = 8.hours.ago.wday
 
 		ulat = ulat.to_d
@@ -515,6 +514,21 @@ class Facility < ActiveRecord::Base
 	  	return arr
 	end #ends self.contains_service?
 
+def self.redist_sort(inArray, ulat, ulong)
+	ulat = ulat.to_d
+	ulong = ulong.to_d
+	arr = Array.new
+	distarr = Array.new
+
+	inArray.each do |a|
+		distarr.push(Facility.haversine(a.lat, a.long, ulat, ulong))
+	end
+
+	arr = Facility.bubble_sort(distarr, inArray)
+
+	return arr
+end
+
 #use haversine and power to calculate distance between user's latlongs and facilities'
 def self.haversine(lat1, long1, lat2, long2)
   dtor = Math::PI/180
@@ -554,6 +568,12 @@ def self.bubble_sort(list, alist )
   end
 
   alist
+end
+
+def self.rename_sort(inArray)
+	arr = Array.new
+	arr = inArray.sort_by {|f| f[:name]}
+	return arr
 end
 
 
