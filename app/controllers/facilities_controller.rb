@@ -40,7 +40,7 @@ class FacilitiesController < ApplicationController
         @suitable = params[:suitable]
         @welcome = params[:welcome]
 
-        welcomeset = @welcome.split(" ").to_set
+        suitableset = @suitable.split(" ").to_set
 
         if !(@services.nil?)
           servicesarr = @services.split(",")
@@ -66,70 +66,20 @@ class FacilitiesController < ApplicationController
         @facilities_name_no = Facility.rename_sort(@facilities_name_no.uniq)
 
         #remove from each of the @facilities any facilities which don't contain the appropriate @welcome and @suitable
-
-        tempnearyes = Array.new
-        tempnearno = Array.new
-        tempnameyes = Array.new
-        tempnameno = Array.new
-
-        tempnearyes = @facilities_near_yes
-        tempnearno = @facilities_near_no
-        tempnameyes = @facilities_name_yes
-        tempnameno = @facilities_name_no
-
-        tempnearyes.each do |t|
-          if (t.suitability != @suitable)
-            @facilities_near_yes.delete(t)
-          end
-
-          if t.suitability != "All" #refactor to "Everyone"
-            tset = t.welcomes.split(" ").to_set
-            if !(tset.subset?(welcomeset))
-              @facilities_near_yes.delete(t)
-            end
-          end
-
+        if @welcome != "All"
+          @facilities_near_yes.keep_if {|f| f.welcomes == @welcome}
+          @facilities_near_no.keep_if {|f| f.welcomes == @welcome}
+          @facilities_name_yes.keep_if {|f| f.welcomes == @welcome}
+          @facilities_name_no.keep_if {|f| f.welcomes == @welcome}
         end
-
-        tempnearno.each do |t|
-          if (t.suitability != @suitable)
-            @facilities_near_no.delete(t)
-          end
-
-          if t.suitability != "All" #refactor to "Everyone"
-            tset = t.welcomes.split(" ").to_set
-            if !(tset.subset?(welcomeset))
-              @facilities_near_no.delete(t)
-            end
-          end
+        
+        if @suitable != "All" #refactor to "Everyone"
+          @facilities_near_yes.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
+          @facilities_near_no.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
+          @facilities_name_yes.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
+          @facilities_name_no.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
         end
-
-        tempnameyes.each do |t|
-          if (t.suitability != @suitable)
-            @facilities_name_yes.delete(t)
-          end
-
-          if t.suitability != "All" #refactor to "Everyone"
-            tset = t.welcomes.split(" ").to_set
-            if !(tset.subset?(welcomeset))
-              @facilities_name_yes.delete(t)
-            end
-          end
-        end
-
-        tempnameno.each do |t|
-          if (t.suitability != @suitable)
-            @facilities_name_no.delete(t)
-          end
-
-          if t.suitability != "All" #refactor to "Everyone"
-            tset = t.welcomes.split(" ").to_set
-            if !(tset.subset?(welcomeset))
-              @facilities_name_no.delete(t)
-            end
-          end
-        end
-
+    
       else
         @facilities_near_yes = Facility.all
         @facilities_near_no = Facility.all
