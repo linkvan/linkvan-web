@@ -4,3 +4,71 @@
 
 
 <%= link_to "Back", root_path %>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+<script>  
+
+var map;
+var address;
+var geocoder;
+var marker;
+var markersArray = [];
+var infowindow = new google.maps.InfoWindow();
+
+function init_map() {
+  geocoder = new google.maps.Geocoder();
+  var myLocation = new google.maps.LatLng(49.2496600,-123.1193400);
+  var mapOptions = {
+    center: myLocation,
+    zoom: 11,
+  };
+
+  map = new google.maps.Map(document.getElementById("map-canvas-new"), mapOptions);
+}
+
+  
+
+
+function clearOverlays() {
+  for (var i = 0; i < markersArray.length; i++ ) {
+    markersArray[i].setMap(null);
+  }
+  markersArray.length = 0;
+}
+
+function codeAddress() {
+  clearOverlays();
+  infowindow.close();
+  address = document.getElementById('facility_address').value;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+        });
+        markersArray.push(marker);
+
+        infowindow.setContent(address);
+        infowindow.open(map, marker);
+
+        populateFields(results[0].geometry.location);
+      } else {
+      
+      alert('Sorry, please check your address and try again.' + status);
+
+      }
+    });
+  }
+
+
+    function populateFields(position){
+      document.getElementById("facility_lat").value=position.lat();
+      document.getElementById("facility_long").value=position.lng();
+    }
+
+      google.maps.event.addDomListener(window, 'load', init_map);
+
+    </script>

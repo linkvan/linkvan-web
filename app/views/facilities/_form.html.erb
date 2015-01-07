@@ -8,12 +8,21 @@
     <%= f.text_field :welcomes %>
   </p>
   <p>
+    <%= f.label :suitability %><br/>
+    <%= f.text_field :suitability %>
+  </p>
+  <p>
     <%= f.label :services %><br/>
     <%= f.text_field :services %>
   </p>
   <p>
     <%= f.label :address %><br/>
-    <%= f.text_field :address %>
+    <%= f.text_field :address %><br>
+    <div id="map-canvas-new"></div>
+    <input type="button" value="Search" onclick="codeAddress()">
+  
+
+
   </p>
   <p>
     <%= f.label :phone %><br/>
@@ -93,6 +102,10 @@
   <p>
     <%= f.label :notes %><br/>
     <%= f.text_area :notes, cols: 40, rows: 7 %>
+  </p>
+  <p>
+    <%= f.hidden_field :lat%><br>
+    <%= f.hidden_field :long %>
   </p>
   <p>
     <%= f.submit %>

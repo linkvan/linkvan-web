@@ -137,7 +137,7 @@ private
 							permit(:name, :welcomes, :services, :address, :phone, 
 								:website, :description, :startsmon_at, :endsmon_at, :startstues_at, :endstues_at,
                   :startswed_at, :endswed_at, :startsthurs_at, :endsthurs_at, :startsfri_at, :endsfri_at,
-                    :startssat_at, :endssat_at, :startssun_at, :endssun_at, :notes)
+                    :startssat_at, :endssat_at, :startssun_at, :endssun_at, :notes, :suitability, :lat, :long)
 	end
 
 
