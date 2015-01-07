@@ -40,14 +40,13 @@ class FacilitiesController < ApplicationController
         @suitable = params[:suitable]
         @welcome = params[:welcome]
 
+        welcomeset = @welcome.split(" ").to_set
+
         if !(@services.nil?)
           servicesarr = @services.split(",")
         else
           servicesarr = ["Shelter", "Food", "Medical", "Hygiene", "Technology"]
         end
-
-        #once search results are returned, on the filtered page, create button to allow to search all again?
-
 
         @facilities_near_yes = []
         @facilities_near_no = []
@@ -66,10 +65,71 @@ class FacilitiesController < ApplicationController
         @facilities_name_yes = Facility.rename_sort(@facilities_name_yes.uniq)
         @facilities_name_no = Facility.rename_sort(@facilities_name_no.uniq)
 
+        #remove from each of the @facilities any facilities which don't contain the appropriate @welcome and @suitable
 
-        #in filtered, pass in the selection from the options page in order to toggle the filtered buttons correctly
-        #****************i.e. use @hours and @sortby in the filtered page*************
-        
+        tempnearyes = Array.new
+        tempnearno = Array.new
+        tempnameyes = Array.new
+        tempnameno = Array.new
+
+        tempnearyes = @facilities_near_yes
+        tempnearno = @facilities_near_no
+        tempnameyes = @facilities_name_yes
+        tempnameno = @facilities_name_no
+
+        tempnearyes.each do |t|
+          if (t.suitability != @suitable)
+            @facilities_near_yes.delete(t)
+          end
+
+          if t.suitability != "All" #refactor to "Everyone"
+            tset = t.welcomes.split(" ").to_set
+            if !(tset.subset?(welcomeset))
+              @facilities_near_yes.delete(t)
+            end
+          end
+
+        end
+
+        tempnearno.each do |t|
+          if (t.suitability != @suitable)
+            @facilities_near_no.delete(t)
+          end
+
+          if t.suitability != "All" #refactor to "Everyone"
+            tset = t.welcomes.split(" ").to_set
+            if !(tset.subset?(welcomeset))
+              @facilities_near_no.delete(t)
+            end
+          end
+        end
+
+        tempnameyes.each do |t|
+          if (t.suitability != @suitable)
+            @facilities_name_yes.delete(t)
+          end
+
+          if t.suitability != "All" #refactor to "Everyone"
+            tset = t.welcomes.split(" ").to_set
+            if !(tset.subset?(welcomeset))
+              @facilities_name_yes.delete(t)
+            end
+          end
+        end
+
+        tempnameno.each do |t|
+          if (t.suitability != @suitable)
+            @facilities_name_no.delete(t)
+          end
+
+          if t.suitability != "All" #refactor to "Everyone"
+            tset = t.welcomes.split(" ").to_set
+            if !(tset.subset?(welcomeset))
+              @facilities_name_no.delete(t)
+            end
+          end
+        end
+
       else
         @facilities_near_yes = Facility.all
         @facilities_near_no = Facility.all

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141231025951) do
+ActiveRecord::Schema.define(version: 20150107013553) do
 
   create_table "facilities", force: true do |t|
     t.string   "name"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20141231025951) do
     t.time     "endssat_at"
     t.time     "startssun_at"
     t.time     "endssun_at"
+    t.string   "suitability"
   end
 
 end
