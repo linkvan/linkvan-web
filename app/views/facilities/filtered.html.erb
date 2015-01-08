@@ -132,10 +132,10 @@ if ((nearyescheck == 0) && (nearnocheck != 0)){
 
 if ((jssortby == "Near") && (jshours == "All")){
 
-  $('.prox').find('.btn').toggleClass('active');  
-  $('.prox').find('.btn').toggleClass('btn-primary');
-  $('.prox').find('.btn').toggleClass('btn-default');
-  $('.open-toggle').toggle();
+  $('.open').find('.btn').toggleClass('active');  
+  $('.open').find('.btn').toggleClass('btn-primary');
+  $('.open').find('.btn').toggleClass('btn-default');
+  $('.prox-toggle').toggle();
 
   nearyes.style.display = 'block';
   nearno.style.display = 'block';
@@ -148,10 +148,10 @@ if ((jssortby == "Near") && (jshours == "All")){
 
 if ((jssortby == "Name") && (jshours == "Open")){
 
-  $('.open').find('.btn').toggleClass('active');  
-  $('.open').find('.btn').toggleClass('btn-primary');
-  $('.open').find('.btn').toggleClass('btn-default');
-  $('.prox-toggle').toggle();
+  $('.prox').find('.btn').toggleClass('active');  
+  $('.prox').find('.btn').toggleClass('btn-primary');
+  $('.prox').find('.btn').toggleClass('btn-default');
+  $('.open-toggle').toggle();
 
   nearyes.style.display = 'none';
   nearno.style.display = 'none';

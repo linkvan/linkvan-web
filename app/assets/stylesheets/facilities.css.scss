@@ -8,31 +8,40 @@ body, html{
 }
 
 nav {
-	height: 60px;
-	background-color: white;
+	height: 40px;
+	background-color: #fff;
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	z-index: 200;
-	padding: 8px 0 4px;
+	padding: 0 0 4px;
 	border-bottom: 1px solid #DDD;
-
-	.nav-container .logo img{
-		width: 40px;
-		float: left;
-		margin-top: 5px;
-		margin-left: 230px;
-		display: block
-
-	}
-
-	.container-nav-search{
-		float: left;
-		margin-top: 5px;
-		margin-left: 350px;
-	}
 }
+
+nav .nav-container {
+		text-align: center;
+		font-weight: 700;
+		margin: 0 auto;
+		max-width: 650px;
+}
+
+nav .nav-container .logo {
+	display: block;
+	margin: 0 auto;
+	width: 100px;
+}
+nav .nav-container a {
+	color: #3081B7;
+	text-decoration: none;
+	font-weight: 700;
+	padding-top: 0;
+}
+
+nav .nav-container .logo img {
+	width: 40px;
+}
+
 
 #index-main{
 	margin-top: 75px;

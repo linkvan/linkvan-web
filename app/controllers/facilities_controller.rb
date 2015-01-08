@@ -40,7 +40,12 @@ class FacilitiesController < ApplicationController
         @suitable = params[:suitable]
         @welcome = params[:welcome]
 
-        suitableset = @suitable.split(" ").to_set
+        if !(@suitable.nil?)
+          suitableset = @suitable.split(",").to_set
+        else
+          suitableset = ["Children", "Youth", "Adults", "Seniors"].to_set
+        end
+        
 
         if !(@services.nil?)
           servicesarr = @services.split(",")
