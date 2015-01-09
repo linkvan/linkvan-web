@@ -34,8 +34,18 @@ setTimeout(function(){
     //Create Shelter
     var divid = document.getElementById("index-main");
     var bshelter = document.createElement("button");
-    var tshelter = document.createTextNode("Shelter"); 
+    var tshelter = document.createElement("p");
+    tshelter.innerHTML = "Shelter";
+    tshelter.setAttribute("class", "button-text");
+
+    var shelterImg=document.createElement("i");
+    shelterImg.setAttribute("class", "glyphicon glyphicon-home shelter-colour");
+    var shelterChev=document.createElement("i");
+    shelterChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
+    bshelter.appendChild(shelterImg);
     bshelter.appendChild(tshelter);
+    bshelter.appendChild(shelterChev);
+
     bshelter.setAttribute("class", "btn");
     bshelter.onclick = function() { // Note this is a function
         window.location = "/facilities/filter/Shelter/?latitude=" + latitude + "&longitude="+longitude;
@@ -43,10 +53,23 @@ setTimeout(function(){
 
     divid.appendChild(bshelter);
 
+
 //Create Food
     var bfood = document.createElement("button");
-    var tfood = document.createTextNode("Food"); 
+    var tfood = document.createElement("p");
+    tfood.innerHTML = "Food"
+    tfood.setAttribute("class", "button-text");
+
+    var foodImg=document.createElement("i");
+    foodImg.setAttribute("class", "glyphicon glyphicon-cutlery food-colour");
+
+    var foodChev=document.createElement("i");
+    foodChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
+
+    bfood.appendChild(foodImg);
     bfood.appendChild(tfood);
+    bfood.appendChild(foodChev);
+
     bfood.setAttribute("class", "btn");
     bfood.onclick = function() { // Note this is a function
         window.location = "/facilities/filter/Food/?latitude=" + latitude + "&longitude="+longitude;
@@ -56,8 +79,20 @@ setTimeout(function(){
 
 //Create Medical
     var bmedical = document.createElement("button");
-    var tmedical = document.createTextNode("Medical"); 
+    var tmedical = document.createElement("p");
+    tmedical.innerHTML = "Medical"
+    tmedical.setAttribute("class", "button-text");
+
+    var medicalImg=document.createElement("i");
+    medicalImg.setAttribute("class", "glyphicon glyphicon-heart-empty medical-colour");
+
+    var medicalChev=document.createElement("i");
+    medicalChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
+
+    bmedical.appendChild(medicalImg);
     bmedical.appendChild(tmedical);
+    bmedical.appendChild(medicalChev);
+
     bmedical.setAttribute("class", "btn");
     bmedical.onclick = function() { // Note this is a function
         window.location = "/facilities/filter/Medical/?latitude=" + latitude + "&longitude="+longitude;
@@ -67,8 +102,20 @@ setTimeout(function(){
 
 //Create Hygiene
     var bhygiene = document.createElement("button");
-    var thygiene = document.createTextNode("Hygiene"); 
+    var thygiene = document.createElement("p");
+    thygiene.innerHTML = "Hygiene"
+    thygiene.setAttribute("class", "button-text");
+
+    var hygieneImg=document.createElement("i");
+    hygieneImg.setAttribute("class", "glyphicon glyphicon-tint hygiene-colour");
+
+    var hygieneChev=document.createElement("i");
+    hygieneChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
+
+    bhygiene.appendChild(hygieneImg);
     bhygiene.appendChild(thygiene);
+    bhygiene.appendChild(hygieneChev);
+
     bhygiene.setAttribute("class", "btn");
     bhygiene.onclick = function() { // Note this is a function
         window.location = "/facilities/filter/Hygiene/?latitude=" + latitude + "&longitude="+longitude;
@@ -78,8 +125,20 @@ setTimeout(function(){
 
 //Create Technology
     var btech = document.createElement("button");
-    var ttech = document.createTextNode("Technology"); 
+    var ttech = document.createElement("p");
+    ttech.innerHTML = "Technology"
+    ttech.setAttribute("class", "button-text");
+
+    var techImg=document.createElement("i");
+    techImg.setAttribute("class", "glyphicon glyphicon-globe technology-colour");
+
+    var techChev=document.createElement("i");
+    techChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
+
+    btech.appendChild(techImg);
     btech.appendChild(ttech);
+    btech.appendChild(techChev);
+
     btech.setAttribute("class", "btn");
     btech.onclick = function() { // Note this is a function
         window.location = "/facilities/filter/Technology/?latitude=" + latitude + "&longitude="+longitude;

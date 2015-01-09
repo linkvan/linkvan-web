@@ -7,6 +7,40 @@ body, html{
 	height:100%;
 }
 
+.shelter-colour {
+	color: #62919C;
+	float: left;
+	margin-right: 15px;
+
+}
+.food-colour {
+	color: #9EA861;
+	float: left;
+	margin-right: 15px;
+}
+.medical-colour {
+	color: #A97A60;
+	float: left;
+	margin-right: 15px;
+}
+.hygiene-colour {
+	color: #7E7485;
+	float: left;
+	margin-right: 15px;
+}
+
+.technology-colour {
+	color: #CBAA4B;
+	float: left;
+	margin-right: 15px;
+}
+
+.chevron-right{
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 0;
+}
+
 nav {
 	height: 40px;
 	background-color: #fff;
@@ -63,10 +97,10 @@ nav .nav-container .logo img {
 		font-weight: 700;
 		text-align: left;
 		cursor: pointer;
-		padding-top: 10px;
+		padding-top: 12px;
 		padding-right: 0px;
-		padding-bottom: 10px;
-		padding-left: 50px;
+		padding-bottom: 0;
+		padding-left: 17px;
 		width: 100%;
 		margin-bottom: 10px;
 
@@ -82,11 +116,16 @@ nav .nav-container .logo img {
     	color: white;
   	}
 
+  	.button-text{
+  		float: left;
+  	}
+
 	h3{
 		font-family: arial;
 		font-size: 18px;
 		font-weight: bold;
 		color: #666;
+		margin-top: 10px;
 	}
 
 	h2{
@@ -352,6 +391,8 @@ nav .nav-container .logo img {
 		margin-bottom: 10px;
 
 	}
+
+
 
 	.btn:hover {
   		background: #286090;
