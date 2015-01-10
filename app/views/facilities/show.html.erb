@@ -131,18 +131,28 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 
 setTimeout(function(){
-var divid = document.getElementById("inset-directions");
-var bdirections = document.createElement("button");
-var tdirections = document.createTextNode("Directions"); 
-bdirections.appendChild(tdirections);
-bdirections.setAttribute("class", "btn");
-bdirections.onclick = function() { // Note this is a function
-  window.location = "/facilities/directions/" + jsevent.id
+    var divid = document.getElementById("inset-directions");
+    var bdirections = document.createElement("button");
+    var tdirections = document.createElement("p");
+    tdirections.innerHTML = "Directions"
+    tdirections.setAttribute("class", "button-text");
+
+    var directionsImg=document.createElement("i");
+    directionsImg.setAttribute("class", "glyphicon glyphicon-search directions-colour");
+
+    var directionsChev=document.createElement("i");
+    directionsChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
+
+    bdirections.appendChild(directionsImg);
+    bdirections.appendChild(tdirections);
+    bdirections.appendChild(directionsChev);
+    bdirections.setAttribute("class", "btn");
+    bdirections.onclick = function() { // Note this is a function
+      window.location = "/facilities/directions/" + jsevent.id
     };
 
-divid.appendChild(bdirections);
+    divid.appendChild(bdirections);
 }, 800);
-
 
 
 
