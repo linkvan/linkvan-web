@@ -52,33 +52,57 @@ Count facilities: <%=@facilities.count%></br> -->
 
 <div id="near-yes">
 <% @facilities_near_yes.each do |f| %>
-  <strong><%= link_to f.name, f%></strong><br>
-  <%=f.description%><br>
-  <%=f.services%>
+<a href=<%= facility_path(f)%>>
+  <div class="facility-block">
+    <div class= "facility-block-name"><strong><%= f.name %></strong></div>
+    <div class="is-open">open</div>
+    <%= display_services(f.services) %>
+    <!-- put display_distance(f) here -->
+    <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>  
+  </div>
+</a>
   <hr>
 <% end %>
 </div>
 <div id="near-no">
 <% @facilities_near_no.each do |f| %>
-  <strong><%= link_to f.name, f%></strong><br>
-  <%=f.description%><br>
-  <%=f.services%>
+<a href=<%= facility_path(f)%>>
+  <div class="facility-block">
+    <div class= "facility-block-name"><strong><%= f.name %></strong></div>
+    <div class="is-closed">closed</div>
+    <%= display_services(f.services) %>
+    <!-- put display_distance(f) here -->
+    <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
+  </div>
+</a>
   <hr>
 <% end %>
 </div>
 <div id="name-yes">
 <% @facilities_name_yes.each do |f| %>
-  <strong><%= link_to f.name, f%></strong><br>
-  <%=f.description%><br>
-  <%=f.services%>
+<a href=<%= facility_path(f)%>>
+  <div class="facility-block">
+    <div class= "facility-block-name"><strong><%= f.name %></strong></div>
+    <div class="is-open">open</div>
+    <%= display_services(f.services) %>
+    <!-- put display_distance(f) here -->
+    <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
+  </div>
+</a>
   <hr>
 <% end %>
 </div>
 <div id="name-no">
 <% @facilities_name_no.each do |f| %>
-  <strong><%= link_to f.name, f%></strong><br>
-  <%=f.description%><br>
-  <%=f.services%>
+<a href=<%= facility_path(f)%>>
+  <div class="facility-block">
+    <div class= "facility-block-name"><strong><%= f.name %></strong></div>
+    <div class="is-closed">closed</div>
+    <%= display_services(f.services) %>
+    <!-- put display_distance(f) here -->
+    <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
+  </div>
+</a>
   <hr>
 <% end %>
 </div>

@@ -4,7 +4,7 @@
 <p class="open-toggle"></p>
 <div class="container-prox">
   <div class="btn-group btn-toggle prox">
-    <h1>Sort By</h1>
+    <h1 class="sortby-header">Sort By</h1>
     <button class="btn btn-primary active" id="near">Near</button>
     <button class="btn btn-default" id="name">Name</button>
   </div>
@@ -140,8 +140,17 @@ setTimeout(function(){
 
     var divid = document.getElementById("services-div");
     var bshelter = document.createElement("button");
-    var tshelter = document.createTextNode("Shelter"); 
+    var tshelter = document.createElement("p");
+    tshelter.innerHTML = "Shelter";
+    tshelter.setAttribute("class", "button-text");
+
+    var shelterImg=document.createElement("i");
+    shelterImg.setAttribute("class", "glyphicon glyphicon-home shelter-colour");
+
+    bshelter.appendChild(shelterImg);
     bshelter.appendChild(tshelter);
+
+
     bshelter.setAttribute("class", "btn");
     bshelter.onclick = function() { // Note this is a function
         $( this ).toggleClass( "highlight" );
@@ -152,8 +161,17 @@ setTimeout(function(){
 
 //Create Food
     var bfood = document.createElement("button");
-    var tfood = document.createTextNode("Food"); 
+    var tfood = document.createElement("p");
+    tfood.innerHTML = "Food"
+    tfood.setAttribute("class", "button-text");
+
+    var foodImg=document.createElement("i");
+    foodImg.setAttribute("class", "glyphicon glyphicon-cutlery food-colour");
+
+
+    bfood.appendChild(foodImg);
     bfood.appendChild(tfood);
+
     bfood.setAttribute("class", "btn");
     bfood.onclick = function() { // Note this is a function
         $( this ).toggleClass( "highlight" );
@@ -163,9 +181,18 @@ setTimeout(function(){
     divid.appendChild(bfood);
 
 //Create Medical
-    var bmedical = document.createElement("button");
-    var tmedical = document.createTextNode("Medical"); 
+     var bmedical = document.createElement("button");
+    var tmedical = document.createElement("p");
+    tmedical.innerHTML = "Medical"
+    tmedical.setAttribute("class", "button-text");
+
+    var medicalImg=document.createElement("i");
+    medicalImg.setAttribute("class", "glyphicon glyphicon-heart-empty medical-colour");
+
+
+    bmedical.appendChild(medicalImg);
     bmedical.appendChild(tmedical);
+
     bmedical.setAttribute("class", "btn");
     bmedical.onclick = function() { // Note this is a function
         $( this ).toggleClass( "highlight" );
@@ -176,8 +203,16 @@ setTimeout(function(){
 
 //Create Hygiene
     var bhygiene = document.createElement("button");
-    var thygiene = document.createTextNode("Hygiene"); 
+    var thygiene = document.createElement("p");
+    thygiene.innerHTML = "Hygiene"
+    thygiene.setAttribute("class", "button-text");
+
+    var hygieneImg=document.createElement("i");
+    hygieneImg.setAttribute("class", "glyphicon glyphicon-tint hygiene-colour");
+
+    bhygiene.appendChild(hygieneImg);
     bhygiene.appendChild(thygiene);
+
     bhygiene.setAttribute("class", "btn");
     bhygiene.onclick = function() { // Note this is a function
         $( this ).toggleClass( "highlight" );
@@ -188,8 +223,16 @@ setTimeout(function(){
 
 //Create Technology
     var btech = document.createElement("button");
-    var ttech = document.createTextNode("Technology"); 
+    var ttech = document.createElement("p");
+    ttech.innerHTML = "Technology"
+    ttech.setAttribute("class", "button-text");
+
+    var techImg=document.createElement("i");
+    techImg.setAttribute("class", "glyphicon glyphicon-globe technology-colour");
+
+    btech.appendChild(techImg);
     btech.appendChild(ttech);
+
     btech.setAttribute("class", "btn");
     btech.onclick = function() { // Note this is a function
         $( this ).toggleClass( "highlight" );
@@ -204,7 +247,7 @@ setTimeout(function(){
     var bchildren = document.createElement("button");
     var tchildren = document.createTextNode("Children"); 
     bchildren.appendChild(tchildren);
-    bchildren.setAttribute("class", "btn");
+    bchildren.setAttribute("class", "children-btn");
     bchildren.onclick = function() { // Note this is a function
         $( this ).toggleClass( "highlight" );
         $('.children-o').toggle();
@@ -217,7 +260,7 @@ setTimeout(function(){
     var byouth = document.createElement("button");
     var tyouth = document.createTextNode("Youth"); 
     byouth.appendChild(tyouth);
-    byouth.setAttribute("class", "btn");
+    byouth.setAttribute("class", "youth-btn");
     byouth.onclick = function() { // Note this is a function
         $( this ).toggleClass( "highlight" );
         $('.youth-o').toggle();
@@ -230,7 +273,7 @@ setTimeout(function(){
     var badults = document.createElement("button");
     var tadults = document.createTextNode("Adults"); 
     badults.appendChild(tadults);
-    badults.setAttribute("class", "btn");
+    badults.setAttribute("class", "adults-btn");
     badults.onclick = function() { // Note this is a function
         $( this ).toggleClass( "highlight" );
         $('.adults-o').toggle();
@@ -243,7 +286,7 @@ setTimeout(function(){
     var bseniors = document.createElement("button");
     var tseniors = document.createTextNode("Seniors"); 
     bseniors.appendChild(tseniors);
-    bseniors.setAttribute("class", "btn");
+    bseniors.setAttribute("class", "seniors-btn");
     bseniors.onclick = function() { // Note this is a function
         $( this ).toggleClass( "highlight" );
         $('.seniors-o').toggle();
@@ -256,7 +299,7 @@ setTimeout(function(){
     var bwall = document.createElement("button");
     var twall = document.createTextNode("All"); 
     bwall.appendChild(twall);
-    bwall.setAttribute("class", "btn all-welcome-btn highlight");
+    bwall.setAttribute("class", "welcomes-all-btn all-welcome-btn highlight");
 
 
     bwall.onclick = function() { // Note this is a function
@@ -284,7 +327,7 @@ setTimeout(function(){
     var bmen = document.createElement("button");
     var tmen = document.createTextNode("Men"); 
     bmen.appendChild(tmen);
-    bmen.setAttribute("class", "btn men-welcome-btn");
+    bmen.setAttribute("class", "men-btn men-welcome-btn");
     //bmen.setAttribute("id", "men-welcome-btn");
     bmen.onclick = function() { // Note this is a function
         $( this ).toggleClass( "highlight" );
@@ -308,7 +351,7 @@ setTimeout(function(){
     var bwomen = document.createElement("button");
     var twomen = document.createTextNode("Women"); 
     bwomen.appendChild(twomen);
-    bwomen.setAttribute("class", "btn women-welcome-btn");
+    bwomen.setAttribute("class", "women-btn women-welcome-btn");
     bwomen.onclick = function() { // Note this is a function
         $( this ).toggleClass( "highlight" );
         $('.women-o').toggle();
@@ -332,7 +375,7 @@ setTimeout(function(){
     var bsearch = document.createElement("button");
     var tsearch = document.createTextNode("Search");
     bsearch.appendChild(tsearch);
-    bsearch.setAttribute("class", "btn");
+    bsearch.setAttribute("class", "search-btn");
 
 
     bsearch.onclick=function(){
