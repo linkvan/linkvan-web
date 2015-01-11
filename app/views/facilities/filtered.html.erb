@@ -28,27 +28,13 @@
 
 </div>
 
-<!--
-<h3>sortby = <%=@sortby%> </h3>
-<h3>hours = <%=@hours%> </h3>
-<h3>services = <%=@services%> </h3>
-<h3>suitable = <%=@suitable%> </h3>
-<h3>welcome = <%=@welcome%> </h3>
--->
-
-
 <div id="index">
 <br>
 <br>
 <br>
 <br>
 
-<!--
-Count nearyes: <%=@facilities_near_yes.count%><br>
-Count nearno: <%=@facilities_near_no.count%><br>
-Count nameyes: <%=@facilities_name_yes.count%><br>
-Count nameno: <%=@facilities_name_no.count%><br>
-Count facilities: <%=@facilities.count%></br> -->
+<% $i=0 %>
 
 <div id="near-yes">
 <% @facilities_near_yes.each do |f| %>
@@ -57,13 +43,17 @@ Count facilities: <%=@facilities.count%></br> -->
     <div class= "facility-block-name"><strong><%= f.name %></strong></div>
     <div class="is-open">open</div>
     <%= display_services(f.services) %>
-    <!-- put display_distance(f) here -->
+    <%= @facilities_near_yes_distance[$i].round(2) %> kilometres
     <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>  
   </div>
 </a>
   <hr>
+<% $i += 1 %>
 <% end %>
 </div>
+
+<% $i=0 %>
+
 <div id="near-no">
 <% @facilities_near_no.each do |f| %>
 <a href=<%= facility_path(f)%>>
@@ -71,13 +61,18 @@ Count facilities: <%=@facilities.count%></br> -->
     <div class= "facility-block-name"><strong><%= f.name %></strong></div>
     <div class="is-closed">closed</div>
     <%= display_services(f.services) %>
-    <!-- put display_distance(f) here -->
+    <%= @facilities_near_no_distance[$i].round(2) %> kilometres
     <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>
 </a>
   <hr>
+<% $i += 1 %>
 <% end %>
+
 </div>
+
+<% $i=0 %>
+
 <div id="name-yes">
 <% @facilities_name_yes.each do |f| %>
 <a href=<%= facility_path(f)%>>
@@ -85,13 +80,17 @@ Count facilities: <%=@facilities.count%></br> -->
     <div class= "facility-block-name"><strong><%= f.name %></strong></div>
     <div class="is-open">open</div>
     <%= display_services(f.services) %>
-    <!-- put display_distance(f) here -->
+    <%= @facilities_name_yes_distance[$i].round(2) %> kilometres
     <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>
 </a>
   <hr>
+<% $i += 1 %>
 <% end %>
 </div>
+
+<% $i=0 %>
+
 <div id="name-no">
 <% @facilities_name_no.each do |f| %>
 <a href=<%= facility_path(f)%>>
@@ -99,11 +98,12 @@ Count facilities: <%=@facilities.count%></br> -->
     <div class= "facility-block-name"><strong><%= f.name %></strong></div>
     <div class="is-closed">closed</div>
     <%= display_services(f.services) %>
-    <!-- put display_distance(f) here -->
+    <%= @facilities_name_no_distance[$i].round(2) %> kilometres
     <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>
 </a>
   <hr>
+<% $i += 1 %>
 <% end %>
 </div>
 <div id="no-results">

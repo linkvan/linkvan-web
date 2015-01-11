@@ -25,11 +25,11 @@
 
 
   <div class="inset-call">
-    <p>Call <%=@facility.phone %></p>
+    <p><strong>Call: </strong> <%=@facility.phone %></p>
   </div> <!--ends inset-call -->
 
 <div class="inset-website">
-  <p>Website <%= link_to @facility.website, "http://" + @facility.website  %></p>
+  <p><strong>Website: </strong> <%= link_to @facility.website, "http://" + @facility.website  %></p>
 </div>
 
 <div id="inset-directions">

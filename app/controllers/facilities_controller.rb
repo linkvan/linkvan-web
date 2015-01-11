@@ -7,6 +7,11 @@ class FacilitiesController < ApplicationController
       @longitude = params[:longitude]
       @scope = params[:scope]
 
+      @facilities_near_yes_distance = Array.new
+      @facilities_near_no_distance = Array.new
+      @facilities_name_yes_distance = Array.new
+      @facilities_name_no_distance = Array.new
+
       case params[:scope]
       when 'Shelter'
         @facilities_near_yes = Facility.contains_service("Shelter", "Near", "Yes", @latitude, @longitude)
@@ -93,6 +98,22 @@ class FacilitiesController < ApplicationController
       end
 
       @facilities = Facility.all
+
+      @facilities_near_yes.each do |f|
+         @facilities_near_yes_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+      end
+
+      @facilities_near_no.each do |f|
+         @facilities_near_no_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+      end
+
+      @facilities_name_yes.each do |f|
+         @facilities_name_yes_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+      end
+
+      @facilities_name_no.each do |f|
+         @facilities_name_no_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+      end
    
 	  end
 
