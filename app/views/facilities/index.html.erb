@@ -50,12 +50,9 @@ setTimeout(function(){
     shelterImg.setAttribute("class", "glyphicon glyphicon-home shelter-colour");
     var shelterChev=document.createElement("i");
     shelterChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
-
-    setTimeout(function(){
-        bshelter.appendChild(shelterImg);
-        bshelter.appendChild(tshelter);
-        bshelter.appendChild(shelterChev);
-    }, 1000);
+    bshelter.appendChild(shelterImg);
+    bshelter.appendChild(tshelter);
+    bshelter.appendChild(shelterChev);
 
     bshelter.setAttribute("class", "btn");
     bshelter.onclick = function() { // Note this is a function
