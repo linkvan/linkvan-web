@@ -1,7 +1,7 @@
 class FacilitiesController < ApplicationController
-  before_action :require_signin, except: [:new, :create]
+  before_action :require_signin, only: [:edit, :update, :new, :create, :destroy]
 	def index
-    end
+  end
 
     def filtered
       @latitude = params[:latitude]
