@@ -1,5 +1,8 @@
 Linkvan::Application.routes.draw do
   
+  resource :session
+  resources :users
+
   get 'facilities/options', to: 'facilities#options'
   get 'facilities/directions/:id', to: 'facilities#directions'
   get "facilities/filter/:scope" => "facilities#filtered", as: :filtered_facilities

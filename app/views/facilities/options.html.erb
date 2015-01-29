@@ -30,8 +30,6 @@
     <div id="welcomes-div"></div>
     <div id="search-div"></div>
 </div>
-
-<p><%= link_to "Add New Facility", new_facility_path %></p>
 <p id="demo"></p>
 
 <div class="tog">
@@ -128,8 +126,6 @@ var x = document.getElementById("demo");
     }
 
 function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude; 
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
 }

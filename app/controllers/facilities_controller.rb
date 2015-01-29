@@ -1,4 +1,5 @@
 class FacilitiesController < ApplicationController
+  before_action :require_signin, except: [:new, :create]
 	def index
     end
 

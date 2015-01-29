@@ -2,10 +2,18 @@
 
 <div id="index-main">
 	<h3>What service are you looking for?</h3>
-
 </div>
 
-<p><%= link_to "Add New Facility", new_facility_path %></p>
+<div class="admin-options">
+    <% if current_user %>
+        Welcome back, <%= current_user.name %>!<br>
+        <%= link_to "Add New Facility", new_facility_path %><br>
+        <%= link_to "Sign Out", session_path, method: :delete %>
+    <%else%>
+        <%= link_to "Admin Sign In", new_session_path %>
+    <%end%>
+</div>
+
 <p id="demo"></p>
 
 

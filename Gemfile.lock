@@ -26,6 +26,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.2)
+    bcrypt (3.1.9-x86-mingw32)
     builder (3.1.4)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -103,6 +104,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  bcrypt (~> 3.1.9)
   coffee-rails (~> 4.0.0)
   geocoder
   jbuilder (~> 1.2)

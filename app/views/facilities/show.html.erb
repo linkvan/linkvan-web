@@ -81,10 +81,10 @@
 </div>
 
 
-
-<%= link_to "All Facilities", facilities_path %>
-<%= link_to "Edit", edit_facility_path%>
-<%= link_to "Delete", @facility, method: :delete, data: {confirm: 'Are you sure?'}%>
+<% if current_user %>
+  <%= link_to "Edit", edit_facility_path%>
+  <%= link_to "Delete", @facility, method: :delete, data: {confirm: 'Are you sure?'}%>
+<% end %>
 </div>
 
 
