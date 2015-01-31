@@ -29,7 +29,7 @@ var flat = jsevent.lat;
 var flong = jsevent.long; 
 var map, tlat, tlong, start, end;
 
-window.setTimeout(500);
+window.setTimeout(800);
 
 var x = document.getElementById("demo");
 
@@ -91,7 +91,6 @@ function calcRoute() {
   });
 }
 
-window.setTimeout(500);
 google.maps.event.addDomListener(window, 'load', initialize);
 
 //click listener needed for map to appear
