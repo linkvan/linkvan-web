@@ -29,8 +29,6 @@ var flat = jsevent.lat;
 var flong = jsevent.long; 
 var map, tlat, tlong, start, end;
 
-window.setTimeout(800);
-
 var x = document.getElementById("demo");
 
     if (navigator.geolocation) {
@@ -38,6 +36,8 @@ var x = document.getElementById("demo");
     } else { 
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
+
+window.setTimeout(800);
 
 function showPosition(position) {
     tlat = position.coords.latitude;
