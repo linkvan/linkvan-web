@@ -147,11 +147,6 @@ nav .nav-container .logo img {
 
 	}
 
-	.btn:hover {
-  		background: #3276b1;
-  		text-decoration: none;
-	}
-
 	.highlight {
     	background: #3276b1;
     	color: white;
@@ -461,13 +456,6 @@ nav .nav-container .logo img {
 
 	}
 
-
-
-	.btn:hover {
-  		background: #3276b1;
-  		text-decoration: none;
-	}
-
 	.highlight {
     	background: #286090;
     	color: white;
@@ -510,10 +498,6 @@ nav .nav-container .logo img {
 
 	}
 
-.children-btn:hover {
-  	background: #3276b1;
-  	text-decoration: none;
-}
 
 .highlight {
     background: #3276b1;
@@ -542,12 +526,6 @@ nav .nav-container .logo img {
 
 	}
 
-.youth-btn:hover {
-  	background: #3276b1;
-  	text-decoration: none;
-}
-
-
 
  .adults-btn {
 
@@ -571,10 +549,6 @@ nav .nav-container .logo img {
 
 	}
 
-.adults-btn:hover {
-  	background: #3276b1;
-  	text-decoration: none;
-}
 
  .seniors-btn {
 
@@ -600,11 +574,6 @@ nav .nav-container .logo img {
 
 	}
 
-.seniors-btn:hover {
-  	background: #3276b1;
-  	text-decoration: none;
-}
-
 .welcomes-all-btn {
 
 		align-items: flex-start;
@@ -628,10 +597,6 @@ nav .nav-container .logo img {
 
 	}
 
-.welcomes-all-btn:hover {
-  	background: #3276b1;
-  	text-decoration: none;
-}
 
 .men-btn {
 
@@ -654,11 +619,6 @@ nav .nav-container .logo img {
 		margin-bottom: 10px;
 
 	}
-
-.men-btn:hover {
-  	background: #3276b1;
-  	text-decoration: none;
-}
 
 .women-btn {
 
@@ -683,11 +643,6 @@ nav .nav-container .logo img {
 		margin-bottom: 10px;
 
 	}
-
-.women-btn:hover {
-  	background: #3276b1;
-  	text-decoration: none;
-}
 
 .search-btn {
 
@@ -715,7 +670,23 @@ nav .nav-container .logo img {
 	}
 
 .search-btn:hover {
-  	background: #286090;
+  	background: #ebebeb;
+ }
+
+#near {
+ 	border-top-left-radius: 4px;
+ 	border-bottom-left-radius: 4px;
+ }
+
+
+#yes {
+ 	border-top-left-radius: 4px;
+ 	border-bottom-left-radius: 4px;
+ }
+
+ #options-id{
+ 	border-top-left-radius: 4px;
+ 	border-bottom-left-radius: 4px;
  }
 
 

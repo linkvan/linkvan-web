@@ -19,8 +19,8 @@
   <div class="open">
   <div class="btn-group btn-toggle"> 
     <p>Open Now</p> 
-    <button class="btn btn-primary active">Yes</button>
-    <button class="btn btn-default">No</button>
+    <button class="btn btn-primary active" id="yes">Yes</button>
+    <button class="btn btn-default" id="no">No</button>
   </div>
   </div>
 </div>
@@ -29,7 +29,7 @@
   <div class="options-button">
   <div class="btn-group btn-toggle">
     <p><span style="color:white">.</span></p>
-    <%= link_to "Options", facilities_options_path, class: 'btn btn-default' %>
+    <%= link_to "Options", facilities_options_path, class: 'btn btn-default', id: 'options-id' %>
   </div>
   </div>
 </div>
