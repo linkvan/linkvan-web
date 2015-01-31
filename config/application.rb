@@ -24,5 +24,7 @@ module Linkvan
         ActiveRecord::Base.connection
     end
 
+    config.assets.paths << "#{Rails}/vendor/assets/fonts"
+
   end
 end
