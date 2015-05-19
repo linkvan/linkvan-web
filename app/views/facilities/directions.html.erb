@@ -58,22 +58,6 @@ function initialize() {
 
 }//ends initialize
 
-function initCalcRoute() {
-  var request = {
-      origin: start,
-      destination: end,
-      // Note that Javascript allows us to access the constant
-      // using square brackets and a string value as its
-      // "property."
-      travelMode: google.maps.TravelMode.WALKING
-  };
-  directionsService.route(request, function(response, status) {
-    if (status == google.maps.DirectionsStatus.OK) {
-      directionsDisplay.setDirections(response);
-    }
-  });
-}
-
 function calcRoute() {
   selectedMode = document.getElementById('mode').value;
   var request = {
@@ -91,16 +75,20 @@ function calcRoute() {
   });
 }
 
+
 google.maps.event.addDomListener(window, 'load', initialize);
 
 //click listener needed for map to appear
 google.maps.event.addDomListener(window, 'click', initialize);
+
+
 $("#map-canvas-dir").click();
 google.maps.event.clearListeners(window, 'click');
 //clear click listener right after click
 
 google.maps.event.addDomListener(window, 'load', calcRoute);
-
+//setTimeout(function(){
+//}, 800); //ends timer
 
 
 </script>

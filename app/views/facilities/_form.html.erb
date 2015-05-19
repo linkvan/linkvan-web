@@ -1,42 +1,51 @@
 <%= form_for(@facility) do |f| %>
   <p>
-    <%= f.label :name %><br/>
+    <strong> WARNING: DO NOT PRESS ENTER WHEN FILLING IN FIELDS. USE "CREATE FACILITY" BUTTON AT BOTTOM OF PAGE.</strong><br/><br/>
+    <%= f.label :name %> - Facility's name. Example: UBC Learning Exchange<br/>
     <%= f.text_field :name, autofocus: true %>
   </p>
   <p>
-    <%= f.label :welcomes %><br/>
+    <%= f.label :welcomes %> - Enter One (case-sensitive): All, Women, Men<br/>
+    Example: Women<br/>
     <%= f.text_field :welcomes %>
   </p>
   <p>
-    <%= f.label :suitability %><br/>
+    <%= f.label :suitability %> - Enter One or Many (case-sensitive, order doesn't matter, use space to separate terms): Children, Youth, Adults, Seniors<br/>
+    Example: Adults Seniors<br/>
     <%= f.text_field :suitability %>
   </p>
   <p>
-    <%= f.label :services %><br/>
+    <%= f.label :services %> - Enter One or Many (case-sensitive, order doesn't matter, use space to separate terms): Shelter, Food, Medical, Hygiene, Technology<br/>
+    Example: Shelter Medical Hygiene<br/>
     <%= f.text_field :services %>
   </p>
   <p>
-    <%= f.label :address %><br/>
-    <%= f.text_field :address %><br>
-    <div id="map-canvas-new"></div>
+    <%= f.label :address %> - Enter the facility's address then click Search. This will populate the hidden latitude and longitude fields.<br/> Format: Street Address, City, BC. Example: 612 Main St, Vancouver, BC<br/>
+
+    <%= f.text_field :address %>
     <input type="button" value="Search" onclick="codeAddress()">
+    <div id="map-canvas-new"></div>
+   
   
 
 
   </p>
   <p>
-    <%= f.label :phone %><br/>
+    <%= f.label :phone %> - Example: 604 555 6789<br/>
     <%= f.text_field :phone %>
   </p>
   <p>
-    <%= f.label :website %><br/>
+    <%= f.label :website %> - Example: learningexchange.ubc.ca (Note: Do not include "http://". "www" is optional.)<br/>
     <%= f.text_field :website %>
   </p>
   <p>
-    <%= f.label :description %><br/>
+    <%= f.label :description %> - Copy paste verbatim from the facility's "about us" page. Will tweak on stakeholder feedback.<br/>
     <%= f.text_area :description, cols: 40, rows: 7 %>
   </p>
   <p>
+    If hours of operation are not available for any given date, enter 22:59 for the start time and 23:59 for the end time.<br/>
+    This will make it easier to relocate in the database.<br/>
+    <strong> WARNING: The start time and end time for a day cannot be identical. Also, the start time must be earlier than the end time.</strong><br/><br/>
     <%= f.label :startsmon_at %><br/>
     <%= f.time_select :startsmon_at, default: 8.hours.ago  %>
   </p>
@@ -100,7 +109,7 @@
   </p>
 
   <p>
-    <%= f.label :notes %><br/>
+    <%= f.label :notes %> - Leave empty for now. Facility admin can update at will. Examples: special events, facility rules, etc.<br/>
     <%= f.text_area :notes, cols: 40, rows: 7 %>
   </p>
   <p>
