@@ -1,10 +1,14 @@
 <%= render 'nav' %>
-
+    
 <div id="index-main">
 	<h3>What service are you looking for?</h3>
 </div>
 
+
 <div class="admin-options">
+    <strong>Prototype Status:</strong> <h4 style="color:red">Database Maintenance</h4></br>
+   <strong>Developer Note:</strong> Resolve null latlongs</br>
+    <strong>Volunteer Note:</strong> Pause database entry. Please use spreadsheet.</br>
     <% if current_user %>
         Welcome back, <%= current_user.name %>!<br>
         <%= link_to "Add New Facility", new_facility_path %><br>
@@ -13,6 +17,7 @@
         <%= link_to "Admin Sign In", new_session_path %>
     <%end%>
 </div>
+
 
 <p id="demo"></p>
 
