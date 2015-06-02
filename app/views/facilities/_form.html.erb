@@ -1,4 +1,8 @@
 <%= form_for(@facility) do |f| %>
+  <% if @facility.errors.any? %>
+  <h3 style="color:red">Oops, did you remember to "Search" the address? Name missing?</h3>
+  <h4>Errors: <%= @facility.errors.full_messages.to_sentence %></h4>
+  <% end %>
   <p>
     <strong> WARNING: DO NOT PRESS ENTER WHEN FILLING IN FIELDS. USE "CREATE FACILITY" BUTTON AT BOTTOM OF PAGE.</strong><br/><br/>
     <%= f.label :name %> - Facility's name. Example: UBC Learning Exchange<br/>

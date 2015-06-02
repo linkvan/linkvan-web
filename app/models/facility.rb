@@ -3,6 +3,8 @@ require 'bigdecimal/util'
 
 class Facility < ActiveRecord::Base
 
+	validates :name, :lat, :long, :services, presence: true
+
 	def self.contains_service(service_query, prox, open, ulat, ulong)
 		arr = Array.new
 		distarr = Array.new

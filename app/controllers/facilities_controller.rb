@@ -136,8 +136,11 @@ class FacilitiesController < ApplicationController
 
 	def update
 		@facility = Facility.find(params[:id])
-		@facility.update(facility_params)
-		redirect_to @facility
+		if @facility.update(facility_params)
+		  redirect_to @facility
+    else
+      render :edit
+    end
 	end
 
 	def new
@@ -146,8 +149,11 @@ class FacilitiesController < ApplicationController
 
 	def create
 		@facility = Facility.new(facility_params)
-		@facility.save
-		redirect_to @facility
+		if @facility.save
+		  redirect_to @facility
+    else
+      render :new
+    end
 	end
 
 	def destroy
