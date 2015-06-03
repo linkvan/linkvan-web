@@ -39,6 +39,11 @@ class FacilitiesController < ApplicationController
         @facilities_near_no = Facility.contains_service("Technology", "Near", "No", @latitude, @longitude)
         @facilities_name_yes = Facility.contains_service("Technology", "Name", "Yes", @latitude, @longitude)
         @facilities_name_no = Facility.contains_service("Technology", "Name", "No", @latitude, @longitude)
+      when 'Legal'
+        @facilities_near_yes = Facility.contains_service("Legal", "Near", "Yes", @latitude, @longitude)
+        @facilities_near_no = Facility.contains_service("Legal", "Near", "No", @latitude, @longitude)
+        @facilities_name_yes = Facility.contains_service("Legal", "Name", "Yes", @latitude, @longitude)
+        @facilities_name_no = Facility.contains_service("Legal", "Name", "No", @latitude, @longitude)
       when 'Search'
         @sortby = params[:sortby]
         @hours = params[:hours]
@@ -56,7 +61,7 @@ class FacilitiesController < ApplicationController
         if !(@services.nil?)
           servicesarr = @services.split(",")
         else
-          servicesarr = ["Shelter", "Food", "Medical", "Hygiene", "Technology"]
+          servicesarr = ["Shelter", "Food", "Medical", "Hygiene", "Technology", "Legal"]
         end
 
         @facilities_near_yes = []
@@ -70,6 +75,7 @@ class FacilitiesController < ApplicationController
           @facilities_name_yes = @facilities_name_yes.concat Facility.contains_service(s, "Name", "Yes", @latitude, @longitude)
           @facilities_name_no = @facilities_name_no.concat Facility.contains_service(s, "Name", "No", @latitude, @longitude)
         end
+
 
         @facilities_near_yes = Facility.redist_sort(@facilities_near_yes.uniq, @latitude, @longitude)
         @facilities_near_no = Facility.redist_sort(@facilities_near_no.uniq, @latitude, @longitude)
@@ -115,6 +121,8 @@ class FacilitiesController < ApplicationController
       @facilities_name_no.each do |f|
          @facilities_name_no_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
       end
+
+
    
 	  end
 

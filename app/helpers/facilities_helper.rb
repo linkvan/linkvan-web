@@ -13,8 +13,10 @@ module FacilitiesHelper
    				content_arr += content_tag(:i, nil, class: "glyphicon glyphicon-heart-empty medical-colour-index")
    			when "Hygiene"
    				content_arr += content_tag(:i, nil, class: "glyphicon glyphicon-tint hygiene-colour-index")
-   			else
+   			when "Technology"
    				content_arr += content_tag(:i, nil, class: "glyphicon glyphicon-globe technology-colour-index")
+   			else
+   				content_arr += content_tag(:i, nil, class: "glyphicon glyphicon-briefcase legal-colour-index")
 
 			end #ends case
 		end

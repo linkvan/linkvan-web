@@ -158,6 +158,33 @@ setTimeout(function(){
     };
 
     divid.appendChild(btech);
+
+//Create Legal
+    var blegal = document.createElement("button");
+    var tlegal = document.createElement("p");
+    tlegal.innerHTML = "Legal"
+    tlegal.setAttribute("class", "button-text");
+
+    var legalImg=document.createElement("i");
+    legalImg.setAttribute("class", "glyphicon glyphicon-briefcase legal-colour");
+
+    var legalChev=document.createElement("i");
+    legalChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
+
+    blegal.appendChild(legalImg);
+    blegal.appendChild(tlegal);
+    blegal.appendChild(legalChev);
+
+    blegal.setAttribute("class", "btn");
+    blegal.onclick = function() { // Note this is a function
+        window.location = "/facilities/filter/Legal/?latitude=" + latitude + "&longitude="+longitude;
+    };
+
+    divid.appendChild(blegal);
+
+
+
+
 }, 500);
 
 

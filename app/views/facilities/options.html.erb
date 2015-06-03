@@ -40,6 +40,7 @@
 <p class="medical-o" id="medical-o"></p>
 <p class="hygiene-o" id="hygiene-o"></p>
 <p class="technology-o" id="technology-o"></p>
+<p class="legal-o" id="legal-o"></p>
 <p class="children-o" id="children-o"></p>
 <p class="youth-o" id="youth-o"></p>
 <p class="adults-o" id="adults-o"></p>
@@ -71,6 +72,7 @@ var foodid = document.getElementById("food-o");
 var medicalid = document.getElementById("medical-o");
 var hygieneid = document.getElementById("hygiene-o");
 var technologyid = document.getElementById("technology-o");
+var legalid = document.getElementById("legal-o");
 var childrenid = document.getElementById("children-o");
 var youthid = document.getElementById("youth-o");
 var adultsid = document.getElementById("adults-o");
@@ -86,6 +88,7 @@ foodid.style.display = 'block';
 medicalid.style.display = 'block';
 hygieneid.style.display = 'block';
 technologyid.style.display = 'block';
+legalid.style.display = 'block';
 childrenid.style.display = 'block';
 youthid.style.display = 'block';
 adultsid.style.display = 'block';
@@ -236,6 +239,26 @@ setTimeout(function(){
     };
 
     divid.appendChild(btech);
+
+//Create Legal
+    var blegal = document.createElement("button");
+    var tlegal = document.createElement("p");
+    tlegal.innerHTML = "Legal"
+    tlegal.setAttribute("class", "button-text");
+
+    var legalImg=document.createElement("i");
+    legalImg.setAttribute("class", "glyphicon glyphicon-briefcase legal-colour");
+
+    blegal.appendChild(legalImg);
+    blegal.appendChild(tlegal);
+
+    blegal.setAttribute("class", "btn");
+    blegal.onclick = function() { // Note this is a function
+        $( this ).toggleClass( "highlight" );
+        $('.legal-o').toggle();
+    };
+
+    divid.appendChild(blegal);
 
 //Create Suitable-Children button
     var suitabledivid = document.getElementById("suitable-div");
@@ -401,6 +424,9 @@ setTimeout(function(){
         }
         if (technologyid.style.display == 'none'){
             services += "Technology,";
+        }
+        if (legalid.style.display == 'none'){
+            services += "Legal,";
         }
         //remove last comma
         services = services.substring(0, services.length - 1);
