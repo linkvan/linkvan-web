@@ -8,7 +8,7 @@
 <div class="admin-options">
     <strong>Prototype Status:</strong> <h4 style="color:green">Ready</h4>
    <strong>Developer Note:</strong> No critical issues</br>
-    <strong>Volunteer Note:</strong> Be awesome</br>
+    <strong>Volunteer Note:</strong> New category added - Legal</br>
     <% if current_user %>
         Welcome back, <%= current_user.name %>!<br>
         <%= link_to "Add New Facility", new_facility_path %><br>
@@ -44,6 +44,9 @@ function showPosition(position) {
 }
 
 setTimeout(function(){
+
+
+
     //Create Shelter
     var divid = document.getElementById("index-main");
     var bshelter = document.createElement("button");
@@ -181,9 +184,6 @@ setTimeout(function(){
     };
 
     divid.appendChild(blegal);
-
-
-
 
 }, 500);
 
