@@ -26,14 +26,14 @@ var jsevent = $('.temp_information').data('jsevent');
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 var flat = jsevent.lat;
-var flong = jsevent.long; 
+var flong = jsevent.long;
 var map, tlat, tlong, start, end;
 
 var x = document.getElementById("demo");
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
+    } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 

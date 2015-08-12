@@ -17,8 +17,8 @@
 
 <div class="container-open">
   <div class="open">
-  <div class="btn-group btn-toggle"> 
-    <p>Open Now</p> 
+  <div class="btn-group btn-toggle">
+    <p>Open Now</p>
     <button class="btn btn-primary active" id="yes">Yes</button>
     <button class="btn btn-default" id="no">No</button>
   </div>
@@ -29,7 +29,7 @@
   <div class="options-button">
   <div class="btn-group btn-toggle">
     <p><span style="color:white">.</span></p>
-    <%= link_to "Options", facilities_options_path, class: 'btn btn-default', id: 'options-id' %>
+    <%= link_to "Advanced Search", facilities_options_path, class: 'btn btn-default', id: 'options-id' %>
   </div>
   </div>
 </div>
@@ -51,7 +51,7 @@
     <div class="is-open">open</div>
     <%= display_services(f.services) %>
     <%= @facilities_near_yes_distance[$i].round(2) %> kilometres
-    <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>  
+    <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>
 </a>
   <hr>
@@ -120,7 +120,7 @@
 </div>
 </div>
 
-<%= content_tag :div, class: "temp_information", data: {jssortby: @sortby, jshours: @hours, nearyescheck: 
+<%= content_tag :div, class: "temp_information", data: {jssortby: @sortby, jshours: @hours, nearyescheck:
 
 @facilities_near_yes.count, nearnocheck: @facilities_near_no.count} do %>
 <% end %>
@@ -141,7 +141,7 @@ var noresults = document.getElementById("no-results");
 window.setTimeout(500);
 
 if ((nearyescheck == 0) && (nearnocheck != 0)){
-  $('.open').find('.btn').toggleClass('active');  
+  $('.open').find('.btn').toggleClass('active');
   $('.open').find('.btn').toggleClass('btn-primary');
   $('.open').find('.btn').toggleClass('btn-default');
   $('.prox-toggle').toggle();
@@ -167,7 +167,7 @@ if ((nearyescheck == 0) && (nearnocheck != 0)){
 
 if ((jssortby == "Near") && (jshours == "All")){
 
-  $('.open').find('.btn').toggleClass('active');  
+  $('.open').find('.btn').toggleClass('active');
   $('.open').find('.btn').toggleClass('btn-primary');
   $('.open').find('.btn').toggleClass('btn-default');
   $('.prox-toggle').toggle();
@@ -183,7 +183,7 @@ if ((jssortby == "Near") && (jshours == "All")){
 
 if ((jssortby == "Name") && (jshours == "Open")){
 
-  $('.prox').find('.btn').toggleClass('active');  
+  $('.prox').find('.btn').toggleClass('active');
   $('.prox').find('.btn').toggleClass('btn-primary');
   $('.prox').find('.btn').toggleClass('btn-default');
   $('.open-toggle').toggle();
@@ -199,12 +199,12 @@ if ((jssortby == "Name") && (jshours == "Open")){
 
 if ((jssortby == "Name") && (jshours == "All")){
 
-  $('.open').find('.btn').toggleClass('active');  
+  $('.open').find('.btn').toggleClass('active');
   $('.open').find('.btn').toggleClass('btn-primary');
   $('.open').find('.btn').toggleClass('btn-default');
   $('.prox-toggle').toggle();
 
-  $('.prox').find('.btn').toggleClass('active');  
+  $('.prox').find('.btn').toggleClass('active');
   $('.prox').find('.btn').toggleClass('btn-primary');
   $('.prox').find('.btn').toggleClass('btn-default');
   $('.open-toggle').toggle();
@@ -223,7 +223,7 @@ if ((jssortby == "Name") && (jshours == "All")){
 
 
 $('.prox').click(function() {
-    $(this).find('.btn').toggleClass('active');  
+    $(this).find('.btn').toggleClass('active');
     $(this).find('.btn').toggleClass('btn-primary');
     $(this).find('.btn').toggleClass('btn-default');
 
@@ -254,7 +254,7 @@ $('.prox').click(function() {
 });
 
 $('.open').click(function() {
-    $(this).find('.btn').toggleClass('active');  
+    $(this).find('.btn').toggleClass('active');
     $(this).find('.btn').toggleClass('btn-primary');
     $(this).find('.btn').toggleClass('btn-default');
 
