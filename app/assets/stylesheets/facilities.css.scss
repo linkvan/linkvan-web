@@ -129,12 +129,13 @@ nav .nav-container a {
 
 nav .nav-container .logo img {
 	width: 40px;
+	float: left;
 }
 
-nav .nav-container .search_bar{
+.search_bar{
 	float: right;
-	margin-top: 6px;
-	display: inline;
+	margin-top: 8px;
+	vertical-align: middle;
 }
 
 
