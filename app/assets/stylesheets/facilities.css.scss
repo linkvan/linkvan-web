@@ -106,37 +106,24 @@ nav {
 }
 
 nav .nav-container {
-		text-align: right;
 		font-weight: 700;
-		margin: 0 0;
+		margin: 0 auto;
 		max-width: 650px;
+		position: relative;
 }
 
 nav .nav-container .logo {
-	display: inline;
-	float: right;
+	float: left;
 	margin-right: 30px;
 	width: 40px;
 }
 
-nav .nav-container a {
-	color: #3081B7;
-	text-decoration: none;
-	font-weight: 700;
-	padding-top: 0;
-
-}
-
-nav .nav-container .logo img {
-	width: 40px;
-	display: inline
-	float: right;
-}
 
 .search_bar{
-	float: right;
 	margin-top: 8px;
-	vertical-align: middle;
+	display: block;
+	position: fixed;
+
 }
 
 
