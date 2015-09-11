@@ -106,9 +106,9 @@ nav {
 }
 
 nav .nav-container {
-		text-align: center;
+		text-align: right;
 		font-weight: 700;
-		margin: 0 auto;
+		margin: 0 0;
 		max-width: 650px;
 }
 
@@ -116,7 +116,7 @@ nav .nav-container .logo {
 	display: inline;
 	float: right;
 	margin-right: 30px;
-	width: 100px;
+	width: 40px;
 }
 
 nav .nav-container a {
@@ -129,7 +129,8 @@ nav .nav-container a {
 
 nav .nav-container .logo img {
 	width: 40px;
-	float: left;
+	display: inline
+	float: right;
 }
 
 .search_bar{
