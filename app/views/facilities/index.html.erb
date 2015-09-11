@@ -1,8 +1,12 @@
 <%= render 'nav' %>
-    
+
+
+
+
 <div id="index-main">
 	<h3>What service are you looking for?</h3>
 </div>
+
 
 
 <div class="admin-options">
@@ -20,25 +24,27 @@
 
 
 <p id="demo"></p>
-
+<%= content_tag :div, class: "temp_information", data: {searched_facilities: @facilities} do %>
+<% end %>
 
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
 <script>
+
 var latitude, longitude;
 
 var x = document.getElementById("demo");
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
+    } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 
 function showPosition(position) {
-    //x.innerHTML = "Latitude: " + position.coords.latitude + 
-    //"<br>Longitude: " + position.coords.longitude; 
+    //x.innerHTML = "Latitude: " + position.coords.latitude +
+    //"<br>Longitude: " + position.coords.longitude;
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
 }
@@ -188,8 +194,4 @@ setTimeout(function(){
 }, 500);
 
 
-
-
-
-    
 </script>

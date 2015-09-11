@@ -1,6 +1,8 @@
 class FacilitiesController < ApplicationController
   before_action :require_signin, only: [:edit, :update, :new, :create, :destroy]
-	def index
+
+  def index
+    @facilities = Facility.all
   end
 
     def filtered
@@ -56,7 +58,7 @@ class FacilitiesController < ApplicationController
         else
           suitableset = ["Children", "Youth", "Adults", "Seniors"].to_set
         end
-        
+
 
         if !(@services.nil?)
           servicesarr = @services.split(",")
@@ -89,14 +91,14 @@ class FacilitiesController < ApplicationController
           @facilities_name_yes.keep_if {|f| f.welcomes == @welcome}
           @facilities_name_no.keep_if {|f| f.welcomes == @welcome}
         end
-        
+
         if @suitable != "All" #refactor to "Everyone"
           @facilities_near_yes.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
           @facilities_near_no.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
           @facilities_name_yes.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
           @facilities_name_no.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
         end
-    
+
       else
         @facilities_near_yes = Facility.all
         @facilities_near_no = Facility.all
@@ -123,7 +125,7 @@ class FacilitiesController < ApplicationController
       end
 
 
-   
+
 	  end
 
   def directions
@@ -131,6 +133,14 @@ class FacilitiesController < ApplicationController
   end
 
   def options
+  end
+
+  def search
+    if params[:search]
+      @facilities = Facility.search(params[:search])
+    else
+      @facilities = Facility.all
+    end
   end
 
 
@@ -175,7 +185,7 @@ private
 
 	def facility_params
 		params.require(:facility).
-							permit(:name, :welcomes, :services, :address, :phone, 
+							permit(:name, :welcomes, :services, :address, :phone,
 								:website, :description, :startsmon_at, :endsmon_at, :startstues_at, :endstues_at,
                   :startswed_at, :endswed_at, :startsthurs_at, :endsthurs_at, :startsfri_at, :endsfri_at,
                     :startssat_at, :endssat_at, :startssun_at, :endssun_at, :notes, :suitability, :lat, :long)

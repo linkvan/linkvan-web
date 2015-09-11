@@ -1,5 +1,5 @@
 Linkvan::Application.routes.draw do
-  
+
   resource :session
   resources :users
 
@@ -8,7 +8,7 @@ Linkvan::Application.routes.draw do
   get "facilities/filter/:scope" => "facilities#filtered", as: :filtered_facilities
   get 'facilities/filter/:scope/:latitude&:longitude', to: 'facilities#filtered', as: :coords_facilities
   get 'facilities/filter/:scope/:latitude&:longitude&:sortby&:hours&:services&:suitable&:welcome', to: 'facilities#filtered', as: :searched_facilities
-
+  get 'facilities/search', to: 'facilities#search', as: :search_bar_facilities
   root 'facilities#index'
   resources :facilities
 

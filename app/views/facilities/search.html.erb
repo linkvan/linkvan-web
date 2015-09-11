@@ -1,0 +1,24 @@
+<%= render 'nav' %>
+<br>
+<br>
+
+<div id="index">
+<% if @facilities.present? %>
+<div id="search_results">
+  <h3><%= pluralize(@facilities.count, 'result') %> for "<%= params[:search] %>"</h3>
+</div>
+<% @facilities.each do |f| %>
+<a href=<%= facility_path(f)%>>
+  <div class="facility-block">
+    <div class= "facility-block-name"><strong><%= f.name %></strong></div>
+    <%= display_services(f.services) %>
+    <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
+  </div>
+</a>
+  <hr>
+<% end %>
+
+<% else %>
+  <p>There are no facilities containing <%= params[:search] %>.</p>
+<% end %>
+</div>

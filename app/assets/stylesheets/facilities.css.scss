@@ -113,8 +113,9 @@ nav .nav-container {
 }
 
 nav .nav-container .logo {
-	display: block;
-	margin: 0 auto;
+	display: inline;
+	float: right;
+	margin-right: 30px;
 	width: 100px;
 }
 
@@ -123,10 +124,16 @@ nav .nav-container a {
 	text-decoration: none;
 	font-weight: 700;
 	padding-top: 0;
+
 }
 
 nav .nav-container .logo img {
 	width: 40px;
+}
+
+nav .nav-container .search_bar{
+	float: right;
+	margin-top: 6px;
 }
 
 
@@ -744,4 +751,15 @@ nav .nav-container .logo img {
 
 .admin-options{
 	text-align: center;
+}
+
+#search_results{
+	h3{
+		font-family: arial;
+		font-size: 18px;
+		font-weight: bold;
+		color: #666;
+		margin-top: 10px;
+		text-align: center;
+	}
 }
