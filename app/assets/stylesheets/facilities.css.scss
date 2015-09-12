@@ -105,7 +105,7 @@ nav {
 	border-bottom: 1px solid #DDD;
 }
 
-nav .nav-container {
+.nav-container {
 
 		font-weight: 700;
 		margin: 0 auto;
@@ -113,7 +113,7 @@ nav .nav-container {
 		position: relative;
 }
 
-nav .nav-container .logo {
+.logo {
 	float: left;
 	margin-right: 30px;
 	width: 40px;
@@ -125,6 +125,7 @@ nav .nav-container .logo {
 	margin-top: 8px;
 	display: block;
 	width: 300px;
+	float: right;
 
 }
 
