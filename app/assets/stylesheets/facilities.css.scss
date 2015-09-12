@@ -110,10 +110,10 @@ nav {
 		font-weight: 700;
 		margin: 0 auto;
 		max-width: 650px;
+		display:block;
 }
 
 .logo {
-	float: left;
 	margin-right: 30px;
 	width: 40px;
 	display: inline-block;
@@ -124,8 +124,6 @@ nav {
 	margin-top: 8px;
 	display: inline-block;
 	width: 300px;
-	float: right;
-
 }
 
 
