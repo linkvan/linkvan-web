@@ -108,8 +108,7 @@ nav {
 .nav-container {
 
 		font-weight: 700;
-		max-width: 650px;
-		display:block;
+		margin: 0 auto;
 		position: relative;
 }
 
@@ -124,7 +123,7 @@ nav {
 	margin-top: 8px;
 	display: inline-block;
 	width: 300px;
-	text-align: right;
+	float: right;
 }
 
 
