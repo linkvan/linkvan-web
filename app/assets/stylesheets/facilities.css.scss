@@ -115,11 +115,13 @@ nav {
 .logo {
 	margin-right: 30px;
 	width: 40px;
+	display: inline;
 }
 
 .search-form{
 	max-width: 280px;
 	margin-top: 8px;
+	float: right;
 }
 
 #index-main{
