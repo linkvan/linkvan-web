@@ -1,11 +1,11 @@
 	<nav role="navigation">
 
-        <div class="nav-container" style="min-width:350px">
+        <div class="nav-container" style="min-width:350px; height: 40px;">
 
 
 
 
-						<form action="<%= search_bar_facilities_path %>" method="get" class="search-form" style="width: 280px; float: right; margin-bottom: 0; position:relative; height: 50%;" >
+						<form action="<%= search_bar_facilities_path %>" method="get" class="search-form" style="width: 280px; float: right; veritcal-align: bottom;" >
 							<%= text_field_tag :search, nil, placeholder: "Search Facilities" %>
 							<%= submit_tag "Search", :name => nil%>
 						</form>
