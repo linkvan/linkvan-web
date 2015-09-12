@@ -2,6 +2,11 @@
 
         <div class="nav-container">
 					<div class="search_bar">
+
+						<a class="logo" href='/facilities'>
+							<%= image_tag('test-logo.png') %>
+			  		</a>
+
 						<form action="<%= search_bar_facilities_path %>" method="get" class="search-form" >
 							<%= text_field_tag :search, nil, placeholder: "Search Facilities" %>
 							<%= submit_tag "SEARCH", :name => nil%>
@@ -9,9 +14,7 @@
 					</div>
 
 
-					<a class="logo" href='/facilities'>
-						<%= image_tag('test-logo.png') %>
-		  		</a>
+
 
 
 
