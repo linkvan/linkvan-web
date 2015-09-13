@@ -11,8 +11,8 @@
 </div>
 
 <div class="container-open">
-  <div class="btn-group btn-toggle"> 
-    <h1>Hours</h1> 
+  <div class="btn-group btn-toggle">
+    <h1>Hours</h1>
     <button class="btn btn-primary active" id="yes">Yes</button>
     <button class="btn btn-default" id="no">No</button>
   </div>
@@ -25,7 +25,7 @@
     <h1>Services</h1>
     <div id="services-div"></div>
     <h1>Suitable For</h1>
-    <div id="suitable-div"></div> 
+    <div id="suitable-div"></div>
     <h1>Welcomes</h1>
     <div id="welcomes-div"></div>
     <div id="search-div"></div>
@@ -99,16 +99,16 @@ menid.style.display = 'block';
 womenid.style.display = 'block';
 
 $('.prox').click(function() {
-    $(this).find('.btn').toggleClass('active');  
+    $(this).find('.btn').toggleClass('active');
     $(this).find('.btn').toggleClass('btn-primary');
     $(this).find('.btn').toggleClass('btn-default');
 
     $('.sortby-o').toggle();
-    
+
 });
 
 $('.open').click(function() {
-    $(this).find('.btn').toggleClass('active');  
+    $(this).find('.btn').toggleClass('active');
     $(this).find('.btn').toggleClass('btn-primary');
     $(this).find('.btn').toggleClass('btn-default');
 
@@ -124,7 +124,7 @@ var x = document.getElementById("demo");
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
+    } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 
@@ -243,7 +243,7 @@ setTimeout(function(){
 //Create Legal
     var blegal = document.createElement("button");
     var tlegal = document.createElement("p");
-    tlegal.innerHTML = "Legal"
+    tlegal.innerHTML = "Advocacy"
     tlegal.setAttribute("class", "button-text");
 
     var legalImg=document.createElement("i");
@@ -264,7 +264,7 @@ setTimeout(function(){
     var suitabledivid = document.getElementById("suitable-div");
 
     var bchildren = document.createElement("button");
-    var tchildren = document.createTextNode("Children"); 
+    var tchildren = document.createTextNode("Children");
     bchildren.appendChild(tchildren);
     bchildren.setAttribute("class", "children-btn");
     bchildren.onclick = function() { // Note this is a function
@@ -277,7 +277,7 @@ setTimeout(function(){
 //Create Suitable-Youth button
 
     var byouth = document.createElement("button");
-    var tyouth = document.createTextNode("Youth"); 
+    var tyouth = document.createTextNode("Youth");
     byouth.appendChild(tyouth);
     byouth.setAttribute("class", "youth-btn");
     byouth.onclick = function() { // Note this is a function
@@ -290,7 +290,7 @@ setTimeout(function(){
 //Create Suitable-Adults button
 
     var badults = document.createElement("button");
-    var tadults = document.createTextNode("Adults"); 
+    var tadults = document.createTextNode("Adults");
     badults.appendChild(tadults);
     badults.setAttribute("class", "adults-btn");
     badults.onclick = function() { // Note this is a function
@@ -303,7 +303,7 @@ setTimeout(function(){
 //Create Suitable-Seniors button
 
     var bseniors = document.createElement("button");
-    var tseniors = document.createTextNode("Seniors"); 
+    var tseniors = document.createTextNode("Seniors");
     bseniors.appendChild(tseniors);
     bseniors.setAttribute("class", "seniors-btn");
     bseniors.onclick = function() { // Note this is a function
@@ -311,12 +311,12 @@ setTimeout(function(){
         $('.seniors-o').toggle();
     };
 
-    suitabledivid.appendChild(bseniors); 
+    suitabledivid.appendChild(bseniors);
 
  //Create Welcome-All button
     var welcomesdivid = document.getElementById("welcomes-div");
     var bwall = document.createElement("button");
-    var twall = document.createTextNode("All"); 
+    var twall = document.createTextNode("All");
     bwall.appendChild(twall);
     bwall.setAttribute("class", "welcomes-all-btn all-welcome-btn highlight");
 
@@ -336,7 +336,7 @@ setTimeout(function(){
             $('.women-o').toggle();
         }
 
-       
+
 
     };
 
@@ -344,7 +344,7 @@ setTimeout(function(){
 
 //Create Welcomes-Men button
     var bmen = document.createElement("button");
-    var tmen = document.createTextNode("Men"); 
+    var tmen = document.createTextNode("Men");
     bmen.appendChild(tmen);
     bmen.setAttribute("class", "men-btn men-welcome-btn");
     //bmen.setAttribute("id", "men-welcome-btn");
@@ -368,7 +368,7 @@ setTimeout(function(){
 
 //Create Welcomes-Women button
     var bwomen = document.createElement("button");
-    var twomen = document.createTextNode("Women"); 
+    var twomen = document.createTextNode("Women");
     bwomen.appendChild(twomen);
     bwomen.setAttribute("class", "women-btn women-welcome-btn");
     bwomen.onclick = function() { // Note this is a function
@@ -387,7 +387,7 @@ setTimeout(function(){
         }
     };
 
-    welcomesdivid.appendChild(bwomen); 
+    welcomesdivid.appendChild(bwomen);
 
 //Create Search button
     var searchdivid = document.getElementById("search-div");
@@ -458,7 +458,7 @@ setTimeout(function(){
 
         window.location = "/facilities/filter/Search/?latitude=" + latitude + "&longitude="+longitude+sortby+hours+services+suitable+welcome;
 
-    }; 
+    };
 
     searchdivid.appendChild(bsearch);
 }, 500);
