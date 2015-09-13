@@ -648,6 +648,10 @@ nav {
 
 	}
 
+.top-search-btn{
+	border-radius: 5px;
+}
+
 .search-btn {
 
 		align-items: flex-start;
@@ -737,6 +741,11 @@ nav {
 .admin-options{
 	text-align: center;
 }
+#search{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
 
 #search_results{
 	h3{
@@ -747,8 +756,4 @@ nav {
 		margin-top: 10px;
 		text-align: center;
 	}
-}
-
-.btn .btn-primary .active{
-	color: red;
 }
