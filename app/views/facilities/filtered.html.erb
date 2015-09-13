@@ -1,3 +1,8 @@
+<link href="bootstrap.css" rel="stylesheet">
+<link href="bootstrap-switch.css" rel="stylesheet">
+<script src="jquery.js"></script>
+<script src="bootstrap-switch.js"></script>
+
 <%= render 'nav' %>
 <div>
 <div role="navigation" class="toggle-group">
@@ -126,7 +131,10 @@
 <% end %>
 
 
+<input type="checkbox" name="my-checkbox" checked>
+
 <script>
+$("[name='my-checkbox']").bootstrapSwitch();
 var jssortby = $('.temp_information').data('jssortby');
 var jshours = $('.temp_information').data('jshours');
 
