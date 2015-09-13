@@ -151,6 +151,11 @@ nav {
 
 	}
 
+	.hover {
+    	background: #3276b1;
+    	color: white;
+  	}
+
 	.highlight {
     	background: #3276b1;
     	color: white;
@@ -649,6 +654,10 @@ nav {
 
 	}
 
+.top-search-btn{
+	border-radius: 5px;
+
+}
 
 .search-btn {
 
@@ -739,6 +748,7 @@ nav {
 .admin-options{
 	text-align: center;
 }
+
 
 #search_results{
 	h3{
