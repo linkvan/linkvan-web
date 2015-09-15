@@ -1,7 +1,5 @@
 <%= render 'nav' %>
 
-
-
 <div id="index-main">
 <h1><%=@facility.name %></h1>
 
@@ -21,7 +19,6 @@
   <div id="map-canvas"></div>
   <p><%=@facility.address %></p>
 </div>
-
 
 
   <div class="inset-call">
@@ -92,7 +89,7 @@
 
 <%= content_tag :div, class: "temp_information", data: {jsevent: @facility} do %>
 <% end %>
-    
+
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
@@ -106,7 +103,7 @@ var latitude, longitude;
 
 function initialize() {
   var myLocation = new google.maps.LatLng(jsevent.lat, jsevent.long);
-      
+
         var mapOptions = {
           center: myLocation,
           zoom: 13
@@ -117,7 +114,7 @@ function initialize() {
       		animation: google.maps.Animation.DROP,
       		title: jsevent.name});
 
-        
+
 
   map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
@@ -157,4 +154,3 @@ setTimeout(function(){
 
 
 </script>
-    

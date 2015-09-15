@@ -15,6 +15,8 @@ class FacilitiesController < ApplicationController
       @facilities_name_yes_distance = Array.new
       @facilities_name_no_distance = Array.new
 
+      cookies[:lat_lon] = JSON.generate([@latitude, @longitude])
+
       case params[:scope]
       when 'Shelter'
         @facilities_near_yes = Facility.contains_service("Shelter", "Near", "Yes", @latitude, @longitude)
