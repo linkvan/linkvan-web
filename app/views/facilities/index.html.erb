@@ -6,9 +6,9 @@
 
 
 <div class="admin-options">
-    <strong>Prototype Status:</strong> <h4 style="color:green">Ready</h4>
-   <strong>Developer Note:</strong> No critical issues</br>
-    <strong>Volunteer Note:</strong> New category added - Legal</br>
+    <!-- <strong>Prototype Status:</strong> <h4 style="color:green">Ready</h4> -->
+    <!-- <strong>Developer Note:</strong> No critical issues</br> -->
+    <!-- <strong>Volunteer Note:</strong> New category added - Advocacy</br> -->
     <% if current_user %>
         Welcome back, <%= current_user.name %>!<br>
         <%= link_to "Add New Facility", new_facility_path %><br>
@@ -20,8 +20,6 @@
 
 
 <p id="demo"></p>
-<%= content_tag :div, class: "temp_information", data: {searched_facilities: @facilities} do %>
-<% end %>
 
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
