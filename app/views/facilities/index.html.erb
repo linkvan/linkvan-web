@@ -1,14 +1,17 @@
 <%= render 'nav' %>
 
 <div id="index-main">
+    
+
 	<h3>What service are you looking for?</h3>
 </div>
-
 
 <div class="admin-options">
     <!-- <strong>Prototype Status:</strong> <h4 style="color:green">Ready</h4> -->
     <!-- <strong>Developer Note:</strong> No critical issues</br> -->
     <!-- <strong>Volunteer Note:</strong> New category added - Advocacy</br> -->
+    <br>
+    <br>
     <% if current_user %>
         Welcome back, <%= current_user.name %>!<br>
         <%= link_to "Add New Facility", new_facility_path %><br>
@@ -16,6 +19,8 @@
     <%else%>
         <%= link_to "Admin Sign In", new_session_path %>
     <%end%>
+    <br>
+    <%= link_to "Disclaimer", disclaimer_path %>
 </div>
 
 
@@ -185,7 +190,35 @@ setTimeout(function(){
 
     divid.appendChild(blegal);
 
+//Create Crisis
+    var bcrisis = document.createElement("button");
+    var tcrisis = document.createElement("p");
+    tcrisis.innerHTML = "CRISIS";
+    tcrisis.setAttribute("class", "crisis-text");
+    
+    bcrisis.appendChild(tcrisis);
+
+    bcrisis.setAttribute("class", "btn-crisis");
+    bcrisis.onclick = function() { // Note this is a function
+        window.location = "/crisis";
+    };
+
+    divid.appendChild(bcrisis);
+
 }, 500);
 
+
+</script>
+
+
+<script>
+  //Google Analytics
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-69532727-1', 'auto');
+  ga('send', 'pageview');
 
 </script>

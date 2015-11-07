@@ -33,8 +33,33 @@
 </div>
 
 <div class="description">
-  <h2>Description</h2>
-  <p><%=@facility.description %></p>
+  <h2>Resources</h2>
+  <!--<p><%=@facility.description %></p>-->
+<!--
+  <table>
+    <tr>
+      <td>ID Required?</td>
+      <td>&nbsp;&nbsp;<%=@facility.r_id %></td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Free Phone Available?</td>
+      <td>&nbsp;&nbsp;<%=@facility.r_phone %></td>
+    </tr>
+    <tr>
+      <td>Pets Allowed?</td>
+      <td>&nbsp;&nbsp;<%=@facility.r_pets %></td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Free WiFi Available?</td>
+      <td>&nbsp;&nbsp;<%=@facility.r_wifi %></td>
+    </tr>
+    <tr>
+      <td>Shopping Carts Allowed?</td>
+      <td>&nbsp;&nbsp;<%=@facility.r_cart %></td>
+    </tr>
+  </table> -->
+
+  <p>ID Required?&nbsp;&nbsp;&nbsp;<%=@facility.r_id %>_icon</p>
+  <p>Pets Allowed?&nbsp;&nbsp;&nbsp;<%=@facility.r_pets %>_icon</p>
+  <p>Shopping Carts Allowed?&nbsp;&nbsp;&nbsp;<%=@facility.r_cart %>_icon</p>
+  <p>Free Phone Available?&nbsp;&nbsp;&nbsp;<%=@facility.r_phone %>_icon</p>
+  <p>Free WiFi Available?&nbsp;&nbsp;&nbsp;<%=@facility.r_wifi %>_icon</p>
 
   <h2>Hours</h2>
 
@@ -69,10 +94,10 @@
   </tr>
 </table>
 
-<div class="notes">
+<!--<div class="notes">
   <strong>Notes:</strong><br>
   <p><%= @facility.notes %></p>
-</div>
+</div>-->
 
 
 </div>

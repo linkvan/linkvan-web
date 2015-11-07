@@ -172,6 +172,16 @@ nav {
   		float: left;
   	}
 
+  	h4{
+  		font-family: arial;
+		font-size: 14px;
+		font-weight: bold;
+		color: #666;
+		margin-top: 10px;
+		text-align: center;
+
+  	}
+
 	h3{
 		font-family: arial;
 		font-size: 18px;
@@ -772,4 +782,21 @@ nav {
 		margin-top: 10px;
 		text-align: center;
 	}
+}
+
+.crisis-text{
+	color: #A50000;
+	font-family: arial;
+	font-size: 18px;
+	font-weight: bold;
+
+}
+
+.btn-crisis{
+	float:right;
+
+	p{
+		margin-bottom: 0;
+	}
+	
 }
