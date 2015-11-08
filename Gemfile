@@ -1,10 +1,6 @@
 source 'https://rubygems.org'
 
-<<<<<<< HEAD
 ruby '2.0.0'
-=======
-ruby '2.1.5'
->>>>>>> e284760637a38b6ebf62054d03c93be6f1dcce11
 
 gem "geocoder"
 
