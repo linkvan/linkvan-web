@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129000315) do
+ActiveRecord::Schema.define(version: 20151031150203) do
 
   create_table "facilities", force: true do |t|
     t.string   "name"
@@ -41,6 +41,11 @@ ActiveRecord::Schema.define(version: 20150129000315) do
     t.time     "startssun_at"
     t.time     "endssun_at"
     t.string   "suitability"
+    t.boolean  "r_pets",         default: false
+    t.boolean  "r_id",           default: false
+    t.boolean  "r_cart",         default: false
+    t.boolean  "r_phone",        default: false
+    t.boolean  "r_wifi",         default: false
   end
 
   create_table "users", force: true do |t|

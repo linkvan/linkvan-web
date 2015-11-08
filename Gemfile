@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
 
-ruby '2.1.5'
+ruby '2.0.0'
 
 gem "geocoder"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.10'
+gem 'rails'
 
 # Use sqlite3 as the database for Active Record
+
 group :development, :test do
 	gem 'sqlite3'
 end
@@ -43,7 +44,14 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.9'
+gem 'bcrypt', '3.1.10'
+
+gem 'test-unit'
+
+gem 'rake-compiler', '~> 0.9.2'
+
+gem 'rspec', '>= 3'
+
 
 # Use unicorn as the app server
 # gem 'unicorn'

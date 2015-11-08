@@ -9,6 +9,8 @@ Linkvan::Application.routes.draw do
   get 'facilities/filter/:scope/:latitude&:longitude', to: 'facilities#filtered', as: :coords_facilities
   get 'facilities/filter/:scope/:latitude&:longitude&:sortby&:hours&:services&:suitable&:welcome', to: 'facilities#filtered', as: :searched_facilities
   get 'facilities/search', to: 'facilities#search', as: :search_bar_facilities
+  get 'crisis', to: 'crisis#index'
+  get 'disclaimer', to: 'disclaimer#index'
   root 'facilities#index'
   resources :facilities
 
