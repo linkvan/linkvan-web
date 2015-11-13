@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '1.9.3'
 
 gem "geocoder"
 
@@ -14,7 +14,7 @@ group :development, :test do
 end
 
 group :production do
-	gem "pg"	
+	gem "pg"
 end
 
 # Use SCSS for stylesheets
