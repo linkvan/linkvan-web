@@ -52,6 +52,8 @@ gem 'rake-compiler', '~> 0.9.2'
 
 gem 'rspec', '>= 3'
 
+gem 'icomoon-rails'
+
 
 # Use unicorn as the app server
 # gem 'unicorn'
