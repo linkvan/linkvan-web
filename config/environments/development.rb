@@ -27,6 +27,8 @@ Linkvan::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.assets.precompile += %w( '.woff', '.eot', '.svg', '.ttf' )
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
