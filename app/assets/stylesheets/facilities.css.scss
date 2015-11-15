@@ -7,6 +7,13 @@ body, html{
 	height:100%;
 }
 
+iframe{
+	position: relative;
+ 	height: 0;
+ 	overflow: hidden;
+	padding-bottom: 90%;
+}
+
 .shelter-colour {
 	color: #62919C;
 	float: left;
@@ -105,20 +112,16 @@ nav {
 	border-bottom: 1px solid #DDD;
 }
 
-.nav-container{
-	min-width:350px; 
-	height: 75px;
-	margin-top: 0;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 650px;
-    width: 90%;
+
+
+
+.logo {
+	display: block;
 }
 
 .search-form{
 	max-width: 280px;
 	margin-top: 8px;
-	float: right;
 }
 
 .pusher{
@@ -675,12 +678,7 @@ nav {
 	}
 
 .top-search-btn{
-	-webkit-user-select: none;
-		background-color: #fff;
-		background-image: -webkit-linear-gradient(white, #EBEBEB);
-		border: 1px solid #B8B8B8;
-		border-radius: 4px;
-		font-weight: 600;
+	border-radius: 5px;
 
 }
 
@@ -733,13 +731,11 @@ nav {
 .is-open{
 	color: #32CD32;
 	float: left;
-	font-weight: bold;
 }
 
 .is-closed{
 	color: #AA0114;
 	float: left;
-	font-weight: bold;
 }
 
 #near-yes {
@@ -789,7 +785,7 @@ nav {
 }
 
 .crisis-text{
-	color: #e60000;
+	color: #A50000;
 	font-family: arial;
 	font-size: 18px;
 	font-weight: bold;
@@ -798,155 +794,9 @@ nav {
 
 .btn-crisis{
 	float:right;
-	-webkit-user-select: none;
-		background-color: #fff;
-		background-image: -webkit-linear-gradient(white, #EBEBEB);
-		border: 1px solid #B8B8B8;
-		border-radius: 4px;
 
 	p{
 		margin-bottom: 0;
 	}
-<<<<<<< HEAD
 
 }
-
-.list-crisis-line {
-	list-style: none;
-}
-.no-underline:link {
-	text-decoration: none;
-}
-
-.no-underline:hover {
-	text-decoration: none;
-}
-
-.no-underline:visited {
-	text-decoration: none;
-}
-
-.no-underline:active {
-	text-decoration: none;
-}
-=======
-	
-}
-
-
-
-
-
-
-
-@font-face {
-	font-family: 'Project-Linkvan';
-	src:url('fonts/Project-Linkvan.eot?9zyer7');
-	src:url('fonts/Project-Linkvan.eot?9zyer7#iefix') format('embedded-opentype'),
-		url('fonts/Project-Linkvan.ttf?9zyer7') format('truetype'),
-		url('fonts/Project-Linkvan.woff?9zyer7') format('woff'),
-		url('fonts/Project-Linkvan.svg?9zyer7#Project-Linkvan') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-[class^="icon-"], [class*=" icon-"] {
-	font-family: 'Project-Linkvan';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-.icon-Advocacy_linkvan:before {
-	content: "\e800";
-}
-.icon-pets_linkvan:before {
-	content: "\e801";
-}
-.icon-phone_linkvan:before {
-	content: "\e802";
-}
-.icon-shoppingcart_linkvan:before {
-	content: "\e803";
-}
-.icon-sleepshelter_linkvan:before {
-	content: "\e804";
-}
-.icon-transgender_linkvan:before {
-	content: "\e805";
-}
-.icon-hygiene_linkvan:before {
-	content: "\e806";
-}
-.icon-id_linkvan:before {
-	content: "\e807";
-}
-.icon-laundry_linkvan .path1:before {
-	content: "\e808";
-	color: rgb(0, 0, 0);
-}
-.icon-laundry_linkvan .path2:before {
-	content: "\e809";
-	margin-left: -1em;
-	color: rgb(255, 255, 255);
-}
-.icon-laundry_linkvan .path3:before {
-	content: "\e80a";
-	margin-left: -1em;
-	color: rgb(0, 0, 0);
-}
-.icon-laundry_linkvan .path4:before {
-	content: "\e80b";
-	margin-left: -1em;
-	color: rgb(0, 0, 0);
-}
-.icon-Medical_linkvan:before {
-	content: "\e80c";
-}
-.icon-home3:before {
-	content: "\e80d";
-}
-.icon-connection:before {
-	content: "\e80e";
-}
-.icon-cart:before {
-	content: "\e80f";
-}
-.icon-display:before {
-	content: "\e810";
-}
-
-.logo{
-	display: block;
-}
-
-
-.glyphicon-cutlery{
-	font-size: 145%;
-}
-
-
-.myIframe {
-position: relative;
-padding-bottom: 65.25%;
-padding-top: 30px;
-height: 0;
-overflow: auto; 
--webkit-overflow-scrolling:touch; //<<--- THIS IS THE KEY 
-border: solid black 1px;
-} 
-.myIframe iframe {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-}
->>>>>>> master
