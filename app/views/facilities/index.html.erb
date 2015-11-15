@@ -1,8 +1,10 @@
 <%= render 'nav' %>
 
 <div id="index-main">
-	<h3>Felix Tso. What service are you looking for?</h3>
+	<h3>What service are you looking for?</h3>
 </div>
+
+
 
 <div class="admin-options">
     <!-- <strong>Prototype Status:</strong> <h4 style="color:green">Ready</h4> -->
@@ -61,7 +63,10 @@ setTimeout(function(){
     tshelter.setAttribute("class", "button-text");
 
     var shelterImg=document.createElement("i");
-    shelterImg.setAttribute("class", "glyphicon glyphicon-home shelter-colour");
+    //shelterImg.setAttribute("class", "glyphicon glyphicon-home shelter-colour");
+    shelterImg.setAttribute("font-family", "Project-Linkvan");
+    shelterImg.setAttribute("class", "icon-sleepshelter_linkvan shelter-colour");
+
     var shelterChev=document.createElement("i");
     shelterChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
     bshelter.appendChild(shelterImg);
@@ -106,7 +111,9 @@ setTimeout(function(){
     tmedical.setAttribute("class", "button-text");
 
     var medicalImg=document.createElement("i");
-    medicalImg.setAttribute("class", "glyphicon glyphicon-heart-empty medical-colour");
+    //medicalImg.setAttribute("class", "glyphicon glyphicon-heart-empty medical-colour");
+    medicalImg.setAttribute("font-family", "Project-Linkvan");
+    medicalImg.setAttribute("class", "icon-Medical_linkvan medical-colour");
 
     var medicalChev=document.createElement("i");
     medicalChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
@@ -129,7 +136,10 @@ setTimeout(function(){
     thygiene.setAttribute("class", "button-text");
 
     var hygieneImg=document.createElement("i");
-    hygieneImg.setAttribute("class", "glyphicon glyphicon-tint hygiene-colour");
+    //hygieneImg.setAttribute("class", "glyphicon glyphicon-tint hygiene-colour");
+    hygieneImg.setAttribute("font-family", "Project-Linkvan");
+    hygieneImg.setAttribute("class", "icon-hygiene_linkvan hygiene-colour");
+
 
     var hygieneChev=document.createElement("i");
     hygieneChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
@@ -152,7 +162,10 @@ setTimeout(function(){
     ttech.setAttribute("class", "button-text");
 
     var techImg=document.createElement("i");
-    techImg.setAttribute("class", "glyphicon glyphicon-globe technology-colour");
+    //techImg.setAttribute("class", "glyphicon glyphicon-globe technology-colour");
+    techImg.setAttribute("font-family", "Project-Linkvan");
+    techImg.setAttribute("class", "icon-display technology-colour");
+
 
     var techChev=document.createElement("i");
     techChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
@@ -175,7 +188,10 @@ setTimeout(function(){
     tlegal.setAttribute("class", "button-text");
 
     var legalImg=document.createElement("i");
-    legalImg.setAttribute("class", "glyphicon glyphicon-briefcase medical-colour");
+    //legalImg.setAttribute("class", "glyphicon glyphicon-briefcase medical-colour");
+    legalImg.setAttribute("font-family", "Project-Linkvan");
+    legalImg.setAttribute("class", "icon-Advocacy_linkvan medical-colour");
+
 
     var legalChev=document.createElement("i");
     legalChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
@@ -207,6 +223,25 @@ setTimeout(function(){
     divid.appendChild(bcrisis);
 
 }, 500);
+
+var f = window.frameElement;
+f.document = getFramedWindow(f).document
+
+var fdoc = f.document.createElement("div");
+fdoc.setAttribute("class", "myIframe");
+
+function getFramedWindow(f)
+{
+    if(f.parentNode == null)
+        f = document.body.appendChild(f);
+    var w = (f.contentWindow || f.contentDocument);
+    if(w && w.nodeType && w.nodeType==9)
+        w = (w.defaultView || w.parentWindow);
+    return w;
+}
+
+
+
 
 
 </script>

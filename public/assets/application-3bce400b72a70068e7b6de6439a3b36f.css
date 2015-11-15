@@ -1,3 +1,18 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+
+
+
+ */
 /*!
  * Bootstrap v3.2.0 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
@@ -5,6 +20,7 @@
  */
 
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -6290,3 +6306,1061 @@ button.close {
 
 
 /*# sourceMappingURL=bootstrap.css.map */
+@font-face {
+  font-family: 'Project-Linkvan';
+  src: url(/assets/Project-Linkvan.eot);
+  src: url(/assets/Project-Linkvan.eot?#iefix) format("embedded-opentype"), url(/assets/Project-Linkvan.ttf) format("truetype"), url(/assets/Project-Linkvan.woff) format("woff"), url(/assets/Project-Linkvan.svg#icomoon) format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 12, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'Project-Linkvan';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 150%;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 27, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-Advocacy_linkvan:before {
+  content: "\e800";
+}
+
+/* line 30, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-pets_linkvan:before {
+  content: "\e801";
+}
+
+/* line 33, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-phone_linkvan:before {
+  content: "\e802";
+}
+
+/* line 36, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-shoppingcart_linkvan:before {
+  content: "\e803";
+}
+
+/* line 39, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-sleepshelter_linkvan:before {
+  content: "\e804";
+}
+
+/* line 42, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-transgender_linkvan:before {
+  content: "\e805";
+}
+
+/* line 45, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-hygiene_linkvan:before {
+  content: "\e806";
+}
+
+/* line 48, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-id_linkvan:before {
+  content: "\e807";
+}
+
+/* line 51, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-laundry_linkvan .path1:before {
+  content: "\e808";
+  color: black;
+}
+
+/* line 55, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-laundry_linkvan .path2:before {
+  content: "\e809";
+  margin-left: -1em;
+  color: white;
+}
+
+/* line 60, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-laundry_linkvan .path3:before {
+  content: "\e80a";
+  margin-left: -1em;
+  color: black;
+}
+
+/* line 65, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-laundry_linkvan .path4:before {
+  content: "\e80b";
+  margin-left: -1em;
+  color: black;
+}
+
+/* line 70, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-Medical_linkvan:before {
+  content: "\e80c";
+}
+
+/* line 73, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-home3:before {
+  content: "\e80d";
+}
+
+/* line 76, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-connection:before {
+  content: "\e80e";
+}
+
+/* line 79, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-cart:before {
+  content: "\e80f";
+}
+
+/* line 82, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/style.css.scss */
+.icon-display:before {
+  content: "\e810";
+}
+/* line 5, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 10, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+iframe {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 90%;
+}
+
+/* line 17, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.shelter-colour {
+  color: #62919C;
+  float: left;
+  margin-right: 15px;
+}
+
+/* line 23, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.food-colour {
+  color: #9EA861;
+  float: left;
+  margin-right: 15px;
+}
+
+/* line 28, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.medical-colour {
+  color: #A97A60;
+  float: left;
+  margin-right: 15px;
+}
+
+/* line 33, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.hygiene-colour {
+  color: #7E7485;
+  float: left;
+  margin-right: 15px;
+}
+
+/* line 39, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.technology-colour {
+  color: #CBAA4B;
+  float: left;
+  margin-right: 15px;
+}
+
+/* line 45, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.legal-colour {
+  color: #662e66;
+  float: left;
+  margin-right: 15px;
+}
+
+/* line 51, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.directions-colour {
+  color: #60a97a;
+  float: left;
+  margin-right: 15px;
+}
+
+/* line 57, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.shelter-colour-index {
+  color: #62919C;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* line 63, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.food-colour-index {
+  color: #9EA861;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* line 68, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.medical-colour-index {
+  color: #A97A60;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* line 73, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.hygiene-colour-index {
+  color: #7E7485;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* line 79, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.technology-colour-index {
+  color: #CBAA4B;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* line 85, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.legal-colour-index {
+  color: #662e66;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* line 91, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.chevron-right {
+  float: right;
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+/* line 96, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.chevron-right-filtered {
+  float: right;
+  margin-right: 10px;
+  margin-bottom: 0;
+  color: black;
+}
+
+/* line 103, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+nav {
+  height: 40px;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  padding: 0 0 4px;
+  border-bottom: 1px solid #DDD;
+}
+
+/* line 115, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.nav-container {
+  min-width: 350px;
+  height: 75px;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 650px;
+  width: 90%;
+}
+
+/* line 125, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.search-form {
+  max-width: 280px;
+  margin-top: 8px;
+  float: right;
+}
+
+/* line 136, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main {
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 650px;
+  width: 90%;
+}
+/* line 143, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .btn {
+  align-items: flex-start;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(white, #ebebeb);
+  border: 1px solid #B8B8B8;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  padding-top: 12px;
+  padding-right: 0px;
+  padding-bottom: 0;
+  padding-left: 17px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+/* line 165, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .hover {
+  background: #ebebeb;
+  color: white;
+}
+/* line 170, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .highlight {
+  background: #ebebeb;
+  color: white;
+}
+/* line 175, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .button-text {
+  float: left;
+}
+/* line 179, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main h4 {
+  font-family: arial;
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+  margin-top: 10px;
+  text-align: center;
+}
+/* line 189, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main h3 {
+  font-family: arial;
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+  margin-top: 10px;
+}
+/* line 197, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main h2 {
+  font-family: arial;
+  font-size: 18px;
+  font-weight: 400;
+  color: #666;
+}
+/* line 204, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main h1 {
+  font-family: arial;
+  font-weight: bold;
+  color: black;
+  font-size: 24px;
+}
+/* line 211, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .inset {
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid #DDD;
+  padding: 10px;
+  padding-bottom: 2px;
+  width: 90%;
+  text-align: left;
+  box-sizing: border-box;
+  margin-bottom: 0px;
+}
+/* line 224, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .inset-gmap-dir {
+  height: 100%;
+  width: 100%;
+}
+/* line 229, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .inset-gmap {
+  background-color: white;
+  border: 1px solid #DDD;
+  width: 90%;
+  text-align: left;
+  box-sizing: border-box;
+  margin-bottom: 1px;
+  border-radius: 6px;
+  margin: 20px 0;
+  padding: 0;
+}
+/* line 240, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .inset-gmap p {
+  padding: 8px 8px 0px 12px;
+}
+/* line 245, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .inset-call {
+  border-radius: 6px 6px 0 0;
+  margin-top: 20px;
+  background-color: white;
+  border: 1px solid #DDD;
+  padding: 14px;
+  padding-bottom: 2px;
+  width: 90%;
+  text-align: left;
+  box-sizing: border-box;
+  margin-bottom: 0;
+  border-bottom: 1px solid #DDD;
+}
+/* line 259, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .inset-website {
+  border-radius: 0;
+  background-color: white;
+  border: 1px solid #DDD;
+  border-top: 0;
+  padding: 14px;
+  padding-bottom: 2px;
+  width: 90%;
+  text-align: left;
+  box-sizing: border-box;
+  margin-bottom: 0;
+  border-bottom: 1px solid #DDD;
+}
+/* line 273, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main #inset-directions {
+  border-radius: 0 0 6px 6px;
+  background-color: white;
+  border: 1px solid #DDD;
+  border-top: 0;
+  padding: 14px;
+  padding-bottom: 2px;
+  width: 90%;
+  text-align: left;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #DDD;
+}
+/* line 287, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .description {
+  border-radius: 6px;
+  margin-top: 20px;
+  background-color: white;
+  border: 1px solid #DDD;
+  padding: 14px;
+  padding-top: 0;
+  padding-bottom: 2px;
+  width: 90%;
+  text-align: left;
+  box-sizing: border-box;
+  margin-bottom: 0;
+  border-bottom: 1px solid #DDD;
+}
+/* line 302, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .notes {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #f3f3f3;
+  padding: 8px;
+  border-radius: 6px;
+}
+/* line 309, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main .notes p {
+  margin-top: 10px;
+}
+
+/* line 316, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 650px;
+  width: 90%;
+}
+
+/* line 328, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.toggle-group-content {
+  margin-top: 53px;
+  border-bottom: 1px solid #DCDCDC;
+  color: #929292;
+  font-size: 15px;
+  padding: 10px 4px;
+  min-width: 350px;
+}
+
+/* line 337, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.prox {
+  text-align: center;
+  display: inline-block;
+  margin-left: 0 auto;
+}
+
+/* line 343, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.open {
+  text-align: center;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+/* line 349, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.options-button {
+  text-align: center;
+  float: right;
+  margin: 0;
+}
+
+/* line 356, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.toggle-group {
+  max-width: 650px;
+  min-width: 350px;
+  width: 90%;
+  margin: 0 auto;
+}
+/* line 362, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.toggle-group p {
+  color: #929292;
+}
+/* line 367, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.toggle-group .container-prox {
+  width: 49%;
+  display: inline-block;
+  min-width: 120px;
+  text-align: center;
+}
+/* line 374, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.toggle-group .container-open {
+  width: 49%;
+  display: inline-block;
+  min-width: 93px;
+  text-align: center;
+}
+/* line 381, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.toggle-group .container-search {
+  width: 15%;
+  display: inline-block;
+  float: right;
+  min-width: 75px;
+}
+
+/* line 390, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.toggle-group-options {
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 650px;
+  width: 90%;
+}
+/* line 397, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.toggle-group-options h1 {
+  color: #666;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 5px;
+  font-family: arial;
+}
+/* line 406, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.toggle-group-options .container-prox {
+  margin-bottom: 20px;
+  margin-left: 0;
+  width: 120px;
+}
+/* line 413, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.toggle-group-options .container-open {
+  margin-bottom: 20px;
+  margin-left: 0;
+  width: 93px;
+}
+
+/* line 423, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#map-canvas {
+  width: 100%;
+  height: 200px;
+  margin: 0;
+  padding: 0;
+  border-radius: 6px 6px 0 0;
+}
+
+/* line 431, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#map-canvas-new {
+  width: 300px;
+  height: 300px;
+  margin: 0;
+  padding: 0;
+  border-radius: 6px;
+}
+
+/* line 439, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#map-canvas-dir {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 448, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#panel {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  margin-left: -90px;
+  z-index: 5;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #DDD;
+  font-family: arial;
+  color: black;
+  box-shadow: 7px 7px 5px #888888;
+}
+
+/* line 462, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.tog p {
+  display: inline;
+  float: right;
+}
+
+/* line 467, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main-options {
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 650px;
+  width: 90%;
+}
+/* line 474, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main-options .btn {
+  align-items: flex-start;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(white, #ebebeb);
+  border: 1px solid #B8B8B8;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  padding-top: 12px;
+  padding-right: 0px;
+  padding-bottom: 0;
+  padding-left: 17px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+/* line 496, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main-options .highlight {
+  background: #286090;
+  color: white;
+}
+/* line 501, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main-options h1 {
+  color: #666;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 5px;
+  font-family: arial;
+}
+/* line 510, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#index-main-options .button-text {
+  float: left;
+}
+
+/* line 515, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.children-btn {
+  align-items: flex-start;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(white, #ebebeb);
+  border: 1px solid #B8B8B8;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-right: 2px;
+  padding-bottom: 10px;
+  padding-left: 2px;
+  width: 12.5%;
+  margin-bottom: 10px;
+}
+
+/* line 539, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.highlight {
+  background: #ebebeb;
+  color: white;
+}
+
+/* line 544, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.youth-btn {
+  align-items: flex-start;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(white, #ebebeb);
+  border: 1px solid #B8B8B8;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-right: 2px;
+  padding-bottom: 10px;
+  padding-left: 2px;
+  width: 12.5%;
+  margin-bottom: 10px;
+  border-left: 0;
+}
+
+/* line 567, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.adults-btn {
+  align-items: flex-start;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(white, #ebebeb);
+  border: 1px solid #B8B8B8;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-right: 2px;
+  padding-bottom: 10px;
+  padding-left: 2px;
+  width: 12.5%;
+  margin-bottom: 10px;
+  border-left: 0;
+}
+
+/* line 590, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.seniors-btn {
+  align-items: flex-start;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(white, #ebebeb);
+  border: 1px solid #B8B8B8;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-left: 0;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-right: 2px;
+  padding-bottom: 10px;
+  padding-left: 2px;
+  width: 12.5%;
+  margin-bottom: 10px;
+}
+
+/* line 614, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.welcomes-all-btn {
+  align-items: flex-start;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(white, #ebebeb);
+  border: 1px solid #B8B8B8;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-right: 2px;
+  padding-bottom: 10px;
+  padding-left: 2px;
+  width: 12.5%;
+  margin-bottom: 10px;
+}
+
+/* line 638, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.men-btn {
+  align-items: flex-start;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(white, #ebebeb);
+  border: 1px solid #B8B8B8;
+  border-left: 0;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-right: 2px;
+  padding-bottom: 10px;
+  padding-left: 2px;
+  width: 12.5%;
+  margin-bottom: 10px;
+}
+
+/* line 660, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.women-btn {
+  align-items: flex-start;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(white, #ebebeb);
+  border: 1px solid #B8B8B8;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-left: 0;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-right: 2px;
+  padding-bottom: 10px;
+  padding-left: 2px;
+  width: 12.5%;
+  margin-bottom: 10px;
+}
+
+/* line 684, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.top-search-btn {
+  -webkit-user-select: none;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(white, #ebebeb);
+  border: 1px solid #B8B8B8;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* line 694, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.search-btn {
+  align-items: flex-start;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(white, #ebebeb);
+  border: 1px solid #B8B8B8;
+  border-radius: 25px;
+  border-left: 0;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-right: 2px;
+  padding-bottom: 10px;
+  padding-left: 2px;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #989898;
+}
+
+/* line 719, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.search-btn:hover {
+  background: #ebebeb;
+}
+
+/* line 723, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#near {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* line 729, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#yes {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* line 734, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#options-id {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* line 740, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.is-open {
+  color: #32CD32;
+  float: left;
+  font-weight: bold;
+}
+
+/* line 746, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.is-closed {
+  color: #AA0114;
+  float: left;
+  font-weight: bold;
+}
+
+/* line 753, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#near-yes a {
+  text-decoration: none;
+}
+
+/* line 759, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#near-no a {
+  text-decoration: none;
+}
+
+/* line 764, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#name-yes a {
+  text-decoration: none;
+}
+
+/* line 769, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#name-no a {
+  text-decoration: none;
+}
+
+/* line 774, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.facility-block {
+  color: #ABA9A9;
+}
+
+/* line 778, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.facility-block-name {
+  color: black;
+}
+
+/* line 782, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.admin-options {
+  text-align: center;
+}
+
+/* line 788, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+#search_results h3 {
+  font-family: arial;
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* line 798, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.crisis-text {
+  color: #e60000;
+  font-family: arial;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* line 806, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.btn-crisis {
+  float: right;
+  -webkit-user-select: none;
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(white, #ebebeb);
+  border: 1px solid #B8B8B8;
+  border-radius: 4px;
+}
+/* line 814, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.btn-crisis p {
+  margin-bottom: 0;
+}
+
+@font-face {
+  font-family: 'Project-Linkvan';
+  src: url("fonts/Project-Linkvan.eot?9zyer7");
+  src: url("fonts/Project-Linkvan.eot?9zyer7#iefix") format("embedded-opentype"), url("fonts/Project-Linkvan.ttf?9zyer7") format("truetype"), url("fonts/Project-Linkvan.woff?9zyer7") format("woff"), url("fonts/Project-Linkvan.svg?9zyer7#Project-Linkvan") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 837, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'Project-Linkvan';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 851, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-Advocacy_linkvan:before {
+  content: "\e800";
+}
+
+/* line 854, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-pets_linkvan:before {
+  content: "\e801";
+}
+
+/* line 857, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-phone_linkvan:before {
+  content: "\e802";
+}
+
+/* line 860, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-shoppingcart_linkvan:before {
+  content: "\e803";
+}
+
+/* line 863, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-sleepshelter_linkvan:before {
+  content: "\e804";
+}
+
+/* line 866, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-transgender_linkvan:before {
+  content: "\e805";
+}
+
+/* line 869, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-hygiene_linkvan:before {
+  content: "\e806";
+}
+
+/* line 872, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-id_linkvan:before {
+  content: "\e807";
+}
+
+/* line 875, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-laundry_linkvan .path1:before {
+  content: "\e808";
+  color: black;
+}
+
+/* line 879, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-laundry_linkvan .path2:before {
+  content: "\e809";
+  margin-left: -1em;
+  color: white;
+}
+
+/* line 884, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-laundry_linkvan .path3:before {
+  content: "\e80a";
+  margin-left: -1em;
+  color: black;
+}
+
+/* line 889, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-laundry_linkvan .path4:before {
+  content: "\e80b";
+  margin-left: -1em;
+  color: black;
+}
+
+/* line 894, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-Medical_linkvan:before {
+  content: "\e80c";
+}
+
+/* line 897, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-home3:before {
+  content: "\e80d";
+}
+
+/* line 900, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-connection:before {
+  content: "\e80e";
+}
+
+/* line 903, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-cart:before {
+  content: "\e80f";
+}
+
+/* line 906, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.icon-display:before {
+  content: "\e810";
+}
+
+/* line 910, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.logo {
+  display: block;
+}
+
+/* line 915, C:/Users/Kevin/Documents/GitHub/linkvan/app/assets/stylesheets/facilities.css.scss */
+.glyphicon-cutlery {
+  font-size: 145%;
+}

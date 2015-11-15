@@ -26,5 +26,16 @@ module Linkvan
 
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
 
+    config.assets.paths += [
+      Rails.root.join('vendor', 'assets', 'fonts')
+    ]
+
+    config.assets.precompile += [
+      'icons.eot',
+      'icons.svg',
+      'icons.ttf',
+      'icons.woff'
+    ]
+
   end
 end

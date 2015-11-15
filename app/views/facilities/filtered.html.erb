@@ -57,7 +57,7 @@
 <a href=<%= facility_path(f)%>>
   <div class="facility-block">
     <div class= "facility-block-name"><strong><%= f.name %></strong></div>
-    <div class="is-open">open</div>
+    <div class="is-open">&nbsp;&nbsp;OPEN</div>
     <%= display_services(f.services) %>
     <%= @facilities_near_yes_distance[$i].round(2) %> kilometres
     <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
@@ -75,7 +75,7 @@
 <a href=<%= facility_path(f)%>>
   <div class="facility-block">
     <div class= "facility-block-name"><strong><%= f.name %></strong></div>
-    <div class="is-closed">closed</div>
+    <div class="is-closed">&nbsp;&nbsp;CLOSED</div>
     <%= display_services(f.services) %>
     <%= @facilities_near_no_distance[$i].round(2) %> kilometres
     <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
@@ -94,7 +94,7 @@
 <a href=<%= facility_path(f)%>>
   <div class="facility-block">
     <div class= "facility-block-name"><strong><%= f.name %></strong></div>
-    <div class="is-open">open</div>
+    <div class="is-open">&nbsp;&nbsp;OPEN</div>
     <%= display_services(f.services) %>
     <%= @facilities_name_yes_distance[$i].round(2) %> kilometres
     <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
@@ -112,7 +112,7 @@
 <a href=<%= facility_path(f)%>>
   <div class="facility-block">
     <div class= "facility-block-name"><strong><%= f.name %></strong></div>
-    <div class="is-closed">closed</div>
+    <div class="is-closed">&nbsp;&nbsp;CLOSED</div>
     <%= display_services(f.services) %>
     <%= @facilities_name_no_distance[$i].round(2) %> kilometres
     <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
