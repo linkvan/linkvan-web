@@ -682,7 +682,12 @@ nav {
 	}
 
 .top-search-btn{
-	border-radius: 5px;
+	-webkit-user-select: none;
+		background-color: #fff;
+		background-image: -webkit-linear-gradient(white, #EBEBEB);
+		border: 1px solid #B8B8B8;
+		border-radius: 4px;
+		font-weight: 600;
 
 }
 
@@ -735,11 +740,13 @@ nav {
 .is-open{
 	color: #32CD32;
 	float: left;
+	font-weight: bold;
 }
 
 .is-closed{
 	color: #AA0114;
 	float: left;
+	font-weight: bold;
 }
 
 #near-yes {
@@ -798,7 +805,11 @@ nav {
 
 .btn-crisis{
 	float:right;
-	border-radius: 8%;
+	-webkit-user-select: none;
+		background-color: #fff;
+		background-image: -webkit-linear-gradient(white, #EBEBEB);
+		border: 1px solid #B8B8B8;
+		border-radius: 4px;
 
 	p{
 		margin-bottom: 0;
