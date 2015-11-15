@@ -54,8 +54,6 @@ gem 'rspec', '>= 3'
 
 gem 'icomoon-rails'
 
-gem 'rails-iframe-resizer'
-
 # Use unicorn as the app server
 # gem 'unicorn'
 

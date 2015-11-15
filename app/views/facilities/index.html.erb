@@ -223,6 +223,25 @@ setTimeout(function(){
 
 }, 500);
 
+var f = window.frameElement;
+f.document = getFramedWindow(f).document
+
+var fdoc = f.document.createElement("div");
+fdoc.setAttribute("class", "myIframe");
+
+function getFramedWindow(f)
+{
+    if(f.parentNode == null)
+        f = document.body.appendChild(f);
+    var w = (f.contentWindow || f.contentDocument);
+    if(w && w.nodeType && w.nodeType==9)
+        w = (w.defaultView || w.parentWindow);
+    return w;
+}
+
+
+
+
 
 </script>
 
