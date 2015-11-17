@@ -48,6 +48,8 @@ function showPosition(position) {
     //"<br>Longitude: " + position.coords.longitude;
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
+		console.log("latitude: " + latitude);
+		console.log("longitude: " + longitude);
 }
 
 setTimeout(function(){
@@ -211,7 +213,7 @@ setTimeout(function(){
     var tcrisis = document.createElement("p");
     tcrisis.innerHTML = "CRISIS";
     tcrisis.setAttribute("class", "crisis-text");
-    
+
     bcrisis.appendChild(tcrisis);
 
     bcrisis.setAttribute("class", "btn-crisis");
