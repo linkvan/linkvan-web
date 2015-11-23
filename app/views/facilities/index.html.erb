@@ -2,8 +2,6 @@
 
 <div id="index-main">
 	<h3>What service are you looking for?</h3>
-
-
 </div>
 
 
@@ -20,9 +18,11 @@
         <%= link_to "Sign Out", session_path, method: :delete %>
     <%else%>
         <%= link_to "Admin Sign In", new_session_path %>
+				|
+				<%= link_to "Disclaimer", disclaimer_path %>
+				|
+				<%= link_to "About Us", about_path%>
     <%end%>
-    <br>
-    <%= link_to "Disclaimer", disclaimer_path %>
 </div>
 
 
@@ -34,6 +34,7 @@
 <script>
 
 var latitude, longitude;
+var hasStoredLatLon = false;
 
 var x = document.getElementById("demo");
 
@@ -48,6 +49,13 @@ function showPosition(position) {
     //"<br>Longitude: " + position.coords.longitude;
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
+
+		// TODO add cookies
+		if (hasStoredLatLon === false) {
+			hasStoredLatLon = true;
+			var storedLat = latitude.toFixed(4);
+			var storedLon = longitude.toFixed(4);
+		} else {}
 }
 
 setTimeout(function(){
@@ -208,6 +216,7 @@ setTimeout(function(){
 //Create Crisis
     var bcrisis = document.createElement("button");
     var tcrisis = document.createElement("p");
+
     tcrisis.innerHTML = "&nbsp;Crisis";
     tcrisis.setAttribute("class", "button-text");
 
@@ -219,6 +228,7 @@ setTimeout(function(){
 
     
     bcrisis.appendChild(crisisImg);
+
     bcrisis.appendChild(tcrisis);
     bcrisis.appendChild(crisisChev);
 

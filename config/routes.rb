@@ -11,6 +11,7 @@ Linkvan::Application.routes.draw do
   get 'facilities/search', to: 'facilities#search', as: :search_bar_facilities
   get 'crisis', to: 'crisis#index'
   get 'disclaimer', to: 'disclaimer#index'
+  get 'about', to: 'about#index'
   root 'facilities#index'
   resources :facilities
 

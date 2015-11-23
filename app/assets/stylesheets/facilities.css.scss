@@ -7,6 +7,13 @@ body, html{
 	height:100%;
 }
 
+iframe{
+	position: relative;
+ 	height: 0;
+ 	overflow: hidden;
+	padding-bottom: 90%;
+}
+
 .shelter-colour {
 	color: #62919C;
 	float: left;
@@ -111,20 +118,16 @@ nav {
 	border-bottom: 1px solid #DDD;
 }
 
-.nav-container{
-	min-width:350px; 
-	height: 75px;
-	margin-top: 0;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 650px;
-    width: 90%;
+
+
+
+.logo {
+	display: block;
 }
 
 .search-form{
 	max-width: 280px;
 	margin-top: 8px;
-	float: right;
 }
 
 .pusher{
@@ -681,12 +684,7 @@ nav {
 	}
 
 .top-search-btn{
-	-webkit-user-select: none;
-		background-color: #fff;
-		background-image: -webkit-linear-gradient(white, #EBEBEB);
-		border: 1px solid #B8B8B8;
-		border-radius: 4px;
-		font-weight: 600;
+	border-radius: 5px;
 
 }
 
@@ -739,13 +737,11 @@ nav {
 .is-open{
 	color: #32CD32;
 	float: left;
-	font-weight: bold;
 }
 
 .is-closed{
 	color: #AA0114;
 	float: left;
-	font-weight: bold;
 }
 
 #near-yes {
@@ -795,7 +791,7 @@ nav {
 }
 
 .crisis-text{
-	color: #e60000;
+	color: #A50000;
 	font-family: arial;
 	font-size: 18px;
 	font-weight: bold;
@@ -804,15 +800,11 @@ nav {
 
 .btn-crisis{
 	float:right;
-	-webkit-user-select: none;
-		background-color: #fff;
-		background-image: -webkit-linear-gradient(white, #EBEBEB);
-		border: 1px solid #B8B8B8;
-		border-radius: 4px;
 
 	p{
 		margin-bottom: 0;
 	}
+
 	
 }
 
@@ -844,3 +836,4 @@ td {
 		font-weight: bold;
 	}
 }
+
