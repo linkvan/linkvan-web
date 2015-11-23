@@ -202,19 +202,11 @@ setTimeout(function(){
     bdirections.appendChild(tdirections);
     bdirections.appendChild(directionsChev);
     bdirections.setAttribute("class", "btn");
-    bdirections.onclick = function() {
-    // If on mobile
-    if( (navigator.platform.indexOf("iPhone") != -1) 
-        || (navigator.platform.indexOf("iPod") != -1)
-        || (navigator.platform.indexOf("iPad") != -1)
-        || (navigator.platform.indexOf("Android") != -1))
-         window.open("maps://maps.google.com/maps?daddr=lat,long&amp;ll=");
-    else
-         window.location = "/facilities/directions/" + jsevent.id;
+    bdirections.onclick = function() { // Note this is a function
+      window.location = "/facilities/directions/" + jsevent.id;
     };
 
     divid.appendChild(bdirections);
-
 }, 500);
 
 
