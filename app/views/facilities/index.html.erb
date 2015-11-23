@@ -36,6 +36,8 @@
 var latitude, longitude;
 var hasStoredLatLon = false;
 
+window.onload = function () {
+
 var x = document.getElementById("demo");
 
     if (navigator.geolocation) {
@@ -43,6 +45,7 @@ var x = document.getElementById("demo");
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
+
 
 function showPosition(position) {
     //x.innerHTML = "Latitude: " + position.coords.latitude +
@@ -242,5 +245,7 @@ setTimeout(function(){
     divid.appendChild(bcrisis);
 
 }, 3000);
+
+}
 
 </script>
