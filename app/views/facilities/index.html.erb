@@ -36,7 +36,6 @@
 var latitude, longitude;
 var hasStoredLatLon = false;
 
-window.onload = function () {
 
 var x = document.getElementById("demo");
 
@@ -51,9 +50,7 @@ function showPosition(position) {
     //x.innerHTML = "Latitude: " + position.coords.latitude +
     //"<br>Longitude: " + position.coords.longitude;
     latitude = position.coords.latitude;
-    setTimeout(function(){}, 10000);
     longitude = position.coords.longitude;
-    setTimeout(function(){}, 10000);
 
 		// TODO add cookies
 		//if (hasStoredLatLon === false) {
@@ -244,8 +241,7 @@ setTimeout(function(){
 
     divid.appendChild(bcrisis);
 
-}, 3000);
+}, 1200);
 
-}
 
 </script>

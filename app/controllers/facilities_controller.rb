@@ -8,6 +8,12 @@ class FacilitiesController < ApplicationController
     def filtered
       @latitude = params[:latitude]
       @longitude = params[:longitude]
+
+      #use to catch undefined latlongs
+      #if !(@latitude.nil?) || !(@longitude.nil?) 
+        #redirect_to facilities_url
+      #end
+
       @scope = params[:scope]
 
       @facilities_near_yes_distance = Array.new
