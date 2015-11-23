@@ -16,7 +16,7 @@ body, html{
 .food-colour {
 	color: #9EA861;
 	float: left;
-	margin-right: 15px;
+	margin-right: 19px;
 }
 .medical-colour {
 	color: #A97A60;
@@ -36,9 +36,15 @@ body, html{
 }
 
 .legal-colour {
-	color: #662e66;
+	color: #8f61a8;
 	float: left;
 	margin-right: 15px;
+}
+
+.crisis-colour {
+	color: #e14228;
+	float: left;
+	margin-right: 11px;
 }
 
 .directions-colour {
@@ -76,7 +82,7 @@ body, html{
 }
 
 .legal-colour-index{
-	color: #662e66;
+	color: #8f61a8;
 	margin-left: 5px;
 	margin-right: 5px;
 }
@@ -820,7 +826,11 @@ nav {
 
 
 .glyphicon-cutlery{
-	font-size: 145%;
+	font-size: 135%;
+}
+
+.glyphicon-warning-sign{
+	font-size: 135%;
 }
 
 td {

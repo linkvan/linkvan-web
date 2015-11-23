@@ -16,7 +16,7 @@ module FacilitiesHelper
    			when "Technology"
    				content_arr += content_tag(:i, nil, class: "icon-display technology-colour-index")
    			else
-   				content_arr += content_tag(:i, nil, class: "icon-Advocacy_linkvan medical-colour-index")
+   				content_arr += content_tag(:i, nil, class: "icon-Advocacy_linkvan legal-colour-index")
 
 			end #ends case
 		end

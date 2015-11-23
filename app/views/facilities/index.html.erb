@@ -189,7 +189,7 @@ setTimeout(function(){
     var legalImg=document.createElement("i");
     //legalImg.setAttribute("class", "glyphicon glyphicon-briefcase medical-colour");
     legalImg.setAttribute("font-family", "Project-Linkvan");
-    legalImg.setAttribute("class", "icon-Advocacy_linkvan medical-colour");
+    legalImg.setAttribute("class", "icon-Advocacy_linkvan legal-colour");
 
 
     var legalChev=document.createElement("i");
@@ -209,18 +209,27 @@ setTimeout(function(){
 //Create Crisis
     var bcrisis = document.createElement("button");
     var tcrisis = document.createElement("p");
-    tcrisis.innerHTML = "CRISIS";
-    tcrisis.setAttribute("class", "crisis-text");
-    
-    bcrisis.appendChild(tcrisis);
+    tcrisis.innerHTML = "&nbsp;Crisis";
+    tcrisis.setAttribute("class", "button-text");
 
-    bcrisis.setAttribute("class", "btn-crisis");
+    var crisisImg=document.createElement("i");
+    crisisImg.setAttribute("class", "glyphicon glyphicon-warning-sign crisis-colour");
+
+    var crisisChev=document.createElement("i");
+    crisisChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
+
+    
+    bcrisis.appendChild(crisisImg);
+    bcrisis.appendChild(tcrisis);
+    bcrisis.appendChild(crisisChev);
+
+    bcrisis.setAttribute("class", "btn");
     bcrisis.onclick = function() { // Note this is a function
         window.location = "/crisis";
     };
 
     divid.appendChild(bcrisis);
 
-}, 700);
+}, 800);
 
 </script>
