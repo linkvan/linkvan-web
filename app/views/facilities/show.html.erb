@@ -55,11 +55,44 @@
     </tr>
   </table> -->
 
-  <p>ID Required?&nbsp;&nbsp;&nbsp;<%=@facility.r_id %>_icon</p>
-  <p>Pets Allowed?&nbsp;&nbsp;&nbsp;<%=@facility.r_pets %>_icon</p>
-  <p>Shopping Carts Allowed?&nbsp;&nbsp;&nbsp;<%=@facility.r_cart %>_icon</p>
-  <p>Free Phone Available?&nbsp;&nbsp;&nbsp;<%=@facility.r_phone %>_icon</p>
-  <p>Free WiFi Available?&nbsp;&nbsp;&nbsp;<%=@facility.r_wifi %>_icon</p>
+<!--<i font-family="Project-Linkvan" class="icon-id_linkvan shelter-colour"></i>
+<i font-family="Project-Linkvan" class="icon-pets_linkvan shelter-colour"></i>
+<i font-family="Project-Linkvan" class="icon-shoppingcart_linkvan shelter-colour"></i>
+<i font-family="Project-Linkvan" class="icon-phone_linkvan shelter-colour"></i>
+<i font-family="Project-Linkvan" class="icon-connection shelter-colour"></i>-->
+
+
+
+<!--<i font-family="Project-Linkvan" class="glyphicon glyphicon-ok food-colour"></i>
+<i font-family="Project-Linkvan" class="glyphicon glyphicon-remove medical-colour"></i> -->
+
+<table>
+  <tr>
+    <td><%= resource_icon_t_or_f?("id", @facility.r_id) %></td>
+    <td><%=resource_t_or_f?(@facility.r_id)%></td>
+    <td><%=resource_text_t_or_f?("id", @facility.r_id)%></td>
+  </tr>
+  <tr>
+    <td><%= resource_icon_t_or_f?("pets", @facility.r_pets) %></td>
+    <td><%=resource_t_or_f?(@facility.r_pets)%> </td>
+    <td><%=resource_text_t_or_f?("pets", @facility.r_pets)%></td>
+  </tr>
+  <tr>
+    <td><%= resource_icon_t_or_f?("cart", @facility.r_cart) %></td>
+    <td><%=resource_t_or_f?(@facility.r_cart)%></td>
+    <td><%=resource_text_t_or_f?("cart", @facility.r_cart)%></td>
+  </tr>
+  <tr>
+    <td><%= resource_icon_t_or_f?("phone", @facility.r_phone) %></td>
+    <td><%=resource_t_or_f?(@facility.r_phone)%></td>
+    <td> <%=resource_text_t_or_f?("phone", @facility.r_phone)%></td>
+  </tr>
+  <tr>
+    <td><%= resource_icon_t_or_f?("wifi", @facility.r_wifi) %></td>
+    <td><%=resource_t_or_f?(@facility.r_wifi)%></td>
+    <td><%=resource_text_t_or_f?("wifi", @facility.r_wifi)%></td>
+  </tr>
+</table>
 
   <h2>Hours</h2>
 
@@ -94,10 +127,10 @@
   </tr>
 </table>
 
-<!--<div class="notes">
+<div class="notes">
   <strong>Notes:</strong><br>
   <p><%= @facility.notes %></p>
-</div>-->
+</div>
 
 
 </div>
