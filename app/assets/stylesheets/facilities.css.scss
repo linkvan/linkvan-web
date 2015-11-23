@@ -769,10 +769,12 @@ nav {
 
 .facility-block{
 	color: #ABA9A9;
+	font-size: 16px;
 }
 
 .facility-block-name{
 	color: black;
+	font-size: 18px;
 }
 
 .admin-options{
@@ -838,3 +840,18 @@ td {
 	}
 }
 
+.youthinbc p{
+	text-align:left;
+	float:left;
+	display:inline-block;
+	color: #ABA9A9;
+	font-size: 16px;
+}
+
+.youthinbc a{
+	font-size: 16px;
+}
+
+.container a{
+	font-size: 16px;
+}
