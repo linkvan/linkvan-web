@@ -6,6 +6,7 @@ class Facility < ActiveRecord::Base
 	validates :name, :lat, :long, :services, presence: true
 
 	def self.search(search)
+		#where("name ILIKE ?", "%#{search}%") for production
   	where("name ILIKE ?", "%#{search}%")
 	end
 
@@ -38,13 +39,6 @@ class Facility < ActiveRecord::Base
 
 			arr = Facility.bubble_sort(distarr, arr)
 
-
-
-			#after bubble_sort, arr[0] is Aachen Token, arr[1] is UBCLE2, and arr[2] is Alabama
-			#the problem: after Aachen Token goes through, UBCLE2 does not enter the arr.each loop even though Alabama does.
-			#for some reason i'm getting a null pointer when i hit UBCLE2 in the while loop. Alabama executes find though.
-
-
 			temp_arr = Array.new
 			temp_arr = arr
 
@@ -54,102 +48,342 @@ class Facility < ActiveRecord::Base
 
 			case day
 				when 0
-					if (8.hours.ago.hour.to_i < arr[$i].startssun_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endssun_at.hour.to_i)
+					#in the end, temp_arr is assigned back to arr and then arr is returned
+					#if the current time for a given day is less than the start time and greater than the finish time
+					#that means the current facility is closed, so we delete it from temp_arr
+					#!SUNDAY DONE... PICK UP AT "when 1" - test then replicate for other cases (when 1...etc)
+					if arr[$i].closed_all_day_sun
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endssun_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endssun_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startssun_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endssun_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_sun
+					elsif arr[$i].second_time_sun
+						if (8.hours.ago.hour < arr[$i].startssun_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endssun_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endssun_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startssun_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startssun_at.hour.to_i && 8.hours.ago.min <= arr[$i].startssun_at.min.to_i) || (8.hours.ago.hour == arr[$i].endssun_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endssun_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endssun_at.hour.to_i && 8.hours.ago.hour == arr[$i].startssun_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endssun_at.min.to_i && 8.hours.ago.min < arr[$i].startssun_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endssun_at.hour.to_i && arr[$i].endssun_at.hour.to_i < arr[$i].startssun_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endssun_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startssun_at2.hour.to_i && arr[$i].endssun_at.hour.to_i < arr[$i].startssun_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startssun_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startssun_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endssun_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endssun_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endssun_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startssun_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endssun_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 				when 1
-					if (8.hours.ago.hour.to_i < arr[$i].startsmon_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endsmon_at.hour.to_i)
+					if arr[$i].closed_all_day_mon
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endsmon_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endsmon_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startsmon_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endsmon_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_mon
+					elsif arr[$i].second_time_mon
+						if (8.hours.ago.hour < arr[$i].startsmon_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endsmon_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endsmon_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startsmon_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour == arr[$i].startsmon_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsmon_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsmon_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsmon_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour == arr[$i].endsmon_at.hour.to_i && 8.hours.ago.hour == arr[$i].startsmon_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endsmon_at.min.to_i && 8.hours.ago.min < arr[$i].startsmon_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endsmon_at.hour.to_i && arr[$i].endsmon_at.hour.to_i < arr[$i].startsmon_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endsmon_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startsmon_at2.hour.to_i && arr[$i].endsmon_at.hour.to_i < arr[$i].startsmon_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startsmon_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+
+						if (8.hours.ago.hour.to_i < arr[$i].startsmon_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endsmon_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsmon_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endsmon_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsmon_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endsmon_at.min.to_i)
+
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 				when 2
-					if (8.hours.ago.hour.to_i < arr[$i].startstues_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endstues_at.hour.to_i)
+					if arr[$i].closed_all_day_tues
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endstues_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endstues_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startstues_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endstues_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_tues
+					elsif arr[$i].second_time_tues
+						if (8.hours.ago.hour < arr[$i].startstues_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endstues_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endstues_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startstues_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startstues_at.hour.to_i && 8.hours.ago.min <= arr[$i].startstues_at.min.to_i) || (8.hours.ago.hour == arr[$i].endstues_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endstues_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endstues_at.hour.to_i && 8.hours.ago.hour == arr[$i].startstues_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endstues_at.min.to_i && 8.hours.ago.min < arr[$i].startstues_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endstues_at.hour.to_i && arr[$i].endstues_at.hour.to_i < arr[$i].startstues_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endstues_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startstues_at2.hour.to_i && arr[$i].endstues_at.hour.to_i < arr[$i].startstues_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startstues_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startstues_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endstues_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endstues_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endstues_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startstues_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endstues_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 				when 3
-					if (8.hours.ago.hour.to_i < arr[$i].startswed_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endswed_at.hour.to_i)
+					if arr[$i].closed_all_day_wed
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endswed_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endswed_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startswed_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endswed_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_wed
+					elsif arr[$i].second_time_wed
+						if (8.hours.ago.hour < arr[$i].startswed_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endswed_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endswed_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startswed_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startswed_at.hour.to_i && 8.hours.ago.min <= arr[$i].startswed_at.min.to_i) || (8.hours.ago.hour == arr[$i].endswed_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endswed_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endswed_at.hour.to_i && 8.hours.ago.hour == arr[$i].startswed_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endswed_at.min.to_i && 8.hours.ago.min < arr[$i].startswed_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endswed_at.hour.to_i && arr[$i].endswed_at.hour.to_i < arr[$i].startswed_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endswed_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startswed_at2.hour.to_i && arr[$i].endswed_at.hour.to_i < arr[$i].startswed_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startswed_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startswed_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endswed_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endswed_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endswed_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startswed_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endswed_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 				when 4
-					if (8.hours.ago.hour.to_i < arr[$i].startsthurs_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endsthurs_at.hour.to_i)
+					if arr[$i].closed_all_day_thurs
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endsthurs_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endsthurs_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startsthurs_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endsthurs_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_thurs
+					elsif arr[$i].second_time_thurs
+						if (8.hours.ago.hour < arr[$i].startsthurs_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endsthurs_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endsthurs_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startsthurs_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startsthurs_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsthurs_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsthurs_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsthurs_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endsthurs_at.hour.to_i && 8.hours.ago.hour == arr[$i].startsthurs_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endsthurs_at.min.to_i && 8.hours.ago.min < arr[$i].startsthurs_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endsthurs_at.hour.to_i && arr[$i].endsthurs_at.hour.to_i < arr[$i].startsthurs_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endsthurs_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startsthurs_at2.hour.to_i && arr[$i].endsthurs_at.hour.to_i < arr[$i].startsthurs_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startsthurs_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startsthurs_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endsthurs_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsthurs_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endsthurs_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsthurs_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endsthurs_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 				when 5
-					if (8.hours.ago.hour.to_i < arr[$i].startsfri_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endsfri_at.hour.to_i)
+					if arr[$i].closed_all_day_fri
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endsfri_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endsfri_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startsfri_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endsfri_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_fri
+					elsif arr[$i].second_time_fri
+						if (8.hours.ago.hour < arr[$i].startsfri_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endsfri_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endsfri_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startsfri_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startsfri_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsfri_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsfri_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsfri_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endsfri_at.hour.to_i && 8.hours.ago.hour == arr[$i].startsfri_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endsfri_at.min.to_i && 8.hours.ago.min < arr[$i].startsfri_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endsfri_at.hour.to_i && arr[$i].endsfri_at.hour.to_i < arr[$i].startsfri_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endsfri_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startsfri_at2.hour.to_i && arr[$i].endsfri_at.hour.to_i < arr[$i].startsfri_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startsfri_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startsfri_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endsfri_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsfri_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endsfri_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsfri_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endsfri_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 				else
-					if (8.hours.ago.hour.to_i < arr[$i].startssat_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endssat_at.hour.to_i)
+					if arr[$i].closed_all_day_sat
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endssat_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endssat_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startssat_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endssat_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_sat
+					elsif arr[$i].second_time_sat
+						if (8.hours.ago.hour < arr[$i].startssat_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endssat_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endssat_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startssat_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startssat_at.hour.to_i && 8.hours.ago.min <= arr[$i].startssat_at.min.to_i) || (8.hours.ago.hour == arr[$i].endssat_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endssat_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endssat_at.hour.to_i && 8.hours.ago.hour == arr[$i].startssat_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endssat_at.min.to_i && 8.hours.ago.min < arr[$i].startssat_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endssat_at.hour.to_i && arr[$i].endssat_at.hour.to_i < arr[$i].startssat_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endssat_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startssat_at2.hour.to_i && arr[$i].endssat_at.hour.to_i < arr[$i].startssat_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startssat_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startssat_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endssat_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endssat_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endssat_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startssat_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endssat_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 
 			end #ends case day
@@ -176,104 +410,349 @@ class Facility < ActiveRecord::Base
 
 			case day
 				when 0
-					if (8.hours.ago.hour.to_i > arr[$i].startssun_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssun_at.hour.to_i)
+					if arr[$i].open_all_day_sun
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endssun_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endssun_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startssun_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endssun_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_sun
+					elsif arr[$i].second_time_sun
+						if (8.hours.ago.hour.to_i > arr[$i].startssun_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endssun_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startssun_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endssun_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startssun_at.hour.to_i && 8.hours.ago.min >= arr[$i].startssun_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssun_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endssun_at.hour.to_i && 8.hours.ago.min <= arr[$i].endssun_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startssun_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startssun_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startssun_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssun_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endssun_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endssun_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startssun_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+
+						if (8.hours.ago.hour.to_i > arr[$i].startssun_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssun_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endssun_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endssun_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startssun_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startssun_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endssun_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endssun_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 				when 1
-					if (8.hours.ago.hour.to_i > arr[$i].startsmon_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsmon_at.hour.to_i)
+					if arr[$i].open_all_day_mon
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endsmon_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endsmon_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startsmon_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endsmon_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_mon
+					elsif arr[$i].second_time_mon
+						if (8.hours.ago.hour.to_i > arr[$i].startsmon_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endsmon_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startsmon_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endsmon_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsmon_at.hour.to_i && 8.hours.ago.min >= arr[$i].startsmon_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsmon_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsmon_at.hour.to_i && 8.hours.ago.min <= arr[$i].endsmon_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startsmon_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsmon_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startsmon_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsmon_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsmon_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endsmon_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startsmon_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+
+						if (8.hours.ago.hour.to_i > arr[$i].startsmon_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsmon_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endsmon_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endsmon_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startsmon_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startsmon_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endsmon_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endsmon_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 				when 2
-					if (8.hours.ago.hour.to_i > arr[$i].startstues_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endstues_at.hour.to_i)
+					if arr[$i].open_all_day_tues
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endstues_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endstues_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startstues_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endstues_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_tues
+					elsif arr[$i].second_time_tues
+						if (8.hours.ago.hour.to_i > arr[$i].startstues_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endstues_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startstues_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endstues_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startstues_at.hour.to_i && 8.hours.ago.min >= arr[$i].startstues_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endstues_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endstues_at.hour.to_i && 8.hours.ago.min <= arr[$i].endstues_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startstues_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startstues_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startstues_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endstues_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endstues_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endstues_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startstues_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i > arr[$i].startstues_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endstues_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endstues_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endstues_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startstues_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startstues_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endstues_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endstues_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 				when 3
+					if arr[$i].open_all_day_wed
+						t = arr[$i]
+						temp_arr.delete(t)
+						$i-=1
+					elsif arr[$i].closed_all_day_wed
+					elsif arr[$i].second_time_wed
+						if (8.hours.ago.hour.to_i > arr[$i].startswed_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endswed_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startswed_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endswed_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
 
-					if (8.hours.ago.hour.to_i > arr[$i].startswed_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endswed_at.hour.to_i)
+						elsif (8.hours.ago.hour.to_i == arr[$i].startswed_at.hour.to_i && 8.hours.ago.min >= arr[$i].startswed_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endswed_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
 
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endswed_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endswed_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startswed_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endswed_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endswed_at.hour.to_i && 8.hours.ago.min <= arr[$i].endswed_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startswed_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startswed_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startswed_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endswed_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endswed_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endswed_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startswed_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i > arr[$i].startswed_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endswed_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endswed_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endswed_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startswed_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startswed_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endswed_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endswed_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 				when 4
-					if (8.hours.ago.hour.to_i > arr[$i].startsthurs_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsthurs_at.hour.to_i)
+					if arr[$i].open_all_day_thurs
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endsthurs_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endsthurs_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startsthurs_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endsthurs_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_thurs
+					elsif arr[$i].second_time_thurs
+						if (8.hours.ago.hour.to_i > arr[$i].startsthurs_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endsthurs_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startsthurs_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endsthurs_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsthurs_at.hour.to_i && 8.hours.ago.min >= arr[$i].startsthurs_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsthurs_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsthurs_at.hour.to_i && 8.hours.ago.min <= arr[$i].endsthurs_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startsthurs_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsthurs_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startsthurs_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsthurs_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsthurs_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endsthurs_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startsthurs_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i > arr[$i].startsthurs_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsthurs_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endsthurs_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endsthurs_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startsthurs_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startsthurs_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endsthurs_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endsthurs_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 				when 5
-					if (8.hours.ago.hour.to_i > arr[$i].startsfri_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsfri_at.hour.to_i)
+					if arr[$i].open_all_day_fri
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endsfri_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endsfri_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startsfri_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endsfri_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_fri
+					elsif arr[$i].second_time_fri
+						if (8.hours.ago.hour.to_i > arr[$i].startsfri_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endsfri_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startsfri_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endsfri_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsfri_at.hour.to_i && 8.hours.ago.min >= arr[$i].startsfri_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsfri_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsfri_at.hour.to_i && 8.hours.ago.min <= arr[$i].endsfri_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startsfri_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsfri_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startsfri_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsfri_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsfri_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endsfri_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startsfri_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i > arr[$i].startsfri_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsfri_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endsfri_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endsfri_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startsfri_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startsfri_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endsfri_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endsfri_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 				else
-					if (8.hours.ago.hour.to_i > arr[$i].startssat_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssat_at.hour.to_i)
+					if arr[$i].open_all_day_sat
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endssat_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endssat_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startssat_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endssat_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_sat
+					elsif arr[$i].second_time_sat
+						if (8.hours.ago.hour.to_i > arr[$i].startssat_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endssat_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startssat_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endssat_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startssat_at.hour.to_i && 8.hours.ago.min >= arr[$i].startssat_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssat_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endssat_at.hour.to_i && 8.hours.ago.min <= arr[$i].endssat_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startssat_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startssat_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startssat_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssat_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endssat_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endssat_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startssat_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i > arr[$i].startssat_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssat_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endssat_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endssat_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startssat_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startssat_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endssat_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endssat_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 
 			end #ends case day
@@ -294,103 +773,337 @@ class Facility < ActiveRecord::Base
 
 			case day
 				when 0
-					if (8.hours.ago.hour.to_i < arr[$i].startssun_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endssun_at.hour.to_i)
+					#in the end, temp_arr is assigned back to arr and then arr is returned
+					#if the current time for a given day is less than the start time and greater than the finish time
+					#that means the current facility is closed, so we delete it from temp_arr
+					#!SUNDAY DONE... PICK UP AT "when 1" - test then replicate for other cases (when 1...etc)
+					if arr[$i].closed_all_day_sun
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endssun_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endssun_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startssun_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endssun_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_sun
+					elsif arr[$i].second_time_sun
+						if (8.hours.ago.hour < arr[$i].startssun_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endssun_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endssun_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startssun_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startssun_at.hour.to_i && 8.hours.ago.min <= arr[$i].startssun_at.min.to_i) || (8.hours.ago.hour == arr[$i].endssun_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endssun_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endssun_at.hour.to_i && 8.hours.ago.hour == arr[$i].startssun_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endssun_at.min.to_i && 8.hours.ago.min < arr[$i].startssun_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endssun_at.hour.to_i && arr[$i].endssun_at.hour.to_i < arr[$i].startssun_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endssun_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startssun_at2.hour.to_i && arr[$i].endssun_at.hour.to_i < arr[$i].startssun_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startssun_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startssun_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endssun_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endssun_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endssun_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startssun_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endssun_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 				when 1
-					if (8.hours.ago.hour.to_i < arr[$i].startsmon_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endsmon_at.hour.to_i)
+					if arr[$i].closed_all_day_mon
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endsmon_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endsmon_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startsmon_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endsmon_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_mon
+					elsif arr[$i].second_time_mon
+						if (8.hours.ago.hour < arr[$i].startsmon_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endsmon_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endsmon_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startsmon_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startsmon_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsmon_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsmon_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsmon_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endsmon_at.hour.to_i && 8.hours.ago.hour == arr[$i].startsmon_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endsmon_at.min.to_i && 8.hours.ago.min < arr[$i].startsmon_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endsmon_at.hour.to_i && arr[$i].endsmon_at.hour.to_i < arr[$i].startsmon_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endsmon_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startsmon_at2.hour.to_i && arr[$i].endsmon_at.hour.to_i < arr[$i].startsmon_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startsmon_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startsmon_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endsmon_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsmon_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endsmon_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsmon_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endsmon_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 				when 2
-					if (8.hours.ago.hour.to_i < arr[$i].startstues_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endstues_at.hour.to_i)
+					if arr[$i].closed_all_day_tues
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endstues_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endstues_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startstues_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endstues_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_tues
+					elsif arr[$i].second_time_tues
+						if (8.hours.ago.hour < arr[$i].startstues_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endstues_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endstues_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startstues_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startstues_at.hour.to_i && 8.hours.ago.min <= arr[$i].startstues_at.min.to_i) || (8.hours.ago.hour == arr[$i].endstues_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endstues_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endstues_at.hour.to_i && 8.hours.ago.hour == arr[$i].startstues_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endstues_at.min.to_i && 8.hours.ago.min < arr[$i].startstues_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endstues_at.hour.to_i && arr[$i].endstues_at.hour.to_i < arr[$i].startstues_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endstues_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startstues_at2.hour.to_i && arr[$i].endstues_at.hour.to_i < arr[$i].startstues_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startstues_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startstues_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endstues_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endstues_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endstues_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startstues_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endstues_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 				when 3
-
-					if (8.hours.ago.hour.to_i < arr[$i].startswed_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endswed_at.hour.to_i)
+					if arr[$i].closed_all_day_wed
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endswed_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endswed_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startswed_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endswed_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_wed
+					elsif arr[$i].second_time_wed
+						if (8.hours.ago.hour < arr[$i].startswed_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endswed_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endswed_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startswed_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startswed_at.hour.to_i && 8.hours.ago.min <= arr[$i].startswed_at.min.to_i) || (8.hours.ago.hour == arr[$i].endswed_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endswed_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endswed_at.hour.to_i && 8.hours.ago.hour == arr[$i].startswed_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endswed_at.min.to_i && 8.hours.ago.min < arr[$i].startswed_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endswed_at.hour.to_i && arr[$i].endswed_at.hour.to_i < arr[$i].startswed_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endswed_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startswed_at2.hour.to_i && arr[$i].endswed_at.hour.to_i < arr[$i].startswed_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startswed_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startswed_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endswed_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endswed_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endswed_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startswed_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endswed_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 				when 4
-					if (8.hours.ago.hour.to_i < arr[$i].startsthurs_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endsthurs_at.hour.to_i)
+					if arr[$i].closed_all_day_thurs
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endsthurs_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endsthurs_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startsthurs_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endsthurs_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_thurs
+					elsif arr[$i].second_time_thurs
+						if (8.hours.ago.hour < arr[$i].startsthurs_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endsthurs_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endsthurs_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startsthurs_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startsthurs_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsthurs_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsthurs_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsthurs_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endsthurs_at.hour.to_i && 8.hours.ago.hour == arr[$i].startsthurs_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endsthurs_at.min.to_i && 8.hours.ago.min < arr[$i].startsthurs_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endsthurs_at.hour.to_i && arr[$i].endsthurs_at.hour.to_i < arr[$i].startsthurs_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endsthurs_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startsthurs_at2.hour.to_i && arr[$i].endsthurs_at.hour.to_i < arr[$i].startsthurs_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startsthurs_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startsthurs_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endsthurs_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsthurs_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endsthurs_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsthurs_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endsthurs_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 				when 5
-					if (8.hours.ago.hour.to_i < arr[$i].startsfri_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endsfri_at.hour.to_i)
+					if arr[$i].closed_all_day_fri
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endsfri_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endsfri_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startsfri_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endsfri_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_fri
+					elsif arr[$i].second_time_fri
+						if (8.hours.ago.hour < arr[$i].startsfri_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endsfri_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endsfri_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startsfri_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startsfri_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsfri_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsfri_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsfri_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endsfri_at.hour.to_i && 8.hours.ago.hour == arr[$i].startsfri_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endsfri_at.min.to_i && 8.hours.ago.min < arr[$i].startsfri_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endsfri_at.hour.to_i && arr[$i].endsfri_at.hour.to_i < arr[$i].startsfri_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endsfri_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startsfri_at2.hour.to_i && arr[$i].endsfri_at.hour.to_i < arr[$i].startsfri_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startsfri_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startsfri_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endsfri_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsfri_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endsfri_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsfri_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endsfri_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 				else
-					if (8.hours.ago.hour.to_i < arr[$i].startssat_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endssat_at.hour.to_i)
+					if arr[$i].closed_all_day_sat
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endssat_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endssat_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startssat_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endssat_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].open_all_day_sat
+					elsif arr[$i].second_time_sat
+						if (8.hours.ago.hour < arr[$i].startssat_at.hour.to_i) || (8.hours.ago.hour > arr[$i].endssat_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour > arr[$i].endssat_at.hour.to_i) && (8.hours.ago.hour < arr[$i].startssat_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startssat_at.hour.to_i && 8.hours.ago.min <= arr[$i].startssat_at.min.to_i) || (8.hours.ago.hour == arr[$i].endssat_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endssat_at2.min.to_i) 
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endssat_at.hour.to_i && 8.hours.ago.hour == arr[$i].startssat_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endssat_at.min.to_i && 8.hours.ago.min < arr[$i].startssat_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].endssat_at.hour.to_i && arr[$i].endssat_at.hour.to_i < arr[$i].startssat_at2.hour.to_i) && (8.hours.ago.min >= arr[$i].endssat_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour == arr[$i].startssat_at2.hour.to_i && arr[$i].endssat_at.hour.to_i < arr[$i].startssat_at2.hour.to_i) && (8.hours.ago.min <= arr[$i].startssat_at2.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i < arr[$i].startssat_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].endssat_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].endssat_at.hour.to_i) && (8.hours.ago.min.to_i >= arr[$i].endssat_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif (8.hours.ago.hour.to_i == arr[$i].startssat_at.hour.to_i) && (8.hours.ago.min.to_i < arr[$i].endssat_at.min.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
 					end
 
 			end #ends case day
@@ -412,102 +1125,349 @@ class Facility < ActiveRecord::Base
 
 			case day
 				when 0
-					if (8.hours.ago.hour.to_i > arr[$i].startssun_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssun_at.hour.to_i)
+					if arr[$i].open_all_day_sun
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endssun_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endssun_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startssun_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endssun_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_sun
+					elsif arr[$i].second_time_sun
+						if (8.hours.ago.hour.to_i > arr[$i].startssun_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endssun_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startssun_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endssun_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startssun_at.hour.to_i && 8.hours.ago.min >= arr[$i].startssun_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssun_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endssun_at.hour.to_i && 8.hours.ago.min <= arr[$i].endssun_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startssun_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startssun_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startssun_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssun_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endssun_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endssun_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startssun_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+
+						if (8.hours.ago.hour.to_i > arr[$i].startssun_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssun_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endssun_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endssun_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startssun_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startssun_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endssun_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endssun_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 				when 1
-					if (8.hours.ago.hour.to_i > arr[$i].startsmon_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsmon_at.hour.to_i)
+					if arr[$i].open_all_day_mon
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endsmon_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endsmon_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startsmon_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endsmon_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_mon
+					elsif arr[$i].second_time_mon
+						if (8.hours.ago.hour.to_i > arr[$i].startsmon_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endsmon_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startsmon_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endsmon_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsmon_at.hour.to_i && 8.hours.ago.min >= arr[$i].startsmon_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsmon_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsmon_at.hour.to_i && 8.hours.ago.min <= arr[$i].endsmon_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startsmon_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsmon_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startsmon_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsmon_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsmon_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endsmon_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startsmon_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+
+						if (8.hours.ago.hour.to_i > arr[$i].startsmon_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsmon_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endsmon_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endsmon_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startsmon_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startsmon_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endsmon_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endsmon_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 				when 2
-					if (8.hours.ago.hour.to_i > arr[$i].startstues_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endstues_at.hour.to_i)
+					if arr[$i].open_all_day_tues
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endstues_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endstues_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startstues_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endstues_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_tues
+					elsif arr[$i].second_time_tues
+						if (8.hours.ago.hour.to_i > arr[$i].startstues_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endstues_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startstues_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endstues_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startstues_at.hour.to_i && 8.hours.ago.min >= arr[$i].startstues_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endstues_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endstues_at.hour.to_i && 8.hours.ago.min <= arr[$i].endstues_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startstues_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startstues_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startstues_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endstues_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endstues_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endstues_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startstues_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i > arr[$i].startstues_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endstues_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endstues_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endstues_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startstues_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startstues_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endstues_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endstues_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 				when 3
-					if (8.hours.ago.hour.to_i > arr[$i].startswed_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endswed_at.hour.to_i)
+					if arr[$i].open_all_day_wed
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endswed_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endswed_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startswed_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endswed_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_wed
+					elsif arr[$i].second_time_wed
+						if (8.hours.ago.hour.to_i > arr[$i].startswed_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endswed_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startswed_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endswed_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startswed_at.hour.to_i && 8.hours.ago.min >= arr[$i].startswed_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endswed_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endswed_at.hour.to_i && 8.hours.ago.min <= arr[$i].endswed_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startswed_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startswed_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startswed_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endswed_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endswed_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endswed_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startswed_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i > arr[$i].startswed_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endswed_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endswed_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endswed_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startswed_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startswed_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endswed_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endswed_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 				when 4
-					if (8.hours.ago.hour.to_i > arr[$i].startsthurs_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsthurs_at.hour.to_i)
+					if arr[$i].open_all_day_thurs
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endsthurs_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endsthurs_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startsthurs_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endsthurs_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_thurs
+					elsif arr[$i].second_time_thurs
+						if (8.hours.ago.hour.to_i > arr[$i].startsthurs_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endsthurs_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startsthurs_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endsthurs_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsthurs_at.hour.to_i && 8.hours.ago.min >= arr[$i].startsthurs_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsthurs_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsthurs_at.hour.to_i && 8.hours.ago.min <= arr[$i].endsthurs_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startsthurs_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsthurs_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startsthurs_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsthurs_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsthurs_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endsthurs_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startsthurs_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i > arr[$i].startsthurs_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsthurs_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endsthurs_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endsthurs_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startsthurs_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startsthurs_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endsthurs_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endsthurs_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 				when 5
-					if (8.hours.ago.hour.to_i > arr[$i].startsfri_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsfri_at.hour.to_i)
+					if arr[$i].open_all_day_fri
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endsfri_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endsfri_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startsfri_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endsfri_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_fri
+					elsif arr[$i].second_time_fri
+						if (8.hours.ago.hour.to_i > arr[$i].startsfri_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endsfri_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startsfri_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endsfri_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsfri_at.hour.to_i && 8.hours.ago.min >= arr[$i].startsfri_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsfri_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsfri_at.hour.to_i && 8.hours.ago.min <= arr[$i].endsfri_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startsfri_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startsfri_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startsfri_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsfri_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endsfri_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endsfri_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startsfri_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i > arr[$i].startsfri_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endsfri_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endsfri_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endsfri_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startsfri_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startsfri_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endsfri_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endsfri_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 				else
-					if (8.hours.ago.hour.to_i > arr[$i].startssat_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssat_at.hour.to_i)
+					if arr[$i].open_all_day_sat
 						t = arr[$i]
 						temp_arr.delete(t)
 						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].endssat_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endssat_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
-					elsif (8.hours.ago.hour.to_i == arr[$i].startssat_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endssat_at.min.to_i)
-						t = arr[$i]
-						temp_arr.delete(t)
-						$i-=1
+					elsif arr[$i].closed_all_day_sat
+					elsif arr[$i].second_time_sat
+						if (8.hours.ago.hour.to_i > arr[$i].startssat_at.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endssat_at.hour.to_i) || (8.hours.ago.hour.to_i > arr[$i].startssat_at2.hour.to_i && 8.hours.ago.hour.to_i < arr[$i].endssat_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startssat_at.hour.to_i && 8.hours.ago.min >= arr[$i].startssat_at.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssat_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endssat_at.hour.to_i && 8.hours.ago.min <= arr[$i].endssat_at.min.to_i) && (8.hours.ago.hour.to_i > arr[$i].startssat_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].startssat_at2.hour.to_i && 8.hours.ago.min >= arr[$i].startssat_at2.min.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssat_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif (8.hours.ago.hour.to_i == arr[$i].endssat_at2.hour.to_i && 8.hours.ago.min <= arr[$i].endssat_at2.min.to_i) && (8.hours.ago.hour.to_i >arr[$i].startssat_at2.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						end
+					else
+						if (8.hours.ago.hour.to_i > arr[$i].startssat_at.hour.to_i) && (8.hours.ago.hour.to_i < arr[$i].endssat_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						elsif ((8.hours.ago.hour.to_i == arr[$i].endssat_at.hour.to_i) && (8.hours.ago.min.to_i <= arr[$i].endssat_at.min.to_i)) && (8.hours.ago.hour.to_i > arr[$i].startssat_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+
+						elsif ((8.hours.ago.hour.to_i == arr[$i].startssat_at.hour.to_i) && (8.hours.ago.min.to_i > arr[$i].endssat_at.min.to_i)) && (8.hours.ago.hour.to_i < arr[$i].endssat_at.hour.to_i)
+							t = arr[$i]
+							temp_arr.delete(t)
+							$i-=1
+						
+						end
 					end
 
 			end #ends case day

@@ -34,37 +34,6 @@
 
 <div class="description">
   <h2>Resources</h2>
-  <!--<p><%=@facility.description %></p>-->
-<!--
-  <table>
-    <tr>
-      <td>ID Required?</td>
-      <td>&nbsp;&nbsp;<%=@facility.r_id %></td>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Free Phone Available?</td>
-      <td>&nbsp;&nbsp;<%=@facility.r_phone %></td>
-    </tr>
-    <tr>
-      <td>Pets Allowed?</td>
-      <td>&nbsp;&nbsp;<%=@facility.r_pets %></td>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Free WiFi Available?</td>
-      <td>&nbsp;&nbsp;<%=@facility.r_wifi %></td>
-    </tr>
-    <tr>
-      <td>Shopping Carts Allowed?</td>
-      <td>&nbsp;&nbsp;<%=@facility.r_cart %></td>
-    </tr>
-  </table> -->
-
-<!--<i font-family="Project-Linkvan" class="icon-id_linkvan shelter-colour"></i>
-<i font-family="Project-Linkvan" class="icon-pets_linkvan shelter-colour"></i>
-<i font-family="Project-Linkvan" class="icon-shoppingcart_linkvan shelter-colour"></i>
-<i font-family="Project-Linkvan" class="icon-phone_linkvan shelter-colour"></i>
-<i font-family="Project-Linkvan" class="icon-connection shelter-colour"></i>-->
-
-
-
-<!--<i font-family="Project-Linkvan" class="glyphicon glyphicon-ok food-colour"></i>
-<i font-family="Project-Linkvan" class="glyphicon glyphicon-remove medical-colour"></i> -->
 
 <table>
   <tr>
@@ -99,31 +68,31 @@
 <table>
   <tr>
     <td>Monday:</td>
-    <td>&nbsp;&nbsp;<%=@facility.startsmon_at.strftime("%I:%M%p") %> to <%=@facility.endsmon_at.strftime("%I:%M%p") %> </td>
+    <td><%= display_mon_hours(@facility) %></td>
   </tr>
   <tr>
     <td>Tuesday:</td>
-    <td>&nbsp;&nbsp;<%=@facility.startstues_at.strftime("%I:%M%p") %> to <%=@facility.endstues_at.strftime("%I:%M%p") %> </td>
+    <td><%= display_tues_hours(@facility) %></td>
   </tr>
   <tr>
     <td>Wednesday:</td>
-    <td>&nbsp;&nbsp;<%=@facility.startswed_at.strftime("%I:%M%p") %> to <%=@facility.endswed_at.strftime("%I:%M%p") %> </td>
+    <td><%= display_wed_hours(@facility) %></td>
   </tr>
   <tr>
     <td>Thursday:</td>
-    <td>&nbsp;&nbsp;<%=@facility.startsthurs_at.strftime("%I:%M%p") %> to <%=@facility.endsthurs_at.strftime("%I:%M%p") %> </td>
+    <td><%= display_thurs_hours(@facility) %></td>
   </tr>
   <tr>
     <td>Friday:</td>
-    <td>&nbsp;&nbsp;<%=@facility.startsfri_at.strftime("%I:%M%p") %> to <%=@facility.endsfri_at.strftime("%I:%M%p") %> </td>
+    <td><%= display_fri_hours(@facility) %></td>
   </tr>
   <tr>
     <td>Saturday:</td>
-    <td>&nbsp;&nbsp;<%=@facility.startssat_at.strftime("%I:%M%p") %> to <%=@facility.endssat_at.strftime("%I:%M%p") %> </td>
+    <td><%= display_sat_hours(@facility) %> </td>
   </tr>
   <tr>
     <td>Sunday:</td>
-    <td>&nbsp;&nbsp;<%=@facility.startssun_at.strftime("%I:%M%p") %> to <%=@facility.endssun_at.strftime("%I:%M%p") %> </td>
+    <td><%= display_sun_hours(@facility) %> </td>
   </tr>
 </table>
 

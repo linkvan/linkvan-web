@@ -29,9 +29,6 @@
     <%= f.text_field :address %>
     <input type="button" value="Search" onclick="codeAddress()">
     <div id="map-canvas-new"></div>
-   
-  
-
 
   </p>
   <p>
@@ -46,74 +43,236 @@
     <%= f.label :description %> - Copy paste verbatim from the facility's "about us" page. Will tweak on stakeholder feedback.<br/>
     <%= f.text_area :description, cols: 40, rows: 7 %>
   </p>
+  <h3>Hours</h3>
   <p>
-    If hours of operation are not available for any given date, enter 22:59 for the start time and 23:59 for the end time.<br/>
-    This will make it easier to relocate in the database.<br/>
-    <strong> WARNING: The start time and end time for a day cannot be identical. Also, the start time must be earlier than the end time.</strong><br/><br/>
-    <%= f.label :startsmon_at %><br/>
-    <%= f.time_select :startsmon_at, default: 8.hours.ago  %>
+    <strong> WARNING: The start time and end time for a day cannot be identical. Also, the start time must be earlier than the end time.</strong><br/>
   </p>
-  <p>
-    <%= f.label :endsmon_at %><br/>
-    <%= f.time_select :endsmon_at, default: 8.hours.ago  %>
-  </p>
+  <table>
+    <tr>
+      <td><%= f.label :open_all_day_mon %>
+      <%= f.check_box :open_all_day_mon %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :closed_all_day_mon %>
+      <%= f.check_box :closed_all_day_mon %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :second_time_mon %>
+      <%= f.check_box :second_time_mon %></td>
+    </tr>
+  </table>
+  <div id="mon-hours">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startsmon_at %></td>
+      <td><%= f.time_select :startsmon_at, default: 8.hours.ago  %></td>
+      <td><%= f.label :endsmon_at %></td>
+      <td><%= f.time_select :endsmon_at, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <div id="mon-hours-2" style="display: none;">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startsmon_at2 %></td>
+      <td><%= f.time_select :startsmon_at2, default: 8.hours.ago  %></td>
+      <td><%= f.label :endsmon_at2 %></td>
+      <td><%= f.time_select :endsmon_at2, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <hr>
+
+  <table>
+    <tr>
+      <td><%= f.label :open_all_day_tues %>
+      <%= f.check_box :open_all_day_tues %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :closed_all_day_tues %>
+      <%= f.check_box :closed_all_day_tues %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :second_time_tues %>
+      <%= f.check_box :second_time_tues %></td>
+    </tr>
+  </table>
+  <div id="tues-hours">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startstues_at %></td>
+      <td><%= f.time_select :startstues_at, default: 8.hours.ago  %></td>
+      <td><%= f.label :endstues_at %></td>
+      <td><%= f.time_select :endstues_at, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <div id="tues-hours-2" style="display: none;">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startstues_at2 %></td>
+      <td><%= f.time_select :startstues_at2, default: 8.hours.ago  %></td>
+      <td><%= f.label :endstues_at2 %></td>
+      <td><%= f.time_select :endstues_at2, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <hr>
+
+  <table>
+    <tr>
+      <td><%= f.label :open_all_day_wed %>
+      <%= f.check_box :open_all_day_wed %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :closed_all_day_wed %>
+      <%= f.check_box :closed_all_day_wed %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :second_time_wed %>
+      <%= f.check_box :second_time_wed %></td>
+    </tr>
+  </table>
+  <div id="wed-hours">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startswed_at %></td>
+      <td><%= f.time_select :startswed_at, default: 8.hours.ago  %></td>
+      <td><%= f.label :endswed_at %></td>
+      <td><%= f.time_select :endswed_at, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <div id="wed-hours-2" style="display: none;">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startswed_at2 %></td>
+      <td><%= f.time_select :startswed_at2, default: 8.hours.ago  %></td>
+      <td><%= f.label :endswed_at2 %></td>
+      <td><%= f.time_select :endswed_at2, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <hr>
+
+  <table>
+    <tr>
+      <td><%= f.label :open_all_day_thurs %>
+      <%= f.check_box :open_all_day_thurs %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :closed_all_day_thurs%>
+      <%= f.check_box :closed_all_day_thurs %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :second_time_thurs %>
+      <%= f.check_box :second_time_thurs %></td>
+    </tr>
+  </table>
+  <div id="thurs-hours">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startsthurs_at %></td>
+      <td><%= f.time_select :startsthurs_at, default: 8.hours.ago  %></td>
+      <td><%= f.label :endsthurs_at %></td>
+      <td><%= f.time_select :endsthurs_at, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <div id="thurs-hours-2" style="display: none;">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startsthurs_at2 %></td>
+      <td><%= f.time_select :startsthurs_at2, default: 8.hours.ago  %></td>
+      <td><%= f.label :endsthurs_at2 %></td>
+      <td><%= f.time_select :endsthurs_at2, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <hr>
+
+  <table>
+    <tr>
+      <td><%= f.label :open_all_day_fri %>
+      <%= f.check_box :open_all_day_fri %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :closed_all_day_fri%>
+      <%= f.check_box :closed_all_day_fri %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :second_time_fri %>
+      <%= f.check_box :second_time_fri %></td>
+    </tr>
+  </table>
+  <div id="fri-hours">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startsfri_at %></td>
+      <td><%= f.time_select :startsfri_at, default: 8.hours.ago  %></td>
+      <td><%= f.label :endsfri_at %></td>
+      <td><%= f.time_select :endsfri_at, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <div id="fri-hours-2" style="display: none;">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startsfri_at2 %></td>
+      <td><%= f.time_select :startsfri_at2, default: 8.hours.ago  %></td>
+      <td><%= f.label :endsfri_at2 %></td>
+      <td><%= f.time_select :endsfri_at2, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <hr>
+
+  <table>
+    <tr>
+      <td><%= f.label :open_all_day_sat %>
+      <%= f.check_box :open_all_day_sat %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :closed_all_day_sat%>
+      <%= f.check_box :closed_all_day_sat %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :second_time_sat %>
+      <%= f.check_box :second_time_sat %></td>
+    </tr>
+  </table>
+  <div id="sat-hours">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startssat_at %></td>
+      <td><%= f.time_select :startssat_at, default: 8.hours.ago  %></td>
+      <td><%= f.label :endssat_at %></td>
+      <td><%= f.time_select :endssat_at, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <div id="sat-hours-2" style="display: none;">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startssat_at2 %></td>
+      <td><%= f.time_select :startssat_at2, default: 8.hours.ago  %></td>
+      <td><%= f.label :endssat_at2 %></td>
+      <td><%= f.time_select :endssat_at2, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <hr>
+
+  <table>
+    <tr>
+      <td><%= f.label :open_all_day_sun %>
+      <%= f.check_box :open_all_day_sun %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :closed_all_day_sun%>
+      <%= f.check_box :closed_all_day_sun %>&nbsp;&nbsp;&nbsp;
+      <%= f.label :second_time_sun %>
+      <%= f.check_box :second_time_sun %></td>
+    </tr>
+  </table>
+  <div id="sun-hours">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startssun_at %></td>
+      <td><%= f.time_select :startssun_at, default: 8.hours.ago  %></td>
+      <td><%= f.label :endssun_at %></td>
+      <td><%= f.time_select :endssun_at, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <div id="sun-hours-2" style="display: none;">
+  <table class="hours-form">
+    <tr>
+      <td><%= f.label :startssun_at2 %></td>
+      <td><%= f.time_select :startssun_at2, default: 8.hours.ago  %></td>
+      <td><%= f.label :endssun_at2 %></td>
+      <td><%= f.time_select :endssun_at2, default: 8.hours.ago  %></td>
+    </tr>
+  </table>
+  </div>
+  <hr>
 
   <p>
-    <%= f.label :startstues_at %><br/>
-    <%= f.time_select :startstues_at, default: 8.hours.ago  %>
-  </p>
-  <p>
-    <%= f.label :endstues_at %><br/>
-    <%= f.time_select :endstues_at, default: 8.hours.ago  %>
-  </p>
-
-  <p>
-    <%= f.label :startswed_at %><br/>
-    <%= f.time_select :startswed_at, default: 8.hours.ago  %>
-  </p>
-  <p>
-    <%= f.label :endswed_at %><br/>
-    <%= f.time_select :endswed_at, default: 8.hours.ago  %>
-  </p>
-
-  <p>
-    <%= f.label :startsthurs_at %><br/>
-    <%= f.time_select :startsthurs_at, default: 8.hours.ago  %>
-  </p>
-  <p>
-    <%= f.label :endsthurs_at %><br/>
-    <%= f.time_select :endsthurs_at, default: 8.hours.ago  %>
-  </p>
-
-  <p>
-    <%= f.label :startsfri_at %><br/>
-    <%= f.time_select :startsfri_at, default: 8.hours.ago  %>
-  </p>
-  <p>
-    <%= f.label :endsfri_at %><br/>
-    <%= f.time_select :endsfri_at, default: 8.hours.ago  %>
-  </p>
-
-  <p>
-    <%= f.label :startssat_at %><br/>
-    <%= f.time_select :startssat_at, default: 8.hours.ago  %>
-  </p>
-  <p>
-    <%= f.label :endssat_at %><br/>
-    <%= f.time_select :endssat_at, default: 8.hours.ago  %>
-  </p>
-
-  <p>
-    <%= f.label :startssun_at %><br/>
-    <%= f.time_select :startssun_at, default: 8.hours.ago  %>
-  </p>
-  <p>
-    <%= f.label :endssun_at %><br/>
-    <%= f.time_select :endssun_at, default: 8.hours.ago  %>
-  </p>
-
-  <p>
-    <%= f.label :notes %> - Leave empty for now. Facility admin can update at will. Examples: special events, facility rules, etc.<br/>
+    <%= f.label :notes %> - Examples: special events, facility rules, etc.<br/>
     <%= f.text_area :notes, cols: 40, rows: 7 %>
   </p>
   <p>
@@ -125,3 +284,279 @@
     <%= link_to "Cancel", facilities_path %>
   </p>
 <% end %>
+
+<script>
+var monhours = document.getElementById("mon-hours");
+var tueshours = document.getElementById("tues-hours");
+var wedhours = document.getElementById("wed-hours");
+var thurshours = document.getElementById("thurs-hours");
+var frihours = document.getElementById("fri-hours");
+var sathours = document.getElementById("sat-hours");
+var sunhours = document.getElementById("sun-hours");
+
+var monhours2 = document.getElementById("mon-hours-2");
+var tueshours2 = document.getElementById("tues-hours-2");
+var wedhours2 = document.getElementById("wed-hours-2");
+var thurshours2 = document.getElementById("thurs-hours-2");
+var frihours2 = document.getElementById("fri-hours-2");
+var sathours2 = document.getElementById("sat-hours-2");
+var sunhours2 = document.getElementById("sun-hours-2");
+
+
+//open and closed all days
+var oadmon = document.getElementById('facility_open_all_day_mon');
+oadmon.setAttribute("onclick", "validate_mon()");
+var cadmon = document.getElementById('facility_closed_all_day_mon');
+cadmon.setAttribute("onclick", "validate_mon()");
+
+var oadtues = document.getElementById('facility_open_all_day_tues');
+oadtues.setAttribute("onclick", "validate_tues()");
+var cadtues = document.getElementById('facility_closed_all_day_tues');
+cadtues.setAttribute("onclick", "validate_tues()");
+
+var oadwed = document.getElementById('facility_open_all_day_wed');
+oadwed.setAttribute("onclick", "validate_wed()");
+var cadwed = document.getElementById('facility_closed_all_day_wed');
+cadwed.setAttribute("onclick", "validate_wed()");
+
+var oadthurs = document.getElementById('facility_open_all_day_thurs');
+oadthurs.setAttribute("onclick", "validate_thurs()");
+var cadthurs = document.getElementById('facility_closed_all_day_thurs');
+cadthurs.setAttribute("onclick", "validate_thurs()");
+
+var oadfri = document.getElementById('facility_open_all_day_fri');
+oadfri.setAttribute("onclick", "validate_fri()");
+var cadfri = document.getElementById('facility_closed_all_day_fri');
+cadfri.setAttribute("onclick", "validate_fri()");
+
+var oadsat = document.getElementById('facility_open_all_day_sat');
+oadsat.setAttribute("onclick", "validate_sat()");
+var cadsat = document.getElementById('facility_closed_all_day_sat');
+cadsat.setAttribute("onclick", "validate_sat()");
+
+var oadsun = document.getElementById('facility_open_all_day_sun');
+oadsun.setAttribute("onclick", "validate_sun()");
+var cadsun= document.getElementById('facility_closed_all_day_sun');
+cadsun.setAttribute("onclick", "validate_sun()");
+
+//second_times
+var stmon = document.getElementById('facility_second_time_mon');
+stmon.setAttribute("onclick", "validate_mon()");
+
+var sttues = document.getElementById('facility_second_time_tues');
+sttues.setAttribute("onclick", "validate_tues()");
+
+var stwed = document.getElementById('facility_second_time_wed');
+stwed.setAttribute("onclick", "validate_wed()");
+
+var stthurs = document.getElementById('facility_second_time_thurs');
+stthurs.setAttribute("onclick", "validate_thurs()");
+
+var stfri = document.getElementById('facility_second_time_fri');
+stfri.setAttribute("onclick", "validate_fri()");
+
+var stsat = document.getElementById('facility_second_time_sat');
+stsat.setAttribute("onclick", "validate_sat()");
+
+var stsun = document.getElementById('facility_second_time_sun');
+stsun.setAttribute("onclick", "validate_sun()");
+
+//open or closed all day toggles
+function validate_mon(){
+
+  if(oadmon.checked && cadmon.checked && stmon.checked){
+    monhours.style.display = 'none';
+    monhours2.style.display = 'none';
+  }else if (oadmon.checked && cadmon.checked && !stmon.checked){
+    monhours.style.display = 'none';
+    monhours2.style.display = 'none';
+  }else if (oadmon.checked && !cadmon.checked && stmon.checked){
+    monhours.style.display = 'none';
+    monhours2.style.display = 'none';
+  }else if (oadmon.checked && !cadmon.checked && !stmon.checked){
+    monhours.style.display = 'none';
+    monhours2.style.display = 'none';
+  }else if (!oadmon.checked && cadmon.checked && stmon.checked){
+    monhours.style.display = 'none';
+    monhours2.style.display = 'none';
+  }else if (!oadmon.checked && cadmon.checked && !stmon.checked){
+    monhours.style.display = 'none';
+    monhours2.style.display = 'none';
+  }else if (!oadmon.checked && !cadmon.checked && stmon.checked){
+    monhours.style.display = 'block';
+    monhours2.style.display = 'block';
+  }else if (!oadmon.checked && !cadmon.checked && !stmon.checked){
+    monhours.style.display = 'block';
+    monhours2.style.display = 'none';
+  }
+}
+
+function validate_tues(){
+  if(oadtues.checked && cadtues.checked && sttues.checked){
+    tueshours.style.display = 'none';
+    tueshours2.style.display = 'none';
+  }else if (oadtues.checked && cadtues.checked && !sttues.checked){
+    tueshours.style.display = 'none';
+    tueshours2.style.display = 'none';
+  }else if (oadtues.checked && !cadtues.checked && sttues.checked){
+    tueshours.style.display = 'none';
+    tueshours2.style.display = 'none';
+  }else if (oadtues.checked && !cadtues.checked && !sttues.checked){
+    tueshours.style.display = 'none';
+    tueshours2.style.display = 'none';
+  }else if (!oadtues.checked && cadtues.checked && sttues.checked){
+    tueshours.style.display = 'none';
+    tueshours2.style.display = 'none';
+  }else if (!oadtues.checked && cadtues.checked && !sttues.checked){
+    tueshours.style.display = 'none';
+    tueshours2.style.display = 'none';
+  }else if (!oadtues.checked && !cadtues.checked && sttues.checked){
+    tueshours.style.display = 'block';
+    tueshours2.style.display = 'block';
+  }else if (!oadtues.checked && !cadtues.checked && !sttues.checked){
+    tueshours.style.display = 'block';
+    tueshours2.style.display = 'none';
+  }
+}
+
+function validate_wed(){
+  if(oadwed.checked && cadwed.checked && stwed.checked){
+    wedhours.style.display = 'none';
+    wedhours2.style.display = 'none';
+  }else if (oadwed.checked && cadwed.checked && !stwed.checked){
+    wedhours.style.display = 'none';
+    wedhours2.style.display = 'none';
+  }else if (oadwed.checked && !cadwed.checked && stwed.checked){
+    wedhours.style.display = 'none';
+    wedhours2.style.display = 'none';
+  }else if (oadwed.checked && !cadwed.checked && !stwed.checked){
+    wedhours.style.display = 'none';
+    wedhours2.style.display = 'none';
+  }else if (!oadwed.checked && cadwed.checked && stwed.checked){
+    wedhours.style.display = 'none';
+    wedhours2.style.display = 'none';
+  }else if (!oadwed.checked && cadwed.checked && !stwed.checked){
+    wedhours.style.display = 'none';
+    wedhours2.style.display = 'none';
+  }else if (!oadwed.checked && !cadwed.checked && stwed.checked){
+    wedhours.style.display = 'block';
+    wedhours2.style.display = 'block';
+  }else if (!oadwed.checked && !cadwed.checked && !stwed.checked){
+    wedhours.style.display = 'block';
+    wedhours2.style.display = 'none';
+  }
+}
+
+function validate_thurs(){
+  if(oadthurs.checked && cadthurs.checked && stthurs.checked){
+    thurshours.style.display = 'none';
+    thurshours2.style.display = 'none';
+  }else if (oadthurs.checked && cadthurs.checked && !stthurs.checked){
+    thurshours.style.display = 'none';
+    thurshours2.style.display = 'none';
+  }else if (oadthurs.checked && !cadthurs.checked && stthurs.checked){
+    thurshours.style.display = 'none';
+    thurshours2.style.display = 'none';
+  }else if (oadthurs.checked && !cadthurs.checked && !stthurs.checked){
+    thurshours.style.display = 'none';
+    thurshours2.style.display = 'none';
+  }else if (!oadthurs.checked && cadthurs.checked && stthurs.checked){
+    thurshours.style.display = 'none';
+    thurshours2.style.display = 'none';
+  }else if (!oadthurs.checked && cadthurs.checked && !stthurs.checked){
+    thurshours.style.display = 'none';
+    thurshours2.style.display = 'none';
+  }else if (!oadthurs.checked && !cadthurs.checked && stthurs.checked){
+    thurshours.style.display = 'block';
+    thurshours2.style.display = 'block';
+  }else if (!oadthurs.checked && !cadthurs.checked && !stthurs.checked){
+    thurshours.style.display = 'block';
+    thurshours2.style.display = 'none';
+  }
+}
+
+function validate_fri(){
+  if(oadfri.checked && cadfri.checked && stfri.checked){
+    frihours.style.display = 'none';
+    frihours2.style.display = 'none';
+  }else if (oadfri.checked && cadfri.checked && !stfri.checked){
+    frihours.style.display = 'none';
+    frihours2.style.display = 'none';
+  }else if (oadfri.checked && !cadfri.checked && stfri.checked){
+    frihours.style.display = 'none';
+    frihours2.style.display = 'none';
+  }else if (oadfri.checked && !cadfri.checked && !stfri.checked){
+    frihours.style.display = 'none';
+    frihours2.style.display = 'none';
+  }else if (!oadfri.checked && cadfri.checked && stfri.checked){
+    frihours.style.display = 'none';
+    frihours2.style.display = 'none';
+  }else if (!oadfri.checked && cadfri.checked && !stfri.checked){
+    frihours.style.display = 'none';
+    frihours2.style.display = 'none';
+  }else if (!oadfri.checked && !cadfri.checked && stfri.checked){
+    frihours.style.display = 'block';
+    frihours2.style.display = 'block';
+  }else if (!oadfri.checked && !cadfri.checked && !stfri.checked){
+    frihours.style.display = 'block';
+    frihours2.style.display = 'none';
+  }
+}
+
+function validate_sat(){
+  if(oadsat.checked && cadsat.checked && stsat.checked){
+    sathours.style.display = 'none';
+    sathours2.style.display = 'none';
+  }else if (oadsat.checked && cadsat.checked && !stsat.checked){
+    sathours.style.display = 'none';
+    sathours2.style.display = 'none';
+  }else if (oadsat.checked && !cadsat.checked && stsat.checked){
+    sathours.style.display = 'none';
+    sathours2.style.display = 'none';
+  }else if (oadsat.checked && !cadsat.checked && !stsat.checked){
+    sathours.style.display = 'none';
+    sathours2.style.display = 'none';
+  }else if (!oadsat.checked && cadsat.checked && stsat.checked){
+    sathours.style.display = 'none';
+    sathours2.style.display = 'none';
+  }else if (!oadsat.checked && cadsat.checked && !stsat.checked){
+    sathours.style.display = 'none';
+    sathours2.style.display = 'none';
+  }else if (!oadsat.checked && !cadsat.checked && stsat.checked){
+    sathours.style.display = 'block';
+    sathours2.style.display = 'block';
+  }else if (!oadsat.checked && !cadsat.checked && !stsat.checked){
+    sathours.style.display = 'block';
+    sathours2.style.display = 'none';
+  }
+}
+
+function validate_sun(){
+  if(oadsun.checked && cadsun.checked && stsun.checked){
+    sunhours.style.display = 'none';
+    sunhours2.style.display = 'none';
+  }else if (oadsun.checked && cadsun.checked && !stsun.checked){
+    sunhours.style.display = 'none';
+    sunhours2.style.display = 'none';
+  }else if (oadsun.checked && !cadsun.checked && stsun.checked){
+    sunhours.style.display = 'none';
+    sunhours2.style.display = 'none';
+  }else if (oadsun.checked && !cadsun.checked && !stsun.checked){
+    sunhours.style.display = 'none';
+    sunhours2.style.display = 'none';
+  }else if (!oadsun.checked && cadsun.checked && stsun.checked){
+    sunhours.style.display = 'none';
+    sunhours2.style.display = 'none';
+  }else if (!oadsun.checked && cadsun.checked && !stsun.checked){
+    sunhours.style.display = 'none';
+    sunhours2.style.display = 'none';
+  }else if (!oadsun.checked && !cadsun.checked && stsun.checked){
+    sunhours.style.display = 'block';
+    sunhours2.style.display = 'block';
+  }else if (!oadsun.checked && !cadsun.checked && !stsun.checked){
+    sunhours.style.display = 'block';
+    sunhours2.style.display = 'none';
+  }
+}
+
+</script>

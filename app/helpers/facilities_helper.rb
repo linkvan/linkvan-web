@@ -1,5 +1,103 @@
 module FacilitiesHelper
 
+	def display_mon_hours(facility)
+		if !facility.open_all_day_mon.nil? && facility.open_all_day_mon
+			content_tag(:h5, "OPEN", class: "food-colour")
+		elsif !facility.closed_all_day_mon.nil? && facility.closed_all_day_mon
+			content_tag(:h5, "CLOSED", class: "medical-colour")
+		elsif facility.closed_all_day_mon.nil? && facility.closed_all_day_mon.nil?
+			content_tag(:h5, "BOTH ARE NIL")
+		elsif facility.second_time_mon
+			content_tag(:h5, facility.startsmon_at.strftime("%I:%M%p") + " to " + facility.endsmon_at.strftime("%I:%M%p") + " and " + facility.startsmon_at2.strftime("%I:%M%p") + " to " + facility.endsmon_at2.strftime("%I:%M%p"))
+		else
+			content_tag(:h5, facility.startsmon_at.strftime("%I:%M%p") + " to " + facility.endsmon_at.strftime("%I:%M%p"))
+		end
+	end
+
+	def display_tues_hours(facility)
+		if !facility.open_all_day_tues.nil? && facility.open_all_day_tues
+			content_tag(:h5, "OPEN", class: "food-colour")
+		elsif !facility.closed_all_day_tues.nil? && facility.closed_all_day_tues
+			content_tag(:h5, "CLOSED", class: "medical-colour")
+		elsif facility.closed_all_day_tues.nil? && facility.closed_all_day_tues.nil?
+			content_tag(:h5, "BOTH ARE NIL")
+		elsif facility.second_time_tues
+			content_tag(:h5, facility.startstues_at.strftime("%I:%M%p") + " to " + facility.endstues_at.strftime("%I:%M%p") + " and " + facility.startstues_at2.strftime("%I:%M%p") + " to " + facility.endstues_at2.strftime("%I:%M%p"))
+		else
+			content_tag(:h5, facility.startstues_at.strftime("%I:%M%p") + " to " + facility.endstues_at.strftime("%I:%M%p"))
+		end
+	end
+
+	def display_wed_hours(facility)
+		if !facility.open_all_day_wed.nil? && facility.open_all_day_wed
+			content_tag(:h5, "OPEN", class: "food-colour")
+		elsif !facility.closed_all_day_wed.nil? && facility.closed_all_day_wed
+			content_tag(:h5, "CLOSED", class: "medical-colour")
+		elsif facility.closed_all_day_wed.nil? && facility.closed_all_day_wed.nil?
+			content_tag(:h5, "BOTH ARE NIL")
+		elsif facility.second_time_wed
+			content_tag(:h5, facility.startswed_at.strftime("%I:%M%p") + " to " + facility.endswed_at.strftime("%I:%M%p") + " and " + facility.startswed_at2.strftime("%I:%M%p") + " to " + facility.endswed_at2.strftime("%I:%M%p"))
+		else
+			content_tag(:h5, facility.startswed_at.strftime("%I:%M%p") + " to " + facility.endswed_at.strftime("%I:%M%p"))
+		end
+	end
+
+	def display_thurs_hours(facility)
+		if !facility.open_all_day_thurs.nil? && facility.open_all_day_thurs
+			content_tag(:h5, "OPEN", class: "food-colour")
+		elsif !facility.closed_all_day_thurs.nil? && facility.closed_all_day_thurs
+			content_tag(:h5, "CLOSED", class: "medical-colour")
+		elsif facility.closed_all_day_thurs.nil? && facility.closed_all_day_thurs.nil?
+			content_tag(:h5, "BOTH ARE NIL")
+		elsif facility.second_time_thurs
+			content_tag(:h5, facility.startsthurs_at.strftime("%I:%M%p") + " to " + facility.endsthurs_at.strftime("%I:%M%p") + " and " + facility.startsthurs_at2.strftime("%I:%M%p") + " to " + facility.endsthurs_at2.strftime("%I:%M%p"))
+		else
+			content_tag(:h5, facility.startsthurs_at.strftime("%I:%M%p") + " to " + facility.endsthurs_at.strftime("%I:%M%p"))
+		end
+	end
+
+	def display_fri_hours(facility)
+		if !facility.open_all_day_fri.nil? && facility.open_all_day_fri
+			content_tag(:h5, "OPEN", class: "food-colour")
+		elsif !facility.closed_all_day_fri.nil? && facility.closed_all_day_fri
+			content_tag(:h5, "CLOSED", class: "medical-colour")
+		elsif facility.closed_all_day_fri.nil? && facility.closed_all_day_fri.nil?
+			content_tag(:h5, "BOTH ARE NIL")
+		elsif facility.second_time_fri
+			content_tag(:h5, facility.startsfri_at.strftime("%I:%M%p") + " to " + facility.endsfri_at.strftime("%I:%M%p") + " and " + facility.startsfri_at2.strftime("%I:%M%p") + " to " + facility.endsfri_at2.strftime("%I:%M%p"))
+		else
+			content_tag(:h5, facility.startsfri_at.strftime("%I:%M%p") + " to " + facility.endsfri_at.strftime("%I:%M%p"))
+		end
+	end
+
+	def display_sat_hours(facility)
+		if !facility.open_all_day_sat.nil? && facility.open_all_day_sat
+			content_tag(:h5, "OPEN", class: "food-colour")
+		elsif !facility.closed_all_day_sat.nil? && facility.closed_all_day_sat
+			content_tag(:h5, "CLOSED", class: "medical-colour")
+		elsif facility.closed_all_day_sat.nil? && facility.closed_all_day_sat.nil?
+			content_tag(:h5, "BOTH ARE NIL")
+		elsif facility.second_time_sat
+			content_tag(:h5, facility.startssat_at.strftime("%I:%M%p") + " to " + facility.endssat_at.strftime("%I:%M%p") + " and " + facility.startssat_at2.strftime("%I:%M%p") + " to " + facility.endssat_at2.strftime("%I:%M%p"))
+		else
+			content_tag(:h5, facility.startssat_at.strftime("%I:%M%p") + " to " + facility.endssat_at.strftime("%I:%M%p"))
+		end
+	end
+
+	def display_sun_hours(facility)
+		if !facility.open_all_day_sun.nil? && facility.open_all_day_sun
+			content_tag(:h5, "OPEN", class: "food-colour")
+		elsif !facility.closed_all_day_sun.nil? && facility.closed_all_day_sun
+			content_tag(:h5, "CLOSED", class: "medical-colour")
+		elsif facility.closed_all_day_sun.nil? && facility.closed_all_day_sun.nil?
+			content_tag(:h5, "BOTH ARE NIL")
+		elsif facility.second_time_sun
+			content_tag(:h5, facility.startssun_at.strftime("%I:%M%p") + " to " + facility.endssun_at.strftime("%I:%M%p") + " and " + facility.startssun_at2.strftime("%I:%M%p") + " to " + facility.endssun_at2.strftime("%I:%M%p"))
+		else
+			content_tag(:h5, facility.startssun_at.strftime("%I:%M%p") + " to " + facility.endssun_at.strftime("%I:%M%p"))
+		end
+	end
+
 	def display_services(services_str)
 		content_arr = ""
 		services_arr = services_str.split(" ")
@@ -103,8 +201,4 @@ module FacilitiesHelper
 		end
 
 	end
-
-	#def display_distance(fac)
-
-	#end
 end
