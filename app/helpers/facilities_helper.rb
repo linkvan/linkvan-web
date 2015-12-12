@@ -199,6 +199,21 @@ module FacilitiesHelper
 				content_tag(:h5, "Wi-Fi IS NOT available")
 			end
 		end
-
 	end
+
+
+	def format_tel(tel)
+		if (tel[0] == "+")
+			return tel.gsub("+1", "")
+		else
+			if (tel[0] != "1")
+				tel.prepend("+1")
+			end
+			return tel.delete('-').gsub(/\s+/, "")
+		end
+		
+	end
+
+
+
 end

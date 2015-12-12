@@ -20,10 +20,10 @@
   <p><%=@facility.address %></p>
 </div>
 
-
-  <div class="inset-call">
-    <p><strong>Call: </strong> <%=@facility.phone %></p>
-  </div> <!--ends inset-call -->
+<div class="inset-call">
+  <!--<strong>Call:</strong> <a href="tel:+17788853580">778-885-3580</a>-->
+  <strong>Call:</strong> <a href="tel:<%=format_tel(@facility.phone) %>"><%=format_tel(@facility.phone) %></a>
+</div> <!--ends inset-call -->
 
 <!--max=71-->
 <div class="inset-website">
