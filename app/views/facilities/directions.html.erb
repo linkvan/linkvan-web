@@ -24,6 +24,14 @@
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 <script>
+//Landmarks: Woodwards, Carnegie Centre, The 44 (Evelyne Saller), Oppenheimer Park, RayCam
+//Woodwards: 49.2825437,-123.1085684
+//Carnegie Centre: 49.280966,-123.099672
+//The 44 (Evelyne Saller): 49.283799,-123.096927
+//Oppenheimer Park: 49.2827075,-123.0954157
+//RayCam: 49.281415,-123.083726
+//'https://www.google.com/support/enterprise/static/geo/cdate/art/dots/blue_dot.png'
+
 var jsevent = $('.temp_information').data('jsevent');
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
@@ -32,76 +40,24 @@ var flong = jsevent.long;
 var ulat = $('.temp_information').data('jsulat');
 var ulong = $('.temp_information').data('jsulong');
 var map, tlat, tlong, start, end;
-var markerSize = { x: 22, y: 40 };
 var woodwards = new google.maps.LatLng(49.2825437, -123.1085684);
-var carnegie = new google.maps.LatLng(49.2811284, -123.102335);
-var saller = new google.maps.LatLng(49.2838568, -123.0990305);
-var oppenheimer = new google.maps.LatLng(49.282711, -123.0965074);
-var raycam = new google.maps.LatLng(49.2813845, -123.0857777);
+var carnegie = new google.maps.LatLng(49.280966, -123.099672);
+var saller = new google.maps.LatLng(49.283799, -123.096927);
+var oppenheimer = new google.maps.LatLng(49.2827075, -123.0954157);
+var raycam = new google.maps.LatLng(49.281415, -123.083726);
 var landmark = 'https://linkvan.herokuapp.com/assets/blue_dot-389fca422ef93e351134817e9c5b67d4.png';
-var woodwardslandmark = 'https://linkvan.herokuapp.com/assets/woodward_marker-81ea1df1e2bd4a8353c9d044e50b3de8.png';
-var carnegielandmark = 'https://linkvan.herokuapp.com/assets/carnegie_marker-27457298c67b670cf9857559b43bf413.png';
-var sallerlandmark = 'https://linkvan.herokuapp.com/assets/saller_marker-511dd0e510428265735d33cb891e350b.png';
-var oppenheimerlandmark = 'https://linkvan.herokuapp.com/assets/oppenheimer_marker-5e11cdf91a22cc2ba7f90264da1ebd52.png';
-var raycamlandmark = 'https://linkvan.herokuapp.com/assets/raycam_marker-fe9a8c6b226bcdeaefba4413db862d05.png';
+var woodwardslandmark = 'https://linkvan.herokuapp.com/assets/woodward_marker-1496bd72f1b6cfe8285091f21f445279.png';
+var carnegielandmark = 'https://linkvan.herokuapp.com/assets/carnegie_marker-d0cc46c1b6eaf99e478071e993a3a256.png';
+var sallerlandmark = 'https://linkvan.herokuapp.com/assets/saller_marker-3b815fb050847f188c99866ab696f1a8.png';
+var oppenheimerlandmark = 'https://linkvan.herokuapp.com/assets/oppenheimer_marker-2f34ab471c89ca261f7d9949312e342d.png';
+var raycamlandmark = 'https://linkvan.herokuapp.com/assets/raycam_marker-3a80591adfb60c88a00f6eea0ac5bd2e.png';
 
-var woodwardsmarker;
-
-//Landmarks: Woodwards, Carnegie Centre, The 44 (Evelyne Saller), Oppenheimer Park, RayCam
-//Woodwards: 49.2825437,-123.1085684
-//Carnegie Centre: 49.2811284,-123.102335
-//The 44 (Evelyne Saller): 49.2838568,-123.0990305
-//Oppenheimer Park: 49.282711,-123.0965074
-//RayCam: 49.2813845,-123.0857777
-//'https://www.google.com/support/enterprise/static/geo/cdate/art/dots/blue_dot.png'
-
-google.maps.Marker.prototype.setLabel = function(label){
-        this.label = new MarkerLabel({
-          map: this.map,
-          marker: this,
-          text: label
-        });
-        this.label.bindTo('position', this, 'position');
-    };
-
-    var MarkerLabel = function(options) {
-        this.setValues(options);
-        this.span = document.createElement('span');
-        this.span.id = 'map-marker-label';
-    };
-
-    MarkerLabel.prototype = $.extend(new google.maps.OverlayView(), {
-        onAdd: function() {
-            this.getPanes().overlayImage.appendChild(this.span);
-            var self = this;
-            this.listeners = [
-            google.maps.event.addListener(this, 'position_changed', function() { self.draw();    })];
-        },
-        draw: function() {
-            var text = String(this.get('text'));
-            var position = this.getProjection().fromLatLngToDivPixel(this.get('position'));
-            this.span.innerHTML = text;
-            this.span.style.left = (position.x - (markerSize.x / 2)) - (text.length * 3) + 14 + 'px';
-            this.span.style.top = (position.y - markerSize.y + 35) + 'px';
-        }
-    });
-
-
-
-
-
-
-
-
-
-
+var woodwardsmarker, carnegiemarker, sallermarker, oppenheimermarker, raycammarker;
 
 function initialize() {
   directionsDisplay = new google.maps.DirectionsRenderer();
   start = new google.maps.LatLng(ulat, ulong);
   end = new google.maps.LatLng(flat, flong);
-
-  
 
   var mapOptions = {
     zoom:10,
@@ -115,49 +71,41 @@ function initialize() {
     icon: woodwardslandmark,
   });
 
-/*
-  var carnegiemarker = new google.maps.Marker({
+
+  carnegiemarker = new google.maps.Marker({
     position: carnegie,
     map: map,
-    icon: landmark,
-    label: 'Carnegie'
+    icon: carnegielandmark,
   });
 
-  var sallermarker = new google.maps.Marker({
+  sallermarker = new google.maps.Marker({
     position: saller,
     map: map,
-    icon: landmark,
-    label: 'The 44'
+    icon: sallerlandmark,
   });
 
-  var oppenheimermarker = new google.maps.Marker({
+  oppenheimermarker = new google.maps.Marker({
     position: oppenheimer,
     map: map,
-    icon: landmark,
-    label: 'Oppenheimer'
+    icon: oppenheimerlandmark,
   });
 
-  var raycammarker = new google.maps.Marker({
+  raycammarker = new google.maps.Marker({
     position: raycam,
     map: map,
-    icon: landmark,
-    label: 'RayCam'
-  }); */
+    icon: raycamlandmark,
+  });
 
   directionsDisplay.setMap(map);
-
-
 
 }//ends initialize
 
 function calcRoute() {
+  var zoom = map.getZoom(); 
   selectedMode = document.getElementById('mode').value;
   var request = {
       origin: start,
       destination: end,
-      // Note that Javascript allows us to access the constant
-      // using square brackets and a string value as its
-      // "property."
       travelMode: google.maps.TravelMode[selectedMode]
   };
   directionsService.route(request, function(response, status) {
@@ -165,54 +113,52 @@ function calcRoute() {
       directionsDisplay.setDirections(response);
     }
   });
-}
 
+  if (zoom <= 14) {
+      woodwardsmarker.setMap(null);
+      carnegiemarker.setMap(null);
+      sallermarker.setMap(null);
+      oppenheimermarker.setMap(null);
+      raycammarker.setMap(null);
+  } else {
+      woodwardsmarker.setMap(map);
+      carnegiemarker.setMap(map);
+      sallermarker.setMap(map);
+      oppenheimermarker.setMap(map);
+      raycammarker.setMap(map);
+
+  }
+}
 
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
 //click listener needed for map to appear
 //google.maps.event.addDomListener(window, 'click', initialize);
-
-
 //google.maps.event.clearListeners(window, 'click');
 //clear click listener right after click
 
 google.maps.event.addDomListener(window, 'load', calcRoute);
-//setTimeout(function(){
-//}, 800); //ends timer
 
-
-
-
-/*
 setTimeout(function(){
   google.maps.event.addListener(map, 'zoom_changed', function() {
     var zoom = map.getZoom(); //fully zoomed out = 0
     //var x = document.getElementById("map-marker-label")
     //alert(x.innerHTML);
     if (zoom <= 14) {
-     // x.innerHTML = " ";
       woodwardsmarker.setMap(null);
+      carnegiemarker.setMap(null);
+      sallermarker.setMap(null);
+      oppenheimermarker.setMap(null);
+      raycammarker.setMap(null);
     } else {
-      //x.innerHTML = "Woodwards";
-      woodwardsmarker.setMap(map); 
-    }
+      woodwardsmarker.setMap(map);
+      carnegiemarker.setMap(map);
+      sallermarker.setMap(map);
+      oppenheimermarker.setMap(map);
+      raycammarker.setMap(map);
+  }
 });
-}, 3000); */
-
-
-
+}, 2000);
 
 </script>
-
-<style>
-    .map-marker-label{
-      position: absolute;
-      color: #8b0000;
-      font-size: 9px;
-      font-weight: bold;
-    }
-
-
-</style>
