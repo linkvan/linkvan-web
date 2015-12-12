@@ -39,7 +39,13 @@ var saller = new google.maps.LatLng(49.2838568, -123.0990305);
 var oppenheimer = new google.maps.LatLng(49.282711, -123.0965074);
 var raycam = new google.maps.LatLng(49.2813845, -123.0857777);
 var landmark = 'https://linkvan.herokuapp.com/assets/blue_dot-389fca422ef93e351134817e9c5b67d4.png';
- var woodwardsmarker;
+var woodwardslandmark = 'https://linkvan.herokuapp.com/assets/woodward_marker-81ea1df1e2bd4a8353c9d044e50b3de8.png';
+var carnegielandmark = 'https://linkvan.herokuapp.com/assets/carnegie_marker-27457298c67b670cf9857559b43bf413.png';
+var sallerlandmark = 'https://linkvan.herokuapp.com/assets/saller_marker-511dd0e510428265735d33cb891e350b.png';
+var oppenheimerlandmark = 'https://linkvan.herokuapp.com/assets/oppenheimer_marker-5e11cdf91a22cc2ba7f90264da1ebd52.png';
+var raycamlandmark = 'https://linkvan.herokuapp.com/assets/raycam_marker-fe9a8c6b226bcdeaefba4413db862d05.png';
+
+var woodwardsmarker;
 
 //Landmarks: Woodwards, Carnegie Centre, The 44 (Evelyne Saller), Oppenheimer Park, RayCam
 //Woodwards: 49.2825437,-123.1085684
@@ -106,7 +112,7 @@ function initialize() {
   woodwardsmarker = new google.maps.Marker({
     position: woodwards,
     map: map,
-    icon: landmark,
+    icon: woodwardslandmark,
   });
 
 /*
