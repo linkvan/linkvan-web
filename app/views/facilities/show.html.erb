@@ -25,8 +25,9 @@
     <p><strong>Call: </strong> <%=@facility.phone %></p>
   </div> <!--ends inset-call -->
 
+<!--max=71-->
 <div class="inset-website">
-  <p><strong>Website: </strong> <%= link_to @facility.website, "http://" + @facility.website  %></p>
+  <p><strong>Website: </strong> <%= link_to truncate(@facility.website, length: 33), "http://" + @facility.website  %></p>
 </div>
 
 <div id="inset-directions">

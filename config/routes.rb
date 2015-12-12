@@ -12,6 +12,7 @@ Linkvan::Application.routes.draw do
   get 'crisis', to: 'crisis#index'
   get 'disclaimer', to: 'disclaimer#index'
   get 'about', to: 'about#index'
+  get 'images', to: 'images#index'
   root 'facilities#index'
   resources :facilities
 
