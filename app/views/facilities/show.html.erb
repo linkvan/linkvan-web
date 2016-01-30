@@ -111,7 +111,9 @@
 
 <% if correct_user_or_admin? %>
   <%= link_to "Edit", edit_facility_path%>
-  <%= link_to "Delete", @facility, method: :delete, data: {confirm: 'Are you sure?'}%>
+  <% if current_user_admin? %>
+    <%= link_to "Delete", @facility, method: :delete, data: {confirm: 'Are you sure?'}%>
+  <% end %>
 <% end %>
 </div>
 
