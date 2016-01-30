@@ -214,6 +214,20 @@ module FacilitiesHelper
 		
 	end
 
+	def correct_user_or_admin?
+
+  		if current_user.admin?
+  			return true
+  		else
+  			current_user.facilities.each do |f|
+  				if f.id == Facility.find(params[:id]).id
+  					return true
+  				end
+  			end
+  			return false
+  		end
+  	end
+
 
 
 end
