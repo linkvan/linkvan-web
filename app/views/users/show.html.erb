@@ -12,17 +12,12 @@
 <% @imps = Array.new %>
 <% @facilitynames = Array.new %>
 
-
+<!--if @user.facilities.count > 0-->
 <% if @user.facilities.count > 0 %>
   <div class="administered">
     <h4><%= pluralize(@user.facilities.count, 'Facility') %> Available to Edit</h4>
     <ul>
-      <% @user.facilities.each do |f| %>
-        <li><%= link_to f.name, edit_facility_path(f.id) %>  (Monthly View Count: <%= Impression.where(impressionable_id: f.id).count %>)</li>
-
-      <% @imps.concat(Impression.where(impressionable_id: f.id)) %>
-      <% @facilitynames.push(@imps.last.message) %>
-      <% end %>
+      <h4>TEST</h4>
     </ul>
   </div>
 
