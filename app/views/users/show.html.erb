@@ -21,7 +21,7 @@
         <li><%= link_to f.name, edit_facility_path(f.id) %>  (Monthly View Count: <%= Impression.where(impressionable_id: f.id).count %>)</li>
 
       <% @imps.concat(Impression.where(impressionable_id: f.id)) %>
-     
+      <% @facilitynames.push(@imps.last.message) %>
       <% end %>
     </ul>
   </div>
