@@ -17,7 +17,9 @@
   <div class="administered">
     <h4><%= pluralize(@user.facilities.count, 'Facility') %> Available to Edit</h4>
     <ul>
-      <h4>TEST</h4>
+      <% @user.facilities.each do |f| %>
+        
+      <% end %>
     </ul>
   </div>
 
