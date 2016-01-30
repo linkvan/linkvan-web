@@ -2,9 +2,11 @@ require 'bigdecimal'
 require 'bigdecimal/util'
 
 class Facility < ActiveRecord::Base
-
+	belongs_to :user
 	validates :name, :lat, :long, :services, presence: true
 
+	is_impressionable
+	
 	def self.search(search)
 		#where("name ILIKE ?", "%#{search}%") for production
   	where("name ILIKE ?", "%#{search}%")

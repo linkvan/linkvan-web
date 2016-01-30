@@ -109,7 +109,7 @@
 </div>
 
 
-<% if current_user %>
+<% if correct_user_or_admin? %>
   <%= link_to "Edit", edit_facility_path%>
   <%= link_to "Delete", @facility, method: :delete, data: {confirm: 'Are you sure?'}%>
 <% end %>

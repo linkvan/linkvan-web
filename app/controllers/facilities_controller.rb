@@ -1,5 +1,6 @@
 class FacilitiesController < ApplicationController
   before_action :require_signin, only: [:edit, :update, :new, :create, :destroy]
+  #use impressionist to log views to display on user show page
 
   def index
     @facilities = Facility.all
@@ -154,6 +155,7 @@ class FacilitiesController < ApplicationController
 
 	def show
 		@facility = Facility.find(params[:id])
+    impressionist(@facility, @facility.name)
 	end
 
 	def edit

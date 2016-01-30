@@ -12,16 +12,23 @@
     <!-- <strong>Volunteer Note:</strong> New category added - Advocacy</br> -->
     <br>
     <br>
-    <% if current_user %>
-        Welcome back, <%= current_user.name %>!<br>
+
+    <% if current_user_admin? %>
         <%= link_to "Add New Facility", new_facility_path %><br>
+    <%end%>
+
+    <% if current_user %>
+        Welcome back, <%= link_to current_user.name, current_user %>!<br>
+        
         <%= link_to "Sign Out", session_path, method: :delete %>
     <%else%>
-        <%= link_to "Admin Sign In", new_session_path %>
+        <%= link_to 'Sign In', signin_path%>
 				|
 				<%= link_to "Disclaimer", disclaimer_path %>
 				|
 				<%= link_to "About Us", about_path%>
+                |
+                <%= link_to 'Sign Up', signup_path%>
     <%end%>
 </div>
 

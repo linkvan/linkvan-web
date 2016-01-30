@@ -1,3 +1,48 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile{
+	margin-top: 49px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 650px;
+	width:90%;
+
+	.administered{
+		display: table;
+		text-align: left;
+	}
+
+	ul{
+		list-style-type: none;
+		padding-left: 15px;
+		text-align: left;
+	}
+	
+	h1{
+		text-align: left;
+	}
+
+	h4{
+		text-align: left;
+		margin-top: 0;
+		margin-bottom: 5px;
+	}
+
+	#filter_div, #chart_div, footer{
+		display: table;
+		margin: 0 auto;
+	}
+
+	#dashboard_div, #day_of_week_div, #time_of_day_div{
+		float: left;
+	}
+
+	.report{
+		h1{
+			text-align: left;
+		}
+	}
+}
+

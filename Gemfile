@@ -54,6 +54,10 @@ gem 'rspec', '>= 3'
 
 gem 'icomoon-rails'
 
+gem 'impressionist'
+
+gem 'mail'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

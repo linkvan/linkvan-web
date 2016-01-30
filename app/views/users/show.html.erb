@@ -1,0 +1,499 @@
+<%= render 'facilities/nav' %>
+<div class="profile">
+
+  <h1><%= @user.name %></h1>
+  <h4><%= mail_to(@user.email) %></h4>
+
+<h4>Registered Since <%= @user.created_at.strftime("%B %Y") %></h4>
+
+<br>
+
+
+<% @imps = Array.new %>
+<% @facilitynames = Array.new %>
+
+
+<% if @user.facilities.count > 0 %>
+  <div class="administered">
+    <h4><%= pluralize(@user.facilities.count, 'Facility') %> Available to Edit</h4>
+    <ul>
+      <% @user.facilities.each do |f| %>
+        <li><%= link_to f.name, edit_facility_path(f.id) %>  (Monthly View Count: <%= Impression.where(impressionable_id: f.id).count %>)</li>
+
+      <% @imps.concat(Impression.where(impressionable_id: f.id)) %>
+      <% @facilitynames.push(@imps.last.message) %>
+      <% end %>
+    </ul>
+  </div>
+
+
+<br>
+<div class="report">
+ <!--Div that will hold the dashboard-->
+  <h4>Reports</h4>
+    <div id="dashboard_div">
+      <!--Divs that will hold each control and chart-->
+      
+      <div id="chart_div"></div>
+      <div id="filter_div"></div>
+    </div>
+
+
+    <div id="day_of_week_div"></div>
+
+    <div id="time_of_day_div"></div>
+</div>
+<%else%>
+  <h4>Step 2. Please fill out the form below and a member of the LinkVan team will get in touch with you to confirm your registration.</h4>
+
+
+<%end%>
+
+<br>
+
+
+
+<footer>
+
+    <%= link_to 'Edit Account', edit_user_path(@user), class: 'button' %>
+    |
+    <%= link_to 'Delete Account', @user,
+                method: :delete,
+                data: { confirm: 'Are you sure you want to permanently delete your account?' }%>
+
+</footer>
+
+</div>
+
+<%= content_tag :div, class: "temp_information", data: {facilitynames: @facilitynames, imps: @imps} do %>
+<% end %>
+
+  <!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+
+
+var facilitynames = $('.temp_information').data('facilitynames');
+var imps = $('.temp_information').data('imps');
+
+function dateMinus(date, type, amount){
+    var y = date.getFullYear(),
+        m = date.getMonth(),
+        d = date.getDate();
+    if(type === 'y'){
+        y -= amount;
+    };
+    if(type === 'm'){
+        m -= amount;
+    };
+    if(type === 'd'){
+        d -= amount;
+    };
+    return new Date(y, m, d);
+}
+
+function dateAdd(date, type, amount){
+    var y = date.getFullYear(),
+        m = date.getMonth(),
+        d = date.getDate();
+    if(type === 'y'){
+        y += amount;
+    };
+    if(type === 'm'){
+        m += amount;
+    };
+    if(type === 'd'){
+        d += amount;
+    };
+    return new Date(y, m, d);
+}
+
+function compareDates(date1, date2){
+  if ((date1.getFullYear() == date2.getFullYear()) && (date1.getMonth() == date2.getMonth()) && (date1.getDate() == date2.getDate())){
+    return true;
+  }else{
+    return false;
+  }
+}
+
+
+function initializeRow(rowNum){
+  masterData.push([new Date(minDate.toString())]);
+
+  for(var i=0; i<facilitynames.length; i++){
+    masterData[rowNum].push(0);
+  }
+}
+
+function incHour(hour, k){
+  masterDataTimeOfDay[hour+1, k+1]++;
+}
+
+var maxDaysAgo = 30;
+var minDate = dateMinus(new Date(), 'd', maxDaysAgo);
+var masterData = [];
+var masterDataDayOfWeek = [];
+var masterDataTimeOfDay = [];
+//initialize first row of masterData
+var firstRow = ["Date"];
+var firstRowDayOfWeek = ["Day of Week"];
+var firstRowTimeOfDay = ["Time of Day"];
+
+for(var i=0; i<facilitynames.length; i++){
+  firstRow.push(facilitynames[i]);
+  firstRowDayOfWeek.push(facilitynames[i]);
+  firstRowTimeOfDay.push(facilitynames[i]);
+}
+masterData.push(firstRow);
+masterDataDayOfWeek.push(firstRowDayOfWeek);
+masterDataTimeOfDay.push(firstRowTimeOfDay);
+
+//build masterData for first report
+/* output:
+[['Date',         'FacName1', 'FacName2', ...],
+  ['Jan 1, 2016',  0,          20],
+  ['Jan 2, 2016',  25,         46],
+  ['Jan 3, 2016',  3,          5],
+  ['Jan 4, 2016',  10,         4],
+  ...] */
+for(var i=0; i<=maxDaysAgo; i++){
+  initializeRow(i+1);
+  for(var j=0; j<imps.length; j++){
+    if (compareDates(minDate, new Date(imps[j].created_at))){
+      for(var k=0; k<facilitynames.length; k++){
+        if (imps[j].message == facilitynames[k]){
+          masterData[i+1][k+1]++;
+        }
+      }
+    }
+  }
+  minDate = dateAdd(minDate, 'd', 1);
+}
+
+
+//build masterDataDayOfWeek for 2nd report
+/* output:
+[['Day of Week', 'FacName1', 'FacName2', ...],
+  [Mon,        ,  0,          5],
+  [Tues,       ,  4,          15],
+  ...] */
+
+masterDataDayOfWeek.push(["Mon"]);
+masterDataDayOfWeek.push(["Tues"]);
+masterDataDayOfWeek.push(["Wed"]);
+masterDataDayOfWeek.push(["Thurs"]);
+masterDataDayOfWeek.push(["Fri"]);
+masterDataDayOfWeek.push(["Sat"]);
+masterDataDayOfWeek.push(["Sun"]);
+
+
+for(var i=0; i<7; i++){
+  for(var j=0; j<facilitynames.length; j++){
+    masterDataDayOfWeek[i+1].push(0);
+  }
+}
+
+
+for(var j=0; j<imps.length; j++){
+  for(var k=0; k<facilitynames.length; k++){
+  switch (new Date(imps[j].created_at).getDay()) {
+    case 0:
+        //Sunday
+        if (imps[j].message == facilitynames[k]){
+          masterDataDayOfWeek[7][k+1]++;
+        }
+        break;
+    case 1:
+        //Monday
+        if (imps[j].message == facilitynames[k]){
+          masterDataDayOfWeek[1][k+1]++;
+        }
+        break;
+    case 2:
+        //Tuesday
+        if (imps[j].message == facilitynames[k]){
+          masterDataDayOfWeek[2][k+1]++;
+        }
+        break;
+    case 3:
+        //Wednesday
+        if (imps[j].message == facilitynames[k]){
+          masterDataDayOfWeek[3][k+1]++;
+        }
+        break;
+    case 4:
+        //Thursday
+        if (imps[j].message == facilitynames[k]){
+          masterDataDayOfWeek[4][k+1]++;
+        }
+        break;
+    case 5:
+        //Friday
+        if (imps[j].message == facilitynames[k]){
+          masterDataDayOfWeek[5][k+1]++;
+        }
+        break;
+    case 6:
+        //Saturday
+        if (imps[j].message == facilitynames[k]){
+          masterDataDayOfWeek[6][k+1]++;
+        }
+        break;
+  }
+}
+}
+
+//build masterTimeOfDay for 3rd report
+/* output:
+[['Time Of Day', 'FacName1', 'FacName2', ...],
+  [00,        ,   0,          5],
+  [01,       ,    4,          15],
+  ...] */
+
+    //console.log(new Date(imps[2].created_at));
+    //console.log(Number(new Date(imps[2].created_at).toString().substring(16, 18)));
+    
+masterDataTimeOfDay.push(["12am-1am"]);
+masterDataTimeOfDay.push(["1am-2am"]);
+masterDataTimeOfDay.push(["2am-3am"]);
+masterDataTimeOfDay.push(["3am-4am"]);
+masterDataTimeOfDay.push(["4am-5am"]);
+masterDataTimeOfDay.push(["5am-6am"]);
+masterDataTimeOfDay.push(["6am-7am"]);
+masterDataTimeOfDay.push(["7am-8am"]);
+masterDataTimeOfDay.push(["8am-9am"]);
+masterDataTimeOfDay.push(["9am-10am"]);
+masterDataTimeOfDay.push(["10am-11am"]);
+masterDataTimeOfDay.push(["11am-12pm"]);
+masterDataTimeOfDay.push(["12pm-1pm"]);
+masterDataTimeOfDay.push(["1pm-2pm"]);
+masterDataTimeOfDay.push(["2pm-3pm"]);
+masterDataTimeOfDay.push(["3pm-4pm"]);
+masterDataTimeOfDay.push(["4pm-5pm"]);
+masterDataTimeOfDay.push(["5pm-6pm"]);
+masterDataTimeOfDay.push(["6pm-7pm"]);
+masterDataTimeOfDay.push(["7pm-8pm"]);
+masterDataTimeOfDay.push(["8pm-9pm"]);
+masterDataTimeOfDay.push(["9pm-10pm"]);
+masterDataTimeOfDay.push(["10pm-11pm"]);
+masterDataTimeOfDay.push(["11pm-12am"]);
+
+
+
+for(var i=0; i<24; i++){
+  for(var j=0; j<facilitynames.length; j++){
+    masterDataTimeOfDay[i+1].push(0);
+  }
+}
+
+
+for(var j=0; j<imps.length; j++){
+  for(var k=0; k<facilitynames.length; k++){
+    var test = new Date(imps[j].created_at).toString().substring(16, 18);
+    console.log(test)
+  switch (Number(new Date(imps[j].created_at).toString().substring(16, 18))){
+    case 0:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[1][k+1]++;
+        }
+        break;
+    case 1:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[2][k+1]++;
+        }
+        break;
+    case 2:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[3][k+1]++;
+        }
+        break;
+    case 3:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[4][k+1]++;
+        }
+        break;
+    case 4:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[5][k+1]++;
+        }
+        break;
+    case 5:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[6][k+1]++;
+        }
+        break;
+    case 6:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[7][k+1]++;
+        }
+        break;
+    case 7:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[8][k+1]++;
+        }
+        break;
+    case 8:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[9][k+1]++;
+        }
+        break;
+    case 9:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[10][k+1]++;
+        }
+        break;
+    case 10:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[11][k+1]++;
+        }
+        break;
+    case 11:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[12][k+1]++;
+        }
+        break;
+    case 12:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[13][k+1]++;
+        }
+        break;
+    case 13:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[14][k+1]++;
+        }
+        break;
+    case 14:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[15][k+1]++;
+        }
+        break;
+    case 15:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[16][k+1]++;
+        }
+        break;
+    case 16:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[17][k+1]++;
+        }
+        break;
+    case 17:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[18][k+1]++;
+        }
+        break;
+    case 19:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[20][k+1]++;
+        }
+        break;
+    case 20:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[21][k+1]++;
+        }
+        break;
+    case 21:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[22][k+1]++;
+        }
+        break;
+    case 22:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[23][k+1]++;
+        }
+        break;
+    case 23:
+        if (imps[j].message == facilitynames[k]){
+          masterDataTimeOfDay[24][k+1]++;
+        }
+        break;
+  }
+  }
+}
+
+      // Load the Visualization API and the controls package.
+      google.load('visualization', '1.0', {'packages':['controls', 'corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawDashboard);
+      
+
+      // Callback that creates and populates a data table,
+      // instantiates a dashboard, a range slider and a pie chart,
+      // passes in the data and draws it.
+
+
+      function drawDashboard() {
+
+        var data = new google.visualization.arrayToDataTable(masterData);
+        var dataDayOfWeek = new google.visualization.arrayToDataTable(masterDataDayOfWeek);
+        var dataTimeOfDay = new google.visualization.arrayToDataTable(masterDataTimeOfDay);
+        
+
+        // Create a dashboard.
+        var dashboard = new google.visualization.Dashboard(
+            document.getElementById('dashboard_div'));
+
+        var chartDayOfWeek = new google.visualization.ColumnChart(document.getElementById('day_of_week_div'));
+
+        var chartTimeOfDay = new google.visualization.BarChart(document.getElementById('time_of_day_div'));
+
+
+        // Create a range slider, passing some options
+        var dateRangeSlider = new google.visualization.ControlWrapper({
+          'controlType': 'DateRangeFilter',
+          'containerId': 'filter_div',
+          'options': {
+            'filterColumnIndex': '0',
+            'filterColumnLabel': 'Date'
+          }
+        });
+
+        var optionsDayOfWeek = {
+          title: 'Number of Views per Day of Week',
+          curveType: 'linear',
+          legend: { position: 'right' },
+          'width': 650,
+          'height': 402
+        };
+
+        var optionsTimeOfDay = {
+          title: 'Number of Views per Time of Day',
+          curveType: 'linear',
+          legend: { position: 'right' },
+          'width': 650,
+          'height': 800
+        };
+
+        // Create a pie chart, passing some options
+        var lineChart = new google.visualization.ChartWrapper({
+          'chartType': 'LineChart',
+          'containerId': 'chart_div', 
+          'options': {
+            'title' : 'Number of Views per Day',
+            'width': 650,
+            'height': 402,
+            'legend': 'right',
+            'animation':{
+              'duration': 1000,
+              'easing': 'out',
+              'startup': true
+            },
+          }
+        });
+
+        
+
+        // Establish dependencies, declaring that 'filter' drives 'lineChart',
+        // so that the pie chart will only display entries that are let through
+        // given the chosen slider range.
+        dashboard.bind(dateRangeSlider, lineChart);
+
+        // Draw the dashboard.
+        dashboard.draw(data);
+        chartDayOfWeek.draw(dataDayOfWeek, optionsDayOfWeek);
+        chartTimeOfDay.draw(dataTimeOfDay, optionsTimeOfDay);
+      }
+    
+    </script>

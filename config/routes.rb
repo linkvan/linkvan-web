@@ -14,6 +14,8 @@ Linkvan::Application.routes.draw do
   get 'about', to: 'about#index'
   get 'images', to: 'images#index'
   root 'facilities#index'
+  get 'signup' => 'users#new'
+  get "signin" => "sessions#new"
   resources :facilities
 
 
