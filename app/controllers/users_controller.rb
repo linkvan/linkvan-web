@@ -1,9 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_signin, except: [:new, :create]
   before_action :require_admin, only: [:index]
-  before_action :require_correct_user, only: [:edit, :update, :destroy]
-  before_action :require_correct_user_or_admin, only: [:show]
-  
+  before_action :require_correct_user_or_admin, only: [:edit, :update, :show, :destroy]  
 
 	def index
 		@users = User.all
@@ -29,11 +27,11 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-
+    @user = User.find(params[:id])
 	end
 
 	def update
-
+    @user = User.find(params[:id])
  		if @user.update(user_params)
     		redirect_to @user, notice: "Account successfully updated!"
   		else
@@ -42,8 +40,10 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-      session[:user_id] = nil
+      @user = User.find(params[:id])
   		@user.destroy
+      session[:user_id] = nil
+      
   		redirect_to root_url, alert: "Account successfully deleted!"
 	end
 
@@ -60,5 +60,10 @@ class UsersController < ApplicationController
       redirect_to root_url
     end
   end
+
+
+
+
+
 
 end

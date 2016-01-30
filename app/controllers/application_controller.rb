@@ -18,7 +18,7 @@ private
 	end
 
 	def current_user
-    #if !@current_user.nil?
+    #if !session[:user_id].blank?
 		  @current_user ||= User.find(session[:user_id]) if session[:user_id]
     #end
 	end
