@@ -4,48 +4,137 @@
   <h4>Errors: <%= @facility.errors.full_messages.to_sentence %></h4>
   <% end %>
   <p>
-    <strong> WARNING: DO NOT PRESS ENTER WHEN FILLING IN FIELDS. USE "CREATE FACILITY" BUTTON AT BOTTOM OF PAGE.</strong><br/><br/>
-    <%= f.label :name %> - Facility's name. Example: UBC Learning Exchange<br/>
-    <%= f.text_field :name, autofocus: true %>
+    <strong> NOTE: DO NOT PRESS ENTER WHEN FILLING IN FIELDS. USE "CREATE FACILITY"/"UPDATE FACILITY" BUTTON AT BOTTOM OF PAGE.</strong><br/><br/>
+    <%= f.label :name %>&nbsp;&nbsp;&nbsp;<%= f.text_field :name, autofocus: true %>
   </p>
+  <hr>
   <p>
-    <%= f.label :welcomes %> - Enter One (case-sensitive): All, Women, Men<br/>
-    Example: Women<br/>
-    <%= f.text_field :welcomes %>
+    <%= f.label :welcomes %>&nbsp;&nbsp;&nbsp;<%= f.select :welcomes, [['All'], ['Women'], ['Men']] %>
   </p>
+  <hr>
   <p>
-    <%= f.label :suitability %> - Enter One or Many (case-sensitive, order doesn't matter, use space to separate terms): Children, Youth, Adults, Seniors<br/>
-    Example: Adults Seniors<br/>
-    <%= f.text_field :suitability %>
-  </p>
-  <p>
-    <%= f.label :services %> - Enter One or Many (case-sensitive, order doesn't matter, use space to separate terms): Shelter, Food, Medical, Hygiene, Technology, Legal<br/>
-    Example: Shelter Medical Hygiene<br/>
-    <%= f.text_field :services %>
-  </p>
-  <p>
-    <%= f.label :address %> - Enter the facility's address then click Search. This will populate the hidden latitude and longitude fields.<br/> Format: Street Address, City, BC. Example: 612 Main St, Vancouver, BC<br/>
+    <%= f.label :suitability %> - Select All Relevant Categories<br/>
+    <strong>Note: Suitability is currently not used; however, future designs of the web app may use this information to better search and sort facilities.</strong><br>
+    <%= f.hidden_field :suitability %><br>
 
-    <%= f.text_field :address %>
+    <% if @facility.suitability.nil? %>
+      <input type="checkbox" id="chcheck" name="Children" value="Children" onclick="chclicked()">Children &nbsp;&nbsp;
+      <input type="checkbox" id="yocheck" name="Youth" value="Youth" onclick="yoclicked()">Youth &nbsp;&nbsp;
+      <input type="checkbox" id="adcheck" name="Adults" value="Adults" onclick="adclicked()">Adults &nbsp;&nbsp;
+      <input type="checkbox" id="secheck" name="Seniors" value="Seniors" onclick="seclicked()">Seniors &nbsp;&nbsp;
+    <%else%>
+
+    <% if @facility.suitability.include? "Children" %>
+      <input type="checkbox" id="scheck" name="Children" value="Children" onclick="chclicked()" checked>Children &nbsp;&nbsp;
+    <%else%>
+      <input type="checkbox" id="scheck" name="Children" value="Children" onclick="chclicked()">Children &nbsp;&nbsp;
+    <%end%>
+
+    <% if @facility.suitability.include? "Youth" %>
+      <input type="checkbox" id="fcheck" name="Youth" value="Youth" onclick="yoclicked()" checked>Youth &nbsp;&nbsp;
+    <%else%>
+      <input type="checkbox" id="fcheck" name="Youth" value="Youth" onclick="yoclicked()">Youth &nbsp;&nbsp;
+    <%end%>
+
+    <% if @facility.suitability.include? "Adults" %>
+      <input type="checkbox" id="mcheck" name="Adults" value="Adults" onclick="adclicked()" checked>Adults &nbsp;&nbsp;
+    <%else%>
+      <input type="checkbox" id="mcheck" name="Adults" value="Adults" onclick="adclicked()">Adults &nbsp;&nbsp;
+    <%end%>
+
+    <% if @facility.suitability.include? "Seniors" %>
+      <input type="checkbox" id="hcheck" name="Seniors" value="Seniors" onclick="seclicked()" checked>Seniors &nbsp;&nbsp;
+    <%else%>
+      <input type="checkbox" id="hcheck" name="Seniors" value="Seniors" onclick="seclicked()">Seniors &nbsp;&nbsp;
+    <%end%>
+
+
+    <%end%>
+
+
+  </p>
+  <hr>
+  <p>
+    <%= f.label :services %> - Select All Relevant Categories<br/>
+
+
+    <%= f.hidden_field :services%><br>
+    <% if @facility.services.nil? %>
+      <input type="checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">Shelter &nbsp;&nbsp;
+      <input type="checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">Food &nbsp;&nbsp;
+      <input type="checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">Medical &nbsp;&nbsp;
+      <input type="checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">Hygiene &nbsp;&nbsp;
+      <input type="checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">Technology &nbsp;&nbsp;
+      <input type="checkbox" id="acheck" name="Advocacy" value="Advocacy" onclick="aclicked()">Advocacy &nbsp;&nbsp;
+    <%else%>
+
+    <% if @facility.services.include? "Shelter" %>
+      <input type="checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()" checked>Shelter &nbsp;&nbsp;
+    <%else%>
+      <input type="checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">Shelter &nbsp;&nbsp;
+    <%end%>
+
+    <% if @facility.services.include? "Food" %>
+      <input type="checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()" checked>Food &nbsp;&nbsp;
+    <%else%>
+      <input type="checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">Food &nbsp;&nbsp;
+    <%end%>
+
+    <% if @facility.services.include? "Medical" %>
+      <input type="checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()" checked>Medical &nbsp;&nbsp;
+    <%else%>
+      <input type="checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">Medical &nbsp;&nbsp;
+    <%end%>
+
+    <% if @facility.services.include? "Hygiene" %>
+      <input type="checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()" checked>Hygiene &nbsp;&nbsp;
+    <%else%>
+      <input type="checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">Hygiene &nbsp;&nbsp;
+    <%end%>
+
+    <% if @facility.services.include? "Technology" %>
+      <input type="checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()" checked>Technology &nbsp;&nbsp;
+    <%else%>
+      <input type="checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">Technology &nbsp;&nbsp;
+    <%end%>
+
+    <% if @facility.services.include? "Advocacy" %>
+      <input type="checkbox" id="acheck" name="Advocacy" value="Advocacy" onclick="aclicked()" checked>Advocacy &nbsp;&nbsp;
+    <%else%>
+      <input type="checkbox" id="acheck" name="Advocacy" value="Advocacy" onclick="aclicked()">Advocacy &nbsp;&nbsp;
+    <%end%>
+
+    <%end%>
+
+  </p>
+  <hr>
+  <p>
+    <%= f.label :address %> - Enter the facility's address then click Search.<br>Format: Street Address, City, BC. Example: 612 Main St, Vancouver, BC<br/>
+
+    <%= f.text_field :address, size: 50 %>
     <input type="button" value="Search" onclick="codeAddress()">
     <div id="map-canvas-new"></div>
 
   </p>
+  <hr>
   <p>
     <%= f.label :phone %> - Example: 604 555 6789<br/>
     <%= f.text_field :phone %>
   </p>
+  <hr>
   <p>
-    <%= f.label :website %> - Example: learningexchange.ubc.ca (Note: Do not include "http://". "www" is optional.)<br/>
+    <%= f.label :website %> - Do not include "http://". Example: www.learningexchange.ubc.ca<br/>
     <%= f.text_field :website %>
   </p>
+  <hr>
+<!--
   <p>
     <%= f.label :description %> - Copy paste verbatim from the facility's "about us" page. Will tweak on stakeholder feedback.<br/>
-    <%= f.text_area :description, cols: 40, rows: 7 %>
-  </p>
+    <%= f.text_area :description, cols: 60, rows: 7 %>
+  </p> -->
   <h3>Hours</h3>
   <p>
-    <strong> WARNING: The start time and end time for a day cannot be identical. Also, the start time must be earlier than the end time.</strong><br/>
+    <strong> NOTE: The start time and end time for a day cannot be identical. Check the "Second time" option to specify a second time range</strong><br/>
   </p>
   <table>
     <tr>
@@ -270,10 +359,10 @@
   </table>
   </div>
   <hr>
-
+  <h3>Notes</h3>
   <p>
-    <%= f.label :notes %> - Examples: special events, facility rules, etc.<br/>
-    <%= f.text_area :notes, cols: 40, rows: 7 %>
+    Examples: special events, facility rules, etc.<br/>
+    <%= f.text_area :notes, cols: 60, rows: 7 %>
   </p>
   <p>
     <%= f.hidden_field :lat%><br>
@@ -286,6 +375,167 @@
 <% end %>
 
 <script>
+
+var chcheck;
+var yocheck;
+var adcheck;
+var secheck;
+
+var scheck;
+var fcheck;
+var mcheck;
+var hcheck;
+var tcheck;
+var acheck;
+var finalservices = [];
+var finalsuitability = [];
+
+function chclicked(){
+  var index;
+  chcheck = document.getElementById('chcheck');
+  if(chcheck.checked){
+    finalsuitability.push(chcheck.value);
+  }else{
+    index = finalsuitability.indexOf(chcheck.value);
+    if (index > -1) {
+      finalsuitability.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_suitability').value = finalsuitability.join(' ');
+}
+
+function yoclicked(){
+  var index;
+  yocheck = document.getElementById('yocheck');
+  if(yocheck.checked){
+    finalsuitability.push(yocheck.value);
+  }else{
+    index = finalsuitability.indexOf(yocheck.value);
+    if (index > -1) {
+      finalsuitability.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_suitability').value = finalsuitability.join(' ');
+}
+
+function adclicked(){
+  var index;
+  adcheck = document.getElementById('adcheck');
+  if(adcheck.checked){
+    finalsuitability.push(adcheck.value);
+  }else{
+    index = finalsuitability.indexOf(adcheck.value);
+    if (index > -1) {
+      finalsuitability.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_suitability').value = finalsuitability.join(' ');
+}
+
+function seclicked(){
+  var index;
+  secheck = document.getElementById('secheck');
+  if(secheck.checked){
+    finalsuitability.push(secheck.value);
+  }else{
+    index = finalsuitability.indexOf(secheck.value);
+    if (index > -1) {
+      finalsuitability.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_suitability').value = finalsuitability.join(' ');
+}
+
+
+
+
+
+
+
+function sclicked(){
+  var index;
+  scheck = document.getElementById('scheck');
+  if(scheck.checked){
+    finalservices.push(scheck.value);
+  }else{
+    index = finalservices.indexOf(scheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
+}
+
+function fclicked(){
+  var index;
+  fcheck = document.getElementById('fcheck');
+  if(fcheck.checked){
+    finalservices.push(fcheck.value);
+  }else{
+    index = finalservices.indexOf(fcheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
+}
+function mclicked(){
+  var index;
+  mcheck = document.getElementById('mcheck');
+  if(mcheck.checked){
+    finalservices.push(mcheck.value);
+  }else{
+    index = finalservices.indexOf(mcheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
+}
+function hclicked(){
+  var index;
+  hcheck = document.getElementById('hcheck');
+  if(hcheck.checked){
+    finalservices.push(hcheck.value);
+  }else{
+    index = finalservices.indexOf(hcheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
+}
+function tclicked(){
+  var index;
+  tcheck = document.getElementById('tcheck');
+  if(tcheck.checked){
+    finalservices.push(tcheck.value);
+  }else{
+    index = finalservices.indexOf(tcheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
+}
+function aclicked(){
+  var index;
+  acheck = document.getElementById('acheck');
+  if(acheck.checked){
+    finalservices.push(acheck.value);
+  }else{
+    index = finalservices.indexOf(acheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
+}
+
+
+
+
+
 var monhours = document.getElementById("mon-hours");
 var tueshours = document.getElementById("tues-hours");
 var wedhours = document.getElementById("wed-hours");

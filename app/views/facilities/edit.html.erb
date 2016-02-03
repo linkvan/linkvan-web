@@ -1,6 +1,10 @@
-<h1>Editing <%=@facility.name %></h1>
+<%= render 'facilities/nav' %>
 
-<%= render 'form' %>
+<h1 style="text-align: center; margin-top: 50px; margin-bottom: -30px; font-weight: bold">Edit Facility</h1>
+
+<div class="profile">
+  <%= render 'form' %>
+</div>
 
 <%= content_tag :div, class: "temp_information", data: {jsfacility: @facility} do %>
 <% end %>
