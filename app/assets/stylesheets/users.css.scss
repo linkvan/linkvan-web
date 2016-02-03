@@ -21,16 +21,6 @@
 			text-align: left;
 		}
 	}
-	.edit-form{
-		ul{
-			list-style-type: none;
-			padding-left: 0;
-		}
-		fieldset{
-			display: block;
-			margin-left: 104px;
-		}
-	}
 
 	.quote{
 		font-style: italic;
@@ -68,5 +58,15 @@
 	}
 }
 
+.edit-form{
+		ul{
+			list-style-type: none;
+			padding-left: 0;
+		}
+		fieldset{
+			display: block;
+			margin: 0 auto;
+		}
+	}
 
 
