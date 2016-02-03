@@ -1,5 +1,7 @@
 Linkvan::Application.routes.draw do
 
+  get "contact_form/new"
+  get "contact_form/create"
   resource :session
   resources :users
 
@@ -16,6 +18,8 @@ Linkvan::Application.routes.draw do
   root 'facilities#index'
   get 'signup' => 'users#new'
   get "signin" => "sessions#new"
+  get 'contact', to: 'messages#new', as: 'contact'
+  post 'contact', to: 'messages#create'
   resources :facilities
 
 

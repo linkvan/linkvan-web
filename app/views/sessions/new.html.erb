@@ -1,19 +1,29 @@
-<h1>Service Provider</h1>
-<h3>Please sign in</h3>
+<%= render 'facilities/nav' %>
 
+<h1 style="text-align: center; margin-top: 50px; font-weight: bold">Service Provider Sign In</h1>
+<div class="profile">
 
-<%= form_tag(session_path) do %>
+<table style="margin: 0 auto">
+	<tr>
+		<td><%= image_tag('logo.svg', width: "200px", height: "200px") %></td>
+		<td><%= form_tag(session_path) do %>
 <fieldset>
 	<p>
-		<%= label_tag :email %>
+		<%= label_tag :email %><br>
 		<%= email_field_tag :email, nil, autofocus: true %>
 	</p>
 	<p>
-		<%= label_tag :password %>
+		<%= label_tag :password %><br>
 		<%= password_field_tag :password, nil%>
 	</p>
 	<p>
 		<%= submit_tag "Sign In" %>
 	</p>
 </fieldset>
-<% end %>
+<% end %></td>
+	</tr>
+</table>
+
+
+
+</div>

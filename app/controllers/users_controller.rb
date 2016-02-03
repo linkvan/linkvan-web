@@ -8,11 +8,12 @@ class UsersController < ApplicationController
 	end
 
 	def show
-  		@user = User.find(params[:id])
+    @message = Message.new
+    @user = User.find(params[:id])
 	end
 
 	def new
-  		@user = User.new
+  	@user = User.new
 	end
 
 	def create
@@ -33,16 +34,22 @@ class UsersController < ApplicationController
 	def update
     @user = User.find(params[:id])
  		if @user.update(user_params)
-    		redirect_to @user, notice: "Account successfully updated!"
-  		else
+    	redirect_to @user, notice: "Account successfully updated!"
+  	else
     	render :edit
-  		end
+  	end
 	end
 
 	def destroy
       @user = User.find(params[:id])
-  		@user.destroy
-      session[:user_id] = nil
+  		@user.facilities.each do |f|
+        f.user = nil
+        f.save
+      end
+      @user.destroy
+      if session[:user_id] == @user.id
+        session[:user_id] = nil #session[:user_id] = nil
+      end
       
   		redirect_to root_url, alert: "Account successfully deleted!"
 	end
@@ -51,7 +58,7 @@ class UsersController < ApplicationController
 
 	def user_params
   		params.require(:user).
-    	permit(:name, :email, :password, :password_confirmation)
+    	permit(:name, :email, :password, :password_confirmation, :activation_email_sent)
 	end
 
   def require_correct_user

@@ -14,6 +14,18 @@
 		text-align: left;
 	}
 
+	.sign-up-form{
+		ul{
+			list-style-type: none;
+			padding-left: 0;
+			text-align: left;
+		}
+	}
+
+	.quote{
+		font-style: italic;
+	}
+
 	ul{
 		list-style-type: none;
 		padding-left: 15px;
@@ -45,4 +57,6 @@
 		}
 	}
 }
+
+
 

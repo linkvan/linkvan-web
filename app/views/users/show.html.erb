@@ -43,8 +43,13 @@
 
     <div id="time_of_day_div"></div>
 </div>
+<%elsif @user.activation_email_sent%>
+  <h3>Thank you! Your message has already been sent to the LinkVan team. We will get in touch as soon as we can :)</h3>
+
 <%else%>
-  <h4>Step 2. Please fill out the form below and a member of the LinkVan team will get in touch with you to confirm your registration.</h4>
+  <h4><b>Step 2: </b>Almost ready! Please fill out the form below and a member of the LinkVan team will get in touch with you as soon as we can to finish setting up your account:</h4><br>
+
+  <%= render 'messages/contact_form' %>
 
 
 <%end%>

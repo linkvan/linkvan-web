@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160126201534) do
+ActiveRecord::Schema.define(version: 20160202020920) do
 
   create_table "anaylitics", force: true do |t|
     t.decimal  "lat"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 20160126201534) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin"
+    t.boolean  "activation_email_sent", default: false
   end
 
 end

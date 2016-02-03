@@ -1,0 +1,27 @@
+<%= form_for @message, url: contact_path do |message_form| %>
+  <fieldset>
+    <div class="field">
+      <%= message_form.label "Contact Name" %><br>
+      <%= message_form.text_field :name, placeholder: "Name" %>
+    </div><br>
+    
+    <div class="field">
+      <%= message_form.label :phone %><br>
+      <%= message_form.text_field :phone, placeholder: "Phone"%>
+    </div>
+    
+    <div class="field"><br>
+      <h4>Please tell us the name of the organization for which you'd like to become an administrator. If you are the administrator of an organization not listed in the app, please tell us the name of the organization you'd like created.  </h4><br>
+      <%= message_form.text_area :content, placeholder: "Message", :cols => "50", :rows => "8" %>
+    </div>
+
+
+  </fieldset>
+  
+  <fieldset>
+    <br>
+    <div class="field">
+      <%= message_form.submit "Send" %>
+    </div>
+  </fieldset>
+<% end %>
