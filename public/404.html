@@ -4,8 +4,13 @@
   <title>The page you were looking for doesn't exist (404)</title>
   <style>
   body {
-    background-color: #EFEFEF;
-    color: #2E2F30;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/96/Errorbg.png');
+    background-repeat: repeat-x;
+    background-color: white;
+    color: #484848;
+    margin: 0;
+    padding: 0;
+    height: 100%;
     text-align: center;
     font-family: arial, sans-serif;
   }
@@ -17,7 +22,7 @@
     border-right-color: #999;
     border-left-color: #999;
     border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
+    border-top: #305c99 solid 4px;
     border-top-left-radius: 9px;
     border-top-right-radius: 9px;
     background-color: white;
@@ -26,7 +31,7 @@
 
   h1 {
     font-size: 100%;
-    color: #730E15;
+    color: #305c99;
     line-height: 1.5em;
   }
 
@@ -50,9 +55,11 @@
 <body>
   <!-- This file lives in public/404.html -->
   <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
+    <img alt="Logo" height="200px" src="/assets/logo.svg" width="200px">
+    <h1>Oops! Wrong Turn!</h1>
+    <p><em>Error 404 - File Not Found</em></p>
+    <p>You may have mistyped the address or the page may have moved. To return to the home page, click <a href="/facilities">here</a></p>
   </div>
-  <p>If you are the application owner check the logs for more information.</p>
+  <p>If you think this may be a bug, please shoot us an email: <a href="mailto:info@linkvan.ca">info@linkvan.ca</a> We appreciate your feedback! </p>
 </body>
 </html>
