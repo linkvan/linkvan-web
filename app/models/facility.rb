@@ -9,7 +9,8 @@ class Facility < ActiveRecord::Base
 	
 	def self.search(search)
 		#where("name ILIKE ?", "%#{search}%") for production
-  	where("name ILIKE ?", "%#{search}%")
+		#where("name LIKE ?", "%#{search}%") for development
+  		where("name ILIKE ?", "%#{search}%")
 	end
 
 	def self.contains_service(service_query, prox, open, ulat, ulong)

@@ -1,4 +1,11 @@
 Linkvan::Application.routes.draw do
+  #api routes
+  #get 'api/facilities', to: 'api#all'
+  get 'api/facilities/filter/:scope', to: 'api#filtered'
+  get 'api/facilities/filteredtest', to: 'api#filteredtest'
+  get 'api/facilities/search', to: 'api#search'
+  get 'api/facilities/:id', to: 'api#show'
+ 
 
   get "contact_form/new"
   get "contact_form/create"
@@ -20,6 +27,9 @@ Linkvan::Application.routes.draw do
   get "signin" => "sessions#new"
   get 'contact', to: 'messages#new', as: 'contact'
   post 'contact', to: 'messages#create'
+
+  
+  
   resources :facilities
 
 
