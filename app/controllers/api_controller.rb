@@ -13,7 +13,7 @@ class ApiController < ApplicationController
 			#returned example: statusgrouped[0] returns last record (created most recent) of first grouping
 			statusgrouped = Status.where("id > ?", localid).group(:fid)
 
-			#build @allchanges to return
+			#build allchanges to return
 			statusgrouped.each do |s|
 				if s.changetype == "D"
 					allchanges.store(s.id, {s.fid => s.changetype})

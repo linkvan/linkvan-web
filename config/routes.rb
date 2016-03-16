@@ -1,7 +1,7 @@
 Linkvan::Application.routes.draw do
   #api routes
 
-  #get 'api/facilities', to: 'api#all' #only enable if needed
+  get 'api/facilities', to: 'api#all' #only enable if needed
   get 'api/facilities/filter/:scope', to: 'api#filtered'
   get 'api/facilities/filteredtest', to: 'api#filteredtest'
   get 'api/facilities/search', to: 'api#search'
