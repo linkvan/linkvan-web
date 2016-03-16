@@ -1,16 +1,39 @@
 class ApiController < ApplicationController
 
+	def getchanges
+		localid = params[:localid]
+
+		if localid.to_i >= Status.last.id
+			#uptodate success code = 42
+			render :json => 42.to_json
+		else
+			allchanges = Hash.new
+
+			#returned example: statusgrouped[0] returns last record (created most recent) of first grouping
+			statusgrouped = Status.where("id > ?", localid).group(:fid)
+
+			#build @allchanges to return
+			statusgrouped.each do |s|
+				if s.changetype == "D"
+					allchanges.store(s.id, {s.fid => s.changetype})
+				else
+					allchanges.store(s.id, {s.fid => Facility.find(s.fid)})
+				end
+			end
+			render :json => allchanges.to_json
+		end
+	end
+
 	def all
-		@facilities = Facility.all
-		render :json => @facilities.to_json
+		render :json => Facility.all.to_json
 	end
 
 	def filtered
-	  @latitude = params[:latitude]
+	  	@latitude = params[:latitude]
       @longitude = params[:longitude]
 
       #use to catch undefined latlongs
-      #if !(@latitude.nil?) || !(@longitude.nil?) 
+      #if !(@latitude.nil?) || !(@longitude.nil?)
         #redirect_to facilities_url
       #end
 
@@ -131,7 +154,7 @@ class ApiController < ApplicationController
       end
 
       @filteredfacs = {:nearyesdistances => @facilities_near_yes_distance, :nearyes => @facilities_near_yes,
-      					:nearnodistances => @facilities_near_no_distance, :nearno => @facilities_near_no, 
+      					:nearnodistances => @facilities_near_no_distance, :nearno => @facilities_near_no,
       					 :nameyesdistances => @facilities_name_yes_distance,:nameyes => @facilities_name_yes,
       					 :namenodistances => @facilities_name_no_distance,:nameno => @facilities_name_no}.to_json
 

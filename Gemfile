@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.8'
 
 gem "geocoder"
 
@@ -57,6 +57,8 @@ gem 'icomoon-rails'
 gem 'impressionist'
 
 gem 'mail'
+
+gem 'tzinfo-data', platforms: [:x64_mingw, :mingw, :mswin]
 
 # Use unicorn as the app server
 # gem 'unicorn'

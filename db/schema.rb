@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202020920) do
+ActiveRecord::Schema.define(version: 20160315211029) do
 
-  create_table "anaylitics", force: true do |t|
+  create_table "anaylitics", force: :cascade do |t|
     t.decimal  "lat"
     t.decimal  "long"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "facilities", force: true do |t|
+  create_table "facilities", force: :cascade do |t|
     t.string   "name"
     t.string   "welcomes"
     t.string   "services"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20160202020920) do
 
   add_index "facilities", ["user_id"], name: "index_facilities_on_user_id"
 
-  create_table "impressions", force: true do |t|
+  create_table "impressions", force: :cascade do |t|
     t.string   "impressionable_type"
     t.integer  "impressionable_id"
     t.integer  "user_id"
@@ -118,7 +118,14 @@ ActiveRecord::Schema.define(version: 20160202020920) do
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id"
 
-  create_table "users", force: true do |t|
+  create_table "statuses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "fid"
+    t.string   "changetype"
+  end
+
+  create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"

@@ -4,7 +4,6 @@ class FacilitiesController < ApplicationController
 
   def index
     @facilities = Facility.all
-
   end
 
     def filtered
@@ -12,7 +11,7 @@ class FacilitiesController < ApplicationController
       @longitude = params[:longitude]
 
       #use to catch undefined latlongs
-      #if !(@latitude.nil?) || !(@longitude.nil?) 
+      #if !(@latitude.nil?) || !(@longitude.nil?)
         #redirect_to facilities_url
       #end
 
@@ -23,7 +22,7 @@ class FacilitiesController < ApplicationController
       @facilities_name_yes_distance = Array.new
       @facilities_name_no_distance = Array.new
 
-      
+
 
       case params[:scope]
       when 'Shelter'
@@ -166,6 +165,7 @@ class FacilitiesController < ApplicationController
 	def update
 		@facility = Facility.find(params[:id])
 		if @facility.update(facility_params)
+      Status.create(fid: @facility.id, changetype: "U")
 		  redirect_to @facility
     else
       render :edit
@@ -179,6 +179,7 @@ class FacilitiesController < ApplicationController
 	def create
 		@facility = Facility.new(facility_params)
 		if @facility.save
+      Status.create(fid: @facility.id, changetype: "C")
 		  redirect_to @facility
     else
       render :new
@@ -187,6 +188,7 @@ class FacilitiesController < ApplicationController
 
 	def destroy
 		@facility = Facility.find(params[:id])
+    Status.create(fid: @facility.id, changetype: "D")
 		@facility.destroy
 		redirect_to facilities_url
 	end
