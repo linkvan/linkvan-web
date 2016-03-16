@@ -1,16 +1,17 @@
 class ApiController < ApplicationController
 
 	def getchanges
-		@localid = params[:localid]
+		localid = params[:localid]
 
-		if @localid.to_i >= Status.last.id
+		#Status needs at least 1 record - set manually
+		if localid.to_i >= Status.last.id
 			#uptodate success code = 42
 			render :json => 42.to_json
 		else
 			allchanges = Hash.new
 
 			#returned example: statusgrouped[0] returns last record (created most recent) of first grouping
-			statusgrouped = Status.where("id > ?", @localid).group(:fid)
+			statusgrouped = Status.where("id > ?", localid).group(:fid)
 
 			#build @allchanges to return
 			statusgrouped.each do |s|
