@@ -1,4 +1,4 @@
-<%= render 'facilities/nav' %>
+
 
 <h1 style="text-align: center; margin-top: 50px; margin-bottom: -30px; font-weight: bold">Edit Facility</h1>
 
@@ -25,8 +25,8 @@ var markersArray = [];
 var infowindow = new google.maps.InfoWindow();
 
 function init_map() {
-      	
-	geocoder = new google.maps.Geocoder();      
+
+	geocoder = new google.maps.Geocoder();
 
     myLocation = new google.maps.LatLng(jsfacility.lat, jsfacility.long);
 
@@ -44,15 +44,15 @@ function init_map() {
 
     infowindow.setContent(jsfacility.address);
 
-         
+
 
     map = new google.maps.Map(document.getElementById("map-canvas-new"),
             mapOptions);
 
     infowindow.open(map, marker);
-    marker.setMap(map); 
-      
-   
+    marker.setMap(map);
+
+
 }
 
 function clearOverlays() {
@@ -67,7 +67,7 @@ function clearOverlays() {
       infowindow.close();
       address = document.getElementById('facility_address').value;
       geocoder.geocode( { 'address': address}, function(results, status) {
-    
+
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
         marker = new google.maps.Marker({
@@ -78,10 +78,10 @@ function clearOverlays() {
 
         infowindow.setContent(address);
         infowindow.open(map, marker);
-        
+
         populateFields(results[0].geometry.location);
       } else {
-      
+
       alert('Sorry, please check your address and try again.' + status);
 
       }

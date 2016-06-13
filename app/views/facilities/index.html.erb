@@ -1,42 +1,48 @@
-<%= render 'nav' %>
+<section id="facilities">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<h3 class="title">What service are you looking for?</h3>
 
-<div id="index-main">
-	<h3>What service are you looking for?</h3>
-</div>
-
-
-
-<div class="admin-options">
-    <!-- <strong>Prototype Status:</strong> <h4 style="color:green">Ready</h4> -->
-    <!-- <strong>Developer Note:</strong> No critical issues</br> -->
-    <!-- <strong>Volunteer Note:</strong> New category added - Advocacy</br> -->
-    <br>
-    <br>
-
-    <% if current_user_admin? %>
-        <%= link_to "Add New Facility", new_facility_path %><br>
-    <%end%>
-
-    <% if current_user %>
-        Welcome back, <%= link_to current_user.name, current_user %>!<br>
-        
-        <%= link_to "Sign Out", session_path, method: :delete %>
-    <%else%>
-        <%= link_to 'Sign In', signin_path%>
-				|
-				<%= link_to "Disclaimer", disclaimer_path %>
-				|
-				<%= link_to "About Us", about_path%>
-                |
-                <%= link_to 'Sign Up', signup_path%>
-    <%end%>
-</div>
-
-
-<p id="demo"></p>
-
-<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+				<a href="/facilities/filter/Shelter/?latitude=0&longitude=0" class="btn btn-default clearfix facilities-category">
+					<i class="icon-sleepshelter_linkvan shelter-colour"></i>
+					<span>Shelter</span>
+					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
+				</a>
+				<a href="/facilities/filter/Food/?latitude=0&longitude=0" class="btn btn-default clearfix facilities-category">
+					<i class="glyphicon glyphicon-cutlery food-colour"></i>
+					<span>Food</span>
+					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
+				</a>
+				<a href="/facilities/filter/Medical/?latitude=0&longitude=0" class="btn btn-default clearfix facilities-category">
+					<i class="icon-Medical_linkvan medical-colour"></i>
+					<span>Medical</span>
+					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
+				</a>
+				<a href="/facilities/filter/Hygiene/?latitude=0&longitude=0" class="btn btn-default clearfix facilities-category">
+					<i class="icon-hygiene_linkvan hygiene-colour"></i>
+					<span>Hygiene</span>
+					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
+				</a>
+				<a href="/facilities/filter/Technology/?latitude=0&longitude=0" class="btn btn-default clearfix facilities-category">
+					<i class="icon-display technology-colour"></i>
+					<span>Technology</span>
+					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
+				</a>
+				<a href="/facilities/filter/Legal/?latitude=0&longitude=0" class="btn btn-default clearfix facilities-category">
+					<i class="icon-Advocacy_linkvan legal-colour"></i>
+					<span>Advocacy</span>
+					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
+				</a>
+				<a href="/crisis" class="btn btn-default clearfix facilities-category">
+					<i class="glyphicon glyphicon-warning-sign crisis-colour"></i>
+					<span>Crisis Lines</span>
+					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
 
 <script>
 
@@ -66,189 +72,4 @@ function showPosition(position) {
 			//var storedLon = longitude.toFixed(4);
 		//} else {}
 }
-
-setTimeout(function(){
-
-    //Create Shelter
-
-    var divid = document.getElementById("index-main");
-    var bshelter = document.createElement("button");
-    var tshelter = document.createElement("p");
-    tshelter.innerHTML = "Shelter";
-    tshelter.setAttribute("class", "button-text");
-
-    var shelterImg=document.createElement("i");
-    //shelterImg.setAttribute("class", "glyphicon glyphicon-home shelter-colour");
-    shelterImg.setAttribute("font-family", "Project-Linkvan");
-    shelterImg.setAttribute("class", "icon-sleepshelter_linkvan shelter-colour");
-
-    var shelterChev=document.createElement("i");
-    shelterChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
-    bshelter.appendChild(shelterImg);
-    bshelter.appendChild(tshelter);
-    bshelter.appendChild(shelterChev);
-
-    bshelter.setAttribute("class", "btn");
-    bshelter.onclick = function() { // Note this is a function
-        window.location = "/facilities/filter/Shelter/?latitude=" + latitude + "&longitude="+longitude;
-    };
-
-    divid.appendChild(bshelter);
-
-
-//Create Food
-    var bfood = document.createElement("button");
-    var tfood = document.createElement("p");
-    tfood.innerHTML = "Food"
-    tfood.setAttribute("class", "button-text");
-
-    var foodImg=document.createElement("i");
-    foodImg.setAttribute("class", "glyphicon glyphicon-cutlery food-colour");
-
-    var foodChev=document.createElement("i");
-    foodChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
-
-    bfood.appendChild(foodImg);
-    bfood.appendChild(tfood);
-    bfood.appendChild(foodChev);
-
-    bfood.setAttribute("class", "btn");
-    bfood.onclick = function() { // Note this is a function
-        window.location = "/facilities/filter/Food/?latitude=" + latitude + "&longitude="+longitude;
-    };
-
-    divid.appendChild(bfood);
-
-//Create Medical
-    var bmedical = document.createElement("button");
-    var tmedical = document.createElement("p");
-    tmedical.innerHTML = "Medical"
-    tmedical.setAttribute("class", "button-text");
-
-    var medicalImg=document.createElement("i");
-    //medicalImg.setAttribute("class", "glyphicon glyphicon-heart-empty medical-colour");
-    medicalImg.setAttribute("font-family", "Project-Linkvan");
-    medicalImg.setAttribute("class", "icon-Medical_linkvan medical-colour");
-
-    var medicalChev=document.createElement("i");
-    medicalChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
-
-    bmedical.appendChild(medicalImg);
-    bmedical.appendChild(tmedical);
-    bmedical.appendChild(medicalChev);
-
-    bmedical.setAttribute("class", "btn");
-    bmedical.onclick = function() { // Note this is a function
-        window.location = "/facilities/filter/Medical/?latitude=" + latitude + "&longitude="+longitude;
-    };
-
-    divid.appendChild(bmedical);
-
-//Create Hygiene
-    var bhygiene = document.createElement("button");
-    var thygiene = document.createElement("p");
-    thygiene.innerHTML = "Hygiene"
-    thygiene.setAttribute("class", "button-text");
-
-    var hygieneImg=document.createElement("i");
-    //hygieneImg.setAttribute("class", "glyphicon glyphicon-tint hygiene-colour");
-    hygieneImg.setAttribute("font-family", "Project-Linkvan");
-    hygieneImg.setAttribute("class", "icon-hygiene_linkvan hygiene-colour");
-
-
-    var hygieneChev=document.createElement("i");
-    hygieneChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
-
-    bhygiene.appendChild(hygieneImg);
-    bhygiene.appendChild(thygiene);
-    bhygiene.appendChild(hygieneChev);
-
-    bhygiene.setAttribute("class", "btn");
-    bhygiene.onclick = function() { // Note this is a function
-        window.location = "/facilities/filter/Hygiene/?latitude=" + latitude + "&longitude="+longitude;
-    };
-
-    divid.appendChild(bhygiene);
-
-//Create Technology
-    var btech = document.createElement("button");
-    var ttech = document.createElement("p");
-    ttech.innerHTML = "Technology"
-    ttech.setAttribute("class", "button-text");
-
-    var techImg=document.createElement("i");
-    //techImg.setAttribute("class", "glyphicon glyphicon-globe technology-colour");
-    techImg.setAttribute("font-family", "Project-Linkvan");
-    techImg.setAttribute("class", "icon-display technology-colour");
-
-
-    var techChev=document.createElement("i");
-    techChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
-
-    btech.appendChild(techImg);
-    btech.appendChild(ttech);
-    btech.appendChild(techChev);
-
-    btech.setAttribute("class", "btn");
-    btech.onclick = function() { // Note this is a function
-        window.location = "/facilities/filter/Technology/?latitude=" + latitude + "&longitude="+longitude;
-    };
-
-    divid.appendChild(btech);
-
-//Create Legal
-    var blegal = document.createElement("button");
-    var tlegal = document.createElement("p");
-    tlegal.innerHTML = "Advocacy";
-    tlegal.setAttribute("class", "button-text");
-
-    var legalImg=document.createElement("i");
-    //legalImg.setAttribute("class", "glyphicon glyphicon-briefcase medical-colour");
-    legalImg.setAttribute("font-family", "Project-Linkvan");
-    legalImg.setAttribute("class", "icon-Advocacy_linkvan legal-colour");
-
-
-    var legalChev=document.createElement("i");
-    legalChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
-
-    blegal.appendChild(legalImg);
-    blegal.appendChild(tlegal);
-    blegal.appendChild(legalChev);
-
-    blegal.setAttribute("class", "btn");
-    blegal.onclick = function() { // Note this is a function
-        window.location = "/facilities/filter/Legal/?latitude=" + latitude + "&longitude="+longitude;
-    };
-
-    divid.appendChild(blegal);
-
-//Create Crisis
-    var bcrisis = document.createElement("button");
-    var tcrisis = document.createElement("p");
-
-    tcrisis.innerHTML = "&nbsp;Crisis Lines";
-    tcrisis.setAttribute("class", "button-text");
-
-    var crisisImg=document.createElement("i");
-    crisisImg.setAttribute("class", "glyphicon glyphicon-warning-sign crisis-colour");
-
-    var crisisChev=document.createElement("i");
-    crisisChev.setAttribute("class", "glyphicon glyphicon-chevron-right chevron-right");
-
-    
-    bcrisis.appendChild(crisisImg);
-
-    bcrisis.appendChild(tcrisis);
-    bcrisis.appendChild(crisisChev);
-
-    bcrisis.setAttribute("class", "btn");
-    bcrisis.onclick = function() { // Note this is a function
-        window.location = "/crisis";
-    };
-
-    divid.appendChild(bcrisis);
-
-}, 1200);
-
-
 </script>

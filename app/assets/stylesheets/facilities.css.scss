@@ -2,56 +2,60 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body, html{
-	width:100%;
-	height:100%;
-}
+#facilities {
+	.facilities-category {
+		display: block;
+		margin-bottom: 12px;
+		padding: 8px 12px;
+		font-size: 20px;
+		font-weight: bold;
 
-iframe{
-	position: relative;
- 	height: 0;
- 	overflow: hidden;
-	padding-bottom: 90%;
+		&:hover {
+			background: #f8f8f8;
+		}
+
+		span {
+			float: left;
+			line-height: 30px;
+		}
+
+		i {
+			&:first-child {
+				float: left;
+				margin-right: 16px;
+			}
+
+			&.glyphicon:last-child {
+				margin: 0;
+				line-height: 28px;
+			}
+		}
+	}
 }
 
 .shelter-colour {
 	color: #62919C;
-	float: left;
-	margin-right: 15px;
-
 }
 .food-colour {
 	color: #9EA861;
-	float: left;
-	margin-right: 19px;
 }
 .medical-colour {
 	color: #A97A60;
-	float: left;
-	margin-right: 15px;
 }
 .hygiene-colour {
 	color: #7E7485;
-	float: left;
-	margin-right: 15px;
 }
 
 .technology-colour {
 	color: #CBAA4B;
-	float: left;
-	margin-right: 15px;
 }
 
 .legal-colour {
 	color: #8f61a8;
-	float: left;
-	margin-right: 15px;
 }
 
 .crisis-colour {
 	color: #e14228;
-	float: left;
-	margin-right: 11px;
 }
 
 .directions-colour {
@@ -104,34 +108,6 @@ iframe{
 	margin-right: 10px;
 	margin-bottom: 0;
 	color: black;
-}
-
-nav {
-	height: 40px;
-	background-color: #fff;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 200;
-	padding: 0 0 4px;
-	border-bottom: 1px solid #DDD;
-}
-
-.nav-container{
-	min-width:350px; 
-	height: 75px;
-	margin-top: 0;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 650px;
-    width: 90%;
-}
-
-.search-form{
-	max-width: 280px;
-	margin-top: 8px;
-	float: right;
 }
 
 #index-main{
@@ -777,10 +753,6 @@ nav {
 	font-size: 18px;
 }
 
-.admin-options{
-	text-align: center;
-}
-
 
 #search_results{
 	h3{
@@ -808,17 +780,8 @@ nav {
 		margin-bottom: 0;
 	}
 
-	
-}
 
-.logo{
-	display: block;
-	height: 39px;
-	img{
-		height:39px;
-	}
 }
-
 
 .glyphicon-cutlery{
 	font-size: 135%;
