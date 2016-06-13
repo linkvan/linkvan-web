@@ -1,0 +1,23 @@
+<nav role="navigation">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<div class="row">
+					<div class="col-sm-4">
+						<a class="logo" href='/facilities'>
+							<%= image_tag('linkvan_horizontal.png') %>
+						</a>
+					</div>
+					<div class="col-sm-8">
+						<form action="<%= search_bar_facilities_path %>" method="get" class="navbar-form navbar-right" role="search">
+							<div class="form-group">
+								<%= text_field_tag :search, nil, placeholder: "Search Facilities", class: "form-control" %>
+							</div>
+							<%= submit_tag "SEARCH", :name => nil, class: "btn btn-default" %>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
