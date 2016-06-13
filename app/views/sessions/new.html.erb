@@ -1,29 +1,27 @@
-<%= render 'facilities/nav' %>
-
-<h1 style="text-align: center; margin-top: 50px; font-weight: bold">Service Provider Sign In</h1>
-<div class="profile">
-
-<table style="margin: 0 auto">
-	<tr>
-		<td><%= image_tag('logo.svg', width: "200px", height: "200px") %></td>
-		<td><%= form_tag(session_path) do %>
-<fieldset>
-	<p>
-		<%= label_tag :email %><br>
-		<%= email_field_tag :email, nil, :autofocus => true %>
-	</p>
-	<p>
-		<%= label_tag :password %><br>
-		<%= password_field_tag :password, nil%>
-	</p>
-	<p>
-		<%= submit_tag "Sign In" %>
-	</p>
-</fieldset>
-<% end %></td>
-	</tr>
-</table>
-
-
-
-</div>
+<section id="singin">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<h3 class="title text-center">Service Provider Sign In</h3>
+				<div class="row">
+					<div class="col-sm-6">
+						<%= image_tag('logo.svg', width: "200px", height: "200px") %>
+					</div>
+					<div class="col-sm-6">
+						<%= form_tag(session_path) do %>
+							<div class="form-group">
+								<%= label_tag :email %>
+								<%= email_field_tag :email, nil, :autofocus => true, class: "form-control" %>
+							</div>
+							<div class="form-group">
+								<%= label_tag :password %>
+								<%= password_field_tag :password, nil, class: "form-control"%>
+							</div>
+							<%= submit_tag "Sign In", class: "btn btn-primary" %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

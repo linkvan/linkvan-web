@@ -1,25 +1,23 @@
 <%= form_for(@user) do |f| %>
-  <fieldset>
-    <ul>
-      <li class="required">
-        <%= f.label :name %><br>
-        <%= f.text_field :name, size: 40 %><br>
-      </li>
-      <li class="required">
-        <%= f.label :email %><br>
-        <%= f.email_field :email, size: 40 %><br>
-      </li>
-      <li class="required">
-        <%= f.label :password %><br>
-        <%= f.password_field :password, size: 40 %><br>
-      </li>
-      <li class="required">
-        <%= f.label :password_confirmation, "Confirm Password" %><br>
-        <%= f.password_field :password_confirmation, size: 40 %><br>
-      </li>
-    </ul><br>
-
-      <%= f.submit %>
-
-  </fieldset>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, size: 40, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, size: 40, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, size: 40, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Confirm Password" %>
+        <%= f.password_field :password_confirmation, size: 40, class: "form-control" %>
+      </div>
+      <%= f.submit "Create User", class: "btn btn-primary" %>
+    </div>
+  </div>
 <% end %>

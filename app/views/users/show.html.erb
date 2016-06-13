@@ -1,4 +1,4 @@
-<%= render 'facilities/nav' %>
+
 <div class="profile">
 
   <h1><%= @user.name %></h1>
@@ -33,7 +33,7 @@
   <h4>Reports</h4>
     <div id="dashboard_div">
       <!--Divs that will hold each control and chart-->
-      
+
       <div id="chart_div"></div>
       <div id="filter_div"></div>
     </div>
@@ -258,7 +258,7 @@ for(var j=0; j<imps.length; j++){
 
     //console.log(new Date(imps[2].created_at));
     //console.log(Number(new Date(imps[2].created_at).toString().substring(16, 18)));
-    
+
 masterDataTimeOfDay.push(["12am-1am"]);
 masterDataTimeOfDay.push(["1am-2am"]);
 masterDataTimeOfDay.push(["2am-3am"]);
@@ -422,7 +422,7 @@ for(var j=0; j<imps.length; j++){
 
       // Set a callback to run when the Google Visualization API is loaded.
       google.setOnLoadCallback(drawDashboard);
-      
+
 
       // Callback that creates and populates a data table,
       // instantiates a dashboard, a range slider and a pie chart,
@@ -434,7 +434,7 @@ for(var j=0; j<imps.length; j++){
         var data = new google.visualization.arrayToDataTable(masterData);
         var dataDayOfWeek = new google.visualization.arrayToDataTable(masterDataDayOfWeek);
         var dataTimeOfDay = new google.visualization.arrayToDataTable(masterDataTimeOfDay);
-        
+
 
         // Create a dashboard.
         var dashboard = new google.visualization.Dashboard(
@@ -474,7 +474,7 @@ for(var j=0; j<imps.length; j++){
         // Create a pie chart, passing some options
         var lineChart = new google.visualization.ChartWrapper({
           'chartType': 'ColumnChart',
-          'containerId': 'chart_div', 
+          'containerId': 'chart_div',
           'options': {
             'title' : 'Number of Views per Day',
             'width': 650,
@@ -488,7 +488,7 @@ for(var j=0; j<imps.length; j++){
           }
         });
 
-        
+
 
         // Establish dependencies, declaring that 'filter' drives 'lineChart',
         // so that the pie chart will only display entries that are let through
@@ -500,5 +500,5 @@ for(var j=0; j<imps.length; j++){
         chartDayOfWeek.draw(dataDayOfWeek, optionsDayOfWeek);
         chartTimeOfDay.draw(dataTimeOfDay, optionsTimeOfDay);
       }
-    
+
     </script>

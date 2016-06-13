@@ -1,23 +1,29 @@
-<%= render 'facilities/nav' %>
-<h1 style="text-align: center; margin-top: 50px; margin-bottom: -30px; font-weight: bold">Service Provider Sign Up</h1>
-<div class="profile">
-  <h4>Are you a Service Provider in the Vancouver DTES offering one or more services in any of the following categories: Shelter, Food, Medical, Hygiene, Technology, or Advocacy? If so, you're on the right page! Creating a LinkVan account allows you to update the content on your organization's page in the web app. In addition, we provide you basic analytics data for your account.<br><br>
-  <h4>Activating an account is easy and absolutely free!<br><br>
-  <ul>
-  	<li><b>Step 1:</b> Fill out the form below to set your password and click Create User.</li><br>
+<section id="signup">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <h3 class="title text-center">Service Provider Sign Up</h3>
+        <p>Are you a Service Provider in the Vancouver DTES offering one or more services in any of the following categories: Shelter, Food, Medical, Hygiene, Technology, or Advocacy? If so, you're on the right page!</p>
+        <p>Creating a LinkVan account allows you to update the content on your organization's page in the web app. In addition, we provide you basic analytics data for your account.</p>
+        <p>Activating an account is easy and absolutely free!</p>
+        <ul class="list-unstyled">
+        	<li><b>Step 1:</b> Fill out the form below to set your password and click Create User.</li>
 
-  	<li><b>Step 2:</b> Tell us if you'd like to create a new listing for your organization OR become the administrator of your organization's page if it's already in the web app.</li><br>
+        	<li><b>Step 2:</b> Tell us if you'd like to create a new listing for your organization OR become the administrator of your organization's page if it's already in the web app.</li>
 
-  	<li><b>Step 3:</b> A member of our team will get in touch with you over the phone as soon as we can to verify your account and help with the initial set up.</li>
-  </ul><br>
+        	<li><b>Step 3:</b> A member of our team will get in touch with you over the phone as soon as we can to verify your account and help with the initial set up.</li>
+        </ul>
+        <p>
+          And that's it! Should you have any questions, please reach out to us at <%= mail_to("info@linkvan.ca", "info@linkvan.ca") %>.
+        </p>
+        <%= render 'form' %>
+        <hr>
+        <blockquote>
+          <p>Teamwork is the ability to work together toward a common vision. The ability to direct individual accomplishments toward organizational objectives. It is the fuel that allows common people to attain uncommon results.</p>
+          <footer>Andrew Carnegie</footer>
+        </blockquote>
 
-  And that's it! Should you have any questions, please reach out to us at <%= mail_to("info@linkvan.ca", "info@linkvan.ca") %>.</h4><br>
-
-<div class="sign-up-form">
-	<%= render 'form' %>
-</div>
-<hr>
-<div class="quote">
-  	<p>"Teamwork is the ability to work together toward a common vision. The ability to direct individual accomplishments toward organizational objectives. It is the fuel that allows common people to attain uncommon results." — Andrew Carnegie</p>
-</div>
-</div>
+      </div>
+    </div>
+  </div>
+</section>
