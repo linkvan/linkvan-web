@@ -1,4 +1,5 @@
 <%= form_for(@facility) do |f| %>
+<<<<<<< cf42e70ff61864da371bc426591d63cf05a95cb7
  <% if @facility.errors.any? %>
  <div class="alert alert-danger" role="alert">
    <strong>Ops!</strong> <%= @facility.errors.full_messages.to_sentence %>
@@ -547,9 +548,18 @@ var mcheck;
 var hcheck;
 var tcheck;
 var acheck;
+<<<<<<< cf42e70ff61864da371bc426591d63cf05a95cb7
 var lcheck;
 // var tscheck;
 var finalservices = [];
+=======
+var finalservices =
+  <% if @facility.services.nil? %>
+    [];
+  <% else %>
+    <%= raw @facility.services.split(' ').to_json %>;
+  <% end %>
+>>>>>>> Fixed facilities not showing
 var finalsuitability = [];
 
 function chclicked(){
@@ -608,6 +618,7 @@ function seclicked(){
  document.getElementById('facility_suitability').value = finalsuitability.join(' ');
 };
 
+<<<<<<< cf42e70ff61864da371bc426591d63cf05a95cb7
 
 function sclicked(){
  var index;
@@ -730,6 +741,21 @@ aclicked();
 lclicked();
 // tsclicked();
 
+=======
+function servclicked(service) {
+  var index;
+  check = document.getElementById(service);
+  if (check.checked) {
+    finalservices.push(check.value);
+  } else {
+    index = finalservices.indexOf(check.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
+}
+>>>>>>> Fixed facilities not showing
 
 var monhours = document.getElementById("mon-hours");
 var tueshours = document.getElementById("tues-hours");
