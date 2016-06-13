@@ -1,0 +1,68 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require bootstrap
+ *= require style
+ *= require_self
+ *= require_tree .
+ */
+
+body {
+  font-size: 16px;
+}
+
+iframe{
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 90%;
+}
+
+/* Navigation */
+nav[role="navigation"] {
+  padding: 6px 0px;
+  border-bottom: 1px solid #ccc;
+  background: #f8f8f8;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+
+  a.logo{
+    display: inline-block;
+
+    img{
+      max-height:42px;
+    }
+  }
+}
+
+/* Footer */
+#footer {
+  padding-top: 24px;
+
+  ul {
+    li {
+     padding: 0;
+    }
+  }
+}
+
+/* General */
+section {
+  h3.title {
+		margin-bottom: 24px;
+	}
+}
+
+blockquote {
+  font-size: 15px;
+
+  footer {
+    font-size: 90%;
+  }
+}
