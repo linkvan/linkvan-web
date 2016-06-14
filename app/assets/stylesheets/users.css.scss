@@ -2,19 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.edit-form{
+	ul{
+		list-style-type: none;
+		padding-left: 0;
+	}
+	fieldset{
+		display: block;
+		margin: 0 auto;
+	}
+}
+
 #signup {
 	form {
 		margin: 24px 0;
 	}
 }
 
-.edit-form{
-		ul{
-			list-style-type: none;
-			padding-left: 0;
-		}
-		fieldset{
-			display: block;
-			margin: 0 auto;
+#user-show {
+	form.new_message {
+		input[type="text"] {
+			max-width: 360px;
 		}
 	}
+}

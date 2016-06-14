@@ -1,74 +1,56 @@
+<section id="user-show">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <h2><%= @user.name %></h2>
+        <p><%= mail_to(@user.email) %></p>
+        <p>Registered Since <%= @user.created_at.strftime("%B %Y") %></p>
+        <hr>
+        <% @imps = Array.new %>
+        <% @facilitynames = Array.new %>
+        <% if @user.facilities.count > 0 %>
+          <div class="administered">
+            <h4><%= pluralize(@user.facilities.count, 'Facility') %> Available to Edit</h4>
+            <ul>
+              <% @user.facilities.each do |f| %>
+                <li><%= link_to f.name, edit_facility_path(f.id) %>  (Monthly View Count: <%= Impression.where(impressionable_id: f.id).count %>)</li>
 
-<div class="profile">
+              <% @imps.concat(Impression.where(impressionable_id: f.id)) %>
+              <% @facilitynames.push(f.name) %>
+              <% end %>
+            </ul>
+          </div>
 
-  <h1><%= @user.name %></h1>
-  <h4><%= mail_to(@user.email) %></h4>
+          <div class="report">
+            <!--Div that will hold the dashboard-->
+            <h4>Reports</h4>
+            <div id="dashboard_div">
+              <!--Divs that will hold each control and chart-->
 
-<h4>Registered Since <%= @user.created_at.strftime("%B %Y") %></h4>
+              <div id="chart_div"></div>
+              <div id="filter_div"></div>
+            </div>
 
-<br>
+            <div id="day_of_week_div"></div>
 
-
-<% @imps = Array.new %>
-<% @facilitynames = Array.new %>
-
-<!--if @user.facilities.count > 0-->
-<% if @user.facilities.count > 0 %>
-  <div class="administered">
-    <h4><%= pluralize(@user.facilities.count, 'Facility') %> Available to Edit</h4>
-    <ul>
-      <% @user.facilities.each do |f| %>
-        <li><%= link_to f.name, edit_facility_path(f.id) %>  (Monthly View Count: <%= Impression.where(impressionable_id: f.id).count %>)</li>
-
-      <% @imps.concat(Impression.where(impressionable_id: f.id)) %>
-      <% @facilitynames.push(f.name) %>
-      <% end %>
-    </ul>
-  </div>
-
-
-<br>
-<div class="report">
- <!--Div that will hold the dashboard-->
-  <h4>Reports</h4>
-    <div id="dashboard_div">
-      <!--Divs that will hold each control and chart-->
-
-      <div id="chart_div"></div>
-      <div id="filter_div"></div>
+            <div id="time_of_day_div"></div>
+          </div>
+        <%elsif @user.activation_email_sent%>
+          <div class="alert alert-info" role="alert">Thank you! Your message has already been sent to the LinkVan team. We will get in touch as soon as we can :)</div>
+        <%else%>
+          <p><b>Step 2: </b>Almost ready! Please fill out the form below and a member of the LinkVan team will get in touch with you as soon as we can to finish setting up your account:</p>
+          <%= render 'messages/contact_form' %>
+        <%end%>
+        <ul class="list-inline text-center">
+          <li><%= link_to 'Edit Account', edit_user_path(@user), class: "btn btn-link" %> |</li>
+          <li><%= link_to 'Delete Account', @user,
+                      method: :delete,
+                      data: { confirm: 'Are you sure you want to permanently delete your account?' }%></li>
+        </ul>
+      </div>
     </div>
-
-
-    <div id="day_of_week_div"></div>
-
-    <div id="time_of_day_div"></div>
-</div>
-<%elsif @user.activation_email_sent%>
-  <h3>Thank you! Your message has already been sent to the LinkVan team. We will get in touch as soon as we can :)</h3>
-
-<%else%>
-  <h4><b>Step 2: </b>Almost ready! Please fill out the form below and a member of the LinkVan team will get in touch with you as soon as we can to finish setting up your account:</h4><br>
-
-  <%= render 'messages/contact_form' %>
-
-
-<%end%>
-
-<br>
-
-
-
-<footer>
-
-    <%= link_to 'Edit Account', edit_user_path(@user), class: 'button' %>
-    |
-    <%= link_to 'Delete Account', @user,
-                method: :delete,
-                data: { confirm: 'Are you sure you want to permanently delete your account?' }%>
-
-</footer>
-
-</div>
+  </div>
+</section>
 
 <%= content_tag :div, class: "temp_information", data: {facilitynames: @facilitynames, imps: @imps} do %>
 <% end %>
