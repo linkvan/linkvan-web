@@ -1,377 +1,510 @@
 <%= form_for(@facility) do |f| %>
   <% if @facility.errors.any? %>
-  <h3 style="color:red">Oops, did you remember to "Search" the address? Name missing?</h3>
-  <h4>Errors: <%= @facility.errors.full_messages.to_sentence %></h4>
+  <div class="alert alert-danger" role="alert">
+    <strong>Ops!</strong> <%= @facility.errors.full_messages.to_sentence %>
+  </div>
   <% end %>
   <p>
-    <strong> NOTE: DO NOT PRESS ENTER WHEN FILLING IN FIELDS. USE "CREATE FACILITY"/"UPDATE FACILITY" BUTTON AT BOTTOM OF PAGE.</strong><br/><br/>
-    <%= f.label :name %>&nbsp;&nbsp;&nbsp;<%= f.text_field :name, autofocus: true %>
+    <strong> NOTE: DO NOT PRESS ENTER WHEN FILLING IN FIELDS. USE "CREATE FACILITY"/"UPDATE FACILITY" BUTTON AT BOTTOM OF PAGE.</strong>
   </p>
-  <hr>
-  <p>
-    <%= f.label :welcomes %>&nbsp;&nbsp;&nbsp;<%= f.select :welcomes, [['All'], ['Women'], ['Men']] %>
-  </p>
-  <hr>
-  <p>
-    <%= f.label :suitability %> - Select All Relevant Categories<br/>
-    <strong>Note: Suitability is currently not used; however, future designs of the web app may use this information to better search and sort facilities.</strong><br>
-    <%= f.hidden_field :suitability %><br>
 
+  <div class="form-group form-group-inline">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, class: "form-control" %>
+  </div>
+  <div class="form-group form-group-inline">
+    <%= f.label :welcomes %>
+    <%= f.select :welcomes, [['All'], ['Women'], ['Men']] %>
+  </div>
+  <hr>
+  <div class="form-group">
+    <%= f.label :suitability %> - Select All Relevant Categories
+    <%= f.hidden_field :suitability %>
     <% if @facility.suitability.nil? %>
-      <input type="checkbox" id="chcheck" name="Children" value="Children" onclick="chclicked()">Children &nbsp;&nbsp;
-      <input type="checkbox" id="yocheck" name="Youth" value="Youth" onclick="yoclicked()">Youth &nbsp;&nbsp;
-      <input type="checkbox" id="adcheck" name="Adults" value="Adults" onclick="adclicked()">Adults &nbsp;&nbsp;
-      <input type="checkbox" id="secheck" name="Seniors" value="Seniors" onclick="seclicked()">Seniors &nbsp;&nbsp;
-    <%else%>
+      <ul class="list-inline">
+        <li>
+          <input type="checkbox" class="custom-checkbox" id="chcheck" name="Children" value="Children" onclick="chclicked()">
+          <label for="chcheck">Children</label>
+        </li>
+        <li>
+          <input type="checkbox" class="custom-checkbox" id="yocheck" name="Youth" value="Youth" onclick="yoclicked()">
+          <label for="yocheck">Youth</label>
+        </li>
+        <li>
+          <input type="checkbox" class="custom-checkbox" id="adcheck" name="Adults" value="Adults" onclick="adclicked()">
+          <label for="adcheck">Adults</label>
+        </li>
+        <li>
+          <input type="checkbox" class="custom-checkbox" id="secheck" name="Seniors" value="Seniors" onclick="seclicked()">
+          <label for="secheck">Seniors</label>
+        </li>
+      </ul>
+    <% else %>
+      <ul class="list-inline">
+        <li>
+          <% if @facility.suitability.include? "Children" %>
+            <input type="checkbox" class="custom-checkbox" id="scheck" name="Children" value="Children" onclick="chclicked()" checked>
+          <% else %>
+            <input type="checkbox" class="custom-checkbox" id="scheck" name="Children" value="Children" onclick="chclicked()">
+          <% end %>
+          <label for="scheck">Children</label>
+        </li>
+        <li>
+          <% if @facility.suitability.include? "Youth" %>
+            <input type="checkbox" class="custom-checkbox" id="fcheck" name="Youth" value="Youth" onclick="yoclicked()" checked>
+          <% else %>
+            <input type="checkbox" class="custom-checkbox" id="fcheck" name="Youth" value="Youth" onclick="yoclicked()">
+          <% end %>
+          <label for="fcheck">Youth</label>
+        </li>
+        <li>
+          <% if @facility.suitability.include? "Adults" %>
+            <input type="checkbox" class="custom-checkbox" id="mcheck" name="Adults" value="Adults" onclick="adclicked()" checked>
+          <% else %>
+            <input type="checkbox" class="custom-checkbox" id="mcheck" name="Adults" value="Adults" onclick="adclicked()">
+          <% end %>
+          <label for="mcheck">Adults</label>
+        </li>
+        <li>
+          <% if @facility.suitability.include? "Seniors" %>
+            <input type="checkbox" class="custom-checkbox" id="hcheck" name="Seniors" value="Seniors" onclick="seclicked()" checked>
+          <% else %>
+            <input type="checkbox" class="custom-checkbox" id="hcheck" name="Seniors" value="Seniors" onclick="seclicked()">
+          <% end %>
+          <label for="hcheck">Seniors</label>
+        </li>
+      </ul>
+    <% end %>
+    <span class="help-block">Note: Suitability is currently not used; however, future designs of the web app may use this information to better search and sort facilities.</span>
+  </div>
 
-    <% if @facility.suitability.include? "Children" %>
-      <input type="checkbox" id="scheck" name="Children" value="Children" onclick="chclicked()" checked>Children &nbsp;&nbsp;
-    <%else%>
-      <input type="checkbox" id="scheck" name="Children" value="Children" onclick="chclicked()">Children &nbsp;&nbsp;
-    <%end%>
-
-    <% if @facility.suitability.include? "Youth" %>
-      <input type="checkbox" id="fcheck" name="Youth" value="Youth" onclick="yoclicked()" checked>Youth &nbsp;&nbsp;
-    <%else%>
-      <input type="checkbox" id="fcheck" name="Youth" value="Youth" onclick="yoclicked()">Youth &nbsp;&nbsp;
-    <%end%>
-
-    <% if @facility.suitability.include? "Adults" %>
-      <input type="checkbox" id="mcheck" name="Adults" value="Adults" onclick="adclicked()" checked>Adults &nbsp;&nbsp;
-    <%else%>
-      <input type="checkbox" id="mcheck" name="Adults" value="Adults" onclick="adclicked()">Adults &nbsp;&nbsp;
-    <%end%>
-
-    <% if @facility.suitability.include? "Seniors" %>
-      <input type="checkbox" id="hcheck" name="Seniors" value="Seniors" onclick="seclicked()" checked>Seniors &nbsp;&nbsp;
-    <%else%>
-      <input type="checkbox" id="hcheck" name="Seniors" value="Seniors" onclick="seclicked()">Seniors &nbsp;&nbsp;
-    <%end%>
-
-
-    <%end%>
-
-
-  </p>
   <hr>
-  <p>
-    <%= f.label :services %> - Select All Relevant Categories<br/>
 
-
-    <%= f.hidden_field :services%><br>
+  <div class="form-group">
+    <%= f.label :services %> - Select All Relevant Categories
+    <%= f.hidden_field :services%>
     <% if @facility.services.nil? %>
-      <input type="checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">Shelter &nbsp;&nbsp;
-      <input type="checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">Food &nbsp;&nbsp;
-      <input type="checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">Medical &nbsp;&nbsp;
-      <input type="checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">Hygiene &nbsp;&nbsp;
-      <input type="checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">Technology &nbsp;&nbsp;
-      <input type="checkbox" id="acheck" name="Advocacy" value="Advocacy" onclick="aclicked()">Advocacy &nbsp;&nbsp;
-    <%else%>
+    <ul class="list-inline">
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">
+        <label for="scheck">Shelter</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">
+        <label for="fcheck">Food</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">
+        <label for="mcheck">Medical</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">
+        <label for="hcheck">Hygiene</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">
+        <label for="tcheck">Technology</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="acheck" name="Advocacy" value="Advocacy" onclick="aclicked()">
+        <label for="acheck">Advocacy</label>
+      </li>
+    </ul>
+    <% else %>
+    <ul class="list-inline">
+      <li>
+        <% if @facility.services.include? "Shelter" %>
+        <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">
+        <% end %>
+        <label for="scheck">Shelter</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Food" %>
+        <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">
+        <% end %>
+        <label for="fcheck">Food</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Medical" %>
+        <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">
+        <% end %>
+        <label for="mcheck">Medical</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Hygiene" %>
+        <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">
+        <% end %>
+        <label for="hcheck">Hygiene</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Technology" %>
+        <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">
+        <% end %>
+        <label for="tcheck">Technology</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Advocacy" %>
+        <input type="checkbox" class="custom-checkbox" id="acheck" name="Advocacy" value="Advocacy" onclick="aclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="acheck" name="Advocacy" value="Advocacy" onclick="aclicked()">
+        <% end %>
+        <label for="acheck">Advocacy</label>
+      </li>
+    </ul>
+    <% end %>
+  </div>
 
-    <% if @facility.services.include? "Shelter" %>
-      <input type="checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()" checked>Shelter &nbsp;&nbsp;
-    <%else%>
-      <input type="checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">Shelter &nbsp;&nbsp;
-    <%end%>
-
-    <% if @facility.services.include? "Food" %>
-      <input type="checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()" checked>Food &nbsp;&nbsp;
-    <%else%>
-      <input type="checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">Food &nbsp;&nbsp;
-    <%end%>
-
-    <% if @facility.services.include? "Medical" %>
-      <input type="checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()" checked>Medical &nbsp;&nbsp;
-    <%else%>
-      <input type="checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">Medical &nbsp;&nbsp;
-    <%end%>
-
-    <% if @facility.services.include? "Hygiene" %>
-      <input type="checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()" checked>Hygiene &nbsp;&nbsp;
-    <%else%>
-      <input type="checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">Hygiene &nbsp;&nbsp;
-    <%end%>
-
-    <% if @facility.services.include? "Technology" %>
-      <input type="checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()" checked>Technology &nbsp;&nbsp;
-    <%else%>
-      <input type="checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">Technology &nbsp;&nbsp;
-    <%end%>
-
-    <% if @facility.services.include? "Advocacy" %>
-      <input type="checkbox" id="acheck" name="Advocacy" value="Advocacy" onclick="aclicked()" checked>Advocacy &nbsp;&nbsp;
-    <%else%>
-      <input type="checkbox" id="acheck" name="Advocacy" value="Advocacy" onclick="aclicked()">Advocacy &nbsp;&nbsp;
-    <%end%>
-
-    <%end%>
-
-  </p>
   <hr>
-  <p>
-    <%= f.label :address %> - Enter the facility's address then click Search.<br>Format: Street Address, City, BC. Example: 612 Main St, Vancouver, BC<br/>
 
-    <%= f.text_field :address, size: 50 %>
-    <input type="button" value="Search" onclick="codeAddress()">
+  <div class="form-group">
+    <p>
+      <%= f.label :address %> - Enter the facility's address then click Search.<br/>Format: Street Address, City, BC. Example: 612 Main St, Vancouver, BC
+    </p>
+    <div class="form-group-inline">
+      <%= f.text_field :address, class: "form-control" %>
+      <input type="button" class="btn btn-primary" value="Search" onclick="codeAddress()">
+    </div>
     <div id="map-canvas-new"></div>
+  </div>
 
-  </p>
   <hr>
-  <p>
+
+  <div class="form-group">
     <%= f.label :phone %> - Example: 604 555 6789<br/>
-    <%= f.text_field :phone %>
-  </p>
+    <%= f.text_field :phone, class: "form-control" %>
+  </div>
+
   <hr>
-  <p>
+
+  <div class="form-group">
     <%= f.label :website %> - Do not include "http://". Example: www.learningexchange.ubc.ca<br/>
-    <%= f.text_field :website %>
-  </p>
+    <%= f.text_field :website, class: "form-control" %>
+  </div>
+
   <hr>
 <!--
   <p>
     <%= f.label :description %> - Copy paste verbatim from the facility's "about us" page. Will tweak on stakeholder feedback.<br/>
     <%= f.text_area :description, cols: 60, rows: 7 %>
   </p> -->
-  <h3>Hours</h3>
-  <p>
-    <strong> NOTE: The start time and end time for a day cannot be identical. Check the "Second time" option to specify a second time range</strong><br/>
-  </p>
-  <table>
-    <tr>
-      <td><%= f.label :open_all_day_mon %>
-      <%= f.check_box :open_all_day_mon %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :closed_all_day_mon %>
-      <%= f.check_box :closed_all_day_mon %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :second_time_mon %>
-      <%= f.check_box :second_time_mon %></td>
-    </tr>
-  </table>
-  <div id="mon-hours">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startsmon_at %></td>
-      <td><%= f.time_select :startsmon_at, default: 8.hours.ago  %></td>
-      <td><%= f.label :endsmon_at %></td>
-      <td><%= f.time_select :endsmon_at, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
+  <div class="form-group facility-hours">
+    <h3>Hours</h3>
+    <span class="help-block">Note: The start time and end time for a day cannot be identical. Check the "Second time" option to specify a second time range.</span>
+    <div class="well">
+      <h4>Monday:</h4>
+      <ul class="list-inline">
+        <li>
+          <%= f.check_box :open_all_day_mon, class: "custom-checkbox" %>
+          <%= f.label :open_all_day_mon, "Open all day" %>
+        </li>
+        <li>
+          <%= f.check_box :closed_all_day_mon, class: "custom-checkbox" %>
+          <%= f.label :closed_all_day_mon, "Closed all day" %>
+        </li>
+        <li>
+          <%= f.check_box :second_time_mon, class: "custom-checkbox" %>
+          <%= f.label :second_time_mon, "Second time" %>
+        </li>
+      </ul>
+      <div id="mon-hours">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startsmon_at, "Starts at" %>
+            <%= f.time_select :startsmon_at, default: 8.hours.ago %>
+          </li>
+          <li>
+            <%= f.label :endsmon_at, "Ends at" %>
+            <%= f.time_select :endsmon_at, default: 8.hours.ago %>
+          </li>
+        </ul>
+      </div>
+      <div id="mon-hours-2" style="display: none;">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startsmon_at2, "Starts at" %>
+            <%= f.time_select :startsmon_at2, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endsmon_at2, "Ends at" %>
+            <%= f.time_select :endsmon_at2, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="well">
+      <h4>Tuesday:</h4>
+      <ul class="list-inline">
+        <li>
+          <%= f.check_box :open_all_day_tues, class: "custom-checkbox" %>
+          <%= f.label :open_all_day_tues, "Open all day" %>
+        </li>
+        <li>
+          <%= f.check_box :closed_all_day_tues, class: "custom-checkbox" %>
+          <%= f.label :closed_all_day_tues, "Closed all day" %>
+        </li>
+        <li>
+          <%= f.check_box :second_time_tues, class: "custom-checkbox" %>
+          <%= f.label :second_time_tues, "Second time" %>
+        </li>
+      </ul>
+      <div id="tues-hours">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startstues_at, "Starts at" %>
+            <%= f.time_select :startstues_at, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endstues_at, "Ends at" %>
+            <%= f.time_select :endstues_at, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+      <div id="tues-hours-2" style="display: none;">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startstues_at2, "Starts at" %>
+            <%= f.time_select :startstues_at2, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endstues_at2, "Ends at" %>
+            <%= f.time_select :endstues_at2, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="well">
+      <h4>Wednesday:</h4>
+      <ul class="list-inline">
+        <li>
+          <%= f.check_box :open_all_day_wed, class: "custom-checkbox" %>
+          <%= f.label :open_all_day_wed, "Open all day" %>
+        </li>
+        <li>
+          <%= f.check_box :closed_all_day_wed, class: "custom-checkbox" %>
+          <%= f.label :closed_all_day_wed, "Closed all day" %>
+        </li>
+        <li>
+          <%= f.check_box :second_time_wed, class: "custom-checkbox" %>
+          <%= f.label :second_time_wed, "Second time" %>
+        </li>
+      </ul>
+      <div id="wed-hours">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startswed_at, "Starts at" %>
+            <%= f.time_select :startswed_at, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endswed_at, "Ends at" %>
+            <%= f.time_select :endswed_at, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+      <div id="wed-hours-2" style="display: none;">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startswed_at2, "Starts at" %>
+            <%= f.time_select :startswed_at2, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endswed_at2, "Ends at" %>
+            <%= f.time_select :endswed_at2, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="well">
+      <h4>Thursday:</h4>
+      <ul class="list-inline">
+        <li>
+          <%= f.check_box :open_all_day_thurs, class: "custom-checkbox" %>
+          <%= f.label :open_all_day_thurs, "Open all day" %>
+        </li>
+        <li>
+          <%= f.check_box :closed_all_day_thurs, class: "custom-checkbox" %>
+          <%= f.label :closed_all_day_thurs, "Closed all day" %>
+        </li>
+        <li>
+          <%= f.check_box :second_time_thurs, class: "custom-checkbox" %>
+          <%= f.label :second_time_thurs, "Second time" %>
+        </li>
+      </ul>
+      <div id="thurs-hours">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startsthurs_at, "Starts at" %>
+            <%= f.time_select :startsthurs_at, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endsthurs_at, "Ends at" %>
+            <%= f.time_select :endsthurs_at, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+      <div id="thurs-hours-2" style="display: none;">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startsthurs_at2, "Starts at" %>
+            <%= f.time_select :startsthurs_at2, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endsthurs_at2, "Ends at" %>
+            <%= f.time_select :endsthurs_at2, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="well">
+      <h4>Friday:</h4>
+      <ul class="list-inline">
+        <li>
+          <%= f.check_box :open_all_day_fri, class: "custom-checkbox" %>
+          <%= f.label :open_all_day_fri, "Open all day" %>
+        </li>
+        <li>
+          <%= f.check_box :closed_all_day_fri, class: "custom-checkbox" %>
+          <%= f.label :closed_all_day_fri, "Closed all day" %>
+        </li>
+        <li>
+          <%= f.check_box :second_time_fri, class: "custom-checkbox" %>
+          <%= f.label :second_time_fri, "Second time" %>
+        </li>
+      </ul>
+      <div id="fri-hours">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startsfri_at, "Starts at" %>
+            <%= f.time_select :startsfri_at, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endsfri_at, "Ends at" %>
+            <%= f.time_select :endsfri_at, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+      <div id="fri-hours-2" style="display: none;">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startsfri_at2, "Starts at" %>
+            <%= f.time_select :startsfri_at2, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endsfri_at2, "Ends at" %>
+            <%= f.time_select :endsfri_at2, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="well">
+      <h4>Saturday:</h4>
+      <ul class="list-inline">
+        <li>
+          <%= f.check_box :open_all_day_sat, class: "custom-checkbox" %>
+          <%= f.label :open_all_day_sat, "Open all day" %>
+        </li>
+        <li>
+          <%= f.check_box :closed_all_day_sat, class: "custom-checkbox" %>
+          <%= f.label :closed_all_day_sat, "Closed all day" %>
+        </li>
+        <li>
+          <%= f.check_box :second_time_sat, class: "custom-checkbox" %>
+          <%= f.label :second_time_sat, "Second time" %>
+        </li>
+      </ul>
+      <div id="sat-hours">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startssat_at, "Starts at" %>
+            <%= f.time_select :startssat_at, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endssat_at, "Ends at" %>
+            <%= f.time_select :endssat_at, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+      <div id="sat-hours-2" style="display: none;">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startssat_at2, "Starts at" %>
+            <%= f.time_select :startssat_at2, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endssat_at2, "Ends at" %>
+            <%= f.time_select :endssat_at2, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="well">
+      <h4>Sunday:</h4>
+      <ul class="list-inline">
+        <li>
+          <%= f.check_box :open_all_day_sun, class: "custom-checkbox" %>
+          <%= f.label :open_all_day_sun, "Open all day" %>
+        </li>
+        <li>
+          <%= f.check_box :closed_all_day_sun, class: "custom-checkbox" %>
+          <%= f.label :closed_all_day_sun, "Closed all day" %>
+        </li>
+        <li>
+          <%= f.check_box :second_time_sun, class: "custom-checkbox" %>
+          <%= f.label :second_time_sun, "Second time" %>
+        </li>
+      </ul>
+      <div id="sun-hours">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startssun_at, "Starts at" %>
+            <%= f.time_select :startssun_at, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endssun_at, "Ends at" %>
+            <%= f.time_select :endssun_at, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+      <div id="sun-hours-2" style="display: none;">
+        <ul class="list-inline hour-selects">
+          <li>
+            <%= f.label :startssun_at2, "Starts at" %>
+            <%= f.time_select :startssun_at2, default: 8.hours.ago  %>
+          </li>
+          <li>
+            <%= f.label :endssun_at2, "Ends at" %>
+            <%= f.time_select :endssun_at2, default: 8.hours.ago  %>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div id="mon-hours-2" style="display: none;">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startsmon_at2 %></td>
-      <td><%= f.time_select :startsmon_at2, default: 8.hours.ago  %></td>
-      <td><%= f.label :endsmon_at2 %></td>
-      <td><%= f.time_select :endsmon_at2, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
+
   <hr>
 
-  <table>
-    <tr>
-      <td><%= f.label :open_all_day_tues %>
-      <%= f.check_box :open_all_day_tues %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :closed_all_day_tues %>
-      <%= f.check_box :closed_all_day_tues %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :second_time_tues %>
-      <%= f.check_box :second_time_tues %></td>
-    </tr>
-  </table>
-  <div id="tues-hours">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startstues_at %></td>
-      <td><%= f.time_select :startstues_at, default: 8.hours.ago  %></td>
-      <td><%= f.label :endstues_at %></td>
-      <td><%= f.time_select :endstues_at, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
-  <div id="tues-hours-2" style="display: none;">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startstues_at2 %></td>
-      <td><%= f.time_select :startstues_at2, default: 8.hours.ago  %></td>
-      <td><%= f.label :endstues_at2 %></td>
-      <td><%= f.time_select :endstues_at2, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
-  <hr>
-
-  <table>
-    <tr>
-      <td><%= f.label :open_all_day_wed %>
-      <%= f.check_box :open_all_day_wed %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :closed_all_day_wed %>
-      <%= f.check_box :closed_all_day_wed %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :second_time_wed %>
-      <%= f.check_box :second_time_wed %></td>
-    </tr>
-  </table>
-  <div id="wed-hours">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startswed_at %></td>
-      <td><%= f.time_select :startswed_at, default: 8.hours.ago  %></td>
-      <td><%= f.label :endswed_at %></td>
-      <td><%= f.time_select :endswed_at, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
-  <div id="wed-hours-2" style="display: none;">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startswed_at2 %></td>
-      <td><%= f.time_select :startswed_at2, default: 8.hours.ago  %></td>
-      <td><%= f.label :endswed_at2 %></td>
-      <td><%= f.time_select :endswed_at2, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
-  <hr>
-
-  <table>
-    <tr>
-      <td><%= f.label :open_all_day_thurs %>
-      <%= f.check_box :open_all_day_thurs %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :closed_all_day_thurs%>
-      <%= f.check_box :closed_all_day_thurs %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :second_time_thurs %>
-      <%= f.check_box :second_time_thurs %></td>
-    </tr>
-  </table>
-  <div id="thurs-hours">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startsthurs_at %></td>
-      <td><%= f.time_select :startsthurs_at, default: 8.hours.ago  %></td>
-      <td><%= f.label :endsthurs_at %></td>
-      <td><%= f.time_select :endsthurs_at, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
-  <div id="thurs-hours-2" style="display: none;">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startsthurs_at2 %></td>
-      <td><%= f.time_select :startsthurs_at2, default: 8.hours.ago  %></td>
-      <td><%= f.label :endsthurs_at2 %></td>
-      <td><%= f.time_select :endsthurs_at2, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
-  <hr>
-
-  <table>
-    <tr>
-      <td><%= f.label :open_all_day_fri %>
-      <%= f.check_box :open_all_day_fri %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :closed_all_day_fri%>
-      <%= f.check_box :closed_all_day_fri %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :second_time_fri %>
-      <%= f.check_box :second_time_fri %></td>
-    </tr>
-  </table>
-  <div id="fri-hours">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startsfri_at %></td>
-      <td><%= f.time_select :startsfri_at, default: 8.hours.ago  %></td>
-      <td><%= f.label :endsfri_at %></td>
-      <td><%= f.time_select :endsfri_at, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
-  <div id="fri-hours-2" style="display: none;">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startsfri_at2 %></td>
-      <td><%= f.time_select :startsfri_at2, default: 8.hours.ago  %></td>
-      <td><%= f.label :endsfri_at2 %></td>
-      <td><%= f.time_select :endsfri_at2, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
-  <hr>
-
-  <table>
-    <tr>
-      <td><%= f.label :open_all_day_sat %>
-      <%= f.check_box :open_all_day_sat %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :closed_all_day_sat%>
-      <%= f.check_box :closed_all_day_sat %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :second_time_sat %>
-      <%= f.check_box :second_time_sat %></td>
-    </tr>
-  </table>
-  <div id="sat-hours">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startssat_at %></td>
-      <td><%= f.time_select :startssat_at, default: 8.hours.ago  %></td>
-      <td><%= f.label :endssat_at %></td>
-      <td><%= f.time_select :endssat_at, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
-  <div id="sat-hours-2" style="display: none;">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startssat_at2 %></td>
-      <td><%= f.time_select :startssat_at2, default: 8.hours.ago  %></td>
-      <td><%= f.label :endssat_at2 %></td>
-      <td><%= f.time_select :endssat_at2, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
-  <hr>
-
-  <table>
-    <tr>
-      <td><%= f.label :open_all_day_sun %>
-      <%= f.check_box :open_all_day_sun %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :closed_all_day_sun%>
-      <%= f.check_box :closed_all_day_sun %>&nbsp;&nbsp;&nbsp;
-      <%= f.label :second_time_sun %>
-      <%= f.check_box :second_time_sun %></td>
-    </tr>
-  </table>
-  <div id="sun-hours">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startssun_at %></td>
-      <td><%= f.time_select :startssun_at, default: 8.hours.ago  %></td>
-      <td><%= f.label :endssun_at %></td>
-      <td><%= f.time_select :endssun_at, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
-  <div id="sun-hours-2" style="display: none;">
-  <table class="hours-form">
-    <tr>
-      <td><%= f.label :startssun_at2 %></td>
-      <td><%= f.time_select :startssun_at2, default: 8.hours.ago  %></td>
-      <td><%= f.label :endssun_at2 %></td>
-      <td><%= f.time_select :endssun_at2, default: 8.hours.ago  %></td>
-    </tr>
-  </table>
-  </div>
-  <hr>
-  <h3>Notes</h3>
-  <p>
-    Examples: special events, facility rules, etc.<br/>
-    <%= f.text_area :notes, cols: 60, rows: 7 %>
-  </p>
-  <p>
-    <%= f.hidden_field :lat%><br>
+  <div class="form-group">
+    <h3>Notes</h3>
+    <p>
+      Examples: special events, facility rules, etc.<br/>
+      <%= f.text_area :notes, rows: 7, class: "form-control" %>
+    </p>
+    <%= f.hidden_field :lat%>
     <%= f.hidden_field :long %>
-  </p>
-  <p>
-    <%= f.submit %>
-    <%= link_to "Cancel", facilities_path %>
-  </p>
+  </div>
+
+  <ul class="list-inline">
+    <li><%= f.submit "Create Facility", class: "btn btn-primary" %></li>
+    <li><%= link_to "Cancel", facilities_path %></li>
+  </ul>
 <% end %>
 
 <script>

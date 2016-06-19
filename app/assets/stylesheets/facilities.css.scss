@@ -3,6 +3,33 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #facilities {
+	form.new_facility {
+		input[type="text"] {
+			max-width: 360px;
+		}
+
+		.facility-hours {
+			h4 {
+					margin-top: 0;
+			}
+
+			ul.hour-selects {
+				li {
+					margin-right: 18px;
+
+					&:last-child {
+						margin-right: 0;
+					}
+
+					label {
+						display: block;
+						font-weight: normal;
+					}
+				}
+			}
+		}
+	}
+
 	.facilities-category {
 		display: block;
 		margin-bottom: 12px;
@@ -317,11 +344,11 @@
 	margin-left: 0 auto;
 }
 
-.open{
-	text-align: center;
-	display: inline-block;
-	margin: 0 auto;
-}
+// .open{
+// 	text-align: center;
+// 	display: inline-block;
+// 	margin: 0 auto;
+// }
 
 .options-button{
 	text-align: center;

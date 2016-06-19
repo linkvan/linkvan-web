@@ -12,4 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
+//= require bootstrap.min
+//= require bootstrap-select.min
+
+$(document).ready(function () {
+  // Plugin: Bootstrap Select
+  $('select').selectpicker({
+    width: 'auto'
+  });
+});

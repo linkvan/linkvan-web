@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require bootstrap
+ *= require bootstrap-select
  *= require style
  *= require_self
  *= require_tree .
@@ -64,5 +65,76 @@ blockquote {
 
   footer {
     font-size: 90%;
+  }
+}
+
+form {
+  .form-group-inline {
+    margin-bottom: 15px;
+    
+    &:before, &:after {
+      display: table;
+      content: " ";
+    }
+
+    &:after {
+      clear: both;
+    }
+
+    label {
+      float: left;
+      padding: 4px 12px 0 0;
+    }
+
+    input.form-control {
+      float: left;
+    }
+
+    .btn {
+      float: left;
+      margin-left: 6px;
+    }
+  }
+}
+
+/* Helper Class */
+input.custom-checkbox {
+  position: absolute;
+  opacity: 0;
+
+  + label {
+    position: relative;
+    margin-left: 16px;
+    padding-left: 4px;
+    font-weight: normal;
+    cursor: pointer;
+
+    &:before {
+      display: block;
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: -18px;
+      width: 17px;
+      height: 17px;
+      padding: 1px 0;
+      font-size: 10px;
+      font-family: "Glyphicons Halflings";
+      text-align: center;
+      color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      background: #fff;
+    }
+  }
+
+  &:hover + label:before {
+    border-color: #428bca;
+  }
+
+  &:checked + label:before {
+    content: "\e013";
+    border-color: #428bca;
+    background: #428bca;
   }
 }
