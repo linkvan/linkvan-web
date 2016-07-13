@@ -71,7 +71,7 @@ blockquote {
 form {
   .form-group-inline {
     margin-bottom: 15px;
-    
+
     &:before, &:after {
       display: table;
       content: " ";
@@ -136,5 +136,11 @@ input.custom-checkbox {
     content: "\e013";
     border-color: #428bca;
     background: #428bca;
+  }
+}
+
+#facilities {
+  .facilities-category {
+    border-color: red;
   }
 }
