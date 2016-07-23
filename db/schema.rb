@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315211029) do
+ActiveRecord::Schema.define(version: 20160722232815) do
 
   create_table "anaylitics", force: :cascade do |t|
     t.decimal  "lat"
@@ -133,6 +133,8 @@ ActiveRecord::Schema.define(version: 20160315211029) do
     t.datetime "updated_at"
     t.boolean  "admin"
     t.boolean  "activation_email_sent", default: false
+    t.string   "phone_number"
+    t.boolean  "verified",              default: false
   end
 
 end

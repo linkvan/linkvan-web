@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_signin, except: [:new, :create]
   before_action :require_admin, only: [:index]
-  before_action :require_correct_user_or_admin, only: [:edit, :update, :show, :destroy]  
+  before_action :require_correct_user_or_admin, only: [:edit, :update, :show, :destroy]
 
 	def index
 		@users = User.all
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
       if session[:user_id] == @user.id
         session[:user_id] = nil #session[:user_id] = nil
       end
-      
+
   		redirect_to root_url, alert: "Account successfully deleted!"
 	end
 
