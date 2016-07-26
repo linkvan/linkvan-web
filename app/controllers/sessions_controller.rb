@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 			redirect_to(session[:intended_url] || user) #change user to rooth_path
     		session[:intended_url] = nil
 		else
+			flash.now[:error] = ['Email or Password invalid, please try again.']
 			render :new
 		end
 	end

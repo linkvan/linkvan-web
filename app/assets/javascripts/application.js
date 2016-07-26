@@ -14,10 +14,14 @@
 //= require jquery_ujs
 //= require bootstrap.min
 //= require bootstrap-select.min
+//= require jquery.validate.min
 
 $(document).ready(function () {
   // Plugin: Bootstrap Select
   $('select').selectpicker({
     width: 'auto'
   });
+
+  // Plugin: jQuery Validate
+  $('.form-validate').validate();
 });

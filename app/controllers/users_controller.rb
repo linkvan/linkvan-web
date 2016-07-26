@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     		redirect_to @user, notice: "Thanks for signing up!"
         UserMailer.welcome_email(@user).deliver
   		else
+        flash.now[:error] = @user.errors.full_messages
     		render :new
   		end
 	end
