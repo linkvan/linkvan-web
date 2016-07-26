@@ -1,4 +1,5 @@
-form.form-validate input.error {
+form.form-validate input.error,
+form.form-validate textarea.error {
   border-color: #a94442;
 }
 
