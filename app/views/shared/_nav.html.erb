@@ -9,9 +9,9 @@
 						</a>
 					</div>
 					<div class="col-sm-8">
-						<form action="<%= search_bar_facilities_path %>" method="get" class="navbar-form navbar-right" role="search">
+						<form action="<%= search_bar_facilities_path %>" method="get" class="navbar-form navbar-right form-validate" role="search">
 							<div class="form-group">
-								<%= text_field_tag :search, nil, placeholder: "Search Facilities", class: "form-control" %>
+								<%= text_field_tag :search, nil, placeholder: "Search Facilities", class: "form-control", required: true %>
 							</div>
 							<%= submit_tag "SEARCH", :name => nil, class: "btn btn-primary" %>
 						</form>
