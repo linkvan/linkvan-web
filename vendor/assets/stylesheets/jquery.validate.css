@@ -1,0 +1,10 @@
+form.form-validate input.error,
+form.form-validate textarea.error {
+  border-color: #a94442;
+}
+
+form.form-validate label.error {
+  font-weight: normal;
+  font-size: 14px;
+  color: #a94442;
+}

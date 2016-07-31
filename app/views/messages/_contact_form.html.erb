@@ -1,15 +1,15 @@
-<%= form_for @message, url: contact_path do |message_form| %>
+<%= form_for @message, url: contact_path, html: {class: "form-validate"} do |message_form| %>
   <div class="form-group">
     <%= message_form.label "Contact Name" %>
-    <%= message_form.text_field :name, class: "form-control" %>
+    <%= message_form.text_field :name, class: "form-control", required: true %>
   </div>
   <div class="form-group">
     <%= message_form.label :phone %>
-    <%= message_form.text_field :phone, class: "form-control" %>
+    <%= message_form.text_field :phone, class: "form-control mask-input", required: true, data: {mask: "000 000 0000"} %>
   </div>
   <div class="form-group">
     <label>Please tell us the name of the organization for which you'd like to become an administrator. If you are the administrator of an organization not listed in the app, please tell us the name of the organization you'd like created.</label>
-    <%= message_form.text_area :content, class: "form-control", :rows => "8" %>
+    <%= message_form.text_area :content, class: "form-control", :rows => "8", required: true %>
   </div>
   <%= message_form.submit "Send", class: "btn btn-primary" %>
 <% end %>
