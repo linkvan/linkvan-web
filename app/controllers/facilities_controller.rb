@@ -178,6 +178,7 @@ class FacilitiesController < ApplicationController
 
 	def create
 		@facility = Facility.new(facility_params)
+    @facility.user_id = current_user.id
 		if @facility.save
       Status.create(fid: @facility.id, changetype: "C")
 		  redirect_to @facility
@@ -198,7 +199,7 @@ private
 
 	def facility_params
 		params.require(:facility).
-							permit(:name, :welcomes, :services, :address, :phone,
+							permit(:name, :welcomes, :services, :address, :phone, :user_id,
 								:website, :description, :startsmon_at, :endsmon_at, :startstues_at, :endstues_at,
                   :startswed_at, :endswed_at, :startsthurs_at, :endsthurs_at, :startsfri_at, :endsfri_at,
                     :startssat_at, :endssat_at, :startssun_at, :endssun_at, :notes, :suitability, :lat, :long,

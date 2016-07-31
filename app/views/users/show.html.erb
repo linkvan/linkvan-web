@@ -6,6 +6,7 @@
         <p><%= mail_to(@user.email) %></p>
         <p>Registered Since <%= @user.created_at.strftime("%B %Y") %></p>
         <hr>
+        <p><%= link_to "Add New Facility ", new_facility_path, class: "btn btn-link"%> </p>
         <% @imps = Array.new %>
         <% @facilitynames = Array.new %>
         <% if @user.facilities.count > 0 %>
