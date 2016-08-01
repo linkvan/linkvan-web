@@ -6,6 +6,7 @@ class FacilitiesController < ApplicationController
     @facilities = Facility.all
   end
 
+
     def filtered
       @latitude = params[:latitude]
       @longitude = params[:longitude]
@@ -108,14 +109,20 @@ class FacilitiesController < ApplicationController
           @facilities_name_no.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
         end
 
+        #remove from each of the @facilities any facilities that are not verified
+          @facilities_near_yes.keep_if {|f| f.verified == true}
+          @facilities_near_no.keep_if {|f| f.verified == true}
+          @facilities_name_yes.keep_if {|f| f.verified == true}
+          @facilities_name_no.keep_if {|f| f.verified == true}
+
       else
-        @facilities_near_yes = Facility.all
-        @facilities_near_no = Facility.all
-        @facilities_name_yes = Facility.all
-        @facilities_name_no = Facility.all
+        @facilities_near_yes = Facility.where(verified: true)
+        @facilities_near_no = Facility.where(verified: true)
+        @facilities_name_yes = Facility.where(verified: true)
+        @facilities_name_no = Facility.where(verified: true)
       end
 
-      @facilities = Facility.all
+      @facilities = Facility.where(verified: true)
 
       @facilities_near_yes.each do |f|
          @facilities_near_yes_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
@@ -199,7 +206,7 @@ private
 
 	def facility_params
 		params.require(:facility).
-							permit(:name, :welcomes, :services, :address, :phone, :user_id,
+							permit(:name, :welcomes, :services, :address, :phone, :user_id, :verified,
 								:website, :description, :startsmon_at, :endsmon_at, :startstues_at, :endstues_at,
                   :startswed_at, :endswed_at, :startsthurs_at, :endsthurs_at, :startsfri_at, :endsfri_at,
                     :startssat_at, :endssat_at, :startssun_at, :endssun_at, :notes, :suitability, :lat, :long,

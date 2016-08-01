@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722232815) do
+ActiveRecord::Schema.define(version: 20160731234828) do
 
   create_table "anaylitics", force: :cascade do |t|
     t.decimal  "lat"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20160722232815) do
     t.boolean  "second_time_sat",      default: false
     t.boolean  "second_time_sun",      default: false
     t.integer  "user_id"
+    t.boolean  "verified",             default: false
   end
 
   add_index "facilities", ["user_id"], name: "index_facilities_on_user_id"

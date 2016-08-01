@@ -6,7 +6,7 @@ class Facility < ActiveRecord::Base
 	validates :name, :lat, :long, :services, presence: true
 
 	is_impressionable
-	
+
 	def self.search(search)
 		#where("name ILIKE ?", "%#{search}%") for production
 		#where("name LIKE ?", "%#{search}%") for development
@@ -23,10 +23,10 @@ class Facility < ActiveRecord::Base
 
 		#first query db for any facility whose services contains the service_query
 		#and store in array arr
-		facility = Facility.select("services", "id")
+		facility = Facility.select("services", "id", "verified")
 
 		facility.each do |f|
-			if f.services.include?(service_query)
+			if (f.services.include?(service_query)) && (f.verified == true)
 				arr.push(Facility.find(f.id))
 			end
 		end
@@ -69,7 +69,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startssun_at.hour.to_i && 8.hours.ago.min <= arr[$i].startssun_at.min.to_i) || (8.hours.ago.hour == arr[$i].endssun_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endssun_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startssun_at.hour.to_i && 8.hours.ago.min <= arr[$i].startssun_at.min.to_i) || (8.hours.ago.hour == arr[$i].endssun_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endssun_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -117,7 +117,7 @@ class Facility < ActiveRecord::Base
 							temp_arr.delete(t)
 							$i-=1
 
-						elsif (8.hours.ago.hour == arr[$i].startsmon_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsmon_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsmon_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsmon_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startsmon_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsmon_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsmon_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsmon_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -168,7 +168,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startstues_at.hour.to_i && 8.hours.ago.min <= arr[$i].startstues_at.min.to_i) || (8.hours.ago.hour == arr[$i].endstues_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endstues_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startstues_at.hour.to_i && 8.hours.ago.min <= arr[$i].startstues_at.min.to_i) || (8.hours.ago.hour == arr[$i].endstues_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endstues_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -215,7 +215,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startswed_at.hour.to_i && 8.hours.ago.min <= arr[$i].startswed_at.min.to_i) || (8.hours.ago.hour == arr[$i].endswed_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endswed_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startswed_at.hour.to_i && 8.hours.ago.min <= arr[$i].startswed_at.min.to_i) || (8.hours.ago.hour == arr[$i].endswed_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endswed_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -262,7 +262,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startsthurs_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsthurs_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsthurs_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsthurs_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startsthurs_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsthurs_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsthurs_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsthurs_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -309,7 +309,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startsfri_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsfri_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsfri_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsfri_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startsfri_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsfri_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsfri_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsfri_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -356,7 +356,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startssat_at.hour.to_i && 8.hours.ago.min <= arr[$i].startssat_at.min.to_i) || (8.hours.ago.hour == arr[$i].endssat_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endssat_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startssat_at.hour.to_i && 8.hours.ago.min <= arr[$i].startssat_at.min.to_i) || (8.hours.ago.hour == arr[$i].endssat_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endssat_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -459,7 +459,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 				when 1
@@ -509,7 +509,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 				when 2
@@ -558,7 +558,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 				when 3
@@ -607,7 +607,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 				when 4
@@ -656,7 +656,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 				when 5
@@ -705,7 +705,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 				else
@@ -754,7 +754,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 
@@ -794,7 +794,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startssun_at.hour.to_i && 8.hours.ago.min <= arr[$i].startssun_at.min.to_i) || (8.hours.ago.hour == arr[$i].endssun_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endssun_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startssun_at.hour.to_i && 8.hours.ago.min <= arr[$i].startssun_at.min.to_i) || (8.hours.ago.hour == arr[$i].endssun_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endssun_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -841,7 +841,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startsmon_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsmon_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsmon_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsmon_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startsmon_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsmon_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsmon_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsmon_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -888,7 +888,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startstues_at.hour.to_i && 8.hours.ago.min <= arr[$i].startstues_at.min.to_i) || (8.hours.ago.hour == arr[$i].endstues_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endstues_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startstues_at.hour.to_i && 8.hours.ago.min <= arr[$i].startstues_at.min.to_i) || (8.hours.ago.hour == arr[$i].endstues_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endstues_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -935,7 +935,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startswed_at.hour.to_i && 8.hours.ago.min <= arr[$i].startswed_at.min.to_i) || (8.hours.ago.hour == arr[$i].endswed_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endswed_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startswed_at.hour.to_i && 8.hours.ago.min <= arr[$i].startswed_at.min.to_i) || (8.hours.ago.hour == arr[$i].endswed_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endswed_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -982,7 +982,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startsthurs_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsthurs_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsthurs_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsthurs_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startsthurs_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsthurs_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsthurs_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsthurs_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -1029,7 +1029,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startsfri_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsfri_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsfri_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsfri_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startsfri_at.hour.to_i && 8.hours.ago.min <= arr[$i].startsfri_at.min.to_i) || (8.hours.ago.hour == arr[$i].endsfri_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endsfri_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -1076,7 +1076,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						elsif (8.hours.ago.hour == arr[$i].startssat_at.hour.to_i && 8.hours.ago.min <= arr[$i].startssat_at.min.to_i) || (8.hours.ago.hour == arr[$i].endssat_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endssat_at2.min.to_i) 
+						elsif (8.hours.ago.hour == arr[$i].startssat_at.hour.to_i && 8.hours.ago.min <= arr[$i].startssat_at.min.to_i) || (8.hours.ago.hour == arr[$i].endssat_at2.hour.to_i && 8.hours.ago.min >= arr[$i].endssat_at2.min.to_i)
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
@@ -1174,7 +1174,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 				when 1
@@ -1224,7 +1224,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 				when 2
@@ -1273,7 +1273,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 				when 3
@@ -1322,7 +1322,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 				when 4
@@ -1371,7 +1371,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 				when 5
@@ -1420,7 +1420,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 				else
@@ -1469,7 +1469,7 @@ class Facility < ActiveRecord::Base
 							t = arr[$i]
 							temp_arr.delete(t)
 							$i-=1
-						
+
 						end
 					end
 
