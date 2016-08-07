@@ -19,7 +19,8 @@ class UsersController < ApplicationController
 	def create
   		@user = User.new(user_params)
   		if @user.save
-        redirect_to "https://interstellar500.herokuapp.com"
+        session[:user_id] = @user.id
+    		redirect_to @user, notice: "Thanks for signing up!"
   		else
         flash.now[:error] = @user.errors.full_messages
     		render :new
