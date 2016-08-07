@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+before_action :require_signin, only: [:new, :create]
 
   def new
     @message = Message.new
