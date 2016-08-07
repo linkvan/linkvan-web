@@ -17,8 +17,8 @@ class UsersController < ApplicationController
 	end
 
 	def create
-  		
-    		redirect_to @user, notice: "Thanks for signing up!"
+
+    		redirect_to "https://interstellar500.herokuapp.com"
 	end
 
 	def edit
