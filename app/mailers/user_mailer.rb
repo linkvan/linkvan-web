@@ -1,10 +1,10 @@
 class UserMailer < ActionMailer::Base
   default from: "linkvanca@gmail.com"
- 
+
   def welcome_email(user)
   	@url  = 'http://linkvan.ca'
     @user = user
-    mail(to: @user.email, 
+    mail(to: @user.email,
     	subject: 'Welcome to LinkVan!')
   end
 
@@ -12,8 +12,8 @@ class UserMailer < ActionMailer::Base
     @message = message
     @user = user
 
-    
-    mail(to: "info@linkvan.ca",
+
+    mail(to: "f.tso11200@gmail.com",
       subject: "Activation Request from #{@user.name}")
 
   end
