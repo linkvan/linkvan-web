@@ -3,19 +3,19 @@
     <div class="col-sm-8 col-sm-offset-2">
       <div class="form-group">
         <%= f.label :name %>
-        <%= f.text_field :name, size: 40, class: "form-control", required: true %>
+        <%= f.text_field :name, size: 40, class: "form-control", %>
       </div>
       <div class="form-group">
         <%= f.label :email %>
-        <%= f.email_field :email, size: 40, class: "form-control", required: true %>
+        <%= f.email_field :email, size: 40, class: "form-control",  %>
       </div>
       <div class="form-group">
         <%= f.label :password %>
-        <%= f.password_field :password, size: 40, class: "form-control", required: true %>
+        <%= f.password_field :password, size: 40, class: "form-control", %>
       </div>
       <div class="form-group">
         <%= f.label :password_confirmation, "Confirm Password" %>
-        <%= f.password_field :password_confirmation, size: 40, class: "form-control", required: true, equalto: "#user_password" %>
+        <%= f.password_field :password_confirmation, size: 40, class: "form-control" %>
       </div>
       <div class="form-group">
         <%= f.label :phone_number, "Phone Number" %>
