@@ -13,7 +13,7 @@ class UserMailer < ActionMailer::Base
     @user = user
 
 
-    mail(to: "f.tso11200@gmail.com",
+    mail(to: "info@linkvan.ca",
       subject: "Activation Request from #{@user.name}")
 
   end
