@@ -10,7 +10,7 @@ before_action :require_signin, only: [:new, :create]
     #@user = User.find(session[:user_id])
 
     if @message.valid?
-      UserMailer.simple_message(current_user).deliver
+      UserMailer.simple_message.deliver
       current_user.activation_email_sent = true
       current_user.save
       redirect_to current_user, notice: "Your messages have been sent."
