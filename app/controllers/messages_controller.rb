@@ -10,10 +10,10 @@ before_action :require_signin, only: [:new, :create]
     #@user = User.find(session[:user_id])
 
     if @message.valid?
-      UserMailer.new_message(@message, current_user).deliver
+      UserMailer.simple_message(current_user).deliver
       current_user.activation_email_sent = true
       current_user.save
-      redirect_to current_user, notice: "Your messages has been sent."
+      redirect_to current_user, notice: "Your messages have been sent."
     else
       flash[:alert] = "An error occurred while delivering this message."
       render :new

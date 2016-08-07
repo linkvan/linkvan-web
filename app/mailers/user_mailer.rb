@@ -18,4 +18,9 @@ class UserMailer < ActionMailer::Base
 
   end
 
+  def simple_message(user)
+    @user = user
+    mail(to: "f.tso11200@gmail.com",
+      subject: "Activation Request from TEST")
+  end
 end
