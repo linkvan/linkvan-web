@@ -1,4 +1,4 @@
-<%= form_for(@user, :html => {:class => "form-validate"}) do |f| %>
+<%= form_for @user, html: {class: "form-validate"} do |f| %>
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
       <div class="form-group">
@@ -16,6 +16,10 @@
       <div class="form-group">
         <%= f.label :password_confirmation, "Confirm Password" %>
         <%= f.password_field :password_confirmation, size: 40, class: "form-control", required: true, equalto: "#user_password" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :phone_number, "Phone Number" %>
+        <%= f.text_field :phone_number, size: 40, class: "form-control" %>
       </div>
       <%= f.submit "Submit", class: "btn btn-primary" %>
     </div>
