@@ -17,8 +17,13 @@ class UsersController < ApplicationController
 	end
 
 	def create
-
-    		redirect_to "https://interstellar500.herokuapp.com"
+  		@user = User.new(user_params)
+  		if @user.save
+        redirect_to "https://interstellar500.herokuapp.com"
+  		else
+        flash.now[:error] = @user.errors.full_messages
+    		render :new
+  		end
 	end
 
 	def edit
