@@ -24,7 +24,9 @@ $(document).ready(function () {
   });
 
   // Plugin: jQuery Validate
-  $('.form-validate').validate();
+  $('.form-validate').each(function() {
+    $(this).validate();
+  });
 
   // Plugin: jQuery Mask
   $('.mask-input').each(function(){
