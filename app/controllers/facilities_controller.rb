@@ -8,6 +8,10 @@ class FacilitiesController < ApplicationController
 
 
     def filtered
+      add_breadcrumb params[:scope]
+      session['facilities_category'] = params[:scope]
+      session['facilities_list'] = request.original_url
+
       @latitude = params[:latitude]
       @longitude = params[:longitude]
 
@@ -162,6 +166,12 @@ class FacilitiesController < ApplicationController
 
 	def show
 		@facility = Facility.find(params[:id])
+
+    if session['facilities_category']
+      add_breadcrumb session['facilities_category'], session['facilities_list']
+    end
+    add_breadcrumb @facility.name
+    
     impressionist(@facility, @facility.name)
 	end
 

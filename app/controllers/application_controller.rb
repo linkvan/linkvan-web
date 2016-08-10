@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :allow_iframe_requests
 
+  add_breadcrumb "Facilities", :root_path
+
 private
 
 	def allow_iframe_requests
@@ -53,5 +55,5 @@ private
   	end
 
 	helper_method :current_user, :current_user_admin?, :require_correct_user_or_admin, :correct_user_or_admin?
-	
+
 end
