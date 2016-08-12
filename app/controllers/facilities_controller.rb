@@ -144,7 +144,7 @@ class FacilitiesController < ApplicationController
          @facilities_name_no_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
       end
 
-      cookies[:lat_lon] = JSON.generate([@latitude, @longitude])
+      # cookies[:lat_lon] = JSON.generate([@latitude, @longitude])
 
 	  end
 
@@ -171,7 +171,7 @@ class FacilitiesController < ApplicationController
       add_breadcrumb session['facilities_category'], session['facilities_list']
     end
     add_breadcrumb @facility.name
-    
+
     impressionist(@facility, @facility.name)
 	end
 

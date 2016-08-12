@@ -43,33 +43,3 @@
 		</div>
 	</div>
 </section>
-
-<script>
-
-var latitude, longitude;
-var hasStoredLatLon = false;
-
-
-var x = document.getElementById("demo");
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-
-
-function showPosition(position) {
-    //x.innerHTML = "Latitude: " + position.coords.latitude +
-    //"<br>Longitude: " + position.coords.longitude;
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
-
-		// TODO add cookies
-		//if (hasStoredLatLon === false) {
-			//hasStoredLatLon = true;
-			//var storedLat = latitude.toFixed(4);
-			//var storedLon = longitude.toFixed(4);
-		//} else {}
-}
-</script>
