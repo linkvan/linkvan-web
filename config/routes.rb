@@ -28,10 +28,13 @@ Linkvan::Application.routes.draw do
   get "signin" => "sessions#new"
   get 'contact', to: 'messages#new', as: 'contact'
   post 'contact', to: 'messages#create'
+  get 'users/:id/toggle_verify' => "users#toggle_verify"
 
 
 
   resources :facilities
+
+  # match "users/:id/toggle_verify" => "users#toggle_verify"
 
 
   # The priority is based upon order of creation: first created -> highest priority.

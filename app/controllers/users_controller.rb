@@ -10,7 +10,22 @@ class UsersController < ApplicationController
 	def show
     @message = Message.new
     @user = User.find(params[:id])
+    @users = User.all
 	end
+
+  def toggle_verify
+    @current_user = User.find(session[:user_id])
+    @user = User.find(params[:id])
+    if @user.verified == true
+      @user.update_attribute(:verified, false)
+      @user.save
+      redirect_to @current_user, notice: "User is not verified"
+    else
+      @user.update_attribute(:verified, true)
+      @user.save
+      redirect_to @current_user, notice: "User is verified"
+    end
+  end
 
 	def new
   	@user = User.new
@@ -67,10 +82,5 @@ class UsersController < ApplicationController
       redirect_to root_url
     end
   end
-
-
-
-
-
 
 end

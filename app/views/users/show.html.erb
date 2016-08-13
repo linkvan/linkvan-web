@@ -9,7 +9,34 @@
         <p><%= link_to "Add New Facility ", new_facility_path, class: "btn btn-link"%> </p>
         <% @imps = Array.new %>
         <% @facilitynames = Array.new %>
-        <% if @user.facilities.count > 0 %>
+        <% if (@user.admin == true) %>
+          <div class="admin-view">
+            <h1>LinkVan Admin</h1>
+            <h4><a href="#" id=facilities-button> Show Facilities</h4>
+            <ul id="users">
+              <% @users.each do |user| %>
+                <li>
+                  <% if user.admin == true %>
+                    <b>LinkVan Admin</b>
+                  <% end %>
+                  <%= link_to user.name, user %>
+                  <%= user.email%>
+                  <% @verified = user.verified ? "Verified" : "Not Verified"%>
+                  <%= link_to @verified, {:controller => "users", :action => "toggle_verify", :id => user.id} %>
+
+                  <div id="facilities-toggle">
+                    <ul>
+                      <% user.facilities.each do |f| %>
+                        <li><%= link_to f.name, edit_facility_path(f.id) %> </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+
+          </div>
+        <% elsif (@user.facilities.count > 0) && (@user.admin != true)%>
           <div class="administered">
             <h4><%= pluralize(@user.facilities.count, 'Facility') %> Available to Edit</h4>
             <ul>
@@ -483,5 +510,14 @@ for(var j=0; j<imps.length; j++){
         chartDayOfWeek.draw(dataDayOfWeek, optionsDayOfWeek);
         chartTimeOfDay.draw(dataTimeOfDay, optionsTimeOfDay);
       }
+
+      $(function() {
+        $('a#facilities-button').click(function(event) {
+          event.preventDefault();
+          $('div#facilities-toggle').toggle();
+        });
+      });
+
+
 
     </script>
