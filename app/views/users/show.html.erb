@@ -21,13 +21,17 @@
                   <% end %>
                   <%= link_to user.name, user %>
                   <%= user.email%>
-                  <% @verified = user.verified ? "Verified" : "Not Verified"%>
-                  <%= link_to @verified, {:controller => "users", :action => "toggle_verify", :id => user.id} %>
+                  <% @userVerified = user.verified ? "Verified" : "Not Verified" %>
+                  <%= link_to @userVerified, {:controller => "users", :action => "toggle_verify", :id => user.id} %>
 
                   <div id="facilities-toggle">
                     <ul>
                       <% user.facilities.each do |f| %>
-                        <li><%= link_to f.name, edit_facility_path(f.id) %> </li>
+                        <li>
+                          <%= link_to f.name, edit_facility_path(f.id) %>
+                          <% @facVerified = f.verified ? "Verified" : "Not Verified" %>
+                          <%= link_to @facVerified, {:controller => "facilities", :action => "toggle_verify", :id => f.id} %>
+                        </li>
                       <% end %>
                     </ul>
                   </div>

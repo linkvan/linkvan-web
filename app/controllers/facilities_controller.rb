@@ -165,6 +165,20 @@ class FacilitiesController < ApplicationController
     impressionist(@facility, @facility.name)
 	end
 
+  def toggle_verify
+    @current_user = User.find(session[:user_id])
+    @facility = Facility.find(params[:id])
+    if @facility.verified == true
+      @facility.update_attribute(:verified, false)
+      @facility.save
+      redirect_to @current_user, notice: "Facility not verified"
+    else
+      @facility.update_attribute(:verified, true)
+      @facility.save
+      redirect_to @current_user, notice: "Facility verified"
+    end
+  end
+
 	def edit
 		@facility = Facility.find(params[:id])
 	end
