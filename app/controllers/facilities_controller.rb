@@ -12,8 +12,14 @@ class FacilitiesController < ApplicationController
       session['facilities_category'] = params[:scope]
       session['facilities_list'] = request.original_url
 
-      @latitude = params[:latitude]
-      @longitude = params[:longitude]
+      @latitude = 0
+      @longitude = 0
+      @coordinates = cookies[:coordinates]
+      if @coordinates.present?
+        @coordinates = JSON.parse(@coordinates)
+        @latitude = @coordinates['lat']
+        @longitude = @coordinates['long']
+      end
 
       #use to catch undefined latlongs
       #if !(@latitude.nil?) || !(@longitude.nil?)
@@ -143,8 +149,6 @@ class FacilitiesController < ApplicationController
       @facilities_name_no.each do |f|
          @facilities_name_no_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
       end
-
-      # cookies[:lat_lon] = JSON.generate([@latitude, @longitude])
 
 	  end
 
