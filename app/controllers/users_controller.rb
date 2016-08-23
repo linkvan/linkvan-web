@@ -33,6 +33,7 @@ class UsersController < ApplicationController
 
 	def create
   		@user = User.new(user_params)
+      @user.update_attribute(:activation_email_sent, true)
   		if @user.save
         session[:user_id] = @user.id
     		redirect_to @user, notice: "Thanks for signing up!"
