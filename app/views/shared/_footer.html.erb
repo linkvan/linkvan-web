@@ -1,11 +1,14 @@
 <footer id="footer">
-  <ul class="list-inline text-center">  
+  <ul class="list-inline text-center">
     <% if current_user_admin? %>
-      <li><%= link_to "Add New Facility", new_facility_path %></li>
+      <!-- <li><%= link_to "Add New Facility", new_facility_path %></li> -->
     <%end%>
     <% if current_user %>
       <li>Welcome back, <%= link_to current_user.name, current_user %>!</li>
-      <li><%= link_to "Sign Out", session_path, method: :delete %></li>
+      <br>
+      <li><%= link_to "Disclaimer", disclaimer_path, class: "btn btn-link" %> |</li>
+      <li><%= link_to "About Us", about_path, class: "btn btn-link" %> |</li>
+      <li><%= link_to "Sign Out", session_path, class: "btn btn-link", method: :delete %></li>
     <%else%>
       <li><%= link_to 'Sign In', signin_path, class: "btn btn-link" %> |</li>
       <li><%= link_to "Disclaimer", disclaimer_path, class: "btn btn-link" %> |</li>
@@ -14,3 +17,4 @@
     <%end%>
   </ul>
 </footer>
+<br>
