@@ -9,6 +9,17 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'Project-Linkvan2';
+	src:font-url('icomoon.eot');
+	src:font-url('icomoon.eot?#iefix') format('embedded-opentype'),
+		font-url('icomoon.ttf') format('truetype'),
+		font-url('icomoon.woff') format('woff'),
+		font-url('icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
 [class^="icon-"], [class*=" icon-"] {
 	font-family: 'Project-Linkvan';
 	speak: none;
@@ -83,6 +94,12 @@
 	content: "\e810";
 }
 
-.icon-learning:before {
-	content: "\e811"
+.icon-learning_linkvan:before {
+	content: "\e91f";
+	font-family: "Project-Linkvan2";
+}
+
+.icon-training_services_linkvan:before {
+	content: "\e991";
+	font-family: "Project-Linkvan2";
 }
