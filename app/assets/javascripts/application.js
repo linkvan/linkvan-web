@@ -16,6 +16,7 @@
 //= require bootstrap-select.min
 //= require jquery.validate.min
 //= require jquery.mask.min
+//= require js.cookie.js
 
 $(document).ready(function () {
   // Plugin: Bootstrap Select
@@ -24,10 +25,32 @@ $(document).ready(function () {
   });
 
   // Plugin: jQuery Validate
-  $('.form-validate').validate();
+  $('.form-validate').each(function() {
+    $(this).validate();
+  });
 
   // Plugin: jQuery Mask
   $('.mask-input').each(function(){
     $(this).mask($(this).data('mask'));
   });
+
+  // Check Cookie - Lat and Long
+  var coordinates = Cookies.get('coordinates');
+  if (coordinates === undefined) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(setUserCoordinates);
+    } else {
+        //x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
 });
+
+function setUserCoordinates(position) {
+  latitude = position.coords.latitude;
+  longitude = position.coords.longitude;
+	Cookies.set('coordinates', {'lat': latitude, 'long': longitude});
+
+  if ($('#map-canvas-dir').length > 0) {
+    location.reload();
+  }
+}

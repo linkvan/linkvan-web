@@ -16,6 +16,10 @@
  *= require_tree .
  */
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-size: 16px;
 }
@@ -44,6 +48,22 @@ nav[role="navigation"] {
 
   #search-error {
     display: none !important;
+  }
+}
+
+ul.breadcrumb {
+  color: #333333;
+}
+
+a.btn-back {
+  display: inline-block;
+  padding: 6px 12px;
+  vertical-align: middle;
+
+  &:hover, &:focus {
+    color: #2a6496;
+    text-decoration: underline;
+    background-color: transparent;
   }
 }
 
