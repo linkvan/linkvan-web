@@ -1,4 +1,4 @@
-<%= form_for(@facility) do |f| %>
+ <%= form_for(@facility) do |f| %>
   <% if @facility.errors.any? %>
   <div class="alert alert-danger" role="alert">
     <strong>Ops!</strong> <%= @facility.errors.full_messages.to_sentence %>
@@ -115,7 +115,6 @@
       </li>
     </ul>
     <% else %>
-    <h1>SERVICES TEST</h1>
     <ul class="list-inline">
       <li>
         <% if @facility.services.include? "Shelter" %>
@@ -505,9 +504,8 @@
     <%= f.hidden_field :lat%>
     <%= f.hidden_field :long %>
   </div>
-
   <ul class="list-inline">
-    <li><%= f.submit "Create Facility", class: "btn btn-primary" %></li>
+    <li><%= f.submit @submitText, class: "btn btn-primary" %></li>
     <li><%= link_to "Cancel", facilities_path %></li>
   </ul>
 <% end %>
