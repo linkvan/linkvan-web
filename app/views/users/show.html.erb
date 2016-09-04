@@ -71,7 +71,10 @@
             <div id="time_of_day_div"></div>
           </div>
         <%elsif @user.activation_email_sent%>
-          <div class="alert alert-info" role="alert">Thank you for making an account with us. The LinkVan team will get in touch with you as soon as we can. In the meantime you can add a new facility! :) </div>
+          <div class="alert alert-info" role="alert">Thank you for making an account with us. The LinkVan team will get in touch with you as soon as we can.
+            <br>
+            In the meantime you can add a new facility! :)
+          </div>
         <%else%>
           <p><b>Step 2: </b>Almost ready! Please fill out the form below and a member of the LinkVan team will get in touch with you as soon as we can to finish setting up your account. :) </p>
           <%= render 'messages/contact_form' %>

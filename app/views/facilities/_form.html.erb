@@ -4,6 +4,9 @@
     <strong>Ops!</strong> <%= @facility.errors.full_messages.to_sentence %>
   </div>
   <% end %>
+  <h1 style="text-align: center; margin-top: 20px; margin-bottom: -30px; font-weight: bold">Edit Facility</h1>
+  <br>
+  <br>
   <p>
     <strong> NOTE: DO NOT PRESS ENTER WHEN FILLING IN FIELDS. USE "CREATE FACILITY"/"UPDATE FACILITY" BUTTON AT BOTTOM OF PAGE.</strong>
   </p>
@@ -43,37 +46,38 @@
       <ul class="list-inline">
         <li>
           <% if @facility.suitability.include? "Children" %>
-            <input type="checkbox" class="custom-checkbox" id="scheck" name="Children" value="Children" onclick="chclicked()" checked>
+            <input type="checkbox" class="custom-checkbox" id="childrencheck" name="Children" value="Children" onclick="chclicked()" checked>
           <% else %>
-            <input type="checkbox" class="custom-checkbox" id="scheck" name="Children" value="Children" onclick="chclicked()">
+            <input type="checkbox" class="custom-checkbox" id="childrencheck" name="Children" value="Children" onclick="chclicked()">
           <% end %>
-          <label for="scheck">Children</label>
+          <label for="childrencheck">Children</label>
         </li>
         <li>
           <% if @facility.suitability.include? "Youth" %>
-            <input type="checkbox" class="custom-checkbox" id="fcheck" name="Youth" value="Youth" onclick="yoclicked()" checked>
+            <input type="checkbox" class="custom-checkbox" id="youthcheck" name="Youth" value="Youth" onclick="yoclicked()" checked>
           <% else %>
-            <input type="checkbox" class="custom-checkbox" id="fcheck" name="Youth" value="Youth" onclick="yoclicked()">
+            <input type="checkbox" class="custom-checkbox" id="youthcheck" name="Youth" value="Youth" onclick="yoclicked()">
           <% end %>
-          <label for="fcheck">Youth</label>
+          <label for="youthcheck">Youth</label>
         </li>
         <li>
           <% if @facility.suitability.include? "Adults" %>
-            <input type="checkbox" class="custom-checkbox" id="mcheck" name="Adults" value="Adults" onclick="adclicked()" checked>
+            <input type="checkbox" class="custom-checkbox" id="adultcheck" name="Adults" value="Adults" onclick="adclicked()" checked>
           <% else %>
-            <input type="checkbox" class="custom-checkbox" id="mcheck" name="Adults" value="Adults" onclick="adclicked()">
+            <input type="checkbox" class="custom-checkbox" id="adultcheck" name="Adults" value="Adults" onclick="adclicked()">
           <% end %>
-          <label for="mcheck">Adults</label>
+          <label for="adultcheck">Adults</label>
         </li>
         <li>
           <% if @facility.suitability.include? "Seniors" %>
-            <input type="checkbox" class="custom-checkbox" id="hcheck" name="Seniors" value="Seniors" onclick="seclicked()" checked>
+            <input type="checkbox" class="custom-checkbox" id="seniorcheck" name="Seniors" value="Seniors" onclick="seclicked()" checked>
           <% else %>
-            <input type="checkbox" class="custom-checkbox" id="hcheck" name="Seniors" value="Seniors" onclick="seclicked()">
+            <input type="checkbox" class="custom-checkbox" id="seniorcheck" name="Seniors" value="Seniors" onclick="seclicked()">
           <% end %>
-          <label for="hcheck">Seniors</label>
+          <label for="seniorcheck">Seniors</label>
         </li>
       </ul>
+
     <% end %>
     <span class="help-block">Note: Suitability is currently not used; however, future designs of the web app may use this information to better search and sort facilities.</span>
   </div>
@@ -111,6 +115,7 @@
       </li>
     </ul>
     <% else %>
+    <h1>SERVICES TEST</h1>
     <ul class="list-inline">
       <li>
         <% if @facility.services.include? "Shelter" %>
@@ -535,7 +540,7 @@ function chclicked(){
     }
   }
   document.getElementById('facility_suitability').value = finalsuitability.join(' ');
-}
+};
 
 function yoclicked(){
   var index;
@@ -549,7 +554,7 @@ function yoclicked(){
     }
   }
   document.getElementById('facility_suitability').value = finalsuitability.join(' ');
-}
+};
 
 function adclicked(){
   var index;
@@ -563,7 +568,7 @@ function adclicked(){
     }
   }
   document.getElementById('facility_suitability').value = finalsuitability.join(' ');
-}
+};
 
 function seclicked(){
   var index;
@@ -577,7 +582,7 @@ function seclicked(){
     }
   }
   document.getElementById('facility_suitability').value = finalsuitability.join(' ');
-}
+};
 
 
 function sclicked(){
@@ -592,10 +597,10 @@ function sclicked(){
     }
   }
   document.getElementById('facility_services').value = finalservices.join(' ');
-}
+};
 
 function fclicked(){
-  var index;
+  var index = 2;
   fcheck = document.getElementById('fcheck');
   if(fcheck.checked){
     finalservices.push(fcheck.value);
@@ -606,7 +611,8 @@ function fclicked(){
     }
   }
   document.getElementById('facility_services').value = finalservices.join(' ');
-}
+};
+
 function mclicked(){
   var index;
   mcheck = document.getElementById('mcheck');
@@ -619,7 +625,8 @@ function mclicked(){
     }
   }
   document.getElementById('facility_services').value = finalservices.join(' ');
-}
+};
+
 function hclicked(){
   var index;
   hcheck = document.getElementById('hcheck');
@@ -632,7 +639,8 @@ function hclicked(){
     }
   }
   document.getElementById('facility_services').value = finalservices.join(' ');
-}
+};
+
 function tclicked(){
   var index;
   tcheck = document.getElementById('tcheck');
@@ -645,7 +653,8 @@ function tclicked(){
     }
   }
   document.getElementById('facility_services').value = finalservices.join(' ');
-}
+};
+
 function aclicked(){
   var index;
   acheck = document.getElementById('acheck');
@@ -658,7 +667,15 @@ function aclicked(){
     }
   }
   document.getElementById('facility_services').value = finalservices.join(' ');
-}
+};
+
+sclicked();
+fclicked();
+mclicked();
+hclicked();
+tclicked();
+aclicked();
+
 
 var monhours = document.getElementById("mon-hours");
 var tueshours = document.getElementById("tues-hours");
