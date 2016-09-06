@@ -113,8 +113,13 @@ module FacilitiesHelper
    				content_arr += content_tag(:i, nil, class: "icon-hygiene_linkvan hygiene-colour-index")
    			when "Technology"
    				content_arr += content_tag(:i, nil, class: "icon-display technology-colour-index")
-   			else
-   				content_arr += content_tag(:i, nil, class: "icon-Advocacy_linkvan legal-colour-index")
+				when "Legal"
+					content_arr += content_tag(:i, nil, class: "icon-Advocacy_linkvan legal-colour-index")
+				when "Learning"
+					content_arr += content_tag(:i, nil, class: "icon-learning_linkvan")
+				when "Training_Services"
+					content_arr += content_tag(:i, nil, class: "icon-training_services_linkvan")
+				#else add error case?
 
 			end #ends case
 		end
@@ -211,7 +216,7 @@ module FacilitiesHelper
 			end
 			return tel.delete('-').gsub(/\s+/, "")
 		end
-		
+
 	end
 
 	def correct_user_or_admin?

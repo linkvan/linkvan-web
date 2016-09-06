@@ -110,8 +110,16 @@
         <label for="tcheck">Technology</label>
       </li>
       <li>
-        <input type="checkbox" class="custom-checkbox" id="acheck" name="Advocacy" value="Advocacy" onclick="aclicked()">
-        <label for="acheck">Advocacy</label>
+        <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()">
+        <label for="acheck">Legal</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lclicked()">
+        <label for="lcheck">Learning</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()">
+        <label for="tscheck">Training Services</label>
       </li>
     </ul>
     <% else %>
@@ -157,12 +165,28 @@
         <label for="tcheck">Technology</label>
       </li>
       <li>
-        <% if @facility.services.include? "Advocacy" %>
-        <input type="checkbox" class="custom-checkbox" id="acheck" name="Advocacy" value="Advocacy" onclick="aclicked()" checked>
+        <% if @facility.services.include? "Legal" %>
+        <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()" checked>
         <% else %>
-        <input type="checkbox" class="custom-checkbox" id="acheck" name="Advocacy" value="Advocacy" onclick="aclicked()">
+        <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()">
         <% end %>
-        <label for="acheck">Advocacy</label>
+        <label for="acheck">Legal</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Learning" %>
+        <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lchecked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lchecked()">
+        <% end %>
+        <label for="lcheck">Learning</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Training_Services" %>
+        <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()">
+        <% end %>
+        <label for="tscheck">Training Services</label>
       </li>
     </ul>
     <% end %>
@@ -523,6 +547,8 @@ var mcheck;
 var hcheck;
 var tcheck;
 var acheck;
+var lcheck;
+var tscheck;
 var finalservices = [];
 var finalsuitability = [];
 
@@ -667,12 +693,42 @@ function aclicked(){
   document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
+function lclicked(){
+  var index;
+  lcheck = document.getElementById('lcheck');
+  if(lcheck.checked){
+    finalservices.push(lcheck.value);
+  }else{
+    index = finalservices.indexOf(lcheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
+};
+
+function tsclicked(){
+  var index;
+  tscheck = document.getElementById('tscheck');
+  if(tscheck.checked){
+    finalservices.push(tscheck.value);
+  }else{
+    index = finalservices.indexOf(tscheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
+};
+
 sclicked();
 fclicked();
 mclicked();
 hclicked();
 tclicked();
 aclicked();
+lclicked();
+tsclicked();
 
 
 var monhours = document.getElementById("mon-hours");
