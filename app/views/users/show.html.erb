@@ -12,7 +12,7 @@
         <% if (@user.admin == true) %>
           <div class="admin-view">
             <h1>LinkVan Admin</h1>
-            <h4><a href="#" id=facilities-button> Show Facilities</h4>
+            <h4><a href="#" id=facilities-button>Hide Facilities</h4>
             <ul id="users">
               <% @users.each do |user| %>
                 <li>
@@ -38,7 +38,33 @@
                 </li>
               <% end %>
             </ul>
+          </div>
+          <div class="administered">
+            <h4><%= pluralize(@user.facilities.count, 'Facility') %> Available to Edit</h4>
+            <ul>
+              <% @user.facilities.each do |f| %>
+                <li><%= link_to f.name, edit_facility_path(f.id) %>  (Monthly View Count: <%= Impression.where(impressionable_id: f.id).count %>)</li>
 
+              <% @imps.concat(Impression.where(impressionable_id: f.id)) %>
+              <% @facilitynames.push(f.name) %>
+              <% end %>
+            </ul>
+          </div>
+          <br>
+          <h4><a href="#" id="report-button">Hide Reports</h4>
+          <div class="report" id="report">
+            <!--Div that will hold the dashboard-->
+            <h4>Reports</h4>
+            <div id="dashboard_div">
+              <!--Divs that will hold each control and chart-->
+
+              <div id="chart_div"></div>
+              <div id="filter_div"></div>
+            </div>
+
+            <div id="day_of_week_div"></div>
+
+            <div id="time_of_day_div"></div>
           </div>
         <% elsif (@user.facilities.count > 0) && (@user.admin != true)%>
           <% if (@user.activation_email_sent == true) %>
@@ -55,8 +81,8 @@
               <% end %>
             </ul>
           </div>
-
-          <div class="report">
+          <h4><a href="#" id="report-button">Hide Reports</h4>
+          <div class="report" id="report">
             <!--Div that will hold the dashboard-->
             <h4>Reports</h4>
             <div id="dashboard_div">
@@ -523,11 +549,17 @@ for(var j=0; j<imps.length; j++){
 
       $(function() {
         $('a#facilities-button').click(function(event) {
-          event.preventDefault();
           $('div#facilities-toggle').toggle();
+          this.innerHTML =  (this.innerHTML == "Hide Facilities") ? "Show Facilities" : "Hide Facilities";
         });
       });
 
+      $(function() {
+        $('a#report-button').click(function(event) {
+          $('div#report').toggle();
+          this.innerHTML =  (this.innerHTML == "Hide Reports") ? "Show Reports" : "Hide Reports";
+        });
+      });
 
 
     </script>
