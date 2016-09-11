@@ -112,7 +112,7 @@ module FacilitiesHelper
    			when "Hygiene"
    				content_arr += content_tag(:i, nil, class: "icon-hygiene_linkvan hygiene-colour-index")
    			when "Technology"
-   				content_arr += content_tag(:i, nil, class: "icon-display technology-colour-index")
+   				content_arr += content_tag(:i, nil, class: "icon-technology_linkvan technology-colour-index")
 				when "Legal"
 					content_arr += content_tag(:i, nil, class: "icon-Advocacy_linkvan legal-colour-index")
 				when "Learning"
