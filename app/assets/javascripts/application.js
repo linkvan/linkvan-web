@@ -37,20 +37,38 @@ $(document).ready(function () {
   // Check Cookie - Lat and Long
   var coordinates = Cookies.get('coordinates');
   if (coordinates === undefined) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(setUserCoordinates);
+    if ($('.coordinate-error').length <= 0) {
+      shareLocation(false);
     } else {
-        //x.innerHTML = "Geolocation is not supported by this browser.";
+      $('.coordinate-error').removeClass('hide');
     }
   }
+  $('.coordinate-error button').on('click', function() {
+    shareLocation(true);
+  })
 });
+
+function shareLocation(reload) {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(setUserCoordinates);
+    if ($('.coordinate-error').length > 0) {
+      $('.coordinate-error')
+        .find('.loading').removeClass('hide').end()
+        .find('button').attr('disabled', 'disabled');
+    }
+  } else {
+    if ($('.coordinate-error').length > 0) {
+      $('.coordinate-error .ballon').html('Geolocation is not supported by this browser.');
+    }
+  }
+}
 
 function setUserCoordinates(position) {
   latitude = position.coords.latitude;
   longitude = position.coords.longitude;
 	Cookies.set('coordinates', {'lat': latitude, 'long': longitude});
 
-  if ($('#map-canvas-dir').length > 0) {
+  if ($('#map-canvas-dir').length > 0 || $('.coordinate-error').length > 0) {
     location.reload();
   }
 }

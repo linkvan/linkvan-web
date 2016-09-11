@@ -19,7 +19,6 @@
 <%= content_tag :div, class: "temp_information", data: {jsevent: @facility} do %>
 <% end %>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSLM-Bv5YwI1Ecw2OrMDQF8fZxik6FTzs"></script>
 <script>
 //Landmarks: Woodwards, Carnegie Centre, The 44 (Evelyne Saller), Oppenheimer Park, RayCam
 //Woodwards: 49.2825437,-123.1085684
@@ -29,20 +28,25 @@
 //RayCam: 49.281415,-123.083726
 //'https://www.google.com/support/enterprise/static/geo/cdate/art/dots/blue_dot.png'
 
-var ucoordinates = JSON.parse(Cookies.get('coordinates'));
+var ucoordinates = Cookies.get('coordinates');
+if (ucoordinates === undefined) {
+  ucoordinates = '{"lat":0,"long":0}';
+}
+ucoordinates = JSON.parse(ucoordinates);
+
 var jsevent = $('.temp_information').data('jsevent');
 var directionsDisplay;
-var directionsService = new google.maps.DirectionsService();
-var flat = jsevent.lat;
-var flong = jsevent.long;
+var directionsService;
+var flat = parseFloat(jsevent.lat);
+var flong = parseFloat(jsevent.long);
 var ulat = ucoordinates.lat;
 var ulong = ucoordinates.long;
 var map, tlat, tlong, start, end;
-var woodwards = new google.maps.LatLng(49.2825437, -123.1085684);
-var carnegie = new google.maps.LatLng(49.280966, -123.099672);
-var saller = new google.maps.LatLng(49.283799, -123.096927);
-var oppenheimer = new google.maps.LatLng(49.2827075, -123.0954157);
-var raycam = new google.maps.LatLng(49.281415, -123.083726);
+var woodwards =   {"lat": 49.2825437,"lng": -123.1085684};
+var carnegie =    {"lat": 49.280966,"lng": -123.099672};
+var saller =      {"lat": 49.283799,"lng": -123.096927};
+var oppenheimer = {"lat": 49.2827075,"lng": -123.0954157};
+var raycam =      {"lat": 49.281415,"lng": -123.083726};
 var landmark = 'https://linkvan.herokuapp.com/assets/blue_dot-389fca422ef93e351134817e9c5b67d4.png';
 var woodwardslandmark = 'https://linkvan.herokuapp.com/assets/woodward_marker-1496bd72f1b6cfe8285091f21f445279.png';
 var carnegielandmark = 'https://linkvan.herokuapp.com/assets/carnegie_marker-d0cc46c1b6eaf99e478071e993a3a256.png';
@@ -53,15 +57,31 @@ var raycamlandmark = 'https://linkvan.herokuapp.com/assets/raycam_marker-3a80591
 var woodwardsmarker, carnegiemarker, sallermarker, oppenheimermarker, raycammarker;
 
 function initialize() {
-  directionsDisplay = new google.maps.DirectionsRenderer();
-  start = new google.maps.LatLng(ulat, ulong);
-  end = new google.maps.LatLng(flat, flong);
+  if (ulat === 0) { // if user doesn't share location, just show the place in the map
+    start = {"lat": flat,"lng": flong};
 
-  var mapOptions = {
-    zoom:10,
-    center: start
-  };
-  map = new google.maps.Map(document.getElementById('map-canvas-dir'), mapOptions);
+    map = new google.maps.Map(document.getElementById('map-canvas-dir'), {
+      zoom: 14,
+      center: start
+    });
+
+    facility = new google.maps.Marker({
+      position: start,
+      map: map,
+      title: jsevent.address
+    });
+
+  } else { // else show the directions
+    directionsService = new google.maps.DirectionsService();
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    start = {"lat": ulat,"lng": ulong};
+    end = {"lat": flat,"lng": flong};
+
+    map = new google.maps.Map(document.getElementById('map-canvas-dir'), {
+      zoom: 10,
+      center: start
+    });
+  }
 
   woodwardsmarker = new google.maps.Marker({
     position: woodwards,
@@ -94,7 +114,9 @@ function initialize() {
     icon: raycamlandmark,
   });
 
-  directionsDisplay.setMap(map);
+  if (ulat !== 0) {
+    directionsDisplay.setMap(map);
+  }
 
 }//ends initialize
 
@@ -128,15 +150,18 @@ function calcRoute() {
   }
 }
 
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
 //click listener needed for map to appear
 //google.maps.event.addDomListener(window, 'click', initialize);
 //google.maps.event.clearListeners(window, 'click');
 //clear click listener right after click
+</script>
 
-google.maps.event.addDomListener(window, 'load', calcRoute);
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSLM-Bv5YwI1Ecw2OrMDQF8fZxik6FTzs&callback=initialize"></script>
+
+<script>
+if (ulat !== 0) {
+  google.maps.event.addDomListener(window, 'load', calcRoute);
+}
 
 setTimeout(function(){
   google.maps.event.addListener(map, 'zoom_changed', function() {

@@ -126,9 +126,7 @@
 <%= content_tag :div, class: "temp_information", data: {jsevent: @facility} do %>
 <% end %>
 
-<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSLM-Bv5YwI1Ecw2OrMDQF8fZxik6FTzs"></script>
 <script>
 var jsevent = $('.temp_information').data('jsevent');
 var map;
@@ -179,7 +177,7 @@ setTimeout(function(){
     bdirections.appendChild(directionsImg);
     bdirections.appendChild(tdirections);
     bdirections.appendChild(directionsChev);
-    bdirections.setAttribute("class", "btn");
+    bdirections.setAttribute("class", "btn-custom");
     bdirections.onclick = function() { // Note this is a function
       window.location = "/facilities/directions/" + jsevent.id;
     };
