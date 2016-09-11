@@ -66,6 +66,16 @@ class FacilitiesController < ApplicationController
         @facilities_near_no = Facility.contains_service("Legal", "Near", "No", @latitude, @longitude)
         @facilities_name_yes = Facility.contains_service("Legal", "Name", "Yes", @latitude, @longitude)
         @facilities_name_no = Facility.contains_service("Legal", "Name", "No", @latitude, @longitude)
+      when 'Learning'
+        @facilities_near_yes = Facility.contains_service("Learning", "Near", "Yes", @latitude, @longitude)
+        @facilities_near_no = Facility.contains_service("Learning", "Near", "No", @latitude, @longitude)
+        @facilities_name_yes = Facility.contains_service("Learning", "Name", "Yes", @latitude, @longitude)
+        @facilities_name_no = Facility.contains_service("Learning", "Name", "No", @latitude, @longitude)
+      when 'Training_Services'
+        @facilities_near_yes = Facility.contains_service("Training_Services", "Near", "Yes", @latitude, @longitude)
+        @facilities_near_no = Facility.contains_service("Training_Services", "Near", "No", @latitude, @longitude)
+        @facilities_name_yes = Facility.contains_service("Training_Services", "Name", "Yes", @latitude, @longitude)
+        @facilities_name_no = Facility.contains_service("Training_Services", "Name", "No", @latitude, @longitude)
       when 'Search'
         @sortby = params[:sortby]
         @hours = params[:hours]
@@ -83,7 +93,7 @@ class FacilitiesController < ApplicationController
         if !(@services.nil?)
           servicesarr = @services.split(",")
         else
-          servicesarr = ["Shelter", "Food", "Medical", "Hygiene", "Technology", "Legal"]
+          servicesarr = ["Shelter", "Food", "Medical", "Hygiene", "Technology", "Legal", "Learning", "Training_Services"]
         end
 
         @facilities_near_yes = []
