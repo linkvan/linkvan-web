@@ -104,21 +104,21 @@ module FacilitiesHelper
 		services_arr.each do |s|
 			case s
 			when "Shelter"
-   				content_arr += content_tag(:i, nil, class: "icon-sleepshelter_linkvan shelter-colour-index")
+   				content_arr += content_tag(:i, nil, class: "icon-sleepshelter_linkvan shelter-colour-index", onclick: "moreInfo('shelter');")
    			when "Food"
-   				content_arr += content_tag(:i, nil, class: "glyphicon glyphicon-cutlery food-colour-index")
+   				content_arr += content_tag(:i, nil, class: "glyphicon glyphicon-cutlery food-colour-index", onclick: "moreInfo('food');")
    			when "Medical"
-   				content_arr += content_tag(:i, nil, class: "icon-Medical_linkvan medical-colour-index")
+   				content_arr += content_tag(:i, nil, class: "icon-Medical_linkvan medical-colour-index", onclick: "moreInfo('medical');")
    			when "Hygiene"
-   				content_arr += content_tag(:i, nil, class: "icon-hygiene_linkvan hygiene-colour-index")
+   				content_arr += content_tag(:i, nil, class: "icon-hygiene_linkvan hygiene-colour-index", onclick: "moreInfo('hygiene');")
    			when "Technology"
-   				content_arr += content_tag(:i, nil, class: "icon-technology_linkvan technology-colour-index")
+   				content_arr += content_tag(:i, nil, class: "icon-technology_linkvan technology-colour-index", onclick: "moreInfo('technology');")
 				when "Legal"
-					content_arr += content_tag(:i, nil, class: "icon-Advocacy_linkvan legal-colour-index")
+					content_arr += content_tag(:i, nil, class: "icon-Advocacy_linkvan legal-colour-index", onclick: "moreInfo('legal');")
 				when "Learning"
-					content_arr += content_tag(:i, nil, class: "icon-learning_linkvan")
+					content_arr += content_tag(:i, nil, class: "icon-learning_linkvan", onclick: "moreInfo('learning');")
 				when "Training_Services"
-					content_arr += content_tag(:i, nil, class: "icon-training_services_linkvan")
+					content_arr += content_tag(:i, nil, class: "icon-training_services_linkvan", onclick: "moreInfo('training');")
 				#else add error case?
 
 			end #ends case

@@ -18,6 +18,35 @@
 <h2>Services</h2>
 <div class="inset">
   <p><%=display_services(@facility.services) %></p>
+  <% @facility.services.split.each do |service|
+      id = service + "Note"
+      #content = ""
+      case service
+          when "Shelter"
+              content = content_tag(:i, nil, class: "icon-sleepshelter_linkvan shelter-colour-index")
+          when "Food"
+              content = content_tag(:i, nil, class: "glyphicon glyphicon-cutlery food-colour-index")
+          when "Medical"
+              content = content_tag(:i, nil, class: "icon-Medical_linkvan medical-colour-index")
+          when "Hygiene"
+              content = content_tag(:i, nil, class: "icon-hygiene_linkvan hygiene-colour-index")
+          when "Technology"
+              content = content_tag(:i, nil, class: "icon-technology_linkvan technology-colour-index")
+          when "Legal"
+              content = content_tag(:i, nil, class: "icon-Advocacy_linkvan legal-colour-index")
+          when "Learning"
+              content = content_tag(:i, nil, class: "icon-learning_linkvan")
+          when "Training_Services"
+              content = content_tag(:i, nil, class: "icon-training_services_linkvan")
+          #else add error case?
+
+      end #ends case
+      content = content_tag(:h3, content + service)
+      content += content_tag(:p, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis cursus ex, non aliquam velit. Mauris fringilla ut diam pellentesque porta. Vestibulum ut ultricies mi, et volutpat massa. Donec risus ipsum, congue non nibh ut, efficitur tincidunt quam.")
+      content.html_safe
+      %>
+    <%= content_tag(:div, content, class: "serviceNote inset", id: id) %>
+  <% end %>
 </div>
 
 <div class="inset-gmap">
@@ -186,6 +215,10 @@ setTimeout(function(){
 
     divid.appendChild(bdirections);
 }, 500);
+
+function moreInfo(service) {
+
+}
 
 
 

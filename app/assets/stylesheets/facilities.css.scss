@@ -223,6 +223,11 @@
 		box-sizing: border-box;
 		margin-bottom: 0px;
 
+		.serviceNote.inset {
+			width: 100%;
+			display: none;
+		}
+
 	}
 
 	.inset-gmap-dir{
