@@ -16,11 +16,10 @@
 
 
 <h2>Services</h2>
-<div class="inset">
+<div class="inset" id="services">
   <p><%=display_services(@facility.services) %></p>
   <% @facility.services.split.each do |service|
       id = service + "Note"
-      #content = ""
       case service
           when "Shelter"
               content = content_tag(:i, nil, class: "icon-sleepshelter_linkvan shelter-colour-index")
@@ -217,9 +216,43 @@ setTimeout(function(){
 }, 500);
 
 function moreInfo(service) {
+    service = service.charAt(0).toUpperCase() + service.slice(1);
+    var id = "#" + service + "Note";
 
+    if($(id).is(":visible")) {
+        $(id).hide();
+    } else {
+        $(".serviceNote").each(function(i) {
+            if($(this).is(":visible")) {
+                $(this).hide();
+            }
+        });
+        $(id).fadeIn();
+    }
 }
 
+//Hover functionality
+$(function(){
+    $(".service").each(function(i){
+        var id = "#" + $(this).attr("id") + "Note";
+        $(this).mouseenter(function(){
+            if(!$(id).is(":visible")){
+                $(".serviceNote").each(function(i) {
+                    if($(this).is(":visible")) {
+                        $(this).hide();
+                    }
+                });
+                $(id).fadeIn();
+            }
+            console.log("show");
+        });
+    });
 
+    $("#services").mouseleave(function(){
+        $(".serviceNote").each(function(i){
+            $(this).fadeOut();
+        });
+    })
+});
 
 </script>
