@@ -117,10 +117,6 @@
         <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lclicked()">
         <label for="lcheck">Learning</label>
       </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()">
-        <label for="tscheck">Training Services</label>
-      </li>
     </ul>
     <% else %>
     <ul class="list-inline">
@@ -179,14 +175,6 @@
         <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lchecked()">
         <% end %>
         <label for="lcheck">Learning</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Training_Services" %>
-        <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()">
-        <% end %>
-        <label for="tscheck">Training Services</label>
       </li>
     </ul>
     <% end %>
@@ -707,18 +695,7 @@ function lclicked(){
   document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
-function tsclicked(){
-  var index;
-  tscheck = document.getElementById('tscheck');
-  if(tscheck.checked){
-    finalservices.push(tscheck.value);
-  }else{
-    index = finalservices.indexOf(tscheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
+
 };
 
 sclicked();
@@ -728,7 +705,6 @@ hclicked();
 tclicked();
 aclicked();
 lclicked();
-tsclicked();
 
 
 var monhours = document.getElementById("mon-hours");
