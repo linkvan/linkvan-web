@@ -170,12 +170,16 @@ class FacilitiesController < ApplicationController
   end
 
   def search
-    if params[:search]
-      @facilities = Facility.search(params[:search])
-    else
-      @facilities = Facility.all
+      if params[:search]
+        if params[:search] == "Children"
+          @facilities = Facility.where(:suitability => "Children")
+        else
+          @facilities = Facility.search(params[:search])
+        end
+      else
+        @facilities = Facility.all
+      end
     end
-  end
 
 
 	def show
