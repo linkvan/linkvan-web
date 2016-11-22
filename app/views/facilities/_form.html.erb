@@ -1,525 +1,537 @@
- <%= form_for(@facility) do |f| %>
-  <% if @facility.errors.any? %>
-  <div class="alert alert-danger" role="alert">
-    <strong>Ops!</strong> <%= @facility.errors.full_messages.to_sentence %>
-  </div>
-  <% end %>
-  <h1 style="text-align: center; margin-top: 20px; margin-bottom: -30px; font-weight: bold">Edit Facility</h1>
-  <br>
-  <br>
-  <p>
-    <strong> NOTE: DO NOT PRESS ENTER WHEN FILLING IN FIELDS. USE "CREATE FACILITY"/"UPDATE FACILITY" BUTTON AT BOTTOM OF PAGE.</strong>
-  </p>
+<%= form_for(@facility) do |f| %>
+ <% if @facility.errors.any? %>
+ <div class="alert alert-danger" role="alert">
+   <strong>Ops!</strong> <%= @facility.errors.full_messages.to_sentence %>
+ </div>
+ <% end %>
+ <h1 style="text-align: center; margin-top: 20px; margin-bottom: -30px; font-weight: bold">Edit Facility</h1>
+ <br>
+ <br>
+ <p>
+   <strong> NOTE: DO NOT PRESS ENTER WHEN FILLING IN FIELDS. USE "CREATE FACILITY"/"UPDATE FACILITY" BUTTON AT BOTTOM OF PAGE.</strong>
+ </p>
 
-  <div class="form-group form-group-inline">
-    <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true, class: "form-control" %>
-  </div>
-  <div class="form-group form-group-inline">
-    <%= f.label :welcomes %>
-    <%= f.select :welcomes, [['All'], ['Women'], ['Men']] %>
-  </div>
-  <hr>
-  <div class="form-group">
-    <%= f.label :suitability %> - Select All Relevant Categories
-    <%= f.hidden_field :suitability %>
-    <% if @facility.suitability.nil? %>
-      <ul class="list-inline">
-        <li>
-          <input type="checkbox" class="custom-checkbox" id="chcheck" name="Children" value="Children" onclick="chclicked()">
-          <label for="chcheck">Children</label>
-        </li>
-        <li>
-          <input type="checkbox" class="custom-checkbox" id="yocheck" name="Youth" value="Youth" onclick="yoclicked()">
-          <label for="yocheck">Youth</label>
-        </li>
-        <li>
-          <input type="checkbox" class="custom-checkbox" id="adcheck" name="Adults" value="Adults" onclick="adclicked()">
-          <label for="adcheck">Adults</label>
-        </li>
-        <li>
-          <input type="checkbox" class="custom-checkbox" id="secheck" name="Seniors" value="Seniors" onclick="seclicked()">
-          <label for="secheck">Seniors</label>
-        </li>
-      </ul>
-    <% else %>
-      <ul class="list-inline">
-        <li>
-          <% if @facility.suitability.include? "Children" %>
-            <input type="checkbox" class="custom-checkbox" id="childrencheck" name="Children" value="Children" onclick="chclicked()" checked>
-          <% else %>
-            <input type="checkbox" class="custom-checkbox" id="childrencheck" name="Children" value="Children" onclick="chclicked()">
-          <% end %>
-          <label for="childrencheck">Children</label>
-        </li>
-        <li>
-          <% if @facility.suitability.include? "Youth" %>
-            <input type="checkbox" class="custom-checkbox" id="youthcheck" name="Youth" value="Youth" onclick="yoclicked()" checked>
-          <% else %>
-            <input type="checkbox" class="custom-checkbox" id="youthcheck" name="Youth" value="Youth" onclick="yoclicked()">
-          <% end %>
-          <label for="youthcheck">Youth</label>
-        </li>
-        <li>
-          <% if @facility.suitability.include? "Adults" %>
-            <input type="checkbox" class="custom-checkbox" id="adultcheck" name="Adults" value="Adults" onclick="adclicked()" checked>
-          <% else %>
-            <input type="checkbox" class="custom-checkbox" id="adultcheck" name="Adults" value="Adults" onclick="adclicked()">
-          <% end %>
-          <label for="adultcheck">Adults</label>
-        </li>
-        <li>
-          <% if @facility.suitability.include? "Seniors" %>
-            <input type="checkbox" class="custom-checkbox" id="seniorcheck" name="Seniors" value="Seniors" onclick="seclicked()" checked>
-          <% else %>
-            <input type="checkbox" class="custom-checkbox" id="seniorcheck" name="Seniors" value="Seniors" onclick="seclicked()">
-          <% end %>
-          <label for="seniorcheck">Seniors</label>
-        </li>
-      </ul>
+ <div class="form-group form-group-inline">
+   <%= f.label :name %>
+   <%= f.text_field :name, autofocus: true, class: "form-control" %>
+ </div>
+ <div class="form-group form-group-inline">
+   <%= f.label :welcomes %>
+   <%= f.select :welcomes, [['All'], ['Women'], ['Men']] %>
+ </div>
+ <hr>
+ <div class="form-group">
+   <%= f.label :suitability %> - Select All Relevant Categories
+   <%= f.hidden_field :suitability %>
+   <% if @facility.suitability.nil? %>
+     <ul class="list-inline">
+       <li>
+         <input type="checkbox" class="custom-checkbox" id="chcheck" name="Children" value="Children" onclick="chclicked()">
+         <label for="chcheck">Children</label>
+       </li>
+       <li>
+         <input type="checkbox" class="custom-checkbox" id="yocheck" name="Youth" value="Youth" onclick="yoclicked()">
+         <label for="yocheck">Youth</label>
+       </li>
+       <li>
+         <input type="checkbox" class="custom-checkbox" id="adcheck" name="Adults" value="Adults" onclick="adclicked()">
+         <label for="adcheck">Adults</label>
+       </li>
+       <li>
+         <input type="checkbox" class="custom-checkbox" id="secheck" name="Seniors" value="Seniors" onclick="seclicked()">
+         <label for="secheck">Seniors</label>
+       </li>
+     </ul>
+   <% else %>
+     <ul class="list-inline">
+       <li>
+         <% if @facility.suitability.include? "Children" %>
+           <input type="checkbox" class="custom-checkbox" id="childrencheck" name="Children" value="Children" onclick="chclicked()" checked>
+         <% else %>
+           <input type="checkbox" class="custom-checkbox" id="childrencheck" name="Children" value="Children" onclick="chclicked()">
+         <% end %>
+         <label for="childrencheck">Children</label>
+       </li>
+       <li>
+         <% if @facility.suitability.include? "Youth" %>
+           <input type="checkbox" class="custom-checkbox" id="youthcheck" name="Youth" value="Youth" onclick="yoclicked()" checked>
+         <% else %>
+           <input type="checkbox" class="custom-checkbox" id="youthcheck" name="Youth" value="Youth" onclick="yoclicked()">
+         <% end %>
+         <label for="youthcheck">Youth</label>
+       </li>
+       <li>
+         <% if @facility.suitability.include? "Adults" %>
+           <input type="checkbox" class="custom-checkbox" id="adultcheck" name="Adults" value="Adults" onclick="adclicked()" checked>
+         <% else %>
+           <input type="checkbox" class="custom-checkbox" id="adultcheck" name="Adults" value="Adults" onclick="adclicked()">
+         <% end %>
+         <label for="adultcheck">Adults</label>
+       </li>
+       <li>
+         <% if @facility.suitability.include? "Seniors" %>
+           <input type="checkbox" class="custom-checkbox" id="seniorcheck" name="Seniors" value="Seniors" onclick="seclicked()" checked>
+         <% else %>
+           <input type="checkbox" class="custom-checkbox" id="seniorcheck" name="Seniors" value="Seniors" onclick="seclicked()">
+         <% end %>
+         <label for="seniorcheck">Seniors</label>
+       </li>
+     </ul>
 
-    <% end %>
-    <span class="help-block">Note: Suitability is currently not used; however, future designs of the web app may use this information to better search and sort facilities.</span>
-  </div>
+   <% end %>
+   <span class="help-block">Note: Suitability is currently not used; however, future designs of the web app may use this information to better search and sort facilities.</span>
+ </div>
 
-  <hr>
+ <hr>
 
-  <div class="form-group">
-    <%= f.label :services %> - Select All Relevant Categories
-    <%= f.hidden_field :services%>
-    <% if @facility.services.nil? %>
-    <ul class="list-inline">
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">
-        <label for="scheck">Shelter</label>
-      </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">
-        <label for="fcheck">Food</label>
-      </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">
-        <label for="mcheck">Medical</label>
-      </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">
-        <label for="hcheck">Hygiene</label>
-      </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">
-        <label for="tcheck">Technology</label>
-      </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()">
-        <label for="acheck">Legal</label>
-      </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lclicked()">
-        <label for="lcheck">Learning</label>
-      </li>
-    </ul>
-    <% else %>
-    <ul class="list-inline">
-      <li>
-        <% if @facility.services.include? "Shelter" %>
-        <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">
-        <% end %>
-        <label for="scheck">Shelter</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Food" %>
-        <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">
-        <% end %>
-        <label for="fcheck">Food</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Medical" %>
-        <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">
-        <% end %>
-        <label for="mcheck">Medical</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Hygiene" %>
-        <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">
-        <% end %>
-        <label for="hcheck">Hygiene</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Technology" %>
-        <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">
-        <% end %>
-        <label for="tcheck">Technology</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Legal" %>
-        <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()">
-        <% end %>
-        <label for="acheck">Legal</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Learning" %>
-        <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lchecked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lchecked()">
-        <% end %>
-        <label for="lcheck">Learning</label>
-      </li>
-    </ul>
-    <% end %>
-  </div>
+ <div class="form-group">
+   <%= f.label :services %> - Select All Relevant Categories
+   <%= f.hidden_field :services%>
+   <% if @facility.services.nil? %>
+   <ul class="list-inline">
+     <li>
+       <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">
+       <label for="scheck">Shelter</label>
+     </li>
+     <li>
+       <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">
+       <label for="fcheck">Food</label>
+     </li>
+     <li>
+       <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">
+       <label for="mcheck">Medical</label>
+     </li>
+     <li>
+       <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">
+       <label for="hcheck">Hygiene</label>
+     </li>
+     <li>
+       <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">
+       <label for="tcheck">Technology</label>
+     </li>
+     <li>
+       <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()">
+       <label for="acheck">Legal</label>
+     </li>
+     <li>
+       <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lclicked()">
+       <label for="lcheck">Learning</label>
+     </li>
+     <!-- <li>
+       <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()">
+       <label for="tscheck">Training Services</label>
+     </li> -->
+   </ul>
+   <% else %>
+   <ul class="list-inline">
+     <li>
+       <% if @facility.services.include? "Shelter" %>
+       <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()" checked>
+       <% else %>
+       <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">
+       <% end %>
+       <label for="scheck">Shelter</label>
+     </li>
+     <li>
+       <% if @facility.services.include? "Food" %>
+       <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()" checked>
+       <% else %>
+       <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">
+       <% end %>
+       <label for="fcheck">Food</label>
+     </li>
+     <li>
+       <% if @facility.services.include? "Medical" %>
+       <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()" checked>
+       <% else %>
+       <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">
+       <% end %>
+       <label for="mcheck">Medical</label>
+     </li>
+     <li>
+       <% if @facility.services.include? "Hygiene" %>
+       <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()" checked>
+       <% else %>
+       <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">
+       <% end %>
+       <label for="hcheck">Hygiene</label>
+     </li>
+     <li>
+       <% if @facility.services.include? "Technology" %>
+       <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()" checked>
+       <% else %>
+       <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">
+       <% end %>
+       <label for="tcheck">Technology</label>
+     </li>
+     <li>
+       <% if @facility.services.include? "Legal" %>
+       <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()" checked>
+       <% else %>
+       <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()">
+       <% end %>
+       <label for="acheck">Legal</label>
+     </li>
+     <li>
+       <% if @facility.services.include? "Learning" %>
+       <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lchecked()" checked>
+       <% else %>
+       <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lchecked()">
+       <% end %>
+       <label for="lcheck">Learning</label>
+     </li>
+     <!-- <li>
+       <% if @facility.services.include? "Training_Services" %>
+       <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()" checked>
+       <% else %>
+       <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()">
+       <% end %>
+       <label for="tscheck">Training Services</label>
+     </li> -->
+   </ul>
+   <% end %>
+ </div>
 
-  <hr>
+ <hr>
 
-  <div class="form-group">
-    <p>
-      <%= f.label :address %> - Enter the facility's address then click Search.<br/>Format: Street Address, City, BC. Example: 612 Main St, Vancouver, BC
-    </p>
-    <div class="form-group-inline">
-      <%= f.text_field :address, class: "form-control" %>
-      <input type="button" class="btn btn-primary" value="Search" onclick="codeAddress()">
-    </div>
-    <div id="map-canvas-new"></div>
-  </div>
+ <div class="form-group">
+   <p>
+     <%= f.label :address %> - Enter the facility's address then click Search.<br/>Format: Street Address, City, BC. Example: 612 Main St, Vancouver, BC
+   </p>
+   <div class="form-group-inline">
+     <%= f.text_field :address, class: "form-control" %>
+     <input type="button" class="btn btn-primary" value="Search" onclick="codeAddress()">
+   </div>
+   <div id="map-canvas-new"></div>
+ </div>
 
-  <hr>
+ <hr>
 
-  <div class="form-group">
-    <%= f.label :phone %> - Example: 604 555 6789<br/>
-    <%= f.text_field :phone, class: "form-control" %>
-  </div>
+ <div class="form-group">
+   <%= f.label :phone %> - Example: 604 555 6789<br/>
+   <%= f.text_field :phone, class: "form-control" %>
+ </div>
 
-  <hr>
+ <hr>
 
-  <div class="form-group">
-    <%= f.label :website %> - Do not include "http://". Example: www.learningexchange.ubc.ca<br/>
-    <%= f.text_field :website, class: "form-control" %>
-  </div>
+ <div class="form-group">
+   <%= f.label :website %> - Do not include "http://". Example: www.learningexchange.ubc.ca<br/>
+   <%= f.text_field :website, class: "form-control" %>
+ </div>
 
-  <hr>
+ <hr>
 <!--
-  <p>
-    <%= f.label :description %> - Copy paste verbatim from the facility's "about us" page. Will tweak on stakeholder feedback.<br/>
-    <%= f.text_area :description, cols: 60, rows: 7 %>
-  </p> -->
-  <div class="form-group facility-hours">
-    <h3>Hours</h3>
-    <span class="help-block">Note: The start time and end time for a day cannot be identical. Check the "Second time" option to specify a second time range.</span>
-    <div class="well">
-      <h4>Monday:</h4>
-      <ul class="list-inline">
-        <li>
-          <%= f.check_box :open_all_day_mon, class: "custom-checkbox" %>
-          <%= f.label :open_all_day_mon, "Open all day" %>
-        </li>
-        <li>
-          <%= f.check_box :closed_all_day_mon, class: "custom-checkbox" %>
-          <%= f.label :closed_all_day_mon, "Closed all day" %>
-        </li>
-        <li>
-          <%= f.check_box :second_time_mon, class: "custom-checkbox" %>
-          <%= f.label :second_time_mon, "Second time" %>
-        </li>
-      </ul>
-      <div id="mon-hours">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startsmon_at, "Starts at" %>
-            <%= f.time_select :startsmon_at, default: 8.hours.ago %>
-          </li>
-          <li>
-            <%= f.label :endsmon_at, "Ends at" %>
-            <%= f.time_select :endsmon_at, default: 8.hours.ago %>
-          </li>
-        </ul>
-      </div>
-      <div id="mon-hours-2" style="display: none;">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startsmon_at2, "Starts at" %>
-            <%= f.time_select :startsmon_at2, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endsmon_at2, "Ends at" %>
-            <%= f.time_select :endsmon_at2, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="well">
-      <h4>Tuesday:</h4>
-      <ul class="list-inline">
-        <li>
-          <%= f.check_box :open_all_day_tues, class: "custom-checkbox" %>
-          <%= f.label :open_all_day_tues, "Open all day" %>
-        </li>
-        <li>
-          <%= f.check_box :closed_all_day_tues, class: "custom-checkbox" %>
-          <%= f.label :closed_all_day_tues, "Closed all day" %>
-        </li>
-        <li>
-          <%= f.check_box :second_time_tues, class: "custom-checkbox" %>
-          <%= f.label :second_time_tues, "Second time" %>
-        </li>
-      </ul>
-      <div id="tues-hours">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startstues_at, "Starts at" %>
-            <%= f.time_select :startstues_at, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endstues_at, "Ends at" %>
-            <%= f.time_select :endstues_at, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-      <div id="tues-hours-2" style="display: none;">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startstues_at2, "Starts at" %>
-            <%= f.time_select :startstues_at2, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endstues_at2, "Ends at" %>
-            <%= f.time_select :endstues_at2, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="well">
-      <h4>Wednesday:</h4>
-      <ul class="list-inline">
-        <li>
-          <%= f.check_box :open_all_day_wed, class: "custom-checkbox" %>
-          <%= f.label :open_all_day_wed, "Open all day" %>
-        </li>
-        <li>
-          <%= f.check_box :closed_all_day_wed, class: "custom-checkbox" %>
-          <%= f.label :closed_all_day_wed, "Closed all day" %>
-        </li>
-        <li>
-          <%= f.check_box :second_time_wed, class: "custom-checkbox" %>
-          <%= f.label :second_time_wed, "Second time" %>
-        </li>
-      </ul>
-      <div id="wed-hours">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startswed_at, "Starts at" %>
-            <%= f.time_select :startswed_at, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endswed_at, "Ends at" %>
-            <%= f.time_select :endswed_at, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-      <div id="wed-hours-2" style="display: none;">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startswed_at2, "Starts at" %>
-            <%= f.time_select :startswed_at2, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endswed_at2, "Ends at" %>
-            <%= f.time_select :endswed_at2, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="well">
-      <h4>Thursday:</h4>
-      <ul class="list-inline">
-        <li>
-          <%= f.check_box :open_all_day_thurs, class: "custom-checkbox" %>
-          <%= f.label :open_all_day_thurs, "Open all day" %>
-        </li>
-        <li>
-          <%= f.check_box :closed_all_day_thurs, class: "custom-checkbox" %>
-          <%= f.label :closed_all_day_thurs, "Closed all day" %>
-        </li>
-        <li>
-          <%= f.check_box :second_time_thurs, class: "custom-checkbox" %>
-          <%= f.label :second_time_thurs, "Second time" %>
-        </li>
-      </ul>
-      <div id="thurs-hours">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startsthurs_at, "Starts at" %>
-            <%= f.time_select :startsthurs_at, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endsthurs_at, "Ends at" %>
-            <%= f.time_select :endsthurs_at, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-      <div id="thurs-hours-2" style="display: none;">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startsthurs_at2, "Starts at" %>
-            <%= f.time_select :startsthurs_at2, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endsthurs_at2, "Ends at" %>
-            <%= f.time_select :endsthurs_at2, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="well">
-      <h4>Friday:</h4>
-      <ul class="list-inline">
-        <li>
-          <%= f.check_box :open_all_day_fri, class: "custom-checkbox" %>
-          <%= f.label :open_all_day_fri, "Open all day" %>
-        </li>
-        <li>
-          <%= f.check_box :closed_all_day_fri, class: "custom-checkbox" %>
-          <%= f.label :closed_all_day_fri, "Closed all day" %>
-        </li>
-        <li>
-          <%= f.check_box :second_time_fri, class: "custom-checkbox" %>
-          <%= f.label :second_time_fri, "Second time" %>
-        </li>
-      </ul>
-      <div id="fri-hours">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startsfri_at, "Starts at" %>
-            <%= f.time_select :startsfri_at, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endsfri_at, "Ends at" %>
-            <%= f.time_select :endsfri_at, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-      <div id="fri-hours-2" style="display: none;">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startsfri_at2, "Starts at" %>
-            <%= f.time_select :startsfri_at2, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endsfri_at2, "Ends at" %>
-            <%= f.time_select :endsfri_at2, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="well">
-      <h4>Saturday:</h4>
-      <ul class="list-inline">
-        <li>
-          <%= f.check_box :open_all_day_sat, class: "custom-checkbox" %>
-          <%= f.label :open_all_day_sat, "Open all day" %>
-        </li>
-        <li>
-          <%= f.check_box :closed_all_day_sat, class: "custom-checkbox" %>
-          <%= f.label :closed_all_day_sat, "Closed all day" %>
-        </li>
-        <li>
-          <%= f.check_box :second_time_sat, class: "custom-checkbox" %>
-          <%= f.label :second_time_sat, "Second time" %>
-        </li>
-      </ul>
-      <div id="sat-hours">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startssat_at, "Starts at" %>
-            <%= f.time_select :startssat_at, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endssat_at, "Ends at" %>
-            <%= f.time_select :endssat_at, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-      <div id="sat-hours-2" style="display: none;">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startssat_at2, "Starts at" %>
-            <%= f.time_select :startssat_at2, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endssat_at2, "Ends at" %>
-            <%= f.time_select :endssat_at2, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="well">
-      <h4>Sunday:</h4>
-      <ul class="list-inline">
-        <li>
-          <%= f.check_box :open_all_day_sun, class: "custom-checkbox" %>
-          <%= f.label :open_all_day_sun, "Open all day" %>
-        </li>
-        <li>
-          <%= f.check_box :closed_all_day_sun, class: "custom-checkbox" %>
-          <%= f.label :closed_all_day_sun, "Closed all day" %>
-        </li>
-        <li>
-          <%= f.check_box :second_time_sun, class: "custom-checkbox" %>
-          <%= f.label :second_time_sun, "Second time" %>
-        </li>
-      </ul>
-      <div id="sun-hours">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startssun_at, "Starts at" %>
-            <%= f.time_select :startssun_at, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endssun_at, "Ends at" %>
-            <%= f.time_select :endssun_at, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-      <div id="sun-hours-2" style="display: none;">
-        <ul class="list-inline hour-selects">
-          <li>
-            <%= f.label :startssun_at2, "Starts at" %>
-            <%= f.time_select :startssun_at2, default: 8.hours.ago  %>
-          </li>
-          <li>
-            <%= f.label :endssun_at2, "Ends at" %>
-            <%= f.time_select :endssun_at2, default: 8.hours.ago  %>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+ <p>
+   <%= f.label :description %> - Copy paste verbatim from the facility's "about us" page. Will tweak on stakeholder feedback.<br/>
+   <%= f.text_area :description, cols: 60, rows: 7 %>
+ </p> -->
+ <div class="form-group facility-hours">
+   <h3>Hours</h3>
+   <span class="help-block">Note: The start time and end time for a day cannot be identical. Check the "Second time" option to specify a second time range.</span>
+   <div class="well">
+     <h4>Monday:</h4>
+     <ul class="list-inline">
+       <li>
+         <%= f.check_box :open_all_day_mon, class: "custom-checkbox" %>
+         <%= f.label :open_all_day_mon, "Open all day" %>
+       </li>
+       <li>
+         <%= f.check_box :closed_all_day_mon, class: "custom-checkbox" %>
+         <%= f.label :closed_all_day_mon, "Closed all day" %>
+       </li>
+       <li>
+         <%= f.check_box :second_time_mon, class: "custom-checkbox" %>
+         <%= f.label :second_time_mon, "Second time" %>
+       </li>
+     </ul>
+     <div id="mon-hours">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startsmon_at, "Starts at" %>
+           <%= f.time_select :startsmon_at, default: 8.hours.ago %>
+         </li>
+         <li>
+           <%= f.label :endsmon_at, "Ends at" %>
+           <%= f.time_select :endsmon_at, default: 8.hours.ago %>
+         </li>
+       </ul>
+     </div>
+     <div id="mon-hours-2" style="display: none;">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startsmon_at2, "Starts at" %>
+           <%= f.time_select :startsmon_at2, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endsmon_at2, "Ends at" %>
+           <%= f.time_select :endsmon_at2, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+   </div>
+   <div class="well">
+     <h4>Tuesday:</h4>
+     <ul class="list-inline">
+       <li>
+         <%= f.check_box :open_all_day_tues, class: "custom-checkbox" %>
+         <%= f.label :open_all_day_tues, "Open all day" %>
+       </li>
+       <li>
+         <%= f.check_box :closed_all_day_tues, class: "custom-checkbox" %>
+         <%= f.label :closed_all_day_tues, "Closed all day" %>
+       </li>
+       <li>
+         <%= f.check_box :second_time_tues, class: "custom-checkbox" %>
+         <%= f.label :second_time_tues, "Second time" %>
+       </li>
+     </ul>
+     <div id="tues-hours">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startstues_at, "Starts at" %>
+           <%= f.time_select :startstues_at, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endstues_at, "Ends at" %>
+           <%= f.time_select :endstues_at, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+     <div id="tues-hours-2" style="display: none;">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startstues_at2, "Starts at" %>
+           <%= f.time_select :startstues_at2, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endstues_at2, "Ends at" %>
+           <%= f.time_select :endstues_at2, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+   </div>
+   <div class="well">
+     <h4>Wednesday:</h4>
+     <ul class="list-inline">
+       <li>
+         <%= f.check_box :open_all_day_wed, class: "custom-checkbox" %>
+         <%= f.label :open_all_day_wed, "Open all day" %>
+       </li>
+       <li>
+         <%= f.check_box :closed_all_day_wed, class: "custom-checkbox" %>
+         <%= f.label :closed_all_day_wed, "Closed all day" %>
+       </li>
+       <li>
+         <%= f.check_box :second_time_wed, class: "custom-checkbox" %>
+         <%= f.label :second_time_wed, "Second time" %>
+       </li>
+     </ul>
+     <div id="wed-hours">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startswed_at, "Starts at" %>
+           <%= f.time_select :startswed_at, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endswed_at, "Ends at" %>
+           <%= f.time_select :endswed_at, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+     <div id="wed-hours-2" style="display: none;">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startswed_at2, "Starts at" %>
+           <%= f.time_select :startswed_at2, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endswed_at2, "Ends at" %>
+           <%= f.time_select :endswed_at2, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+   </div>
+   <div class="well">
+     <h4>Thursday:</h4>
+     <ul class="list-inline">
+       <li>
+         <%= f.check_box :open_all_day_thurs, class: "custom-checkbox" %>
+         <%= f.label :open_all_day_thurs, "Open all day" %>
+       </li>
+       <li>
+         <%= f.check_box :closed_all_day_thurs, class: "custom-checkbox" %>
+         <%= f.label :closed_all_day_thurs, "Closed all day" %>
+       </li>
+       <li>
+         <%= f.check_box :second_time_thurs, class: "custom-checkbox" %>
+         <%= f.label :second_time_thurs, "Second time" %>
+       </li>
+     </ul>
+     <div id="thurs-hours">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startsthurs_at, "Starts at" %>
+           <%= f.time_select :startsthurs_at, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endsthurs_at, "Ends at" %>
+           <%= f.time_select :endsthurs_at, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+     <div id="thurs-hours-2" style="display: none;">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startsthurs_at2, "Starts at" %>
+           <%= f.time_select :startsthurs_at2, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endsthurs_at2, "Ends at" %>
+           <%= f.time_select :endsthurs_at2, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+   </div>
+   <div class="well">
+     <h4>Friday:</h4>
+     <ul class="list-inline">
+       <li>
+         <%= f.check_box :open_all_day_fri, class: "custom-checkbox" %>
+         <%= f.label :open_all_day_fri, "Open all day" %>
+       </li>
+       <li>
+         <%= f.check_box :closed_all_day_fri, class: "custom-checkbox" %>
+         <%= f.label :closed_all_day_fri, "Closed all day" %>
+       </li>
+       <li>
+         <%= f.check_box :second_time_fri, class: "custom-checkbox" %>
+         <%= f.label :second_time_fri, "Second time" %>
+       </li>
+     </ul>
+     <div id="fri-hours">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startsfri_at, "Starts at" %>
+           <%= f.time_select :startsfri_at, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endsfri_at, "Ends at" %>
+           <%= f.time_select :endsfri_at, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+     <div id="fri-hours-2" style="display: none;">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startsfri_at2, "Starts at" %>
+           <%= f.time_select :startsfri_at2, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endsfri_at2, "Ends at" %>
+           <%= f.time_select :endsfri_at2, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+   </div>
+   <div class="well">
+     <h4>Saturday:</h4>
+     <ul class="list-inline">
+       <li>
+         <%= f.check_box :open_all_day_sat, class: "custom-checkbox" %>
+         <%= f.label :open_all_day_sat, "Open all day" %>
+       </li>
+       <li>
+         <%= f.check_box :closed_all_day_sat, class: "custom-checkbox" %>
+         <%= f.label :closed_all_day_sat, "Closed all day" %>
+       </li>
+       <li>
+         <%= f.check_box :second_time_sat, class: "custom-checkbox" %>
+         <%= f.label :second_time_sat, "Second time" %>
+       </li>
+     </ul>
+     <div id="sat-hours">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startssat_at, "Starts at" %>
+           <%= f.time_select :startssat_at, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endssat_at, "Ends at" %>
+           <%= f.time_select :endssat_at, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+     <div id="sat-hours-2" style="display: none;">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startssat_at2, "Starts at" %>
+           <%= f.time_select :startssat_at2, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endssat_at2, "Ends at" %>
+           <%= f.time_select :endssat_at2, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+   </div>
+   <div class="well">
+     <h4>Sunday:</h4>
+     <ul class="list-inline">
+       <li>
+         <%= f.check_box :open_all_day_sun, class: "custom-checkbox" %>
+         <%= f.label :open_all_day_sun, "Open all day" %>
+       </li>
+       <li>
+         <%= f.check_box :closed_all_day_sun, class: "custom-checkbox" %>
+         <%= f.label :closed_all_day_sun, "Closed all day" %>
+       </li>
+       <li>
+         <%= f.check_box :second_time_sun, class: "custom-checkbox" %>
+         <%= f.label :second_time_sun, "Second time" %>
+       </li>
+     </ul>
+     <div id="sun-hours">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startssun_at, "Starts at" %>
+           <%= f.time_select :startssun_at, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endssun_at, "Ends at" %>
+           <%= f.time_select :endssun_at, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+     <div id="sun-hours-2" style="display: none;">
+       <ul class="list-inline hour-selects">
+         <li>
+           <%= f.label :startssun_at2, "Starts at" %>
+           <%= f.time_select :startssun_at2, default: 8.hours.ago  %>
+         </li>
+         <li>
+           <%= f.label :endssun_at2, "Ends at" %>
+           <%= f.time_select :endssun_at2, default: 8.hours.ago  %>
+         </li>
+       </ul>
+     </div>
+   </div>
+ </div>
 
-  <hr>
+ <hr>
 
-  <div class="form-group">
-    <h3>Notes</h3>
-    <p>
-      Examples: special events, facility rules, etc.<br/>
-      <%= f.text_area :notes, rows: 7, class: "form-control" %>
-    </p>
-    <%= f.hidden_field :lat%>
-    <%= f.hidden_field :long %>
-  </div>
-  <ul class="list-inline">
-    <li><%= f.submit @submitText, class: "btn btn-primary" %></li>
-    <li><%= link_to "Cancel", facilities_path %></li>
-  </ul>
+ <div class="form-group">
+   <h3>Notes</h3>
+   <p>
+     Examples: special events, facility rules, etc.<br/>
+     <%= f.text_area :notes, rows: 7, class: "form-control" %>
+   </p>
+   <%= f.hidden_field :lat%>
+   <%= f.hidden_field :long %>
+ </div>
+ <ul class="list-inline">
+   <li><%= f.submit @submitText, class: "btn btn-primary" %></li>
+   <li><%= link_to "Cancel", facilities_path %></li>
+ </ul>
 <% end %>
 
 <script>
@@ -536,167 +548,178 @@ var hcheck;
 var tcheck;
 var acheck;
 var lcheck;
-var tscheck;
+// var tscheck;
 var finalservices = [];
 var finalsuitability = [];
 
 function chclicked(){
-  var index;
-  chcheck = document.getElementById('chcheck');
-  if(chcheck.checked){
-    finalsuitability.push(chcheck.value);
-  }else{
-    index = finalsuitability.indexOf(chcheck.value);
-    if (index > -1) {
-      finalsuitability.splice(index, 1);
-    }
-  }
-  document.getElementById('facility_suitability').value = finalsuitability.join(' ');
+ var index;
+ chcheck = document.getElementById('chcheck');
+ if(chcheck.checked){
+   finalsuitability.push(chcheck.value);
+ }else{
+   index = finalsuitability.indexOf(chcheck.value);
+   if (index > -1) {
+     finalsuitability.splice(index, 1);
+   }
+ }
+ document.getElementById('facility_suitability').value = finalsuitability.join(' ');
 };
 
 function yoclicked(){
-  var index;
-  yocheck = document.getElementById('yocheck');
-  if(yocheck.checked){
-    finalsuitability.push(yocheck.value);
-  }else{
-    index = finalsuitability.indexOf(yocheck.value);
-    if (index > -1) {
-      finalsuitability.splice(index, 1);
-    }
-  }
-  document.getElementById('facility_suitability').value = finalsuitability.join(' ');
+ var index;
+ yocheck = document.getElementById('yocheck');
+ if(yocheck.checked){
+   finalsuitability.push(yocheck.value);
+ }else{
+   index = finalsuitability.indexOf(yocheck.value);
+   if (index > -1) {
+     finalsuitability.splice(index, 1);
+   }
+ }
+ document.getElementById('facility_suitability').value = finalsuitability.join(' ');
 };
 
 function adclicked(){
-  var index;
-  adcheck = document.getElementById('adcheck');
-  if(adcheck.checked){
-    finalsuitability.push(adcheck.value);
-  }else{
-    index = finalsuitability.indexOf(adcheck.value);
-    if (index > -1) {
-      finalsuitability.splice(index, 1);
-    }
-  }
-  document.getElementById('facility_suitability').value = finalsuitability.join(' ');
+ var index;
+ adcheck = document.getElementById('adcheck');
+ if(adcheck.checked){
+   finalsuitability.push(adcheck.value);
+ }else{
+   index = finalsuitability.indexOf(adcheck.value);
+   if (index > -1) {
+     finalsuitability.splice(index, 1);
+   }
+ }
+ document.getElementById('facility_suitability').value = finalsuitability.join(' ');
 };
 
 function seclicked(){
-  var index;
-  secheck = document.getElementById('secheck');
-  if(secheck.checked){
-    finalsuitability.push(secheck.value);
-  }else{
-    index = finalsuitability.indexOf(secheck.value);
-    if (index > -1) {
-      finalsuitability.splice(index, 1);
-    }
-  }
-  document.getElementById('facility_suitability').value = finalsuitability.join(' ');
+ var index;
+ secheck = document.getElementById('secheck');
+ if(secheck.checked){
+   finalsuitability.push(secheck.value);
+ }else{
+   index = finalsuitability.indexOf(secheck.value);
+   if (index > -1) {
+     finalsuitability.splice(index, 1);
+   }
+ }
+ document.getElementById('facility_suitability').value = finalsuitability.join(' ');
 };
 
 
 function sclicked(){
-  var index;
-  scheck = document.getElementById('scheck');
-  if(scheck.checked){
-    finalservices.push(scheck.value);
-  }else{
-    index = finalservices.indexOf(scheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
+ var index;
+ scheck = document.getElementById('scheck');
+ if(scheck.checked){
+   finalservices.push(scheck.value);
+ }else{
+   index = finalservices.indexOf(scheck.value);
+   if (index > -1) {
+     finalservices.splice(index, 1);
+   }
+ }
+ document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
 function fclicked(){
-  var index = 2;
-  fcheck = document.getElementById('fcheck');
-  if(fcheck.checked){
-    finalservices.push(fcheck.value);
-  }else{
-    index = finalservices.indexOf(fcheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
+ var index = 2;
+ fcheck = document.getElementById('fcheck');
+ if(fcheck.checked){
+   finalservices.push(fcheck.value);
+ }else{
+   index = finalservices.indexOf(fcheck.value);
+   if (index > -1) {
+     finalservices.splice(index, 1);
+   }
+ }
+ document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
 function mclicked(){
-  var index;
-  mcheck = document.getElementById('mcheck');
-  if(mcheck.checked){
-    finalservices.push(mcheck.value);
-  }else{
-    index = finalservices.indexOf(mcheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
+ var index;
+ mcheck = document.getElementById('mcheck');
+ if(mcheck.checked){
+   finalservices.push(mcheck.value);
+ }else{
+   index = finalservices.indexOf(mcheck.value);
+   if (index > -1) {
+     finalservices.splice(index, 1);
+   }
+ }
+ document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
 function hclicked(){
-  var index;
-  hcheck = document.getElementById('hcheck');
-  if(hcheck.checked){
-    finalservices.push(hcheck.value);
-  }else{
-    index = finalservices.indexOf(hcheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
+ var index;
+ hcheck = document.getElementById('hcheck');
+ if(hcheck.checked){
+   finalservices.push(hcheck.value);
+ }else{
+   index = finalservices.indexOf(hcheck.value);
+   if (index > -1) {
+     finalservices.splice(index, 1);
+   }
+ }
+ document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
 function tclicked(){
-  var index;
-  tcheck = document.getElementById('tcheck');
-  if(tcheck.checked){
-    finalservices.push(tcheck.value);
-  }else{
-    index = finalservices.indexOf(tcheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
+ var index;
+ tcheck = document.getElementById('tcheck');
+ if(tcheck.checked){
+   finalservices.push(tcheck.value);
+ }else{
+   index = finalservices.indexOf(tcheck.value);
+   if (index > -1) {
+     finalservices.splice(index, 1);
+   }
+ }
+ document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
 function aclicked(){
-  var index;
-  acheck = document.getElementById('acheck');
-  if(acheck.checked){
-    finalservices.push(acheck.value);
-  }else{
-    index = finalservices.indexOf(acheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
+ var index;
+ acheck = document.getElementById('acheck');
+ if(acheck.checked){
+   finalservices.push(acheck.value);
+ }else{
+   index = finalservices.indexOf(acheck.value);
+   if (index > -1) {
+     finalservices.splice(index, 1);
+   }
+ }
+ document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
 function lclicked(){
-  var index;
-  lcheck = document.getElementById('lcheck');
-  if(lcheck.checked){
-    finalservices.push(lcheck.value);
-  }else{
-    index = finalservices.indexOf(lcheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
+ var index;
+ lcheck = document.getElementById('lcheck');
+ if(lcheck.checked){
+   finalservices.push(lcheck.value);
+ }else{
+   index = finalservices.indexOf(lcheck.value);
+   if (index > -1) {
+     finalservices.splice(index, 1);
+   }
+ }
+ document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
-
-};
+// function tsclicked(){
+//   var index;
+//   tscheck = document.getElementById('tscheck');
+//   if(tscheck.checked){
+//     finalservices.push(tscheck.value);
+//   }else{
+//     index = finalservices.indexOf(tscheck.value);
+//     if (index > -1) {
+//       finalservices.splice(index, 1);
+//     }
+//   }
+//   document.getElementById('facility_services').value = finalservices.join(' ');
+// };
 
 sclicked();
 fclicked();
@@ -705,6 +728,7 @@ hclicked();
 tclicked();
 aclicked();
 lclicked();
+// tsclicked();
 
 
 var monhours = document.getElementById("mon-hours");
@@ -785,199 +809,199 @@ stsun.setAttribute("onclick", "validate_sun()");
 //open or closed all day toggles
 function validate_mon(){
 
-  if(oadmon.checked && cadmon.checked && stmon.checked){
-    monhours.style.display = 'none';
-    monhours2.style.display = 'none';
-  }else if (oadmon.checked && cadmon.checked && !stmon.checked){
-    monhours.style.display = 'none';
-    monhours2.style.display = 'none';
-  }else if (oadmon.checked && !cadmon.checked && stmon.checked){
-    monhours.style.display = 'none';
-    monhours2.style.display = 'none';
-  }else if (oadmon.checked && !cadmon.checked && !stmon.checked){
-    monhours.style.display = 'none';
-    monhours2.style.display = 'none';
-  }else if (!oadmon.checked && cadmon.checked && stmon.checked){
-    monhours.style.display = 'none';
-    monhours2.style.display = 'none';
-  }else if (!oadmon.checked && cadmon.checked && !stmon.checked){
-    monhours.style.display = 'none';
-    monhours2.style.display = 'none';
-  }else if (!oadmon.checked && !cadmon.checked && stmon.checked){
-    monhours.style.display = 'block';
-    monhours2.style.display = 'block';
-  }else if (!oadmon.checked && !cadmon.checked && !stmon.checked){
-    monhours.style.display = 'block';
-    monhours2.style.display = 'none';
-  }
+ if(oadmon.checked && cadmon.checked && stmon.checked){
+   monhours.style.display = 'none';
+   monhours2.style.display = 'none';
+ }else if (oadmon.checked && cadmon.checked && !stmon.checked){
+   monhours.style.display = 'none';
+   monhours2.style.display = 'none';
+ }else if (oadmon.checked && !cadmon.checked && stmon.checked){
+   monhours.style.display = 'none';
+   monhours2.style.display = 'none';
+ }else if (oadmon.checked && !cadmon.checked && !stmon.checked){
+   monhours.style.display = 'none';
+   monhours2.style.display = 'none';
+ }else if (!oadmon.checked && cadmon.checked && stmon.checked){
+   monhours.style.display = 'none';
+   monhours2.style.display = 'none';
+ }else if (!oadmon.checked && cadmon.checked && !stmon.checked){
+   monhours.style.display = 'none';
+   monhours2.style.display = 'none';
+ }else if (!oadmon.checked && !cadmon.checked && stmon.checked){
+   monhours.style.display = 'block';
+   monhours2.style.display = 'block';
+ }else if (!oadmon.checked && !cadmon.checked && !stmon.checked){
+   monhours.style.display = 'block';
+   monhours2.style.display = 'none';
+ }
 }
 
 function validate_tues(){
-  if(oadtues.checked && cadtues.checked && sttues.checked){
-    tueshours.style.display = 'none';
-    tueshours2.style.display = 'none';
-  }else if (oadtues.checked && cadtues.checked && !sttues.checked){
-    tueshours.style.display = 'none';
-    tueshours2.style.display = 'none';
-  }else if (oadtues.checked && !cadtues.checked && sttues.checked){
-    tueshours.style.display = 'none';
-    tueshours2.style.display = 'none';
-  }else if (oadtues.checked && !cadtues.checked && !sttues.checked){
-    tueshours.style.display = 'none';
-    tueshours2.style.display = 'none';
-  }else if (!oadtues.checked && cadtues.checked && sttues.checked){
-    tueshours.style.display = 'none';
-    tueshours2.style.display = 'none';
-  }else if (!oadtues.checked && cadtues.checked && !sttues.checked){
-    tueshours.style.display = 'none';
-    tueshours2.style.display = 'none';
-  }else if (!oadtues.checked && !cadtues.checked && sttues.checked){
-    tueshours.style.display = 'block';
-    tueshours2.style.display = 'block';
-  }else if (!oadtues.checked && !cadtues.checked && !sttues.checked){
-    tueshours.style.display = 'block';
-    tueshours2.style.display = 'none';
-  }
+ if(oadtues.checked && cadtues.checked && sttues.checked){
+   tueshours.style.display = 'none';
+   tueshours2.style.display = 'none';
+ }else if (oadtues.checked && cadtues.checked && !sttues.checked){
+   tueshours.style.display = 'none';
+   tueshours2.style.display = 'none';
+ }else if (oadtues.checked && !cadtues.checked && sttues.checked){
+   tueshours.style.display = 'none';
+   tueshours2.style.display = 'none';
+ }else if (oadtues.checked && !cadtues.checked && !sttues.checked){
+   tueshours.style.display = 'none';
+   tueshours2.style.display = 'none';
+ }else if (!oadtues.checked && cadtues.checked && sttues.checked){
+   tueshours.style.display = 'none';
+   tueshours2.style.display = 'none';
+ }else if (!oadtues.checked && cadtues.checked && !sttues.checked){
+   tueshours.style.display = 'none';
+   tueshours2.style.display = 'none';
+ }else if (!oadtues.checked && !cadtues.checked && sttues.checked){
+   tueshours.style.display = 'block';
+   tueshours2.style.display = 'block';
+ }else if (!oadtues.checked && !cadtues.checked && !sttues.checked){
+   tueshours.style.display = 'block';
+   tueshours2.style.display = 'none';
+ }
 }
 
 function validate_wed(){
-  if(oadwed.checked && cadwed.checked && stwed.checked){
-    wedhours.style.display = 'none';
-    wedhours2.style.display = 'none';
-  }else if (oadwed.checked && cadwed.checked && !stwed.checked){
-    wedhours.style.display = 'none';
-    wedhours2.style.display = 'none';
-  }else if (oadwed.checked && !cadwed.checked && stwed.checked){
-    wedhours.style.display = 'none';
-    wedhours2.style.display = 'none';
-  }else if (oadwed.checked && !cadwed.checked && !stwed.checked){
-    wedhours.style.display = 'none';
-    wedhours2.style.display = 'none';
-  }else if (!oadwed.checked && cadwed.checked && stwed.checked){
-    wedhours.style.display = 'none';
-    wedhours2.style.display = 'none';
-  }else if (!oadwed.checked && cadwed.checked && !stwed.checked){
-    wedhours.style.display = 'none';
-    wedhours2.style.display = 'none';
-  }else if (!oadwed.checked && !cadwed.checked && stwed.checked){
-    wedhours.style.display = 'block';
-    wedhours2.style.display = 'block';
-  }else if (!oadwed.checked && !cadwed.checked && !stwed.checked){
-    wedhours.style.display = 'block';
-    wedhours2.style.display = 'none';
-  }
+ if(oadwed.checked && cadwed.checked && stwed.checked){
+   wedhours.style.display = 'none';
+   wedhours2.style.display = 'none';
+ }else if (oadwed.checked && cadwed.checked && !stwed.checked){
+   wedhours.style.display = 'none';
+   wedhours2.style.display = 'none';
+ }else if (oadwed.checked && !cadwed.checked && stwed.checked){
+   wedhours.style.display = 'none';
+   wedhours2.style.display = 'none';
+ }else if (oadwed.checked && !cadwed.checked && !stwed.checked){
+   wedhours.style.display = 'none';
+   wedhours2.style.display = 'none';
+ }else if (!oadwed.checked && cadwed.checked && stwed.checked){
+   wedhours.style.display = 'none';
+   wedhours2.style.display = 'none';
+ }else if (!oadwed.checked && cadwed.checked && !stwed.checked){
+   wedhours.style.display = 'none';
+   wedhours2.style.display = 'none';
+ }else if (!oadwed.checked && !cadwed.checked && stwed.checked){
+   wedhours.style.display = 'block';
+   wedhours2.style.display = 'block';
+ }else if (!oadwed.checked && !cadwed.checked && !stwed.checked){
+   wedhours.style.display = 'block';
+   wedhours2.style.display = 'none';
+ }
 }
 
 function validate_thurs(){
-  if(oadthurs.checked && cadthurs.checked && stthurs.checked){
-    thurshours.style.display = 'none';
-    thurshours2.style.display = 'none';
-  }else if (oadthurs.checked && cadthurs.checked && !stthurs.checked){
-    thurshours.style.display = 'none';
-    thurshours2.style.display = 'none';
-  }else if (oadthurs.checked && !cadthurs.checked && stthurs.checked){
-    thurshours.style.display = 'none';
-    thurshours2.style.display = 'none';
-  }else if (oadthurs.checked && !cadthurs.checked && !stthurs.checked){
-    thurshours.style.display = 'none';
-    thurshours2.style.display = 'none';
-  }else if (!oadthurs.checked && cadthurs.checked && stthurs.checked){
-    thurshours.style.display = 'none';
-    thurshours2.style.display = 'none';
-  }else if (!oadthurs.checked && cadthurs.checked && !stthurs.checked){
-    thurshours.style.display = 'none';
-    thurshours2.style.display = 'none';
-  }else if (!oadthurs.checked && !cadthurs.checked && stthurs.checked){
-    thurshours.style.display = 'block';
-    thurshours2.style.display = 'block';
-  }else if (!oadthurs.checked && !cadthurs.checked && !stthurs.checked){
-    thurshours.style.display = 'block';
-    thurshours2.style.display = 'none';
-  }
+ if(oadthurs.checked && cadthurs.checked && stthurs.checked){
+   thurshours.style.display = 'none';
+   thurshours2.style.display = 'none';
+ }else if (oadthurs.checked && cadthurs.checked && !stthurs.checked){
+   thurshours.style.display = 'none';
+   thurshours2.style.display = 'none';
+ }else if (oadthurs.checked && !cadthurs.checked && stthurs.checked){
+   thurshours.style.display = 'none';
+   thurshours2.style.display = 'none';
+ }else if (oadthurs.checked && !cadthurs.checked && !stthurs.checked){
+   thurshours.style.display = 'none';
+   thurshours2.style.display = 'none';
+ }else if (!oadthurs.checked && cadthurs.checked && stthurs.checked){
+   thurshours.style.display = 'none';
+   thurshours2.style.display = 'none';
+ }else if (!oadthurs.checked && cadthurs.checked && !stthurs.checked){
+   thurshours.style.display = 'none';
+   thurshours2.style.display = 'none';
+ }else if (!oadthurs.checked && !cadthurs.checked && stthurs.checked){
+   thurshours.style.display = 'block';
+   thurshours2.style.display = 'block';
+ }else if (!oadthurs.checked && !cadthurs.checked && !stthurs.checked){
+   thurshours.style.display = 'block';
+   thurshours2.style.display = 'none';
+ }
 }
 
 function validate_fri(){
-  if(oadfri.checked && cadfri.checked && stfri.checked){
-    frihours.style.display = 'none';
-    frihours2.style.display = 'none';
-  }else if (oadfri.checked && cadfri.checked && !stfri.checked){
-    frihours.style.display = 'none';
-    frihours2.style.display = 'none';
-  }else if (oadfri.checked && !cadfri.checked && stfri.checked){
-    frihours.style.display = 'none';
-    frihours2.style.display = 'none';
-  }else if (oadfri.checked && !cadfri.checked && !stfri.checked){
-    frihours.style.display = 'none';
-    frihours2.style.display = 'none';
-  }else if (!oadfri.checked && cadfri.checked && stfri.checked){
-    frihours.style.display = 'none';
-    frihours2.style.display = 'none';
-  }else if (!oadfri.checked && cadfri.checked && !stfri.checked){
-    frihours.style.display = 'none';
-    frihours2.style.display = 'none';
-  }else if (!oadfri.checked && !cadfri.checked && stfri.checked){
-    frihours.style.display = 'block';
-    frihours2.style.display = 'block';
-  }else if (!oadfri.checked && !cadfri.checked && !stfri.checked){
-    frihours.style.display = 'block';
-    frihours2.style.display = 'none';
-  }
+ if(oadfri.checked && cadfri.checked && stfri.checked){
+   frihours.style.display = 'none';
+   frihours2.style.display = 'none';
+ }else if (oadfri.checked && cadfri.checked && !stfri.checked){
+   frihours.style.display = 'none';
+   frihours2.style.display = 'none';
+ }else if (oadfri.checked && !cadfri.checked && stfri.checked){
+   frihours.style.display = 'none';
+   frihours2.style.display = 'none';
+ }else if (oadfri.checked && !cadfri.checked && !stfri.checked){
+   frihours.style.display = 'none';
+   frihours2.style.display = 'none';
+ }else if (!oadfri.checked && cadfri.checked && stfri.checked){
+   frihours.style.display = 'none';
+   frihours2.style.display = 'none';
+ }else if (!oadfri.checked && cadfri.checked && !stfri.checked){
+   frihours.style.display = 'none';
+   frihours2.style.display = 'none';
+ }else if (!oadfri.checked && !cadfri.checked && stfri.checked){
+   frihours.style.display = 'block';
+   frihours2.style.display = 'block';
+ }else if (!oadfri.checked && !cadfri.checked && !stfri.checked){
+   frihours.style.display = 'block';
+   frihours2.style.display = 'none';
+ }
 }
 
 function validate_sat(){
-  if(oadsat.checked && cadsat.checked && stsat.checked){
-    sathours.style.display = 'none';
-    sathours2.style.display = 'none';
-  }else if (oadsat.checked && cadsat.checked && !stsat.checked){
-    sathours.style.display = 'none';
-    sathours2.style.display = 'none';
-  }else if (oadsat.checked && !cadsat.checked && stsat.checked){
-    sathours.style.display = 'none';
-    sathours2.style.display = 'none';
-  }else if (oadsat.checked && !cadsat.checked && !stsat.checked){
-    sathours.style.display = 'none';
-    sathours2.style.display = 'none';
-  }else if (!oadsat.checked && cadsat.checked && stsat.checked){
-    sathours.style.display = 'none';
-    sathours2.style.display = 'none';
-  }else if (!oadsat.checked && cadsat.checked && !stsat.checked){
-    sathours.style.display = 'none';
-    sathours2.style.display = 'none';
-  }else if (!oadsat.checked && !cadsat.checked && stsat.checked){
-    sathours.style.display = 'block';
-    sathours2.style.display = 'block';
-  }else if (!oadsat.checked && !cadsat.checked && !stsat.checked){
-    sathours.style.display = 'block';
-    sathours2.style.display = 'none';
-  }
+ if(oadsat.checked && cadsat.checked && stsat.checked){
+   sathours.style.display = 'none';
+   sathours2.style.display = 'none';
+ }else if (oadsat.checked && cadsat.checked && !stsat.checked){
+   sathours.style.display = 'none';
+   sathours2.style.display = 'none';
+ }else if (oadsat.checked && !cadsat.checked && stsat.checked){
+   sathours.style.display = 'none';
+   sathours2.style.display = 'none';
+ }else if (oadsat.checked && !cadsat.checked && !stsat.checked){
+   sathours.style.display = 'none';
+   sathours2.style.display = 'none';
+ }else if (!oadsat.checked && cadsat.checked && stsat.checked){
+   sathours.style.display = 'none';
+   sathours2.style.display = 'none';
+ }else if (!oadsat.checked && cadsat.checked && !stsat.checked){
+   sathours.style.display = 'none';
+   sathours2.style.display = 'none';
+ }else if (!oadsat.checked && !cadsat.checked && stsat.checked){
+   sathours.style.display = 'block';
+   sathours2.style.display = 'block';
+ }else if (!oadsat.checked && !cadsat.checked && !stsat.checked){
+   sathours.style.display = 'block';
+   sathours2.style.display = 'none';
+ }
 }
 
 function validate_sun(){
-  if(oadsun.checked && cadsun.checked && stsun.checked){
-    sunhours.style.display = 'none';
-    sunhours2.style.display = 'none';
-  }else if (oadsun.checked && cadsun.checked && !stsun.checked){
-    sunhours.style.display = 'none';
-    sunhours2.style.display = 'none';
-  }else if (oadsun.checked && !cadsun.checked && stsun.checked){
-    sunhours.style.display = 'none';
-    sunhours2.style.display = 'none';
-  }else if (oadsun.checked && !cadsun.checked && !stsun.checked){
-    sunhours.style.display = 'none';
-    sunhours2.style.display = 'none';
-  }else if (!oadsun.checked && cadsun.checked && stsun.checked){
-    sunhours.style.display = 'none';
-    sunhours2.style.display = 'none';
-  }else if (!oadsun.checked && cadsun.checked && !stsun.checked){
-    sunhours.style.display = 'none';
-    sunhours2.style.display = 'none';
-  }else if (!oadsun.checked && !cadsun.checked && stsun.checked){
-    sunhours.style.display = 'block';
-    sunhours2.style.display = 'block';
-  }else if (!oadsun.checked && !cadsun.checked && !stsun.checked){
-    sunhours.style.display = 'block';
-    sunhours2.style.display = 'none';
-  }
+ if(oadsun.checked && cadsun.checked && stsun.checked){
+   sunhours.style.display = 'none';
+   sunhours2.style.display = 'none';
+ }else if (oadsun.checked && cadsun.checked && !stsun.checked){
+   sunhours.style.display = 'none';
+   sunhours2.style.display = 'none';
+ }else if (oadsun.checked && !cadsun.checked && stsun.checked){
+   sunhours.style.display = 'none';
+   sunhours2.style.display = 'none';
+ }else if (oadsun.checked && !cadsun.checked && !stsun.checked){
+   sunhours.style.display = 'none';
+   sunhours2.style.display = 'none';
+ }else if (!oadsun.checked && cadsun.checked && stsun.checked){
+   sunhours.style.display = 'none';
+   sunhours2.style.display = 'none';
+ }else if (!oadsun.checked && cadsun.checked && !stsun.checked){
+   sunhours.style.display = 'none';
+   sunhours2.style.display = 'none';
+ }else if (!oadsun.checked && !cadsun.checked && stsun.checked){
+   sunhours.style.display = 'block';
+   sunhours2.style.display = 'block';
+ }else if (!oadsun.checked && !cadsun.checked && !stsun.checked){
+   sunhours.style.display = 'block';
+   sunhours2.style.display = 'none';
+ }
 }
 
 </script>
