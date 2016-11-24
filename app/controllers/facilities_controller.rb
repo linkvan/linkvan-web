@@ -172,11 +172,11 @@ class FacilitiesController < ApplicationController
   def search
       if params[:search]
         if params[:search].include? "Children"
-          @facilities = Facility.where("suitability like ?", "%#{params[:suitability]}")
+          @facilities = Facility.where("suitability like ?", "%Children%")
         elsif params[:search] == "Youth"
-          @facilities = Facility.where("suitability like ?", "%#{params[:suitability]}")
+          @facilities = Facility.where("suitability like ?", "%Youth%")
         elsif params[:search] == "Adults"
-          @facilities = Facility.where("suitability like ?", "%#{params[:suitability]}")
+          @facilities = Facility.where("suitability like ?", "%Adults%")
         elsif params[:search] == "Seniors"
           @facilities = Facility.where("suitability like ?", "%Seniors%")
 
