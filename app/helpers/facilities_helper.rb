@@ -237,7 +237,7 @@ module FacilitiesHelper
 		@word = params[:search]
 		# trim word
 		case @word
-		when "Children", "youth", "adult", "senior", "suitability"
+		when "children", "youth", "adult", "senior", "suitability"
 			return true
 		when "shelter", "house", "housing", "food", "medical", "hygiene", "shower", "technology", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher"
 			return true
