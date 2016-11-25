@@ -233,8 +233,30 @@ module FacilitiesHelper
   		end
   	end
 
+	def isKeyword
+		@word = params[:search]
+		# trim word
+		case @word
+		when "children", "youth", "adult", "senior", "suitability"
+			return true
+		when "shelter", "house", "housing", "food", "medical", "hygiene", "shower", "technology", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher"
+			return true
+		else
+			return false
+		end
+	end
+
 	def keywordSearch
-		Facility.search(params[:search])
+		if params[:search].include? "Children"
+			@facilities = Facility.where("suitability like ?", "%Children%")
+		elsif params[:search] == "Youth"
+			@facilities = Facility.where("suitability like ?", "%Youth%")
+		elsif params[:search] == "Adults"
+			@facilities = Facility.where("suitability like ?", "%Adults%")
+		elsif params[:search] == "Seniors"
+			@facilities = Facility.where("suitability like ?", "%Seniors%")
+		else
+			Facility.search(params[:search])
 	end
 
 end
