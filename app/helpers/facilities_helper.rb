@@ -257,6 +257,6 @@ module FacilitiesHelper
 			@facilities = Facility.where("suitability like ?", "%Seniors%")
 		else
 			Facility.search(params[:search])
+		end
 	end
-
 end
