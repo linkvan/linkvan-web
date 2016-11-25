@@ -1,7 +1,7 @@
 class FacilitiesController < ApplicationController
   before_action :require_signin, only: [:edit, :update, :new, :create, :destroy]
   #use impressionist to log views to display on user show page
-
+  include FacilitiesHelper
   def index
     @facilities = Facility.all
   end
