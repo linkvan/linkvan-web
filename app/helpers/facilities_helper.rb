@@ -247,7 +247,7 @@ module FacilitiesHelper
 	end
 
 	def keywordSearch
-		if params[:search].include? "Children"
+		if params[:search].include? "children"
 			@facilities = Facility.where("suitability like ?", "%Children%")
 		elsif params[:search] == "Youth"
 			@facilities = Facility.where("suitability like ?", "%Youth%")
