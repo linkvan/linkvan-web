@@ -1,7 +1,7 @@
 class ChangeFacilitySuitability < ActiveRecord::Migration
   def up
     change_column :facilities, :suitability, :string
-    Facility do |f|
+    Facility.find_each do |f|
       if f.suitability == "Children"
         f.suitability = "children"
         f.save
@@ -11,7 +11,7 @@ class ChangeFacilitySuitability < ActiveRecord::Migration
 
   def down
     change_column :facilities, :suitability, :string
-    Facility do |f|
+    Facility.find_each do |f|
       if f.suitability == "children"
         f.suitability = "Children"
         f.save
