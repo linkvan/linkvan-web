@@ -1,4 +1,4 @@
-class ChangeAllSuitabilityToLowercase < ActiveRecord::Migration
+class ChangeAllSuitabilityPermutations < ActiveRecord::Migration
   def change
     change_column :facilities, :suitability, :string
     Facility.find_each do |f|
