@@ -46,6 +46,7 @@ class ChangeAllSuitabilityPermutations < ActiveRecord::Migration
         f.suitability = "seniors"
         f.save
       else
+        f.suitability = f.suitability
         f.save
       end
     end
