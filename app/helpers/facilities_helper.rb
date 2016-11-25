@@ -233,6 +233,8 @@ module FacilitiesHelper
   		end
   	end
 
-
+	def keywordSearch
+		Facility.search(params[:search])
+	end
 
 end
