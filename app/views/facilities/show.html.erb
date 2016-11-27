@@ -22,23 +22,23 @@
       id = service + "Note"
       case service
           when "Shelter"
-              content = content_tag(:i, nil, class: "icon-sleepshelter_linkvan shelter-colour-index")
+              content = content_tag(:i, inline_svg('icons/shelter.svg', size: '25px'), class: "linkvan-icon")
           when "Food"
-              content = content_tag(:i, nil, class: "glyphicon glyphicon-cutlery food-colour-index")
+              content = content_tag(:i, inline_svg('icons/cutlery.svg', size: '25px'), class: "linkvan-icon")
           when "Medical"
-              content = content_tag(:i, nil, class: "icon-Medical_linkvan medical-colour-index")
+              content = content_tag(:i, inline_svg('icons/medical.svg', size: '25px'), class: "linkvan-icon")
           when "Hygiene"
-              content = content_tag(:i, nil, class: "icon-hygiene_linkvan hygiene-colour-index")
+              content = content_tag(:i, inline_svg('icons/hygiene.svg', size: '25px'), class: "linkvan-icon")
           when "Technology"
-              content = content_tag(:i, nil, class: "icon-technology_linkvan technology-colour-index")
+              content = content_tag(:i, inline_svg('icons/technology.svg', size: '25px'), class: "linkvan-icon")
           when "Legal"
-              content = content_tag(:i, nil, class: "icon-Advocacy_linkvan legal-colour-index")
+              content = content_tag(:i, inline_svg('icons/advocacy.svg', size: '25px'), class: "linkvan-icon")
           when "Learning"
-              content = content_tag(:i, nil, class: "icon-learning_linkvan")
+              content = content_tag(:i, inline_svg('icons/learning.svg', size: '25px'), class: "linkvan-icon")
           #else add error case?
 
       end #ends case
-      content = content_tag(:h3, content + service)
+      content = content_tag(:h3, content + content_tag(:span, service), class: "clearfix")
       # content += content_tag(:p, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis cursus ex, non aliquam velit. Mauris fringilla ut diam pellentesque porta. Vestibulum ut ultricies mi, et volutpat massa. Donec risus ipsum, congue non nibh ut, efficitur tincidunt quam.")
       content.html_safe
       %>

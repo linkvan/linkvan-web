@@ -64,6 +64,8 @@ gem 'tzinfo-data', platforms: [:x64_mingw, :mingw, :mswin]
 
 gem "breadcrumbs_on_rails"
 
+gem 'inline_svg'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

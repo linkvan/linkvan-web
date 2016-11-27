@@ -1,4 +1,11 @@
 @font-face {
+	font-family: 'Linkvan';
+	src: font-url('Linkvan.svg#icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
 	font-family: 'Project-Linkvan';
 	src:font-url('Project-Linkvan.eot');
 	src:font-url('Project-Linkvan.eot?#iefix') format('embedded-opentype'),
@@ -46,9 +53,17 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-Advocacy_linkvan:before {
-	content: "\e800";
+.linkvan-icon {
+	line-height: 1;
 }
+
+
+
+
+
+
+
+
 .icon-pets_linkvan:before {
 	content: "\e801";
 }
@@ -58,14 +73,8 @@
 .icon-shoppingcart_linkvan:before {
 	content: "\e803";
 }
-.icon-sleepshelter_linkvan:before {
-	content: "\e804";
-}
 .icon-transgender_linkvan:before {
 	content: "\e805";
-}
-.icon-hygiene_linkvan:before {
-	content: "\e806";
 }
 .icon-id_linkvan:before {
 	content: "\e807";
@@ -89,9 +98,6 @@
 	margin-left: -1em;
 	color: rgb(0, 0, 0);
 }
-.icon-Medical_linkvan:before {
-	content: "\e80c";
-}
 .icon-home3:before {
 	content: "\e80d";
 }
@@ -106,22 +112,10 @@
 	color: #CB769E;
 }
 
-.icon-learning_linkvan:before {
-	content: "\e91f";
-	font-family: "Project-Linkvan2";
-	color: #DEA54B;
-}
-
 .icon-training_services_linkvan:before {
 	content: "\e991";
 	font-family: "Project-Linkvan2";
 	color: #949494;
-}
-
-.icon-technology_linkvan:before {
-	content: "\e957";
-	font-family: "Project-Linkvan3";
-	color: #CB769E;
 }
 
 .icon-cart_linkvan:before {

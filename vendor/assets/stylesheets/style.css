@@ -24,9 +24,6 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-Advocacy_linkvan:before {
-	content: "\e800";
-}
 .icon-pets_linkvan:before {
 	content: "\e801";
 }
@@ -36,14 +33,8 @@
 .icon-shoppingcart_linkvan:before {
 	content: "\e803";
 }
-.icon-sleepshelter_linkvan:before {
-	content: "\e804";
-}
 .icon-transgender_linkvan:before {
 	content: "\e805";
-}
-.icon-hygiene_linkvan:before {
-	content: "\e806";
 }
 .icon-id_linkvan:before {
 	content: "\e807";
@@ -67,9 +58,6 @@
 	margin-left: -1em;
 	color: rgb(0, 0, 0);
 }
-.icon-Medical_linkvan:before {
-	content: "\e80c";
-}
 .icon-home3:before {
 	content: "\e80d";
 }
@@ -82,4 +70,3 @@
 .icon-display:before {
 	content: "\e810";
 }
-
