@@ -258,7 +258,8 @@ private
                              :startssun_at2, :endssun_at2, :open_all_day_mon, :open_all_day_tues, :open_all_day_wed, :open_all_day_thurs,
                                 :open_all_day_fri, :open_all_day_sat, :open_all_day_sun, :closed_all_day_mon, :closed_all_day_tues, :closed_all_day_wed,
                                    :closed_all_day_thurs, :closed_all_day_fri, :closed_all_day_sat, :closed_all_day_sun, :r_pets, :r_id, :r_cart, :r_phone, :r_wifi,
-                                      :second_time_mon, :second_time_tues, :second_time_wed, :second_time_thurs, :second_time_fri, :second_time_sat, :second_time_sun )
+                                      :second_time_mon, :second_time_tues, :second_time_wed, :second_time_thurs, :second_time_fri, :second_time_sat, :second_time_sun,
+                                      :shelter_note, :food_note, :medical_note, :hygiene_note, :technology_note, :legal_note, :learning_note )
 	end
 
 
