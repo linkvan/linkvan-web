@@ -248,7 +248,7 @@ module FacilitiesHelper
 
 	def keywordSearch
 		if params[:search].include? @word
-			@facilities = Facility.where("suitability ~* ?", @word)
+			@facilities = Facility.where("suitability ~* ?", @word).where(:verified => true)
 		else
 			Facility.search(params[:search])
 		end
