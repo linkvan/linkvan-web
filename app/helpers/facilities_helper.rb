@@ -235,9 +235,17 @@ module FacilitiesHelper
 
 	def isKeyword
 		@word = params[:search]
-		# trim word
+		@word.strip
+		@word.camelize
 		case @word
-		when "children", "youth", "adult", "senior", "suitability"
+		when "child", "children", "youth", "adult", "adults" "senior", "suitability"
+			case @word
+			when "child"
+				@word = "children"
+			when "adults"
+				@word = "adult"
+			else
+			end
 			return true
 		when "shelter", "house", "housing", "food", "medical", "hygiene", "shower", "technology", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher"
 			return true
