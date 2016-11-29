@@ -234,33 +234,36 @@ module FacilitiesHelper
   	end
 
 	def isKeyword
-		@word = params[:search]
-		@word.strip
-		@word.downcase
 		case @word
-		when "child", "children", "youth", "adult", "adults" "senior", "suitability"
-			case @word
-			when "child"
-				@word = "children"
-				return true
-			when "adults"
-				@word = "adult"
-				return true
-			else
-				return true
-			end
-		when "shelter", "house", "housing", "food", "medical", "hygiene", "shower", "technology", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher"
+		when "child", "children", "youth", "adult", "adults", "senior", "suitability", "shelter", "house", "housing", "food", "medical", "hygiene", "shower", "technology", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher"
 			return true
 		else
 			return false
 		end
 	end
 
-	def keywordSearch
-		if params[:search].include? @word
-			@facilities = Facility.where("suitability ~* ?", @word).where(:verified => true)
+	def getKeyword(word)
+		@word = word
+		@word.strip
+		@word.downcase
+		case @word
+		when "child", "children", "youth", "adult", "adults" "senior", "suitability"
+			case @word
+			when "child"
+				return @word = "children"
+			when "adults"
+				return @word = "adult"
+			else
+				return @word
+			end
+		when "shelter", "house", "housing", "food", "medical", "hygiene", "shower", "technology", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher"
+			return @word
 		else
-			Facility.search(params[:search]).where(:verified => true)
+			return @word
 		end
+	end
+
+	def keywordSearch(word)
+		@facilities = Facility.where("suitability ~* ?", word).where(:verified => true)
 	end
 end

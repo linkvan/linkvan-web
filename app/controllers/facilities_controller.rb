@@ -172,7 +172,7 @@ class FacilitiesController < ApplicationController
   def search
     if params[:search]
       if isKeyword
-        keywordSearch
+        keywordSearch(getKeyword(params[:search]))
       else
         @facilities = Facility.search(params[:search]).where(:verified => true)
       end
