@@ -236,7 +236,7 @@ module FacilitiesHelper
 	def isKeyword
 		@word = params[:search]
 		@word.strip
-		@word.camelize
+		@word.downcase
 		case @word
 		when "child", "children", "youth", "adult", "adults" "senior", "suitability"
 			case @word
