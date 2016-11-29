@@ -242,11 +242,13 @@ module FacilitiesHelper
 			case @word
 			when "child"
 				@word = "children"
+				return true
 			when "adults"
 				@word = "adult"
+				return true
 			else
+				return true
 			end
-			return true
 		when "shelter", "house", "housing", "food", "medical", "hygiene", "shower", "technology", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher"
 			return true
 		else
