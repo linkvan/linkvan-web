@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20161109231325) do
 
   create_table "anaylitics", force: :cascade do |t|
