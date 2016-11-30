@@ -238,7 +238,7 @@ module FacilitiesHelper
 		@word = @word.strip
 		@word = @word.downcase
 		case @word
-		when "child", "children", "youth", "adult", "adults", "senior", "suitability", "shelter", "house", "housing", "food", "medical", "hygiene", "shower", "technology", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher"
+		when "child", "children", "youth", "youths", "adult", "adults", "senior", "seniors", "suitability", "shelter", "house", "housing", "food", "medical", "hygiene", "clean", "cleaning", "shower", "technology", "computer", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher", "all", "facility", "facilities"
 			return true
 		else
 			return false
