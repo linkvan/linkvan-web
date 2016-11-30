@@ -250,23 +250,44 @@ module FacilitiesHelper
 		@word = @word.strip
 		@word = @word.downcase
 		case @word
-		when "child", "children", "youth", "adult", "adults" "senior", "suitability"
-			case @word
-			when "child"
-				return @word = "children"
-			when "adults"
-				return @word = "adult"
-			else
-				return @word
-			end
-		when "shelter", "house", "housing", "food", "medical", "hygiene", "shower", "technology", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher"
-			return @word
+		when "children", "child"
+			return @word = "children"
+		when "youth", "youths"
+			return @word = "youth"
+		when "adult", "adults"
+			return @word = "adult"
+		when "senior", "seniors"
+			return @word = "senior"
+		when "shelter", "house", "housing"
+			return @word = "shelter"
+		when "food"
+			return @word = "food"
+		when "medical"
+			return @word = "medical"
+		when "hygiene", "clean", "cleaning", "shower"
+			return @word = "hygiene"
+		when "technology", "computer", "tech"
+			return @word = "technology"
+		when "legal", "law"
+			return @word = "legal"
+		when "learning", "learn", "education", "teaching", "teach", "teacher"
+			return @word = "learning"
+		when "suitability", "all", "facilities", "facility"
+			return @word = "all"
 		else
 			return @word
 		end
 	end
 
 	def keywordSearch(word)
+		if word == "all"
+			@facilities = Facility.all.where(:verified => true)
+			return
+		end
+
 		@facilities = Facility.where("suitability ~* ?", word).where(:verified => true)
+		if @facilities.nil?
+			@facilities = Facility.where("services ~* ?", word).where(:verified => true)
+		end
 	end
 end
