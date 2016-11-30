@@ -285,7 +285,7 @@ module FacilitiesHelper
 		end
 
 		@facilities = Facility.where("suitability ~* ?", word).where(:verified => true)
-		if @facilities.nil?
+		if @facilities.count(:id) != 0
 			@facilities = Facility.where("services ~* ?", word).where(:verified => true)
 		end
 	end
