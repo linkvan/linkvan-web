@@ -220,7 +220,7 @@ module FacilitiesHelper
 	end
 
 	def correct_user_or_admin?
-			debug current_user
+
   		if current_user.admin?
   			return true
   		else
