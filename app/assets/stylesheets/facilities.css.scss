@@ -60,6 +60,26 @@
 	}
 }
 
+#services {
+	> p i {
+		margin: 0 5px;
+	}
+
+	.serviceNote {
+		h3 {
+			i {
+				float: left;
+				margin-right: 10px;
+			}
+
+			span {
+				float: left;
+				line-height: 25px;
+			}
+		}
+	}
+}
+
 .shelter-colour {
 	color: #62919C;
 }
