@@ -281,12 +281,12 @@ module FacilitiesHelper
 
 	def keywordSearch(word)
 		if word == "all"
-			return @facilities = Facility.all.where(:verified => true)
-		end
-
-		@facilities = Facility.where("suitability ~* ?", word).where(:verified => true)
-		if @facilities.exists?
-			@facilities = Facility.where("services ~* ?", word).where(:verified => true)
+			@facilities = Facility.all.where(:verified => true)
+		else
+		#
+		# @facilities = Facility.where("services ~* ?", word).where(:verified => true)
+		# if @facilities.exists?
+			@facilities = Facility.where("suitability ~* ?", word).where(:verified => true)
 		end
 	end
 end
