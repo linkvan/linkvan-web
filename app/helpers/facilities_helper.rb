@@ -140,33 +140,33 @@ module FacilitiesHelper
 		case res
 		when "id"
 			if t_or_f
-				content_tag(:i, nil, class: "icon-id_linkvan food-colour")
+				content_tag(:i, inline_svg('icons/idcard.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, nil, class: "icon-id_linkvan medical-colour")
+				content_tag(:i, inline_svg('icons/idcard.svg', size: '24px'), class: "linkvan-icon")
 			end
 		when "pets"
 			if t_or_f
-				content_tag(:i, nil, class: "icon-pets_linkvan food-colour")
+				content_tag(:i, inline_svg('icons/pawprint.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, nil, class: "icon-pets_linkvan medical-colour")
+				content_tag(:i, inline_svg('icons/pawprint.svg', size: '24px'), class: "linkvan-icon")
 			end
 		when "cart"
 			if t_or_f
-				content_tag(:i, nil, class: "icon-shoppingcart_linkvan food-colour")
+				content_tag(:i, inline_svg('icons/cart.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, nil, class: "icon-shoppingcart_linkvan medical-colour")
+				content_tag(:i, inline_svg('icons/cart.svg', size: '24px'), class: "linkvan-icon")
 			end
 		when "phone"
 			if t_or_f
-				content_tag(:i, nil, class: "icon-phone_linkvan food-colour")
+				content_tag(:i, inline_svg('icons/phone.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, nil, class: "icon-phone_linkvan medical-colour")
+				content_tag(:i, inline_svg('icons/phone.svg', size: '24px'), class: "linkvan-icon")
 			end
 		else
 			if t_or_f
-				content_tag(:i, nil, class: "icon-connection food-colour")
+				content_tag(:i, inline_svg('icons/wifi.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, nil, class: "icon-connection medical-colour")
+				content_tag(:i, inline_svg('icons/wifi.svg', size: '24px'), class: "linkvan-icon")
 			end
 		end
 	end

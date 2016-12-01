@@ -57,9 +57,6 @@ GEM
     hike (1.2.3)
     httpclient (2.8.1)
     i18n (0.7.0)
-    icomoon-rails (0.1.0)
-      railties (>= 3.1.1)
-      sass-rails (>= 3.1.1)
     impressionist (1.5.1)
       httpclient (~> 2.2)
       nokogiri (~> 1.5)
@@ -189,7 +186,6 @@ DEPENDENCIES
   breadcrumbs_on_rails
   coffee-rails (~> 4.0.0)
   geocoder
-  icomoon-rails
   impressionist
   inline_svg
   jbuilder (~> 1.2)
