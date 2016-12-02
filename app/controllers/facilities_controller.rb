@@ -177,7 +177,7 @@ class FacilitiesController < ApplicationController
         @facilities = Facility.search(params[:search]).where(:verified => true)
       end
     else
-      @facilities = Facility.all
+      @facilities = Facility.all.where(:verified => true)
     end
   end
 
