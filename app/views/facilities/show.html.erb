@@ -144,7 +144,7 @@
 
 </div>
 
-<%= debug correct_user_or_admin %>
+
 <% if correct_user_or_admin? %>
   <%= link_to "Edit", edit_facility_path%>
   <% if current_user_admin? %>
