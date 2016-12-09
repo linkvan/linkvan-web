@@ -11,12 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< b6a114f7d67ddab00ed7a2a03f4075ca8167e185
-
-ActiveRecord::Schema.define(version: 20161109231325) do
-=======
-ActiveRecord::Schema.define(version: 20161121224523) do
->>>>>>> Added database columns for notes, added dynamic textareas in new/edit form to populate the popups.
+ActiveRecord::Schema.define(version: 20161125232147) do
 
   create_table "anaylitics", force: :cascade do |t|
     t.decimal  "lat"
