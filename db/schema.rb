@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20161109231325) do
+ActiveRecord::Schema.define(version: 20161125232147) do
 
   create_table "anaylitics", force: :cascade do |t|
     t.decimal  "lat"
@@ -91,6 +90,13 @@ ActiveRecord::Schema.define(version: 20161109231325) do
     t.boolean  "second_time_sun",      default: false
     t.integer  "user_id"
     t.boolean  "verified",             default: false
+    t.text     "shelter_note"
+    t.text     "food_note"
+    t.text     "medical_note"
+    t.text     "hygiene_note"
+    t.text     "technology_note"
+    t.text     "legal_note"
+    t.text     "learning_note"
   end
 
   add_index "facilities", ["user_id"], name: "index_facilities_on_user_id"
@@ -135,6 +141,9 @@ ActiveRecord::Schema.define(version: 20161109231325) do
     t.datetime "updated_at"
     t.boolean  "admin",                 default: false
     t.boolean  "activation_email_sent", default: false
+    t.string   "phone"
+    t.string   "facility_name"
+    t.boolean  "new_facility"
     t.string   "phone_number"
     t.boolean  "verified",              default: false
   end

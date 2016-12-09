@@ -120,7 +120,6 @@ module FacilitiesHelper
 				when "Training_Services"
 					content_arr += content_tag(:i, inline_svg('icons/crisis.svg', size: '25px'), class: "linkvan-icon service", id: "Training",  onclick: "moreInfo('training');")
 				#else add error case?
-
 			end #ends case
 		end
 
