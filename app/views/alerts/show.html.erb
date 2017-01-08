@@ -1,0 +1,24 @@
+<section id="alert">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <p><%= link_to "Go back to Alerts", alerts_path, class: "btn btn-link"%> </p>
+        <h3><%= @alert.title %></h3>
+        <p><%= simple_format(@alert.content) %></p>
+        <p>
+          <strong>Active:</strong>
+          <% if @alert.active %>
+            <span class="label label-primary">ON</span>
+          <% else %>
+            <span class="label label-default">OFF</span>
+          <% end %>
+        </p>
+        <hr>
+        <p>
+          <%= link_to "Edit", edit_alert_path(@alert.id), class: "btn btn-default"%>
+          <%= link_to "Delete", alert_path(@alert), class: "btn btn-link", method: :delete, data: { confirm: 'Are you certain you want to delete this alert?' } %>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
