@@ -4,6 +4,7 @@ class FacilitiesController < ApplicationController
   include FacilitiesHelper
   def index
     @facilities = Facility.all
+    @alert = Alert.where(active: true).first
   end
 
 
