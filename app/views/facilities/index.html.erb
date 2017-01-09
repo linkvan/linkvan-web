@@ -1,3 +1,4 @@
+<% if @alert %>
 <div id="main-alert" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -5,17 +6,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">Weather Alert!</h4>
+        <h4 class="modal-title"><%= @alert.title %></h4>
       </div>
       <div class="modal-body">
-        <p>The following shelter will be providing spaces during this EWA:</p>
-        <ul>
-          <li>Catholic Charities - 828 Cambie St, Open 4pm to 8am</li>
-          <li>First Baptist - 969 Burrard St, Open 9pm to 7am</li>
-          <li>Union Gospel Mission - 601 E Hastings St, Open 9pm to 6am</li>
-          <li>Back-up site: The Salvation Army Harbour Light - 119 E Cordova St</li>
-          <li>Back-up site: The Salvation Army Belkin House - 555 Homer St</li>
-        </ul>
+        <p><%= simple_format(@alert.content) %></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -23,6 +17,7 @@
     </div>
   </div>
 </div>
+<% end %>
 
 <section id="facilities">
 	<div class="container">

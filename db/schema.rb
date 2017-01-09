@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125232147) do
+ActiveRecord::Schema.define(version: 20170107204418) do
+
+  create_table "alerts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.boolean  "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "anaylitics", force: :cascade do |t|
     t.decimal  "lat"
