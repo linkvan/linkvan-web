@@ -12,6 +12,11 @@
         <% if (@user.admin == true) %>
           <div class="admin-view">
             <h1>LinkVan Admin</h1>
+            <!-- <%= button_to "Generate", action: "generate" %> -->
+            <%= button_to "Generate", {:controller => :users, :action => 'generate'}, :method => :get %>
+            <!-- <%= link_to 'Download CSV list', users_path(:id) %> -->
+            <%= link_to 'Download CSV list', users_path(format: :csv) %>
+
             <h4><a href="#" id=facilities-button>Hide Facilities</h4>
             <ul id="users">
               <% @users.each do |user| %>
