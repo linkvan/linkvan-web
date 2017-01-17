@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @facilities = Facility.where(:verified => true)
+    @facilities = Facility.where(verified: true)
     respond_to do |format|
       format.html
       format.csv do
