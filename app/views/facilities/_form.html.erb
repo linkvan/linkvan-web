@@ -1,225 +1,261 @@
-<%= form_for(@facility) do |f| %>
- <% if @facility.errors.any? %>
- <div class="alert alert-danger" role="alert">
-   <strong>Ops!</strong> <%= @facility.errors.full_messages.to_sentence %>
- </div>
- <% end %>
- <h1 style="text-align: center; margin-top: 20px; margin-bottom: -30px; font-weight: bold">Edit Facility</h1>
- <br>
- <br>
- <p>
-   <strong> NOTE: DO NOT PRESS ENTER WHEN FILLING IN FIELDS. USE "CREATE FACILITY"/"UPDATE FACILITY" BUTTON AT BOTTOM OF PAGE.</strong>
- </p>
+ <%= form_for(@facility) do |f| %>
+  <% if @facility.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <strong>Ops!</strong> <%= @facility.errors.full_messages.to_sentence %>
+  </div>
+  <% end %>
+  <h1 style="text-align: center; margin-top: 20px; margin-bottom: -30px; font-weight: bold">Edit Facility</h1>
+  <br>
+  <br>
+  <p>
+    <strong> NOTE: DO NOT PRESS ENTER WHEN FILLING IN FIELDS. USE "CREATE FACILITY"/"UPDATE FACILITY" BUTTON AT BOTTOM OF PAGE.</strong>
+  </p>
 
- <div class="form-group form-group-inline">
-   <%= f.label :name %>
-   <%= f.text_field :name, autofocus: true, class: "form-control" %>
- </div>
- <div class="form-group form-group-inline">
-   <%= f.label :welcomes %>
-   <%= f.select :welcomes, [['All'], ['Women'], ['Men']] %>
- </div>
- <hr>
- <div class="form-group">
-   <%= f.label :suitability %> - Select All Relevant Categories
-   <%= f.hidden_field :suitability %>
-   <% if @facility.suitability.nil? %>
-     <ul class="list-inline">
-       <li>
-         <input type="checkbox" class="custom-checkbox" id="chcheck" name="Children" value="Children" onclick="chclicked()">
-         <label for="chcheck">Children</label>
-       </li>
-       <li>
-         <input type="checkbox" class="custom-checkbox" id="yocheck" name="Youth" value="Youth" onclick="yoclicked()">
-         <label for="yocheck">Youth</label>
-       </li>
-       <li>
-         <input type="checkbox" class="custom-checkbox" id="adcheck" name="Adults" value="Adults" onclick="adclicked()">
-         <label for="adcheck">Adults</label>
-       </li>
-       <li>
-         <input type="checkbox" class="custom-checkbox" id="secheck" name="Seniors" value="Seniors" onclick="seclicked()">
-         <label for="secheck">Seniors</label>
-       </li>
-     </ul>
-   <% else %>
-     <ul class="list-inline">
-       <li>
-         <% if @facility.suitability.include? "Children" %>
-           <input type="checkbox" class="custom-checkbox" id="childrencheck" name="Children" value="Children" onclick="chclicked()" checked>
-         <% else %>
-           <input type="checkbox" class="custom-checkbox" id="childrencheck" name="Children" value="Children" onclick="chclicked()">
-         <% end %>
-         <label for="childrencheck">Children</label>
-       </li>
-       <li>
-         <% if @facility.suitability.include? "Youth" %>
-           <input type="checkbox" class="custom-checkbox" id="youthcheck" name="Youth" value="Youth" onclick="yoclicked()" checked>
-         <% else %>
-           <input type="checkbox" class="custom-checkbox" id="youthcheck" name="Youth" value="Youth" onclick="yoclicked()">
-         <% end %>
-         <label for="youthcheck">Youth</label>
-       </li>
-       <li>
-         <% if @facility.suitability.include? "Adults" %>
-           <input type="checkbox" class="custom-checkbox" id="adultcheck" name="Adults" value="Adults" onclick="adclicked()" checked>
-         <% else %>
-           <input type="checkbox" class="custom-checkbox" id="adultcheck" name="Adults" value="Adults" onclick="adclicked()">
-         <% end %>
-         <label for="adultcheck">Adults</label>
-       </li>
-       <li>
-         <% if @facility.suitability.include? "Seniors" %>
-           <input type="checkbox" class="custom-checkbox" id="seniorcheck" name="Seniors" value="Seniors" onclick="seclicked()" checked>
-         <% else %>
-           <input type="checkbox" class="custom-checkbox" id="seniorcheck" name="Seniors" value="Seniors" onclick="seclicked()">
-         <% end %>
-         <label for="seniorcheck">Seniors Test</label>
-       </li>
-     </ul>
+  <div class="form-group form-group-inline">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, class: "form-control" %>
+  </div>
+  <div class="form-group form-group-inline">
+    <%= f.label :welcomes %>
+    <%= f.select :welcomes, [['All'], ['Women'], ['Men']] %>
+  </div>
+  <hr>
+  <div class="form-group">
+    <%= f.label :suitability %> - Select All Relevant Categories
+    <%= f.hidden_field :suitability %>
+    <% if @facility.suitability.nil? %>
+      <ul class="list-inline">
+        <li>
+          <input type="checkbox" class="custom-checkbox" id="chcheck" name="Children" value="Children" onclick="chclicked()">
+          <label for="chcheck">Children</label>
+        </li>
+        <li>
+          <input type="checkbox" class="custom-checkbox" id="yocheck" name="Youth" value="Youth" onclick="yoclicked()">
+          <label for="yocheck">Youth</label>
+        </li>
+        <li>
+          <input type="checkbox" class="custom-checkbox" id="adcheck" name="Adults" value="Adults" onclick="adclicked()">
+          <label for="adcheck">Adults</label>
+        </li>
+        <li>
+          <input type="checkbox" class="custom-checkbox" id="secheck" name="Seniors" value="Seniors" onclick="seclicked()">
+          <label for="secheck">Seniors</label>
+        </li>
+      </ul>
+    <% else %>
+      <ul class="list-inline">
+        <li>
+          <% if @facility.suitability.include? "Children" %>
+            <input type="checkbox" class="custom-checkbox" id="childrencheck" name="Children" value="Children" onclick="chclicked()" checked>
+          <% else %>
+            <input type="checkbox" class="custom-checkbox" id="childrencheck" name="Children" value="Children" onclick="chclicked()">
+          <% end %>
+          <label for="childrencheck">Children</label>
+        </li>
+        <li>
+          <% if @facility.suitability.include? "Youth" %>
+            <input type="checkbox" class="custom-checkbox" id="youthcheck" name="Youth" value="Youth" onclick="yoclicked()" checked>
+          <% else %>
+            <input type="checkbox" class="custom-checkbox" id="youthcheck" name="Youth" value="Youth" onclick="yoclicked()">
+          <% end %>
+          <label for="youthcheck">Youth</label>
+        </li>
+        <li>
+          <% if @facility.suitability.include? "Adults" %>
+            <input type="checkbox" class="custom-checkbox" id="adultcheck" name="Adults" value="Adults" onclick="adclicked()" checked>
+          <% else %>
+            <input type="checkbox" class="custom-checkbox" id="adultcheck" name="Adults" value="Adults" onclick="adclicked()">
+          <% end %>
+          <label for="adultcheck">Adults</label>
+        </li>
+        <li>
+          <% if @facility.suitability.include? "Seniors" %>
+            <input type="checkbox" class="custom-checkbox" id="seniorcheck" name="Seniors" value="Seniors" onclick="seclicked()" checked>
+          <% else %>
+            <input type="checkbox" class="custom-checkbox" id="seniorcheck" name="Seniors" value="Seniors" onclick="seclicked()">
+          <% end %>
+          <label for="seniorcheck">Seniors</label>
+        </li>
+      </ul>
 
-   <% end %>
-   <span class="help-block">Note: Suitability is currently not used; however, future designs of the web app may use this information to better search and sort facilities.</span>
- </div>
+    <% end %>
+    <span class="help-block">Note: Suitability is currently not used; however, future designs of the web app may use this information to better search and sort facilities.</span>
+  </div>
 
- <hr>
+  <hr>
 
- <div class="form-group">
-   <%= f.label :services %> - Select All Relevant Categories
-   <%= f.hidden_field :services%>
-   <% if @facility.services.nil? %>
-   <ul class="list-inline">
-     <li>
-       <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">
-       <label for="scheck">Shelter</label>
-     </li>
-     <li>
-       <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">
-       <label for="fcheck">Food</label>
-     </li>
-     <li>
-       <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">
-       <label for="mcheck">Medical</label>
-     </li>
-     <li>
-       <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">
-       <label for="hcheck">Hygiene</label>
-     </li>
-     <li>
-       <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">
-       <label for="tcheck">Technology</label>
-     </li>
-     <li>
-       <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()">
-       <label for="acheck">Legal</label>
-     </li>
-     <li>
-       <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lclicked()">
-       <label for="lcheck">Learning</label>
-     </li>
-     <!-- <li>
-       <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()">
-       <label for="tscheck">Training Services</label>
-     </li> -->
-   </ul>
-   <% else %>
-   <ul class="list-inline">
-     <li>
-       <% if @facility.services.include? "Shelter" %>
-       <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()" checked>
-       <% else %>
-       <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">
-       <% end %>
-       <label for="scheck">Shelter</label>
-     </li>
-     <li>
-       <% if @facility.services.include? "Food" %>
-       <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()" checked>
-       <% else %>
-       <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">
-       <% end %>
-       <label for="fcheck">Food</label>
-     </li>
-     <li>
-       <% if @facility.services.include? "Medical" %>
-       <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()" checked>
-       <% else %>
-       <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">
-       <% end %>
-       <label for="mcheck">Medical</label>
-     </li>
-     <li>
-       <% if @facility.services.include? "Hygiene" %>
-       <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()" checked>
-       <% else %>
-       <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">
-       <% end %>
-       <label for="hcheck">Hygiene</label>
-     </li>
-     <li>
-       <% if @facility.services.include? "Technology" %>
-       <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()" checked>
-       <% else %>
-       <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">
-       <% end %>
-       <label for="tcheck">Technology</label>
-     </li>
-     <li>
-       <% if @facility.services.include? "Legal" %>
-       <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()" checked>
-       <% else %>
-       <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()">
-       <% end %>
-       <label for="acheck">Legal</label>
-     </li>
-     <li>
-       <% if @facility.services.include? "Learning" %>
-       <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lchecked()" checked>
-       <% else %>
-       <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lchecked()">
-       <% end %>
-       <label for="lcheck">Learning</label>
-     </li>
-     <!-- <li>
-       <% if @facility.services.include? "Training_Services" %>
-       <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()" checked>
-       <% else %>
-       <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()">
-       <% end %>
-       <label for="tscheck">Training Services</label>
-     </li> -->
-   </ul>
-   <% end %>
- </div>
+  <div class="form-group">
+    <%= f.label :services %> - Select All Relevant Categories
+    <%= f.hidden_field :services%>
+    <% if @facility.services.nil? %>
+    <ul class="list-inline">
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">
+        <label for="scheck">Shelter</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">
+        <label for="fcheck">Food</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">
+        <label for="mcheck">Medical</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">
+        <label for="hcheck">Hygiene</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">
+        <label for="tcheck">Technology</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()">
+        <label for="acheck">Legal</label>
+      </li>
+      <li>
+        <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lclicked()">
+        <label for="lcheck">Learning</label>
+      </li>
+      <!-- <li>
+        <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()">
+        <label for="tscheck">Training Services</label>
+      </li> -->
+    </ul>
+    <% else %>
+    <ul class="list-inline">
+      <li>
+        <% if @facility.services.include? "Shelter" %>
+        <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">
+        <% end %>
+        <label for="scheck">Shelter</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Food" %>
+        <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">
+        <% end %>
+        <label for="fcheck">Food</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Medical" %>
+        <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">
+        <% end %>
+        <label for="mcheck">Medical</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Hygiene" %>
+        <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">
+        <% end %>
+        <label for="hcheck">Hygiene</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Technology" %>
+        <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">
+        <% end %>
+        <label for="tcheck">Technology</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Legal" %>
+        <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()">
+        <% end %>
+        <label for="acheck">Legal</label>
+      </li>
+      <li>
+        <% if @facility.services.include? "Learning" %>
+        <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lclicked()">
+        <% end %>
+        <label for="lcheck">Learning</label>
+      </li>
+      <!-- <li>
+        <% if @facility.services.include? "Training_Services" %>
+        <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()" checked>
+        <% else %>
+        <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()">
+        <% end %>
+        <label for="tscheck">Training Services</label>
+      </li> -->
+    </ul>
+    <% end %>
+  </div>
 
- <hr>
+  <hr>
+  <div class="form-group" id="service_notes">
+    <p>
+        <b>Service Notes</b> - Add any notes relevant to specific services such as special hours, or eligibility concerns.<br>
+        Eg: "<i>Lunch served between 11:30am and 1:30pm</i>"
+    </p>
+    <div id="shelter_note" class="col-md-4">
+        <%= f.label :shelter_note, "Shelter" %>
+        <%= f.text_area :shelter_note, rows: 7, class: "form-control" %>
+    </div>
+    <div id="food_note" class="col-md-4">
+        <%= f.label :food_note, "Food" %>
+        <%= f.text_area :food_note, rows: 7, class: "form-control" %>
+    </div>
+    <div id="medical_note" class="col-md-4">
+        <%= f.label :medical_note, "Medical" %>
+        <%= f.text_area :medical_note, rows: 7, class: "form-control" %>
+    </div>
+    <div id="hygiene_note" class="col-md-4">
+        <%= f.label :hygiene_note, "Hygiene" %>
+        <%= f.text_area :hygiene_note, rows: 7, class: "form-control" %>
+    </div>
+    <div id="technology_note" class="col-md-4">
+        <%= f.label :technology_note, "Technology" %>
+        <%= f.text_area :technology_note, rows: 7, class: "form-control" %>
+    </div>
+    <div id="legal_note" class="col-md-4">
+        <%= f.label :legal_note, "Legal" %>
+        <%= f.text_area :legal_note, rows: 7, class: "form-control" %>
+    </div>
+    <div id="learning_note" class="col-md-4">
+        <%= f.label :learning_note, "Learning" %>
+        <%= f.text_area :learning_note, rows: 7, class: "form-control" %>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <hr>
 
- <div class="form-group">
-   <p>
-     <%= f.label :address %> - Enter the facility's address then click Search.<br/>Format: Street Address, City, BC. Example: 612 Main St, Vancouver, BC
-   </p>
-   <div class="form-group-inline">
-     <%= f.text_field :address, class: "form-control" %>
-     <input type="button" class="btn btn-primary" value="Search" onclick="codeAddress()">
-   </div>
-   <div id="map-canvas-new"></div>
- </div>
+  <div class="form-group">
+    <p>
+      <%= f.label :address %> - Enter the facility's address then click Search.<br/>Format: Street Address, City, BC. Example: 612 Main St, Vancouver, BC
+    </p>
+    <div class="form-group-inline">
+      <%= f.text_field :address, class: "form-control" %>
+      <input type="button" class="btn btn-primary" value="Search" onclick="codeAddress()">
+    </div>
+    <div id="map-canvas-new"></div>
+  </div>
 
- <hr>
+  <hr>
 
- <div class="form-group">
-   <%= f.label :phone %> - Example: 604 555 6789<br/>
-   <%= f.text_field :phone, class: "form-control" %>
- </div>
+  <div class="form-group">
+    <%= f.label :phone %> - Example: 604 555 6789<br/>
+    <%= f.text_field :phone, class: "form-control" %>
+  </div>
 
- <hr>
+  <hr>
 
- <div class="form-group">
-   <%= f.label :website %> - Do not include "http://". Example: www.learningexchange.ubc.ca<br/>
-   <%= f.text_field :website, class: "form-control" %>
- </div>
+  <div class="form-group">
+    <%= f.label :website %> - Do not include "http://". Example: www.learningexchange.ubc.ca<br/>
+    <%= f.text_field :website, class: "form-control" %>
+  </div>
 
- <hr>
+  <hr>
 <!--
  <p>
    <%= f.label :description %> - Copy paste verbatim from the facility's "about us" page. Will tweak on stakeholder feedback.<br/>
@@ -608,128 +644,127 @@ function seclicked(){
  document.getElementById('facility_suitability').value = finalsuitability.join(' ');
 };
 
-
 function sclicked(){
- var index;
- scheck = document.getElementById('scheck');
- if(scheck.checked){
-   finalservices.push(scheck.value);
- }else{
-   index = finalservices.indexOf(scheck.value);
-   if (index > -1) {
-     finalservices.splice(index, 1);
-   }
- }
- document.getElementById('facility_services').value = finalservices.join(' ');
+  var index;
+  scheck = document.getElementById('scheck');
+  if(scheck.checked){
+    finalservices.push(scheck.value);
+    $('div#shelter_note').show();
+  }else{
+    index = finalservices.indexOf(scheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+    $('div#shelter_note').hide();
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
 function fclicked(){
- var index = 2;
- fcheck = document.getElementById('fcheck');
- if(fcheck.checked){
-   finalservices.push(fcheck.value);
- }else{
-   index = finalservices.indexOf(fcheck.value);
-   if (index > -1) {
-     finalservices.splice(index, 1);
-   }
- }
- document.getElementById('facility_services').value = finalservices.join(' ');
+  var index = 2;
+  fcheck = document.getElementById('fcheck');
+  if(fcheck.checked){
+    finalservices.push(fcheck.value);
+    $('div#food_note').show();
+  }else{
+    index = finalservices.indexOf(fcheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+    $('div#food_note').hide();
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
 function mclicked(){
- var index;
- mcheck = document.getElementById('mcheck');
- if(mcheck.checked){
-   finalservices.push(mcheck.value);
- }else{
-   index = finalservices.indexOf(mcheck.value);
-   if (index > -1) {
-     finalservices.splice(index, 1);
-   }
- }
- document.getElementById('facility_services').value = finalservices.join(' ');
+  var index;
+  mcheck = document.getElementById('mcheck');
+  if(mcheck.checked){
+    finalservices.push(mcheck.value);
+    $('div#medical_note').show();
+  }else{
+    index = finalservices.indexOf(mcheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+    $('div#medical_note').hide();
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
 function hclicked(){
- var index;
- hcheck = document.getElementById('hcheck');
- if(hcheck.checked){
-   finalservices.push(hcheck.value);
- }else{
-   index = finalservices.indexOf(hcheck.value);
-   if (index > -1) {
-     finalservices.splice(index, 1);
-   }
- }
- document.getElementById('facility_services').value = finalservices.join(' ');
+  var index;
+  hcheck = document.getElementById('hcheck');
+  if(hcheck.checked){
+    finalservices.push(hcheck.value);
+    $('div#hygiene_note').show();
+  }else{
+    index = finalservices.indexOf(hcheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+    $('div#hygiene_note').hide();
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
 function tclicked(){
- var index;
- tcheck = document.getElementById('tcheck');
- if(tcheck.checked){
-   finalservices.push(tcheck.value);
- }else{
-   index = finalservices.indexOf(tcheck.value);
-   if (index > -1) {
-     finalservices.splice(index, 1);
-   }
- }
- document.getElementById('facility_services').value = finalservices.join(' ');
+  var index;
+  tcheck = document.getElementById('tcheck');
+  if(tcheck.checked){
+    finalservices.push(tcheck.value);
+    $('div#technology_note').show();
+  }else{
+    index = finalservices.indexOf(tcheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+    $('div#technology_note').hide();
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
 function aclicked(){
- var index;
- acheck = document.getElementById('acheck');
- if(acheck.checked){
-   finalservices.push(acheck.value);
- }else{
-   index = finalservices.indexOf(acheck.value);
-   if (index > -1) {
-     finalservices.splice(index, 1);
-   }
- }
- document.getElementById('facility_services').value = finalservices.join(' ');
+  var index;
+  acheck = document.getElementById('acheck');
+  if(acheck.checked){
+    finalservices.push(acheck.value);
+    $('div#legal_note').show();
+  }else{
+    index = finalservices.indexOf(acheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+    $('div#legal_note').hide();
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
 function lclicked(){
- var index;
- lcheck = document.getElementById('lcheck');
- if(lcheck.checked){
-   finalservices.push(lcheck.value);
- }else{
-   index = finalservices.indexOf(lcheck.value);
-   if (index > -1) {
-     finalservices.splice(index, 1);
-   }
- }
- document.getElementById('facility_services').value = finalservices.join(' ');
+  var index;
+  lcheck = document.getElementById('lcheck');
+  if(lcheck.checked){
+    finalservices.push(lcheck.value);
+    $('div#learning_note').show();
+  }else{
+    index = finalservices.indexOf(lcheck.value);
+    if (index > -1) {
+      finalservices.splice(index, 1);
+    }
+    $('div#learning_note').hide();
+  }
+  document.getElementById('facility_services').value = finalservices.join(' ');
 };
 
-// function tsclicked(){
-//   var index;
-//   tscheck = document.getElementById('tscheck');
-//   if(tscheck.checked){
-//     finalservices.push(tscheck.value);
-//   }else{
-//     index = finalservices.indexOf(tscheck.value);
-//     if (index > -1) {
-//       finalservices.splice(index, 1);
-//     }
-//   }
-//   document.getElementById('facility_services').value = finalservices.join(' ');
-// };
-
-sclicked();
-fclicked();
-mclicked();
-hclicked();
-tclicked();
-aclicked();
-lclicked();
-// tsclicked();
-
+$(document).ready(function(){
+    sclicked();
+    fclicked();
+    mclicked();
+    hclicked();
+    tclicked();
+    aclicked();
+    lclicked();
+});
 
 var monhours = document.getElementById("mon-hours");
 var tueshours = document.getElementById("tues-hours");

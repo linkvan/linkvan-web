@@ -1,0 +1,9 @@
+<ul class="nav nav-tabs">
+  <li class="<%= params[:controller] == 'users' ? 'active' : '' %>">
+    <%= link_to "Dashboard", current_user %>
+  </li>
+  <li class="<%= params[:controller] == 'alerts' ? 'active' : '' %>">
+    <%= link_to "Alerts", alerts_path %>
+  </li>
+</ul>
+<br>

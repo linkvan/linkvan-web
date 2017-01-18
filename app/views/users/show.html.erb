@@ -5,8 +5,12 @@
         <h2><%= @user.name %></h2>
         <p><%= mail_to(@user.email) %></p>
         <p>Registered Since <%= @user.created_at.strftime("%B %Y") %></p>
-        <hr>
-        <p><%= link_to "Add New Facility ", new_facility_path, class: "btn btn-link"%> </p>
+
+        <% if current_user.admin %>
+          <%= render 'shared/admin_nav' %>
+        <% end %>
+
+        <p><%= link_to "Add New Facility ", new_facility_path, class: "btn btn-primary"%> </p>
         <% @imps = Array.new %>
         <% @facilitynames = Array.new %>
         <% if (@user.admin == true) %>

@@ -1,0 +1,49 @@
+<section id="alerts">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <h2><%= current_user.name %></h2>
+        <p><%= mail_to(current_user.email) %></p>
+        <p>Registered Since <%= current_user.created_at.strftime("%B %Y") %></p>
+
+        <% if current_user.admin %>
+          <%= render 'shared/admin_nav' %>
+        <% end %>
+
+        <p><%= link_to "Add New Alert", new_alert_path, class: "btn btn-primary"%></p>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Content</th>
+              <th>Active</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @alerts.each do |alert| %>
+              <tr>
+                <th scope="row"><%= alert.id %></th>
+                <td><%= link_to alert.title, alert_path(alert.id) %></td>
+                <td><%= alert.content[0..50] %>...</td>
+                <td>
+                  <% if alert.active %>
+                    <%= link_to "ON", {controller: "alerts", action: "deactive", id: alert.id}, {class: "btn btn-xs btn-primary"} %>
+                  <% else %>
+                    <%= link_to "OFF", {controller: "alerts", action: "active", id: alert.id}, {class: "btn btn-xs btn-default active"} %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to "Edit", edit_alert_path(alert.id) %> |
+                  <%= link_to "Delete", alert_path(alert), method: :delete, data: { confirm: 'Are you certain you want to delete this alert?' } %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
