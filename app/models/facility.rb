@@ -5,7 +5,7 @@ class Facility < ActiveRecord::Base
 	belongs_to :user
 	validates :name, :lat, :long, :services, presence: true
 
-	is_impressionable
+	# is_impressionable
 
 	def self.search(search)
 		#where("name ILIKE ?", "%#{search}%") for production
