@@ -5,8 +5,12 @@
         <h2><%= current_user.name %></h2>
         <p><%= mail_to(current_user.email) %></p>
         <p>Registered Since <%= current_user.created_at.strftime("%B %Y") %></p>
-        <hr>
-        <p><%= link_to "Add Alert", new_alert_path, class: "btn btn-primary"%> </p>
+
+        <% if current_user.admin %>
+          <%= render 'shared/admin_nav' %>
+        <% end %>
+
+        <p><%= link_to "Add New Alert", new_alert_path, class: "btn btn-primary"%></p>
 
         <table class="table">
           <thead>
