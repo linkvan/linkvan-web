@@ -64,6 +64,8 @@ gem "breadcrumbs_on_rails"
 
 gem 'inline_svg'
 
+gem 'ckeditor'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

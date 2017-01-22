@@ -4,7 +4,7 @@
       <div class="col-sm-8 col-sm-offset-2">
         <p><%= link_to "Go back to Notices", notices_path, class: "btn btn-link"%> </p>
         <h3><%= @notice.title %></h3>
-        <p><%= simple_format(@notice.content) %></p>
+        <p><%= raw(@notice.content) %></p>
         <p>
           <% if @notice.published %>
             <span class="label label-primary">Published</span>
