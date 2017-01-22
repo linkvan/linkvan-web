@@ -1,0 +1,23 @@
+<section id="notice">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <p><%= link_to "Go back to Notices", notices_path, class: "btn btn-link"%> </p>
+        <h3><%= @notice.title %></h3>
+        <p><%= simple_format(@notice.content) %></p>
+        <p>
+          <% if @notice.published %>
+            <span class="label label-primary">Published</span>
+          <% else %>
+            <span class="label label-default">Draft</span>
+          <% end %>
+        </p>
+        <hr>
+        <p>
+          <%= link_to "Edit", edit_notice_path(@notice.id), class: "btn btn-default"%>
+          <%= link_to "Delete", notice_path(@notice), class: "btn btn-link", method: :delete, data: { confirm: 'Are you certain you want to delete this notice?' } %>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

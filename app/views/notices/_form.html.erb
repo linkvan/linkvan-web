@@ -1,0 +1,19 @@
+<%= form_for @notice, html: {class: "form-validate"} do |a| %>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="form-group">
+        <%= a.label :title, "Title" %>
+        <%= a.text_field :title, size: 40, class: "form-control", required: true %>
+      </div>
+      <div class="form-group">
+        <%= a.label :content, "Content" %>
+        <%= a.text_area :content, rows: 10, class: "form-control", required: true %>
+      </div>
+      <div class="form-group">
+        <%= a.label :published, "Published" %>
+        <%= a.check_box :published %>
+      </div>
+      <%= a.submit "Submit", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

@@ -33,7 +33,9 @@ Linkvan::Application.routes.draw do
   get 'alerts' => 'alerts#index'
   get 'alerts/:id/active' => 'alerts#active'
   get 'alerts/:id/deactive' => 'alerts#deactive'
+  get 'notices' => 'notices#index'
   resources :alerts
+  resources :notices
 
 
 
