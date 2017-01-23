@@ -5,6 +5,7 @@ class FacilitiesController < ApplicationController
   def index
     @facilities = Facility.all
     @alert = Alert.where(active: true).first
+    @notices = Notice.where(published: true)
   end
 
 
