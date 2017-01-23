@@ -6,10 +6,10 @@
       <div class="form-group">
         <%= n.label :title, "Title" %>
         <%= n.text_field :title, size: 40, class: "form-control", required: true %>
+        <%= n.hidden_field(:slug)%>
       </div>
       <div class="form-group">
         <%= n.label :content, "Content" %>
-        <!-- <%= n.text_area :content, rows: 10, class: "form-control", required: true %> -->
         <%= n.cktext_area :content %>
       </div>
       <div class="form-group">

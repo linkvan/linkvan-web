@@ -15,7 +15,10 @@ class NoticesController < ApplicationController
 	end
 
   def create
-		@notice = Notice.new(notice_params)
+    temp_params = notice_params
+    temp_params[:slug] = temp_params[:title].parameterize
+    
+		@notice = Notice.new(temp_params)
 		if @notice.save
   		redirect_to @notice, notice: "Notice successfully registered!"
 		else
@@ -30,12 +33,10 @@ class NoticesController < ApplicationController
 
   def update
     @notice = Notice.find(params[:id])
+    temp_params = notice_params
+    temp_params[:slug] = temp_params[:title].parameterize
 
-    if notice_params[:active]
-      Notice.update_all(active: false)
-    end
-
- 		if @notice.update(notice_params)
+ 		if @notice.update(temp_params)
     	redirect_to @notice, notice: "Notice successfully updated!"
   	else
     	render :edit
@@ -51,6 +52,6 @@ class NoticesController < ApplicationController
 
   def notice_params
   		params.require(:notice).
-    	permit(:title, :content, :published)
+    	permit(:title, :content, :published, :slug)
 	end
 end
