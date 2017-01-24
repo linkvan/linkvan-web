@@ -1,6 +1,6 @@
 class NoticesController < ApplicationController
-  before_action :require_signin
-  before_action :require_admin
+  before_action :require_signin, except: [:list, :view]
+  before_action :require_admin, except: [:list, :view]
 
   def index
 		@notices = Notice.all
