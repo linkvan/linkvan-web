@@ -776,17 +776,18 @@
  	border-bottom-left-radius: 4px;
  }
 
+.is-open, .is-closed {
+	float: left;
+	padding: 5px 15px 5px 0;
+	font-weight: bold;
+}
 
 .is-open{
 	color: #32CD32;
-	float: left;
-	font-weight: bold;
 }
 
 .is-closed{
 	color: #AA0114;
-	float: left;
-	font-weight: bold;
 }
 
 #near-yes {
