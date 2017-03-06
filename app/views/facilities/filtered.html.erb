@@ -61,7 +61,9 @@
     <div class="is-open">OPEN</div>
     <%= display_services(f.services) %>
     <% if @coordinates.present? %>
-      <%= @facilities_near_yes_distance[$i].round(2) %> kilometres
+      <span class="walking-distance">
+        <%= distance_of_time_in_words(@facilities_near_yes_distance[$i]) %> walking
+      </span>
     <% end %>
     <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>
@@ -81,7 +83,9 @@
     <div class="is-closed">CLOSED</div>
     <%= display_services(f.services) %>
     <% if @coordinates.present? %>
-      <%= @facilities_near_no_distance[$i].round(2) %> kilometres
+      <span class="walking-distance">
+        <%= distance_of_time_in_words(@facilities_near_no_distance[$i]) %> walking
+      </span>
     <% end %>
     <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>
@@ -102,7 +106,9 @@
     <div class="is-open">OPEN</div>
     <%= display_services(f.services) %>
     <% if @coordinates.present? %>
-      <%= @facilities_name_yes_distance[$i].round(2) %> kilometres
+      <span class="walking-distance">
+        <%= distance_of_time_in_words(@facilities_name_yes_distance[$i]) %> walking
+      </span>
     <% end %>
     <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>
@@ -122,7 +128,9 @@
     <div class="is-closed">CLOSED</div>
     <%= display_services(f.services) %>
     <% if @coordinates.present? %>
-      <%= @facilities_name_no_distance[$i].round(2) %> kilometres
+      <span class="walking-distance">
+        <%= distance_of_time_in_words(@facilities_name_no_distance[$i]) %> walking
+      </span>
     <% end %>
     <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>

@@ -790,25 +790,14 @@
 	color: #AA0114;
 }
 
-#near-yes {
-	a{
+#near-yes, #near-no, #name-yes, #name-no {
+	a {
 		text-decoration: none;
 	}
-}
 
-#near-no {
-	a{
-		text-decoration: none;
-	}
-}
-#name-yes {
-	a{
-		text-decoration: none;
-	}
-}
-#name-no {
-	a{
-		text-decoration: none;
+	.walking-distance {
+		display: inline-block;
+		margin-left: 5px;
 	}
 }
 
