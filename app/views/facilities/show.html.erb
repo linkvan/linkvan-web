@@ -56,7 +56,32 @@
 
 <h2>Suitability</h2>
 <div class="inset" id="suitability">
-  <p><%=@facility.suitability %>
+  <ul>
+    <% if @facility.suitability.downcase.include? "children" %>
+      <li>
+        <i class="linkvan-icon"><%= inline_svg('icons/age-children.svg', size: '35px') %></i>
+        <p>0-11</p>
+      </li>
+    <% end %>
+    <% if @facility.suitability.downcase.include? "youth" %>
+      <li>
+        <i class="linkvan-icon"><%= inline_svg('icons/age-youth.svg', size: '35px') %></i>
+        <p>12-18</p>
+      </li>
+    <% end %>
+    <% if @facility.suitability.downcase.include? "adults" %>
+      <li>
+        <i class="linkvan-icon"><%= inline_svg('icons/age-adults.svg', size: '35px') %></i>
+        <p>19-60</p>
+      </li>
+    <% end %>
+    <% if @facility.suitability.downcase.include? "seniors" %>
+      <li>
+        <i class="linkvan-icon"><%= inline_svg('icons/age-seniors.svg', size: '35px') %></i>
+        <p>60+</p>
+      </li>
+      <% end %>
+  </ul>
 </div>
 
 <div class="inset-gmap">

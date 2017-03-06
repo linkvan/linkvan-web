@@ -80,6 +80,20 @@
 	}
 }
 
+#suitability {
+	> ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		li {
+			display: inline-block;
+			margin-right: 15px;
+			text-align: center;
+		}
+	}
+}
+
 .shelter-colour {
 	color: #62919C;
 }
