@@ -34,9 +34,6 @@ Linkvan::Application.routes.draw do
   get 'alerts/:id/active' => 'alerts#active'
   get 'alerts/:id/deactive' => 'alerts#deactive'
   resources :alerts
-
-
-
   resources :facilities
 
   # match "users/:id/toggle_verify" => "users#toggle_verify"

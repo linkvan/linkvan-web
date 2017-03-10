@@ -16,6 +16,8 @@
         <% if (@user.admin == true) %>
           <div class="admin-view">
             <h1>LinkVan Admin</h1>
+            <%= link_to 'Download CSV list', users_path(format: :csv) %>
+
             <h4><a href="#" id=facilities-button>Hide Facilities</h4>
             <ul id="users">
               <% @users.each do |user| %>
