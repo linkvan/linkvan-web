@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class FacilitiesController < ApplicationController
   before_action :require_signin, only: [:edit, :update, :new, :create, :destroy]
   #use impressionist to log views to display on user show page
@@ -33,8 +35,6 @@ class FacilitiesController < ApplicationController
       @facilities_near_no_distance = Array.new
       @facilities_name_yes_distance = Array.new
       @facilities_name_no_distance = Array.new
-
-
 
       case params[:scope]
       when 'Shelter'
@@ -159,6 +159,21 @@ class FacilitiesController < ApplicationController
 
       @facilities_name_no.each do |f|
          @facilities_name_no_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+      end
+
+
+      if !session[:id].present?
+        session[:id] = SecureRandom.uuid
+      end
+      if !cookies[:userid].present?
+        cookies[:userid] = SecureRandom.uuid
+      end
+
+      analytic = Analytic.new do |a|
+        a.sessionID = session[:id]
+        a.time = Time.new
+        a.cookieID = cookies[:userid]
+        a.service = params[:scope]
       end
 
 	  end
