@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class FacilitiesController < ApplicationController
   before_action :require_signin, only: [:edit, :update, :new, :create, :destroy]
   #use impressionist to log views to display on user show page
@@ -34,8 +36,6 @@ class FacilitiesController < ApplicationController
       @facilities_near_no_distance = Array.new
       @facilities_name_yes_distance = Array.new
       @facilities_name_no_distance = Array.new
-
-
 
       case params[:scope]
       when 'Shelter'
@@ -162,10 +162,54 @@ class FacilitiesController < ApplicationController
          @facilities_name_no_distance.push(Facility.haversine_min(@latitude.to_d, @longitude.to_d, f.lat, f.long))
       end
 
+      if !cookies[:non_data_user].present?
+        if !session[:id].present?
+          session[:id] = SecureRandom.uuid
+        end
+        if !cookies[:userid].present?
+          cookies[:userid] = SecureRandom.uuid
+        end
+
+        @analytic = Analytic.new do |a|
+          a.sessionID = session[:id]
+          a.time = Time.new
+          a.cookieID = cookies[:userid]
+          a.service = params[:scope]
+          a.lat = @latitude
+          a.long = @longitude
+        end
+
+        if @analytic.save
+          session[:current_data] = @analytic.id
+          puts "Test"
+          @facilities_near_yes.each_with_index do |f, i|
+            @option = ListedOption.new do |o|
+              o.analytic_id = @analytic.id
+              o.sessionID = session[:id]
+              o.time = @analytic.time
+              o.facility = f.name
+              o.position = i + 1
+              o.total = @facilities_near_yes.length
+            end
+            @option.save
+          end
+        end
+      end
+
+      if !session[:current_data].present?
+        session[:current_data] = -1
+      end
+
 	  end
 
   def directions
     @facility = Facility.find(params[:id])
+    if session[:current_data] >= 0
+      @analytic = Analytic.find(session[:current_data])
+      @analytic.dirClicked = true
+      @analytic.dirType = "Walking"
+      @analytic.save
+    end
   end
 
   def options
@@ -192,6 +236,14 @@ class FacilitiesController < ApplicationController
       add_breadcrumb session['facilities_category'], session['facilities_list']
     end
     add_breadcrumb @facility.name
+
+    if session[:current_data] >= 0
+      @analytic = Analytic.find(session[:current_data])
+      @analytic.facility = @facility.id
+      @analytic.save
+    else
+      puts 'ERROR DATA NOT FOUND'
+    end
 
     #impressionist(@facility, @facility.name)
 	end
