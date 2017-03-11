@@ -1,0 +1,26 @@
+// Place all the styles related to the Notices controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#notices .notice-list {
+  margin-top: 53px;
+}
+
+#notices .notice-list ul.notice-items {
+  padding: 0;
+  list-style: none;
+}
+
+#notices .notice-list ul.notice-items li {
+  border-bottom: 1px solid #eee;
+}
+
+#notices .notice-list ul.notice-items li:first-child {
+  border-top: 1px solid #eee;
+}
+
+#notices .notice-list ul.notice-items li a {
+  display: block;
+  padding: 20px 0;
+  color: #000;
+}

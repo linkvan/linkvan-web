@@ -1537,6 +1537,12 @@ def self.haversine_km(lat1, long1, lat2, long2)
   return d
 end
 
+def self.haversine_min(lat1, long1, lat2, long2)
+	km = self.haversine_km(lat1, long1, lat2, long2)
+	time = km * 12.2 * 60 # avegrage 12.2 min/km walking
+	return time.round(0) # time in seconds
+end
+
 def self.power(num, pow)
 	num ** pow
 end
