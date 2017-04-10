@@ -1,0 +1,49 @@
+<section id="notices">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <h2><%= current_user.name %></h2>
+        <p><%= mail_to(current_user.email) %></p>
+        <p>Registered Since <%= current_user.created_at.strftime("%B %Y") %></p>
+
+        <% if current_user.admin %>
+          <%= render 'shared/admin_nav' %>
+        <% end %>
+
+        <p><%= link_to "Add New Notice", new_notice_path, class: "btn btn-primary"%></p>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Content</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @notices.each do |notice| %>
+              <tr>
+                <th scope="row"><%= notice.id %></th>
+                <td><%= link_to notice.title, notice_path(notice.id) %></td>
+                <td><%= strip_tags(notice.content)[0..50] %>...</td>
+                <td>
+                  <% if notice.published %>
+                    <span class="label label-primary">Published</span>
+                  <% else %>
+                    <span class="label label-default">Draft</span>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to "Edit", edit_notice_path(notice.id) %> |
+                  <%= link_to "Delete", notice_path(notice), method: :delete, data: { confirm: 'Are you certain you want to delete this notice?' } %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107204418) do
+ActiveRecord::Schema.define(version: 20170311175641) do
 
   create_table "alerts", force: :cascade do |t|
     t.string   "title"
@@ -19,6 +19,18 @@ ActiveRecord::Schema.define(version: 20170107204418) do
     t.boolean  "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "analytics", force: :cascade do |t|
+    t.string   "sessionID"
+    t.datetime "time"
+    t.string   "cookieID"
+    t.string   "service",                    null: false
+    t.decimal  "lat",                        null: false
+    t.decimal  "long",                       null: false
+    t.decimal  "facility"
+    t.boolean  "dirClicked", default: false
+    t.string   "dirType"
   end
 
   create_table "anaylitics", force: :cascade do |t|
@@ -134,6 +146,26 @@ ActiveRecord::Schema.define(version: 20170107204418) do
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id"
 
+  create_table "listed_options", force: :cascade do |t|
+    t.integer  "analytic_id"
+    t.string   "sessionID",   null: false
+    t.datetime "time",        null: false
+    t.string   "facility",    null: false
+    t.decimal  "position",    null: false
+    t.decimal  "total",       null: false
+  end
+
+  add_index "listed_options", ["analytic_id"], name: "index_listed_options_on_analytic_id"
+
+  create_table "notices", force: :cascade do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.text     "content"
+    t.boolean  "published"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "statuses", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -149,6 +181,9 @@ ActiveRecord::Schema.define(version: 20170107204418) do
     t.datetime "updated_at"
     t.boolean  "admin",                 default: false
     t.boolean  "activation_email_sent", default: false
+    t.string   "phone"
+    t.string   "facility_name"
+    t.boolean  "new_facility"
     t.string   "phone_number"
     t.boolean  "verified",              default: false
   end
