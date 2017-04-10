@@ -191,7 +191,6 @@
     </ul>
     <% end %>
   </div>
-
   <hr>
   <div class="form-group" id="service_notes">
     <p>
@@ -229,17 +228,18 @@
   </div>
   <div class="clearfix"></div>
   <hr>
-
-  <div class="form-group">
-    <p>
-      <%= f.label :address %> - Enter the facility's address then click Search.<br/>Format: Street Address, City, BC. Example: 612 Main St, Vancouver, BC
-    </p>
-    <div class="form-group-inline">
-      <%= f.text_field :address, class: "form-control" %>
-      <input type="button" class="btn btn-primary" value="Search" onclick="codeAddress()">
-    </div>
-    <div id="map-canvas-new"></div>
-  </div>
+ <script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
+ type="text/javascript"></script>
+ <div class="form-group">
+   <p>
+     <%= f.label :address %> - Enter the facility's address then click Search.<br/>Format: Street Address, City, BC. Example: 612 Main St, Vancouver, BC
+   </p>
+   <div class="form-group-inline">
+     <%= f.text_field :address, class: "form-control" %>
+     <input type="button" class="btn btn-primary" value="Search" onclick="codeAddress()">
+   </div>
+   <div id="map-canvas-new"></div>
+ </div>
 
   <hr>
 

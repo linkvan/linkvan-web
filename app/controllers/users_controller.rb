@@ -3,9 +3,19 @@ class UsersController < ApplicationController
   before_action :require_admin, only: [:index]
   before_action :require_correct_user_or_admin, only: [:edit, :update, :show, :destroy]
 
-	def index
-		@users = User.all
-	end
+  require 'csv'
+
+  def index
+    @users = User.all
+    @facilities = Facility.where(verified: true)
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"user-facility-list\""
+        headers['Content-Type'] ||= 'csv/text'
+      end
+    end
+  end
 
 	def show
     @message = Message.new

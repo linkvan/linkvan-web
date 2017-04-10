@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   add_breadcrumb "Facilities", :root_path
 
+
+
 private
 
 	def allow_iframe_requests
