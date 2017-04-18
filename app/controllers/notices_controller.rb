@@ -3,7 +3,7 @@ class NoticesController < ApplicationController
   before_action :require_admin, except: [:list, :view]
 
   def index
-		@notices = Notice.all
+		@notices = Notice.order("id ASC").all
 	end
 
   def show

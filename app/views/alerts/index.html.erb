@@ -1,3 +1,9 @@
+<div id="help-alerts" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <%= video_tag "How-to-manage-Alerts.webm", :size => "600x450", :controls => true %>
+  </div>
+</div>
+
 <section id="alerts">
   <div class="container">
     <div class="row">
@@ -10,7 +16,16 @@
           <%= render 'shared/admin_nav' %>
         <% end %>
 
-        <p><%= link_to "Add New Alert", new_alert_path, class: "btn btn-primary"%></p>
+        <div class="clearfix">
+          <div class="pull-left">
+            <%= link_to "Add New Alert", new_alert_path, class: "btn btn-primary"%>
+          </div>
+          <div class="pull-right">
+            <a href="#" class="badge" title="How to manage Alerts?" data-toggle="modal" data-target="#help-alerts">?</a>
+          </div>
+        </div>
+
+        <br>
 
         <table class="table">
           <thead>
@@ -47,3 +62,9 @@
     </div>
   </div>
 </section>
+
+<script type="text/javascript">
+  $('#help-alerts').on('hidden.bs.modal', function (e) {
+    $("video").each(function () { this.pause() });
+  })
+</script>
