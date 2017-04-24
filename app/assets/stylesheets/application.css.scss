@@ -80,6 +80,10 @@ a.btn-back {
 }
 
 /* General */
+.linkvan-icon {
+	line-height: 1;
+}
+
 section {
   h3.title {
 		margin-bottom: 24px;
@@ -119,6 +123,18 @@ form {
     .btn {
       float: left;
       margin-left: 6px;
+    }
+  }
+}
+
+/* Main Alert */
+#main-alert {
+  .modal-content {
+    overflow: hidden;
+
+    .modal-header, .modal-footer {
+      background: #fcf8e3;
+      color: #8a6d3b;
     }
   }
 }

@@ -1,9 +1,13 @@
+require 'securerandom'
+
 class FacilitiesController < ApplicationController
   before_action :require_signin, only: [:edit, :update, :new, :create, :destroy]
   #use impressionist to log views to display on user show page
   include FacilitiesHelper
   def index
     @facilities = Facility.all
+    @alert = Alert.where(active: true).first
+    @notices = Notice.where(published: true)
   end
 
 
@@ -32,8 +36,6 @@ class FacilitiesController < ApplicationController
       @facilities_near_no_distance = Array.new
       @facilities_name_yes_distance = Array.new
       @facilities_name_no_distance = Array.new
-
-
 
       case params[:scope]
       when 'Shelter'
@@ -145,25 +147,69 @@ class FacilitiesController < ApplicationController
       @facilities = Facility.where(verified: true)
 
       @facilities_near_yes.each do |f|
-         @facilities_near_yes_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+         @facilities_near_yes_distance.push(Facility.haversine_min(@latitude.to_d, @longitude.to_d, f.lat, f.long))
       end
 
       @facilities_near_no.each do |f|
-         @facilities_near_no_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+         @facilities_near_no_distance.push(Facility.haversine_min(@latitude.to_d, @longitude.to_d, f.lat, f.long))
       end
 
       @facilities_name_yes.each do |f|
-         @facilities_name_yes_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+         @facilities_name_yes_distance.push(Facility.haversine_min(@latitude.to_d, @longitude.to_d, f.lat, f.long))
       end
 
       @facilities_name_no.each do |f|
-         @facilities_name_no_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+         @facilities_name_no_distance.push(Facility.haversine_min(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+      end
+
+      if !cookies[:non_data_user].present?
+        if !session[:id].present?
+          session[:id] = SecureRandom.uuid
+        end
+        if !cookies[:userid].present?
+          cookies[:userid] = SecureRandom.uuid
+        end
+
+        @analytic = Analytic.new do |a|
+          a.sessionID = session[:id]
+          a.time = Time.new
+          a.cookieID = cookies[:userid]
+          a.service = params[:scope]
+          a.lat = @latitude
+          a.long = @longitude
+        end
+
+        if @analytic.save
+          session[:current_data] = @analytic.id
+          puts "Test"
+          @facilities_near_yes.each_with_index do |f, i|
+            @option = ListedOption.new do |o|
+              o.analytic_id = @analytic.id
+              o.sessionID = session[:id]
+              o.time = @analytic.time
+              o.facility = f.name
+              o.position = i + 1
+              o.total = @facilities_near_yes.length
+            end
+            @option.save
+          end
+        end
+      end
+
+      if !session[:current_data].present?
+        session[:current_data] = -1
       end
 
 	  end
 
   def directions
     @facility = Facility.find(params[:id])
+    if session[:current_data] >= 0
+      @analytic = Analytic.find(session[:current_data])
+      @analytic.dirClicked = true
+      @analytic.dirType = "Walking"
+      @analytic.save
+    end
   end
 
   def options
@@ -190,6 +236,14 @@ class FacilitiesController < ApplicationController
       add_breadcrumb session['facilities_category'], session['facilities_list']
     end
     add_breadcrumb @facility.name
+
+    if session[:current_data] >= 0
+      @analytic = Analytic.find(session[:current_data])
+      @analytic.facility = @facility.id
+      @analytic.save
+    else
+      puts 'ERROR DATA NOT FOUND'
+    end
 
     #impressionist(@facility, @facility.name)
 	end
@@ -258,7 +312,8 @@ private
                              :startssun_at2, :endssun_at2, :open_all_day_mon, :open_all_day_tues, :open_all_day_wed, :open_all_day_thurs,
                                 :open_all_day_fri, :open_all_day_sat, :open_all_day_sun, :closed_all_day_mon, :closed_all_day_tues, :closed_all_day_wed,
                                    :closed_all_day_thurs, :closed_all_day_fri, :closed_all_day_sat, :closed_all_day_sun, :r_pets, :r_id, :r_cart, :r_phone, :r_wifi,
-                                      :second_time_mon, :second_time_tues, :second_time_wed, :second_time_thurs, :second_time_fri, :second_time_sat, :second_time_sun )
+                                      :second_time_mon, :second_time_tues, :second_time_wed, :second_time_thurs, :second_time_fri, :second_time_sat, :second_time_sun,
+                                      :shelter_note, :food_note, :medical_note, :hygiene_note, :technology_note, :legal_note, :learning_note )
 	end
 
 

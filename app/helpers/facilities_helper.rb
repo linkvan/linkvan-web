@@ -104,23 +104,22 @@ module FacilitiesHelper
 		services_arr.each do |s|
 			case s
 			when "Shelter"
-   				content_arr += content_tag(:i, nil, class: "icon-sleepshelter_linkvan shelter-colour-index service", id: "Shelter", onclick: "moreInfo('shelter');")
+					content_arr += content_tag(:i, inline_svg('icons/shelter.svg', size: '25px'), class: "linkvan-icon service", id: "Shelter", onclick: "moreInfo('shelter');")
    			when "Food"
-   				content_arr += content_tag(:i, nil, class: "glyphicon glyphicon-cutlery food-colour-index service", id: "Food", onclick: "moreInfo('food');")
+   				content_arr += content_tag(:i, inline_svg('icons/cutlery.svg', size: '25px'), class: "linkvan-icon service", id: "Food", onclick: "moreInfo('food');")
    			when "Medical"
-   				content_arr += content_tag(:i, nil, class: "icon-Medical_linkvan medical-colour-index service", id: "Medical", onclick: "moreInfo('medical');")
+   				content_arr += content_tag(:i, inline_svg('icons/medical.svg', size: '25px'), class: "linkvan-icon service", id: "Medical", onclick: "moreInfo('medical');")
    			when "Hygiene"
-   				content_arr += content_tag(:i, nil, class: "icon-hygiene_linkvan hygiene-colour-index service", id: "Hygiene", onclick: "moreInfo('hygiene');")
+   				content_arr += content_tag(:i, inline_svg('icons/hygiene.svg', size: '25px'), class: "linkvan-icon service", id: "Hygiene", onclick: "moreInfo('hygiene');")
    			when "Technology"
-   				content_arr += content_tag(:i, nil, class: "icon-technology_linkvan technology-colour-index service", id: "Technology", onclick: "moreInfo('technology');")
+					content_arr += content_tag(:i, inline_svg('icons/technology.svg', size: '25px'), class: "linkvan-icon service", id: "Technology", onclick: "moreInfo('technology');")
 				when "Legal"
-					content_arr += content_tag(:i, nil, class: "icon-Advocacy_linkvan legal-colour-index service", id: "Legal", onclick: "moreInfo('legal');")
+					content_arr += content_tag(:i, inline_svg('icons/advocacy.svg', size: '25px'), class: "linkvan-icon service", id: "Legal", onclick: "moreInfo('legal');")
 				when "Learning"
-					content_arr += content_tag(:i, nil, class: "icon-learning_linkvan service", id: "Learning", onclick: "moreInfo('learning');")
+					content_arr += content_tag(:i, inline_svg('icons/learning.svg', size: '25px'), class: "linkvan-icon service", id: "Learning", onclick: "moreInfo('learning');")
 				when "Training_Services"
-					content_arr += content_tag(:i, nil, class: "icon-training_services_linkvan service", id: "Training",  onclick: "moreInfo('training');")
+					content_arr += content_tag(:i, inline_svg('icons/crisis.svg', size: '25px'), class: "linkvan-icon service", id: "Training",  onclick: "moreInfo('training');")
 				#else add error case?
-
 			end #ends case
 		end
 
@@ -140,33 +139,33 @@ module FacilitiesHelper
 		case res
 		when "id"
 			if t_or_f
-				content_tag(:i, nil, class: "icon-id_linkvan food-colour")
+				content_tag(:i, inline_svg('icons/idcard.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, nil, class: "icon-id_linkvan medical-colour")
+				content_tag(:i, inline_svg('icons/idcard.svg', size: '24px'), class: "linkvan-icon")
 			end
 		when "pets"
 			if t_or_f
-				content_tag(:i, nil, class: "icon-pets_linkvan food-colour")
+				content_tag(:i, inline_svg('icons/pawprint.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, nil, class: "icon-pets_linkvan medical-colour")
+				content_tag(:i, inline_svg('icons/pawprint.svg', size: '24px'), class: "linkvan-icon")
 			end
 		when "cart"
 			if t_or_f
-				content_tag(:i, nil, class: "icon-shoppingcart_linkvan food-colour")
+				content_tag(:i, inline_svg('icons/cart.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, nil, class: "icon-shoppingcart_linkvan medical-colour")
+				content_tag(:i, inline_svg('icons/cart.svg', size: '24px'), class: "linkvan-icon")
 			end
 		when "phone"
 			if t_or_f
-				content_tag(:i, nil, class: "icon-phone_linkvan food-colour")
+				content_tag(:i, inline_svg('icons/phone.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, nil, class: "icon-phone_linkvan medical-colour")
+				content_tag(:i, inline_svg('icons/phone.svg', size: '24px'), class: "linkvan-icon")
 			end
 		else
 			if t_or_f
-				content_tag(:i, nil, class: "icon-connection food-colour")
+				content_tag(:i, inline_svg('icons/wifi.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, nil, class: "icon-connection medical-colour")
+				content_tag(:i, inline_svg('icons/wifi.svg', size: '24px'), class: "linkvan-icon")
 			end
 		end
 	end
@@ -220,18 +219,21 @@ module FacilitiesHelper
 	end
 
 	def correct_user_or_admin?
-
-  		if current_user.admin?
-  			return true
-  		else
-  			current_user.facilities.each do |f|
-  				if f.id == Facility.find(params[:id]).id
-  					return true
-  				end
-  			end
-  			return false
-  		end
-  	end
+		if current_user.nil?
+			return false
+		else
+			if current_user.admin?
+				return true
+			else
+				current_user.facilities.each do |f|
+					if f.id == Facility.find(params[:id]).id
+						return true
+					end
+				end
+				return false
+			end
+		end
+	end
 
 	def isKeyword
 		@word = params[:search]

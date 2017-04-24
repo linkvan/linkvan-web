@@ -5,7 +5,7 @@ class Facility < ActiveRecord::Base
 	belongs_to :user
 	validates :name, :lat, :long, :services, presence: true
 
-	is_impressionable
+	# is_impressionable
 
 	def self.search(search)
 		#where("name ILIKE ?", "%#{search}%") for production
@@ -1535,6 +1535,12 @@ def self.haversine_km(lat1, long1, lat2, long2)
   d = r * c
 
   return d
+end
+
+def self.haversine_min(lat1, long1, lat2, long2)
+	km = self.haversine_km(lat1, long1, lat2, long2)
+	time = km * 12.2 * 60 # avegrage 12.2 min/km walking
+	return time.round(0) # time in seconds
 end
 
 def self.power(num, pow)

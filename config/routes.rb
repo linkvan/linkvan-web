@@ -30,10 +30,14 @@ Linkvan::Application.routes.draw do
   post 'contact', to: 'messages#create'
   get 'users/:id/toggle_verify' => "users#toggle_verify"
   get 'facilities/:id/toggle_verify' => "facilities#toggle_verify"
-  
-
-
-
+  get 'alerts' => 'alerts#index'
+  get 'alerts/:id/active' => 'alerts#active'
+  get 'alerts/:id/deactive' => 'alerts#deactive'
+  get 'notices' => 'notices#index'
+  get 'notices/list' => 'notices#list'
+  get 'notice/:slug' => 'notices#view'
+  resources :alerts
+  resources :notices
   resources :facilities
 
   # match "users/:id/toggle_verify" => "users#toggle_verify"
