@@ -3,6 +3,22 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #facilities {
+	button.display-alert {
+		display: flex;
+		align-items: center;
+		margin-top: 18px;
+		color: #8a6d3b;
+		border-color: #8a6d3b;
+
+		&:hover {
+			background: #fcf8e3;
+		}
+
+		i {
+			margin-right: 6px;
+		}
+	}
+
 	form.new_facility {
 		input[type="text"] {
 			max-width: 360px;
