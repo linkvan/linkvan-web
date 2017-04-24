@@ -66,10 +66,9 @@ GEM
     impressionist (1.5.1)
       httpclient (~> 2.2)
       nokogiri (~> 1.5)
-    inline_svg (0.11.1)
-      activesupport (>= 4.0)
-      loofah (>= 2.0)
-      nokogiri (~> 1.6)
+    inline_svg (1.1.0)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -195,7 +194,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   geocoder
   impressionist
-  inline_svg
+  inline_svg (= 1.1.0)
   jbuilder (~> 1.2)
   jquery-rails
   mail

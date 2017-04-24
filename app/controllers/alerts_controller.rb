@@ -3,7 +3,7 @@ class AlertsController < ApplicationController
   before_action :require_admin
 
 	def index
-		@alerts = Alert.all
+		@alerts = Alert.order("id ASC").all
 	end
 
   def show
@@ -30,7 +30,7 @@ class AlertsController < ApplicationController
 
   def update
     @alert = Alert.find(params[:id])
-    
+
     if alert_params[:active]
       Alert.update_all(active: false)
     end
