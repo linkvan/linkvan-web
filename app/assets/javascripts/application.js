@@ -37,7 +37,7 @@ $(document).ready(function () {
   });
 
   // Alert: Hide alert
-  $('#main-alert button.hide-alert').on('click', function() {
+  $('#main-alert').on('hidden.bs.modal', function() {
     Cookies.set('alertClicked', true, { expires: 7 });
   });
 
