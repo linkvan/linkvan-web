@@ -76,6 +76,14 @@
 	}
 }
 
+@media (max-width: 768px) {
+	#facilities button.display-alert {
+		position: absolute;
+		top: -170px;
+		right: 15px;
+	}
+}
+
 #services {
 	> p i {
 		margin: 0 5px;
