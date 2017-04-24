@@ -288,7 +288,7 @@ module FacilitiesHelper
 		#
 		# @facilities = Facility.where("services ~* ?", word).where(:verified => true)
 		# if @facilities.exists?
-			@facilities = Facility.where("suitability ~* ?", word).where(:verified => true)
+			@facilities = Facility.where("welcomes ~* ?", word).where(:verified => true)
 		end
 	end
 end

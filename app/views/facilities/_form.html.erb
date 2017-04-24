@@ -20,69 +20,6 @@
     <%= f.select :welcomes, [['All'], ['Women'], ['Men']] %>
   </div>
   <hr>
-  <div class="form-group">
-    <%= f.label :suitability %> - Select All Relevant Categories
-    <%= f.hidden_field :suitability %>
-    <% if @facility.suitability.nil? %>
-      <ul class="list-inline">
-        <li>
-          <input type="checkbox" class="custom-checkbox" id="chcheck" name="Children" value="Children" onclick="chclicked()">
-          <label for="chcheck">Children</label>
-        </li>
-        <li>
-          <input type="checkbox" class="custom-checkbox" id="yocheck" name="Youth" value="Youth" onclick="yoclicked()">
-          <label for="yocheck">Youth</label>
-        </li>
-        <li>
-          <input type="checkbox" class="custom-checkbox" id="adcheck" name="Adults" value="Adults" onclick="adclicked()">
-          <label for="adcheck">Adults</label>
-        </li>
-        <li>
-          <input type="checkbox" class="custom-checkbox" id="secheck" name="Seniors" value="Seniors" onclick="seclicked()">
-          <label for="secheck">Seniors</label>
-        </li>
-      </ul>
-    <% else %>
-      <ul class="list-inline">
-        <li>
-          <% if @facility.suitability.include? "Children" %>
-            <input type="checkbox" class="custom-checkbox" id="childrencheck" name="Children" value="Children" onclick="chclicked()" checked>
-          <% else %>
-            <input type="checkbox" class="custom-checkbox" id="childrencheck" name="Children" value="Children" onclick="chclicked()">
-          <% end %>
-          <label for="childrencheck">Children</label>
-        </li>
-        <li>
-          <% if @facility.suitability.include? "Youth" %>
-            <input type="checkbox" class="custom-checkbox" id="youthcheck" name="Youth" value="Youth" onclick="yoclicked()" checked>
-          <% else %>
-            <input type="checkbox" class="custom-checkbox" id="youthcheck" name="Youth" value="Youth" onclick="yoclicked()">
-          <% end %>
-          <label for="youthcheck">Youth</label>
-        </li>
-        <li>
-          <% if @facility.suitability.include? "Adults" %>
-            <input type="checkbox" class="custom-checkbox" id="adultcheck" name="Adults" value="Adults" onclick="adclicked()" checked>
-          <% else %>
-            <input type="checkbox" class="custom-checkbox" id="adultcheck" name="Adults" value="Adults" onclick="adclicked()">
-          <% end %>
-          <label for="adultcheck">Adults</label>
-        </li>
-        <li>
-          <% if @facility.suitability.include? "Seniors" %>
-            <input type="checkbox" class="custom-checkbox" id="seniorcheck" name="Seniors" value="Seniors" onclick="seclicked()" checked>
-          <% else %>
-            <input type="checkbox" class="custom-checkbox" id="seniorcheck" name="Seniors" value="Seniors" onclick="seclicked()">
-          <% end %>
-          <label for="seniorcheck">Seniors</label>
-        </li>
-      </ul>
-
-    <% end %>
-    <span class="help-block">Note: Suitability is currently not used; however, future designs of the web app may use this information to better search and sort facilities.</span>
-  </div>
-
-  <hr>
 
   <div class="form-group">
     <%= f.label :services %> - Select All Relevant Categories
@@ -230,7 +167,6 @@
   <hr>
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
  type="text/javascript"></script>
->>>>>>> d5f4e995d51eed24810d58c30ca7d77e426d89fd
  <div class="form-group">
    <p>
      <%= f.label :address %> - Enter the facility's address then click Search.<br/>Format: Street Address, City, BC. Example: 612 Main St, Vancouver, BC

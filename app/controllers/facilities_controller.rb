@@ -82,14 +82,7 @@ class FacilitiesController < ApplicationController
         @sortby = params[:sortby]
         @hours = params[:hours]
         @services = params[:services]
-        @suitable = params[:suitable]
         @welcome = params[:welcome]
-
-        if !(@suitable.nil?)
-          suitableset = @suitable.split(",").to_set
-        else
-          suitableset = ["Children", "Youth", "Adults", "Seniors"].to_set
-        end
 
 
         if !(@services.nil?)
@@ -116,7 +109,7 @@ class FacilitiesController < ApplicationController
         @facilities_name_yes = Facility.rename_sort(@facilities_name_yes.uniq)
         @facilities_name_no = Facility.rename_sort(@facilities_name_no.uniq)
 
-        #remove from each of the @facilities any facilities which don't contain the appropriate @welcome and @suitable
+        #remove from each of the @facilities any facilities which don't contain the appropriate @welcome
         if @welcome != "All"
           @facilities_near_yes.keep_if {|f| f.welcomes == @welcome}
           @facilities_near_no.keep_if {|f| f.welcomes == @welcome}
@@ -124,12 +117,6 @@ class FacilitiesController < ApplicationController
           @facilities_name_no.keep_if {|f| f.welcomes == @welcome}
         end
 
-        if @suitable != "All" #refactor to "Everyone"
-          @facilities_near_yes.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
-          @facilities_near_no.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
-          @facilities_name_yes.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
-          @facilities_name_no.keep_if {|e| e.suitability.split(" ").to_set.subset?(suitableset) || suitableset.subset?(e.suitability.split(" ").to_set)}
-        end
 
         #remove from each of the @facilities any facilities that are not verified
           @facilities_near_yes.keep_if {|f| f.verified == true}
@@ -306,7 +293,7 @@ private
 							permit(:name, :welcomes, :services, :address, :phone, :user_id, :verified,
 								:website, :description, :startsmon_at, :endsmon_at, :startstues_at, :endstues_at,
                   :startswed_at, :endswed_at, :startsthurs_at, :endsthurs_at, :startsfri_at, :endsfri_at,
-                    :startssat_at, :endssat_at, :startssun_at, :endssun_at, :notes, :suitability, :lat, :long,
+                    :startssat_at, :endssat_at, :startssun_at, :endssun_at, :notes, :lat, :long,
                        :startsmon_at2, :endsmon_at2, :startstues_at2, :endstues_at2, :startswed_at2, :endswed_at2,
                           :startsthurs_at2, :endsthurs_at2, :startsfri_at2, :endsfri_at2, :startssat_at2, :endssat_at2,
                              :startssun_at2, :endssun_at2, :open_all_day_mon, :open_all_day_tues, :open_all_day_wed, :open_all_day_thurs,
