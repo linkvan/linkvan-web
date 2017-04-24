@@ -181,9 +181,6 @@ ActiveRecord::Schema.define(version: 20170311175641) do
     t.datetime "updated_at"
     t.boolean  "admin",                 default: false
     t.boolean  "activation_email_sent", default: false
-    t.string   "phone"
-    t.string   "facility_name"
-    t.boolean  "new_facility"
     t.string   "phone_number"
     t.boolean  "verified",              default: false
   end
