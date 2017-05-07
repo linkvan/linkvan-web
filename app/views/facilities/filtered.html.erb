@@ -60,7 +60,11 @@
       <div class= "facility-block-name">
         <strong><%= f.name %></strong>
       </div>
-      <div class="is-open">OPEN</div>
+      <% if willCloseSoon(f) %>
+        <div class="is-close-soon">CLOSE SOON</div>
+      <% else %>
+        <div class="is-open">OPEN</div>
+      <% end %>
       <%= display_services(f.services) %>
       <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
       <% if @coordinates.present? %>
@@ -90,7 +94,11 @@
       <div class= "facility-block-name">
         <strong><%= f.name %></strong>
       </div>
-      <div class="is-closed">CLOSED</div>
+      <% if willOpenSoon(f) %>
+        <div class="is-open-soon">OPEN SOON</div>
+      <% else %>
+        <div class="is-closed">CLOSED</div>
+      <% end %>
       <%= display_services(f.services) %>
       <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
       <% if @coordinates.present? %>
@@ -121,7 +129,11 @@
       <div class= "facility-block-name">
         <strong><%= f.name %></strong>
       </div>
-      <div class="is-open">OPEN</div>
+      <% if willCloseSoon(f) %>
+        <div class="is-close-soon">CLOSE SOON</div>
+      <% else %>
+        <div class="is-open">OPEN</div>
+      <% end %>
       <%= display_services(f.services) %>
       <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
       <% if @coordinates.present? %>
@@ -151,7 +163,11 @@
       <div class= "facility-block-name">
         <strong><%= f.name %></strong>
       </div>
-      <div class="is-closed">CLOSED</div>
+      <% if willOpenSoon(f) %>
+        <div class="is-open-soon">OPEN SOON</div>
+      <% else %>
+        <div class="is-closed">CLOSED</div>
+      <% end %>
       <%= display_services(f.services) %>
       <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
       <% if @coordinates.present? %>

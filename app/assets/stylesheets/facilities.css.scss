@@ -800,7 +800,7 @@
  	border-bottom-left-radius: 4px;
  }
 
-.is-open, .is-closed {
+.is-open, .is-closed, .is-close-soon, .is-open-soon {
 	float: left;
 	padding: 5px 15px 0 0;
 	font-weight: bold;
@@ -812,6 +812,10 @@
 
 .is-closed{
 	color: #AA0114;
+}
+
+.is-close-soon, .is-open-soon {
+	color: #DEA54B;
 }
 
 #near-yes, #near-no, #name-yes, #name-no {
