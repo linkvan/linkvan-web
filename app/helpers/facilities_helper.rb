@@ -301,11 +301,12 @@ module FacilitiesHelper
 		columnByDay['Fri'] = ['endsfri_at', 'open_all_day_fri']
 		columnByDay['Sat'] = ['endssat_at', 'open_all_day_sat']
 		columnByDay['Sun'] = ['endssun_at', 'open_all_day_sun']
-		currentDay = Time.new.strftime('%a')
+		currentDay = Time.new.in_time_zone("Pacific Time (US & Canada)").strftime('%a')
+		currentTime = Time.new.in_time_zone("Pacific Time (US & Canada)")
 		fEndTime = facility[columnByDay[currentDay][0]]
-		convertedUserTime = 		Time.new(2000, 01, 01, Time.new.hour, Time.new.min, 0)
-		convertedFacilityTime = Time.new(2000, 01, 01, fEndTime.hour, fEndTime.min, 0)
-
+		convertedUserTime = 		Time.utc(2000, 01, 01, currentTime.hour, currentTime.min, 0)
+		convertedFacilityTime = Time.utc(2000, 01, 01, fEndTime.hour, fEndTime.min, 0)
+		
 		if facility[columnByDay[currentDay][1]]
 			return false
 		end
@@ -327,11 +328,11 @@ module FacilitiesHelper
 		columnByDay['Fri'] = ['startsfri_at', 'closed_all_day_fri']
 		columnByDay['Sat'] = ['startssat_at', 'closed_all_day_sat']
 		columnByDay['Sun'] = ['startssun_at', 'closed_all_day_sun']
-
-		currentDay = Time.new.strftime('%a')
+		currentDay = Time.new.in_time_zone("Pacific Time (US & Canada)").strftime('%a')
+		currentTime = Time.new.in_time_zone("Pacific Time (US & Canada)")
 		fStartTime = facility[columnByDay[currentDay][0]]
-		convertedUserTime = 		Time.new(2000, 01, 01, Time.new.hour, Time.new.min, 0)
-		convertedFacilityTime = Time.new(2000, 01, 01, fStartTime.hour, fStartTime.min, 0)
+		convertedUserTime = 		Time.utc(2000, 01, 01, currentTime.hour, currentTime.min, 0)
+		convertedFacilityTime = Time.utc(2000, 01, 01, fStartTime.hour, fStartTime.min, 0)
 
 		if facility[columnByDay[currentDay][1]]
 			return false
