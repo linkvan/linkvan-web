@@ -802,7 +802,7 @@
 
 .is-open, .is-closed {
 	float: left;
-	padding: 5px 15px 5px 0;
+	padding: 5px 15px 0 0;
 	font-weight: bold;
 }
 
@@ -821,13 +821,22 @@
 
 	.walking-distance {
 		display: inline-block;
-		margin-left: 5px;
+		margin: 5px 0;
 	}
 }
 
-.facility-block{
+.facility-block {
+	position: relative;
+}
+
+.facility-block a.facility-link {
+	display: block;
 	color: #ABA9A9;
 	font-size: 16px;
+}
+
+.facility-block .facility-phone {
+
 }
 
 .facility-block-name{
@@ -899,4 +908,19 @@ td {
 
 .container a{
 	font-size: 16px;
+}
+
+@media (min-width: 480px) {
+  .facility-block .facility-phone {
+		position: absolute;
+		top: 3px;
+		right: 40px;
+	}
+
+	#near-yes, #near-no, #name-yes, #name-no {
+		.walking-distance {
+			float: right;
+			margin: 0 15px 0 0;
+		}
+	}
 }

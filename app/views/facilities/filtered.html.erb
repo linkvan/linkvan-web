@@ -55,19 +55,27 @@
 
 <div id="near-yes">
 <% @facilities_near_yes.each do |f| %>
-<a href=<%= facility_path(f)%>>
   <div class="facility-block">
-    <div class= "facility-block-name"><strong><%= f.name %></strong></div>
-    <div class="is-open">OPEN</div>
-    <%= display_services(f.services) %>
-    <% if @coordinates.present? %>
-      <span class="walking-distance">
-        <%= distance_of_time_in_words(@facilities_near_yes_distance[$i]) %> walking
-      </span>
+    <a class="facility-link" href=<%= facility_path(f)%>>
+      <div class= "facility-block-name">
+        <strong><%= f.name %></strong>
+      </div>
+      <div class="is-open">OPEN</div>
+      <%= display_services(f.services) %>
+      <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
+      <% if @coordinates.present? %>
+        <span class="walking-distance">
+          <%= distance_of_time_in_words(@facilities_near_yes_distance[$i]) %> walking
+        </span>
+      <% end %>
+    </a>
+    <% if f.phone.present? %>
+      <div class="facility-phone">
+        Call:
+        <a href="tel:<%=format_tel(f.phone)%>"><%=format_tel(f.phone) %></a>
+      </div>
     <% end %>
-    <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>
-</a>
   <hr>
 <% $i += 1 %>
 <% end %>
