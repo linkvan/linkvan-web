@@ -36,6 +36,11 @@ $(document).ready(function () {
     $(this).mask($(this).data('mask'));
   });
 
+  // Alert: Hide alert
+  $('#main-alert').on('hidden.bs.modal', function() {
+    Cookies.set('alertClicked', true, { expires: 7 });
+  });
+
   // Check Cookie - Lat and Long
   var coordinates = Cookies.get('coordinates');
   if (coordinates === undefined) {

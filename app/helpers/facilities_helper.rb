@@ -291,4 +291,58 @@ module FacilitiesHelper
 			@facilities = Facility.where("suitability ~* ?", word).where(:verified => true)
 		end
 	end
+
+	def willCloseSoon(facility)
+		columnByDay = {}
+		columnByDay['Mon'] = ['endsmon_at', 'open_all_day_mon']
+		columnByDay['Tue'] = ['endstues_at', 'open_all_day_tues']
+		columnByDay['Wed'] = ['endswed_at', 'open_all_day_wed']
+		columnByDay['Thu'] = ['endsthurs_at', 'open_all_day_thurs']
+		columnByDay['Fri'] = ['endsfri_at', 'open_all_day_fri']
+		columnByDay['Sat'] = ['endssat_at', 'open_all_day_sat']
+		columnByDay['Sun'] = ['endssun_at', 'open_all_day_sun']
+		currentDay = Time.new.in_time_zone("Pacific Time (US & Canada)").strftime('%a')
+		currentTime = Time.new.in_time_zone("Pacific Time (US & Canada)")
+		fEndTime = facility[columnByDay[currentDay][0]]
+		convertedUserTime = 		Time.utc(2000, 01, 01, currentTime.hour, currentTime.min, 0)
+		convertedFacilityTime = Time.utc(2000, 01, 01, fEndTime.hour, fEndTime.min, 0)
+		
+		if facility[columnByDay[currentDay][1]]
+			return false
+		end
+
+		# If it will close in 30 minutes
+		if (0..30).include? ((convertedFacilityTime.to_i - convertedUserTime.to_i) / 60)
+			return true
+		end
+
+		return false
+	end
+
+	def willOpenSoon(facility)
+		columnByDay = {}
+		columnByDay['Mon'] = ['startsmon_at', 'closed_all_day_mon']
+		columnByDay['Tue'] = ['startstues_at', 'closed_all_day_tues']
+		columnByDay['Wed'] = ['startswed_at', 'closed_all_day_wed']
+		columnByDay['Thu'] = ['startsthurs_at', 'closed_all_day_thurs']
+		columnByDay['Fri'] = ['startsfri_at', 'closed_all_day_fri']
+		columnByDay['Sat'] = ['startssat_at', 'closed_all_day_sat']
+		columnByDay['Sun'] = ['startssun_at', 'closed_all_day_sun']
+		currentDay = Time.new.in_time_zone("Pacific Time (US & Canada)").strftime('%a')
+		currentTime = Time.new.in_time_zone("Pacific Time (US & Canada)")
+		fStartTime = facility[columnByDay[currentDay][0]]
+		convertedUserTime = 		Time.utc(2000, 01, 01, currentTime.hour, currentTime.min, 0)
+		convertedFacilityTime = Time.utc(2000, 01, 01, fStartTime.hour, fStartTime.min, 0)
+
+		if facility[columnByDay[currentDay][1]]
+			return false
+		end
+
+		# If it will open in 30 minutes
+		if (0..30).include? ((convertedFacilityTime.to_i - convertedUserTime.to_i) / 60)
+			return true
+		end
+
+		return false
+	end
 end
