@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170311175641) do
+ActiveRecord::Schema.define(version: 20170424013616) do
 
   create_table "alerts", force: :cascade do |t|
     t.string   "title"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20170311175641) do
     t.decimal  "facility"
     t.boolean  "dirClicked", default: false
     t.string   "dirType"
+  end
 
   create_table "anaylitics", force: :cascade do |t|
     t.decimal  "lat"
@@ -66,7 +67,6 @@ ActiveRecord::Schema.define(version: 20170311175641) do
     t.time     "endssat_at"
     t.time     "startssun_at"
     t.time     "endssun_at"
-    t.string   "suitability"
     t.boolean  "r_pets",               default: false
     t.boolean  "r_id",                 default: false
     t.boolean  "r_cart",               default: false
