@@ -1,0 +1,11 @@
+<section id="notices">
+  <div class="container notice-list">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <%= render 'facilities/breadcrumb' %>
+        <h3><%= @notice.title %></h3>
+        <p><%= raw(@notice.content) %></p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,7 +1,11 @@
-<div class="profile">
-  <% @submitText = "Update Facility" %>
-  <%= render 'form' %>
-</div>
+<section id="facilities">
+  <div class="container">
+    <div class="col-sm-8 col-sm-offset-2">
+      <% @submitText = "Update Facility" %>
+      <%= render 'form' %>
+    </div>
+  </div>
+</section>
 
 <%= content_tag :div, class: "temp_information", data: {jsfacility: @facility} do %>
 <% end %>

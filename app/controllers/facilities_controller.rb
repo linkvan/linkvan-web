@@ -7,6 +7,7 @@ class FacilitiesController < ApplicationController
   def index
     @facilities = Facility.all
     @alert = Alert.where(active: true).first
+    @notices = Notice.where(published: true)
   end
 
 
@@ -146,19 +147,19 @@ class FacilitiesController < ApplicationController
       @facilities = Facility.where(verified: true)
 
       @facilities_near_yes.each do |f|
-         @facilities_near_yes_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+         @facilities_near_yes_distance.push(Facility.haversine_min(@latitude.to_d, @longitude.to_d, f.lat, f.long))
       end
 
       @facilities_near_no.each do |f|
-         @facilities_near_no_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+         @facilities_near_no_distance.push(Facility.haversine_min(@latitude.to_d, @longitude.to_d, f.lat, f.long))
       end
 
       @facilities_name_yes.each do |f|
-         @facilities_name_yes_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+         @facilities_name_yes_distance.push(Facility.haversine_min(@latitude.to_d, @longitude.to_d, f.lat, f.long))
       end
 
       @facilities_name_no.each do |f|
-         @facilities_name_no_distance.push(Facility.haversine_km(@latitude.to_d, @longitude.to_d, f.lat, f.long))
+         @facilities_name_no_distance.push(Facility.haversine_min(@latitude.to_d, @longitude.to_d, f.lat, f.long))
       end
 
       if !cookies[:non_data_user].present?

@@ -68,6 +68,8 @@ gem 'chartjs-ror'
 
 gem 'momentjs-rails'
 
+gem 'ckeditor'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

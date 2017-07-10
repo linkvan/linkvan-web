@@ -1,0 +1,23 @@
+<section id="notices">
+  <div class="container notice-list">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <%= render 'facilities/breadcrumb' %>
+        <ul class="notice-items">
+          <% @notices.each do |notice| %>
+          <li>
+            <a href="/notice/<%= notice.slug %>" class="clearfix">
+              <div class="pull-left">
+                <strong><%= notice.title %></strong>
+              </div>
+              <div class="pull-right">
+                <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
+              </div>
+            </a>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

@@ -157,6 +157,15 @@ ActiveRecord::Schema.define(version: 20170311175641) do
 
   add_index "listed_options", ["analytic_id"], name: "index_listed_options_on_analytic_id"
 
+  create_table "notices", force: :cascade do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.text     "content"
+    t.boolean  "published"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "statuses", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

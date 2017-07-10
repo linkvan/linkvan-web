@@ -65,6 +65,13 @@
 					<span>Crisis Lines</span>
 					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
 				</a>
+        <% if @notices.size > 0 %>
+          <a href="/notices/list" class="btn btn-default clearfix facilities-category">
+            <i class="linkvan-icon"><%= inline_svg('icons/notices.svg', size: '30px') %></i>
+            <span>Notices</span>
+            <i class="glyphicon glyphicon-chevron-right chevron-right"></i>
+          </a>
+        <% end %>
 			</div>
 		</div>
 	</div>

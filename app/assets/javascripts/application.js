@@ -19,6 +19,8 @@
 //= require js.cookie.js
 //= require moment
 //= require Chart.min
+//= require ckeditor/init
+//= require_tree ./ckeditor
 
 $(document).ready(function () {
   // Plugin: Bootstrap Select
