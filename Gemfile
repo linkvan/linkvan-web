@@ -64,6 +64,10 @@ gem "breadcrumbs_on_rails"
 
 gem 'inline_svg'
 
+gem 'chartjs-ror'
+
+gem 'momentjs-rails'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
