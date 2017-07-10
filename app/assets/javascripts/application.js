@@ -17,6 +17,8 @@
 //= require jquery.validate.min
 //= require jquery.mask.min
 //= require js.cookie.js
+//= require moment
+//= require Chart.min
 
 $(document).ready(function () {
   // Plugin: Bootstrap Select
