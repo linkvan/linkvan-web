@@ -290,4 +290,8 @@ module FacilitiesHelper
 			@facilities = Facility.where("welcomes ~* ?", word).where(:verified => true)
 		end
 	end
+
+	def isWelcome(category, facility)
+		return facility.welcomes.downcase.include?(category) || facility.welcomes.downcase.include?("all")
+	end
 end
