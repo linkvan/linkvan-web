@@ -126,7 +126,6 @@ module FacilitiesHelper
 		return content_arr.html_safe
 	end
 
-
 	def resource_t_or_f?(t_or_f)
 		if t_or_f
 			content_tag(:i, nil, class: "glyphicon glyphicon-ok food-colour")
@@ -288,7 +287,7 @@ module FacilitiesHelper
 		#
 		# @facilities = Facility.where("services ~* ?", word).where(:verified => true)
 		# if @facilities.exists?
-			@facilities = Facility.where("suitability ~* ?", word).where(:verified => true)
+			@facilities = Facility.where("welcomes ~* ?", word).where(:verified => true)
 		end
 	end
 
@@ -345,4 +344,10 @@ module FacilitiesHelper
 
 		return false
 	end
+
+	def isWelcome(category, facility)
+		return facility.welcomes.downcase.include?(category) || facility.welcomes.downcase.include?("all")
+	end
+	
 end
+
