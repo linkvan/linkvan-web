@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20170311175641) do
     t.decimal  "facility"
     t.boolean  "dirClicked", default: false
     t.string   "dirType"
+  end
+
 
   create_table "anaylitics", force: :cascade do |t|
     t.decimal  "lat"

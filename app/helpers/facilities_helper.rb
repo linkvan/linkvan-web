@@ -126,7 +126,6 @@ module FacilitiesHelper
 		return content_arr.html_safe
 	end
 
-
 	def resource_t_or_f?(t_or_f)
 		if t_or_f
 			content_tag(:i, nil, class: "glyphicon glyphicon-ok food-colour")

@@ -187,7 +187,7 @@ class FacilitiesController < ApplicationController
         session[:current_data] = -1
       end
 
-	  end
+    end
 
   def directions
     @facility = Facility.find(params[:id])

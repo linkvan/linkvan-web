@@ -94,7 +94,7 @@
 <div id="inset-directions">
 </div>
 
-<div class="description">
+<!--<div class="description">-->
 
 <!--
   <h2>Resources (In Progress)</h2>
@@ -128,44 +128,51 @@
 </table>
 -->
 
-  <h2>Hours</h2>
+<h2>Hours</h2>
+  <div class="inset" id="hours">
 
-<table>
-  <tr>
-    <td>Monday:</td>
-    <td><%= display_mon_hours(@facility) %></td>
-  </tr>
-  <tr>
-    <td>Tuesday:</td>
-    <td><%= display_tues_hours(@facility) %></td>
-  </tr>
-  <tr>
-    <td>Wednesday:</td>
-    <td><%= display_wed_hours(@facility) %></td>
-  </tr>
-  <tr>
-    <td>Thursday:</td>
-    <td><%= display_thurs_hours(@facility) %></td>
-  </tr>
-  <tr>
-    <td>Friday:</td>
-    <td><%= display_fri_hours(@facility) %></td>
-  </tr>
-  <tr>
-    <td>Saturday:</td>
-    <td><%= display_sat_hours(@facility) %> </td>
-  </tr>
-  <tr>
-    <td>Sunday:</td>
-    <td><%= display_sun_hours(@facility) %> </td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <td>Monday:</td>
+      <td><%= display_mon_hours(@facility) %></td>
+    </tr>
+    <tr>
+      <td>Tuesday:</td>
+      <td><%= display_tues_hours(@facility) %></td>
+    </tr>
+    <tr>
+      <td>Wednesday:</td>
+      <td><%= display_wed_hours(@facility) %></td>
+    </tr>
+    <tr>
+      <td>Thursday:</td>
+      <td><%= display_thurs_hours(@facility) %></td>
+    </tr>
+    <tr>
+      <td>Friday:</td>
+      <td><%= display_fri_hours(@facility) %></td>
+    </tr>
+    <tr>
+      <td>Saturday:</td>
+      <td><%= display_sat_hours(@facility) %> </td>
+    </tr>
+    <tr>
+      <td>Sunday:</td>
+      <td><%= display_sun_hours(@facility) %> </td>
+    </tr>
+  </table>
+  </div>
 
-<div class="notes">
+<div class="notes" id="notes">
   <strong>Notes:</strong><br>
   <p><%= @facility.notes %></p>
 </div>
 
+  <h2>Last Updated</h2>
+  <div class="inset" id="last-updated">
+    <p><%= @facility.updated_at.to_date %></p>
+  </div>
+<br>
 
 <div>
 <% if correct_user_or_admin? %>
@@ -176,7 +183,7 @@
 <% end %>
 </div>
 </div>
-</div>
+<!--</div>-->
 
 
 

@@ -3,14 +3,27 @@
 <div role="navigation" class="toggle-group">
   <div title="filtering options" class="toggle-group-content">
     <%= render 'breadcrumb' %>
-
+    <div class="btn-group" data-toggle="buttons" style="width:100%;
+        margin: 0 auto;">
+      <label class="btn btn-primary active">
+        <input type="checkbox" checked autocomplete="off"> Near
+      </label>
+      <label class="btn btn-primary">
+        <input type="checkbox" autocomplete="off"> A-Z
+      </label>
+      <label class="btn btn-primary">
+        <input type="checkbox" autocomplete="off"> Open
+      </label>
+      <label class="btn btn-primary">
+        <input type="checkbox" autocomplete="off"> All
+      </label>
+    </div>
 <div class="container-prox" style="width: 49%;
                                    display: inline-block;
                                    min-width:120px;
                                    text-align: center;">
   <div class="prox">
   <div class="btn-group btn-toggle">
-    <p>Sort By</p>
     <p class="prox-toggle"></p>
     <p class="open-toggle"></p>
     <button class="custom-checkbox" id="near">Near</button>
@@ -25,9 +38,8 @@
                                    text-align: center;">
   <div class="open">
   <div class="btn-group btn-toggle">
-    <p>Open/Closed</p>
     <button class="btn btn-primary active" id="yes" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px">Open</button>
-    <button class="btn btn-default" id="no" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px">Closed</button>
+    <button class="btn btn-default" id="no" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px">All</button>
   </div>
   </div>
 </div>
@@ -59,6 +71,7 @@
   <div class="facility-block">
     <div class= "facility-block-name"><strong><%= f.name %></strong></div>
     <div class="is-open">OPEN</div>
+    <div>OPEN SOON</div>
     <%= display_services(f.services) %>
     <% if @coordinates.present? %>
       <span class="walking-distance">

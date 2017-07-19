@@ -1483,7 +1483,54 @@ class Facility < ActiveRecord::Base
 	  	return arr
 	end #ends self.contains_service?
 
-def self.redist_sort(inArray, ulat, ulong)
+	def service_filter(service_query)
+		arr = Array.new
+
+		#first query db for any facility whose services contains the service_query
+		#and store in array arr
+		facility = Facility.select("services", "id", "verified")
+
+		facility.each do |f|
+			if (f.services.include?(service_query)) && (f.verified == true)
+				arr.push(Facility.find(f.id))
+			end
+		end
+
+		return arr
+	end
+
+	def open_soon_filter(facility_array)
+		temp_arr = Array.new
+		temp arr = facility_array
+		facility =
+		#time difference between open and closed in seconds
+		tdiff = 30*60
+		t = Time.now
+		day = t.wday
+
+		# iterate through each facility and remove facility if it is open the whole day. Keep only the facilities where the day is the same and the time now and time open is within the time difference.
+		$i = 0
+
+		while $i < facility_array.count do
+			case day
+				when 0
+					if (temp_arr[$i].open_all_day_mon)
+						temp_arr.delete_at($i)
+						i+=1
+					elsif ((temp_arr[$i].startsmon_at.hour.to_i*60 + temp_arr[$i].startsmon_at.min.to_i) - (t.hour.to_i*60 + t.min.to_i)).between?(0, tdiff)
+						i+=1
+					end
+				when 1
+				when 2
+				when 3
+				when 4
+				when 5
+				when 6
+			end
+		end
+	end
+
+		def self.redist_sort(inArray, ulat, ulong)
 	ulat = ulat.to_d
 	ulong = ulong.to_d
 	arr = Array.new
@@ -1569,7 +1616,6 @@ def self.rename_sort(inArray)
 	arr = inArray.sort_by {|f| f[:name]}
 	return arr
 end
-
 
 
 
