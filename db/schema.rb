@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 20170424013616) do
     t.string   "dirType"
   end
 
+  create_table "anaylitics", force: :cascade do |t|
+    t.decimal  "lat"
+    t.decimal  "long"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "facilities", force: :cascade do |t|
     t.string   "name"
     t.string   "welcomes"
