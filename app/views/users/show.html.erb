@@ -47,14 +47,14 @@
 
           <div class="administered">
             <h4><%= pluralize(@user.facilities.count, 'Facility') %> Available to Edit</h4>
-            <ul>
-              <% @user.facilities.each do |f| %>
-                <li><%= link_to f.name, edit_facility_path(f.id) %>  (Monthly View Count: <%= Impression.where(impressionable_id: f.id).count %>)</li>
-
+            <% @user.facilities.each do |f| %>
+              <ul class="user-facilities">
+                <li><%= link_to f.name, edit_facility_path(f.id) %></li>
+                <li>(Monthly View Count: <%= Impression.where(impressionable_id: f.id).count %>)</li>
+              </ul>
               <% @imps.concat(Impression.where(impressionable_id: f.id)) %>
               <% @facilitynames.push(f.name) %>
-              <% end %>
-            </ul>
+            <% end %>
           </div>
           <br>
           <h4><a href="#" id="report-button">Hide Reports</h4>
@@ -78,14 +78,14 @@
           <% end %>
           <div class="administered">
             <h4><%= pluralize(@user.facilities.count, 'Facility') %> Available to Edit</h4>
-            <ul>
-              <% @user.facilities.each do |f| %>
-                <li><%= link_to f.name, edit_facility_path(f.id) %>  (Monthly View Count: <%= Impression.where(impressionable_id: f.id).count %>)</li>
-
+            <% @user.facilities.each do |f| %>
+              <ul class="user-facilities">
+                <li><%= link_to f.name, edit_facility_path(f.id) %></li>
+                <li>(Monthly View Count: <%= Impression.where(impressionable_id: f.id).count %>)</li>
+              </ul>
               <% @imps.concat(Impression.where(impressionable_id: f.id)) %>
               <% @facilitynames.push(f.name) %>
-              <% end %>
-            </ul>
+            <% end %>
           </div>
           <h4><a href="#" id="report-button">Hide Reports</h4>
           <div class="report" id="report">
