@@ -18,33 +18,33 @@
             <h1>LinkVan Admin</h1>
             <%= link_to 'Download CSV list', users_path(format: :csv) %>
 
-            <h4><a href="#" id=facilities-button>Hide Facilities</h4>
-            <ul id="users">
-              <% @users.each do |user| %>
+            <h4><a href="#" id=facilities-button>Hide Facilities</a></h4>
+            <% @users.each do |user| %>
+              <ul class="user-info">
                 <li>
-                  <% if user.admin == true %>
-                    <b>LinkVan Admin</b>
-                  <% end %>
                   <%= link_to user.name, user %>
-                  <%= user.email%>
+                  <% if user.admin == true %>(<b>Admin</b>)<% end %>
+                </li>
+                <li><%= user.email%></li>
+                <li>
                   <% @userVerified = user.verified ? "Verified" : "Not Verified" %>
                   <%= link_to @userVerified, {:controller => "users", :action => "toggle_verify", :id => user.id} %>
-
-                  <div id="facilities-toggle">
-                    <ul>
-                      <% user.facilities.each do |f| %>
-                        <li>
-                          <%= link_to f.name, edit_facility_path(f.id) %>
-                          <% @facVerified = f.verified ? "Verified" : "Not Verified" %>
-                          <%= link_to @facVerified, {:controller => "facilities", :action => "toggle_verify", :id => f.id} %>
-                        </li>
-                      <% end %>
-                    </ul>
-                  </div>
                 </li>
-              <% end %>
-            </ul>
+              </ul>
+              <div id="facilities-toggle">
+                <% user.facilities.each do |f| %>
+                  <ul class="user-facilities">
+                    <li><%= link_to f.name, edit_facility_path(f.id) %></li>
+                    <li>
+                      <% @facVerified = f.verified ? "Verified" : "Not Verified" %>
+                      <%= link_to @facVerified, {:controller => "facilities", :action => "toggle_verify", :id => f.id} %>
+                    </li>
+                  </ul>
+                <% end %>
+              </div>
+            <% end %>
           </div>
+
           <div class="administered">
             <h4><%= pluralize(@user.facilities.count, 'Facility') %> Available to Edit</h4>
             <ul>
@@ -555,6 +555,7 @@ for(var j=0; j<imps.length; j++){
 
       $(function() {
         $('a#facilities-button').click(function(event) {
+          event.preventDefault();
           $('div#facilities-toggle').toggle();
           this.innerHTML =  (this.innerHTML == "Hide Facilities") ? "Show Facilities" : "Hide Facilities";
         });

@@ -25,4 +25,36 @@
 			max-width: 360px;
 		}
 	}
+
+	.admin-view {
+		margin-bottom: 25px;
+	}
+
+	ul.user-info, ul.user-facilities {
+		padding: 10px;
+		margin: 0;
+		list-style: none;
+		display: flex;
+
+		li {
+			flex: 1;
+
+			&:last-child {
+				text-align: right;
+			}
+		}
+	}
+
+	ul.user-info {
+		border-bottom: 2px solid #e9ecef;
+		background: #f7f7f9;
+	}
+
+	ul.user-facilities {
+		border-bottom: 1px solid #e9ecef;
+
+		li:first-child {
+			padding-left: 60px;
+		}
+	}
 }

@@ -204,7 +204,7 @@ class FacilitiesController < ApplicationController
 
   def directions
     @facility = Facility.find(params[:id])
-    if session[:current_data] >= 0
+    if session[:current_data].present?
       @analytic = Analytic.find(session[:current_data])
       @analytic.dirClicked = true
       @analytic.dirType = "Walking"
@@ -236,8 +236,8 @@ class FacilitiesController < ApplicationController
       add_breadcrumb session['facilities_category'], session['facilities_list']
     end
     add_breadcrumb @facility.name
-
-    if session[:current_data] >= 0
+    
+    if session[:current_data].present?
       @analytic = Analytic.find(session[:current_data])
       @analytic.facility = @facility.id
       @analytic.save
