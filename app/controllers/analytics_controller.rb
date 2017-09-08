@@ -8,6 +8,8 @@ class AnalyticsController < ApplicationController
   def show
     @user = User.find(params[:id])
     if (@user.admin)
+      @mapData = gridSort(Analytic.all, 0.01, 49.279869, -123.099512)
+
       @raw_service_chart_data = Analytic.group(:service).count
       @service_chart_data = []
         .push(@raw_service_chart_data['Shelter'])
@@ -43,5 +45,77 @@ class AnalyticsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  MapColors = {
+    0 => "#00CC99",
+    10 => "#009900",
+    25 => "#FFFF00",
+    50 => "#FF6600",
+    100 => "#FF3300"
+  }
+
+  def gridSort(data, gridSize, centerLat, centerLng)
+    remFactor = 10000000
+    size = gridSize * remFactor
+    cLat = centerLat * remFactor
+    cLng = centerLng * remFactor
+    blocks = Hash.new
+    data.each do |it|
+      puts "processing data"
+      if (it.lat != 0 && it.long != 0)
+        itLat = it.lat * remFactor
+        latOffset = ((itLat - cLat) / size).floor
+        itLng = it.long * remFactor
+        lngOffset = ((itLng - cLng) / size).floor
+        if (blocks[latOffset] == nil)
+          newBlock = Hash.new
+          newBlock[lngOffset] = 1
+          blocks[latOffset] = newBlock
+        else
+          if (blocks[latOffset][lngOffset] == nil)
+            blocks[latOffset][lngOffset] = 1
+          else
+            blocks[latOffset][lngOffset] += 1
+          end
+        end
+      end
+    end
+    puts blocks
+    rectAry = Array.new
+    blocks.each do |latOffset, lngs|
+      lngs.each do |lngOffset, count|
+        lat = (latOffset * gridSize) - centerLat
+        lng = (lngOffset * gridSize) - centerLng
+        rect = {
+          "north" => lat,
+          "south" => lat - gridSize,
+          "east" => lng + gridSize,
+          "west" => lng,
+          "count" => count,
+          "fillColor" => getGridColor(count)
+        }
+        rectAry.push(rect)
+      end
+    end
+    return rectAry
+  end
+
+  def getGridColor(count)
+    sortedKeys = MapColors.keys.sort do |a, b|
+      return a - b
+    end
+    puts MapColors
+    puts sortedKeys
+    puts count
+    sortedKeys.each_index do |i|
+      puts sortedKeys[i]
+      if (count < sortedKeys[i])
+        return MapColors[sortedKeys[i]]
+      end
+    end
+    return MapColors[sortedKeys[sortedKeys.length - 1]]
   end
 end
