@@ -39,9 +39,6 @@ Linkvan::Application.routes.draw do
   get 'notice/:slug' => 'notices#view'
   resources :alerts
   resources :notices
-
-
-
   resources :facilities
 
   # match "users/:id/toggle_verify" => "users#toggle_verify"

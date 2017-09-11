@@ -1,5 +1,3 @@
-
-
 <div id="index-main">
   <%= render 'breadcrumb' %>
 <% if @facility.verified != true %>
@@ -8,12 +6,54 @@
 <% end %>
 <h1><%=@facility.name %></h1>
 
-
-<h2>Welcome</h2>
-<div class="inset">
+<h2>Welcomes</h2>
   <p><%=@facility.welcomes %></p>
+<div class="inset" id="suitability">
+  <ul>
+    <% if isWelcome("female", @facility) %>
+        <li>
+          <i class="linkvan-icon"><%= inline_svg('icons/female.svg', size: '35px') %></i>
+          <p>Female</p>
+        </li>
+    <% end %>
+    <% if isWelcome("male", @facility) %>
+        <li>
+          <i class="linkvan-icon"><%= inline_svg('icons/male.svg', size: '35px') %></i>
+          <p>Male</p>
+        </li>
+    <% end %>
+    <% if isWelcome("transgender", @facility) %>
+        <li>
+          <i class="linkvan-icon"><%= inline_svg('icons/transgender.svg', size: '35px') %></i>
+          <p>Transgender</p>
+        </li>
+    <% end %>
+    <% if isWelcome("children", @facility) %>
+        <li>
+          <i class="linkvan-icon"><%= inline_svg('icons/age-children.svg', size: '35px') %></i>
+          <p>Children</p>
+        </li>
+    <% end %>
+    <% if isWelcome("youth", @facility) %>
+        <li>
+          <i class="linkvan-icon"><%= inline_svg('icons/age-youth.svg', size: '35px') %></i>
+          <p>Youth</p>
+        </li>
+    <% end %>
+    <% if isWelcome("adults", @facility) %>
+        <li>
+          <i class="linkvan-icon"><%= inline_svg('icons/age-adults.svg', size: '35px') %></i>
+          <p>Adults</p>
+        </li>
+    <% end %>
+    <% if isWelcome("seniors", @facility) %>
+        <li>
+          <i class="linkvan-icon"><%= inline_svg('icons/age-seniors.svg', size: '35px') %></i>
+          <p>Seniors</p>
+        </li>
+    <% end %>
+  </ul>
 </div>
-
 
 <h2>Services</h2>
 <div class="inset" id="services">
@@ -54,36 +94,6 @@
   <% end %>
 </div>
 
-<h2>Suitability</h2>
-<div class="inset" id="suitability">
-  <ul>
-    <% if @facility.suitability.downcase.include? "children" %>
-      <li>
-        <i class="linkvan-icon"><%= inline_svg('icons/age-children.svg', size: '35px') %></i>
-        <p>0-11</p>
-      </li>
-    <% end %>
-    <% if @facility.suitability.downcase.include? "youth" %>
-      <li>
-        <i class="linkvan-icon"><%= inline_svg('icons/age-youth.svg', size: '35px') %></i>
-        <p>12-18</p>
-      </li>
-    <% end %>
-    <% if @facility.suitability.downcase.include? "adults" %>
-      <li>
-        <i class="linkvan-icon"><%= inline_svg('icons/age-adults.svg', size: '35px') %></i>
-        <p>19-60</p>
-      </li>
-    <% end %>
-    <% if @facility.suitability.downcase.include? "seniors" %>
-      <li>
-        <i class="linkvan-icon"><%= inline_svg('icons/age-seniors.svg', size: '35px') %></i>
-        <p>60+</p>
-      </li>
-      <% end %>
-  </ul>
-</div>
-
 <div class="inset-gmap">
   <div id="map-canvas"></div>
   <p><%=@facility.address %></p>
@@ -102,7 +112,7 @@
 <div id="inset-directions">
 </div>
 
-<div class="description">
+<!--<div class="description">-->
 
 <!--
   <h2>Resources (In Progress)</h2>
@@ -136,48 +146,53 @@
 </table>
 -->
 
-  <h2>Hours</h2>
+<h2>Hours</h2>
+  <div class="inset" id="hours">
 
-<table>
-  <tr>
-    <td>Monday:</td>
-    <td><%= display_mon_hours(@facility) %></td>
-  </tr>
-  <tr>
-    <td>Tuesday:</td>
-    <td><%= display_tues_hours(@facility) %></td>
-  </tr>
-  <tr>
-    <td>Wednesday:</td>
-    <td><%= display_wed_hours(@facility) %></td>
-  </tr>
-  <tr>
-    <td>Thursday:</td>
-    <td><%= display_thurs_hours(@facility) %></td>
-  </tr>
-  <tr>
-    <td>Friday:</td>
-    <td><%= display_fri_hours(@facility) %></td>
-  </tr>
-  <tr>
-    <td>Saturday:</td>
-    <td><%= display_sat_hours(@facility) %> </td>
-  </tr>
-  <tr>
-    <td>Sunday:</td>
-    <td><%= display_sun_hours(@facility) %> </td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <td>Monday:</td>
+      <td><%= display_mon_hours(@facility) %></td>
+    </tr>
+    <tr>
+      <td>Tuesday:</td>
+      <td><%= display_tues_hours(@facility) %></td>
+    </tr>
+    <tr>
+      <td>Wednesday:</td>
+      <td><%= display_wed_hours(@facility) %></td>
+    </tr>
+    <tr>
+      <td>Thursday:</td>
+      <td><%= display_thurs_hours(@facility) %></td>
+    </tr>
+    <tr>
+      <td>Friday:</td>
+      <td><%= display_fri_hours(@facility) %></td>
+    </tr>
+    <tr>
+      <td>Saturday:</td>
+      <td><%= display_sat_hours(@facility) %> </td>
+    </tr>
+    <tr>
+      <td>Sunday:</td>
+      <td><%= display_sun_hours(@facility) %> </td>
+    </tr>
+  </table>
+  </div>
 
-<div class="notes">
+<div class="notes" id="notes">
   <strong>Notes:</strong><br>
   <p><%= @facility.notes %></p>
 </div>
 
+  <h2>Last Updated</h2>
+  <div class="inset" id="last-updated">
+    <p><%= @facility.updated_at.to_date %></p>
+  </div>
+<br>
 
-</div>
-
-
+<div>
 <% if correct_user_or_admin? %>
   <%= link_to "Edit", edit_facility_path%>
   <% if current_user_admin? %>
@@ -185,6 +200,8 @@
   <% end %>
 <% end %>
 </div>
+</div>
+<!--</div>-->
 
 
 

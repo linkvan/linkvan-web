@@ -3,18 +3,16 @@
 <div role="navigation" class="toggle-group">
   <div title="filtering options" class="toggle-group-content">
     <%= render 'breadcrumb' %>
-
 <div class="container-prox" style="width: 49%;
                                    display: inline-block;
                                    min-width:120px;
                                    text-align: center;">
   <div class="prox">
   <div class="btn-group btn-toggle">
-    <p>Sort By</p>
     <p class="prox-toggle"></p>
     <p class="open-toggle"></p>
     <button class="btn btn-primary active" id="near" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px">Near</button>
-    <button class="btn btn-default" id="name" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px">Name</button>
+    <button class="btn btn-default" id="name" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px">A-Z</button>
   </div>
   </div>
 </div>
@@ -25,9 +23,8 @@
                                    text-align: center;">
   <div class="open">
   <div class="btn-group btn-toggle">
-    <p>Open/Closed</p>
     <button class="btn btn-primary active" id="yes" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px">Open</button>
-    <button class="btn btn-default" id="no" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px">Closed</button>
+    <button class="btn btn-default" id="no" style="border-top-right-radius: 10px; border-bottom-right-radius: 10px">All</button>
   </div>
   </div>
 </div>
@@ -55,19 +52,31 @@
 
 <div id="near-yes">
 <% @facilities_near_yes.each do |f| %>
-<a href=<%= facility_path(f)%>>
   <div class="facility-block">
-    <div class= "facility-block-name"><strong><%= f.name %></strong></div>
-    <div class="is-open">OPEN</div>
-    <%= display_services(f.services) %>
-    <% if @coordinates.present? %>
-      <span class="walking-distance">
-        <%= distance_of_time_in_words(@facilities_near_yes_distance[$i]) %> walking
-      </span>
+    <a class="facility-link" href=<%= facility_path(f)%>>
+      <div class= "facility-block-name">
+        <strong><%= f.name %></strong>
+      </div>
+      <% if willCloseSoon(f) %>
+        <div class="is-close-soon">CLOSE SOON</div>
+      <% else %>
+        <div class="is-open">OPEN</div>
+      <% end %>
+      <%= display_services(f.services) %>
+      <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
+      <% if @coordinates.present? %>
+        <span class="walking-distance">
+          <%= distance_of_time_in_words(@facilities_near_yes_distance[$i]) %> walking
+        </span>
+      <% end %>
+    </a>
+    <% if f.phone.present? %>
+      <div class="facility-phone">
+        Call:
+        <a href="tel:<%=format_tel(f.phone)%>"><%=format_tel(f.phone) %></a>
+      </div>
     <% end %>
-    <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>
-</a>
   <hr>
 <% $i += 1 %>
 <% end %>
@@ -77,19 +86,31 @@
 
 <div id="near-no">
 <% @facilities_near_no.each do |f| %>
-<a href=<%= facility_path(f)%>>
   <div class="facility-block">
-    <div class= "facility-block-name"><strong><%= f.name %></strong></div>
-    <div class="is-closed">CLOSED</div>
-    <%= display_services(f.services) %>
-    <% if @coordinates.present? %>
-      <span class="walking-distance">
-        <%= distance_of_time_in_words(@facilities_near_no_distance[$i]) %> walking
-      </span>
+    <a class="facility-link" href=<%= facility_path(f)%>>
+      <div class= "facility-block-name">
+        <strong><%= f.name %></strong>
+      </div>
+      <% if willOpenSoon(f) %>
+        <div class="is-open-soon">OPEN SOON</div>
+      <% else %>
+        <div class="is-closed">CLOSED</div>
+      <% end %>
+      <%= display_services(f.services) %>
+      <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
+      <% if @coordinates.present? %>
+        <span class="walking-distance">
+          <%= distance_of_time_in_words(@facilities_near_no_distance[$i]) %> walking
+        </span>
+      <% end %>
+    </a>
+    <% if f.phone.present? %>
+      <div class="facility-phone">
+        Call:
+        <a href="tel:<%=format_tel(f.phone)%>"><%=format_tel(f.phone) %></a>
+      </div>
     <% end %>
-    <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>
-</a>
   <hr>
 <% $i += 1 %>
 <% end %>
@@ -100,19 +121,31 @@
 
 <div id="name-yes">
 <% @facilities_name_yes.each do |f| %>
-<a href=<%= facility_path(f)%>>
   <div class="facility-block">
-    <div class= "facility-block-name"><strong><%= f.name %></strong></div>
-    <div class="is-open">OPEN</div>
-    <%= display_services(f.services) %>
-    <% if @coordinates.present? %>
-      <span class="walking-distance">
-        <%= distance_of_time_in_words(@facilities_name_yes_distance[$i]) %> walking
-      </span>
+    <a class="facility-link" href=<%= facility_path(f)%>>
+      <div class= "facility-block-name">
+        <strong><%= f.name %></strong>
+      </div>
+      <% if willCloseSoon(f) %>
+        <div class="is-close-soon">CLOSE SOON</div>
+      <% else %>
+        <div class="is-open">OPEN</div>
+      <% end %>
+      <%= display_services(f.services) %>
+      <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
+      <% if @coordinates.present? %>
+        <span class="walking-distance">
+          <%= distance_of_time_in_words(@facilities_name_yes_distance[$i]) %> walking
+        </span>
+      <% end %>
+    </a>
+    <% if f.phone.present? %>
+      <div class="facility-phone">
+        Call:
+        <a href="tel:<%=format_tel(f.phone)%>"><%=format_tel(f.phone) %></a>
+      </div>
     <% end %>
-    <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>
-</a>
   <hr>
 <% $i += 1 %>
 <% end %>
@@ -122,19 +155,31 @@
 
 <div id="name-no">
 <% @facilities_name_no.each do |f| %>
-<a href=<%= facility_path(f)%>>
   <div class="facility-block">
-    <div class= "facility-block-name"><strong><%= f.name %></strong></div>
-    <div class="is-closed">CLOSED</div>
-    <%= display_services(f.services) %>
-    <% if @coordinates.present? %>
-      <span class="walking-distance">
-        <%= distance_of_time_in_words(@facilities_name_no_distance[$i]) %> walking
-      </span>
+    <a class="facility-link" href=<%= facility_path(f)%>>
+      <div class= "facility-block-name">
+        <strong><%= f.name %></strong>
+      </div>
+      <% if willOpenSoon(f) %>
+        <div class="is-open-soon">OPEN SOON</div>
+      <% else %>
+        <div class="is-closed">CLOSED</div>
+      <% end %>
+      <%= display_services(f.services) %>
+      <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
+      <% if @coordinates.present? %>
+        <span class="walking-distance">
+          <%= distance_of_time_in_words(@facilities_name_no_distance[$i]) %> walking
+        </span>
+      <% end %>
+    </a>
+    <% if f.phone.present? %>
+      <div class="facility-phone">
+        Call:
+        <a href="tel:<%=format_tel(f.phone)%>"><%=format_tel(f.phone) %></a>
+      </div>
     <% end %>
-    <i class="glyphicon glyphicon-chevron-right chevron-right-filtered"></i>
   </div>
-</a>
   <hr>
 <% $i += 1 %>
 <% end %>

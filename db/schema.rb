@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170311175641) do
+ActiveRecord::Schema.define(version: 20170424013616) do
 
   create_table "alerts", force: :cascade do |t|
     t.string   "title"
@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(version: 20170311175641) do
     t.time     "endssat_at"
     t.time     "startssun_at"
     t.time     "endssun_at"
-    t.string   "suitability"
     t.boolean  "r_pets",               default: false
     t.boolean  "r_id",                 default: false
     t.boolean  "r_cart",               default: false
@@ -181,9 +180,6 @@ ActiveRecord::Schema.define(version: 20170311175641) do
     t.datetime "updated_at"
     t.boolean  "admin",                 default: false
     t.boolean  "activation_email_sent", default: false
-    t.string   "phone"
-    t.string   "facility_name"
-    t.boolean  "new_facility"
     t.string   "phone_number"
     t.boolean  "verified",              default: false
   end

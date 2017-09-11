@@ -3,6 +3,22 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #facilities {
+	button.display-alert {
+		display: flex;
+		align-items: center;
+		margin-top: 18px;
+		color: #8a6d3b;
+		border-color: #8a6d3b;
+
+		&:hover {
+			background: #fcf8e3;
+		}
+
+		i {
+			margin-right: 6px;
+		}
+	}
+
 	form.new_facility {
 		input[type="text"] {
 			max-width: 360px;
@@ -57,6 +73,14 @@
 				line-height: 28px;
 			}
 		}
+	}
+}
+
+@media (max-width: 768px) {
+	#facilities button.display-alert {
+		position: absolute;
+		top: -170px;
+		right: 15px;
 	}
 }
 
@@ -776,9 +800,9 @@
  	border-bottom-left-radius: 4px;
  }
 
-.is-open, .is-closed {
+.is-open, .is-closed, .is-close-soon, .is-open-soon {
 	float: left;
-	padding: 5px 15px 5px 0;
+	padding: 5px 15px 0 0;
 	font-weight: bold;
 }
 
@@ -790,6 +814,10 @@
 	color: #AA0114;
 }
 
+.is-close-soon, .is-open-soon {
+	color: #DEA54B;
+}
+
 #near-yes, #near-no, #name-yes, #name-no {
 	a {
 		text-decoration: none;
@@ -797,13 +825,22 @@
 
 	.walking-distance {
 		display: inline-block;
-		margin-left: 5px;
+		margin: 5px 0;
 	}
 }
 
-.facility-block{
+.facility-block {
+	position: relative;
+}
+
+.facility-block a.facility-link {
+	display: block;
 	color: #ABA9A9;
 	font-size: 16px;
+}
+
+.facility-block .facility-phone {
+
 }
 
 .facility-block-name{
@@ -875,4 +912,19 @@ td {
 
 .container a{
 	font-size: 16px;
+}
+
+@media (min-width: 480px) {
+  .facility-block .facility-phone {
+		position: absolute;
+		top: 3px;
+		right: 40px;
+	}
+
+	#near-yes, #near-no, #name-yes, #name-no {
+		.walking-distance {
+			float: right;
+			margin: 0 15px 0 0;
+		}
+	}
 }
