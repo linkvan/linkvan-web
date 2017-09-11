@@ -237,7 +237,7 @@ class FacilitiesController < ApplicationController
     end
     add_breadcrumb @facility.name
 
-    if session[:current_data] >= 0
+    if session[:current_data] != nil && session[:current_data] >= 0
       @analytic = Analytic.find(session[:current_data])
       @analytic.facility = @facility.id
       @analytic.save

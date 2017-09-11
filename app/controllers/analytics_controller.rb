@@ -8,7 +8,7 @@ class AnalyticsController < ApplicationController
   def show
     @user = User.find(params[:id])
     if (@user.admin)
-      @mapData = gridSort(Analytic.all, 0.01, 49.279869, -123.099512)
+      @mapData = gridSort(Analytic.all, 0.001, 49.279869, -123.099512)
 
       @raw_service_chart_data = Analytic.group(:service).count
       @service_chart_data = []
@@ -39,8 +39,6 @@ class AnalyticsController < ApplicationController
         @time_chart_data[hour] += 1
         @service_time_chart_data[data.service][hour] += 1
       end
-
-      puts @service_time_chart_data
     end
   end
 
@@ -64,7 +62,6 @@ class AnalyticsController < ApplicationController
     cLng = centerLng * remFactor
     blocks = Hash.new
     data.each do |it|
-      puts "processing data"
       if (it.lat != 0 && it.long != 0)
         itLat = it.lat * remFactor
         latOffset = ((itLat - cLat) / size).floor
@@ -83,15 +80,14 @@ class AnalyticsController < ApplicationController
         end
       end
     end
-    puts blocks
     rectAry = Array.new
     blocks.each do |latOffset, lngs|
       lngs.each do |lngOffset, count|
-        lat = (latOffset * gridSize) - centerLat
-        lng = (lngOffset * gridSize) - centerLng
+        lat = (latOffset * gridSize) + centerLat
+        lng = (lngOffset * gridSize) + centerLng
         rect = {
-          "north" => lat,
-          "south" => lat - gridSize,
+          "north" => lat + gridSize,
+          "south" => lat,
           "east" => lng + gridSize,
           "west" => lng,
           "count" => count,
@@ -104,14 +100,8 @@ class AnalyticsController < ApplicationController
   end
 
   def getGridColor(count)
-    sortedKeys = MapColors.keys.sort do |a, b|
-      return a - b
-    end
-    puts MapColors
-    puts sortedKeys
-    puts count
+    sortedKeys = MapColors.keys
     sortedKeys.each_index do |i|
-      puts sortedKeys[i]
       if (count < sortedKeys[i])
         return MapColors[sortedKeys[i]]
       end

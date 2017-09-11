@@ -179,7 +179,18 @@
     console.log(rects)
     for (var i = 0; i < rects.length; i++) {
       var rect = rects[i];
-
+      var rectangle = new google.maps.Rectangle({
+        fillColor: rect.fillColor,
+        fillOpacity: 0.35,
+        map: map,
+        bounds: {
+          north: rect.north,
+          south: rect.south,
+          east: rect.east,
+          west: rect.west
+        }
+      })
+      console.log(rectangle)
     }
     // var rectangle = new google.maps.Rectangle({
     //   strokeColor: '#FF0000',
