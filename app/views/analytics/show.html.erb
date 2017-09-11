@@ -165,8 +165,9 @@
   // Lat and long for learning exchange
   var latitude = 49.279869;
   var longitude = -123.099512;
-
+  console.log('Script loaded')
   function initialize() {
+    console.log('Initializing google maps')
     var myLocation = new google.maps.LatLng(latitude, longitude);
     var mapOptions = {
       center: myLocation,
