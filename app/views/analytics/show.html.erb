@@ -14,7 +14,7 @@
               <div class="inset-gmap">
                 <div id="analytics-map"></div>
               </div>
-              <%
+              <!-- <%
                 service_chart = {
                   labels: ["Shelter", "Food", "Medical", "Hygiene", "Technology", "Legal", "Learning", "Crisis Lines"],
                   datasets: [
@@ -144,7 +144,7 @@
                 }
               %>
               <h3>Searches by time and service</h3>
-              <%= bar_chart service_time_chart %>
+              <%= bar_chart service_time_chart %> -->
             </div>
           <% elsif (@user.facilities.count > 0) %>
             <% @user.facilities.each do |f| %>
