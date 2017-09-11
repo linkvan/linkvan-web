@@ -1,0 +1,196 @@
+<section id="user">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <h2><%= @user.name %></h2>
+        <p><%= mail_to(@user.email) %></p>
+        <p>Registered Since <%= @user.created_at.strftime("%B %Y") %></p>
+
+        <%= render 'shared/admin_nav' %>
+        <div class="data-view">
+          <% if (@user.admin == true) %>
+            <div class="admin-data">
+              <h3>Location Data</h3>
+              <div class="inset-gmap">
+                <div id="analytics-map"></div>
+              </div>
+              <%
+                service_chart = {
+                  labels: ["Shelter", "Food", "Medical", "Hygiene", "Technology", "Legal", "Learning", "Crisis Lines"],
+                  datasets: [
+                    {
+                      label: "This month",
+                      backgroundColor: [
+                        "rgba(51, 51, 255, 0.2)",
+                        "rgba(153, 51, 255, 0.2)",
+                        "rgba(255, 51, 0, 0.2)",
+                        "rgba(255, 102, 0, 0.2)",
+                        "rgba(255, 255, 0, 0.2)",
+                        "rgba(0, 153, 0, 0.2)",
+                        "rgba(0, 204, 153, 0.2)",
+                        "rgba(0, 153, 204, 0.2)"
+                      ],
+                      borderColor: [
+                        "rgba(51, 51, 255, 1)",
+                        "rgba(153, 51, 255, 1)",
+                        "rgba(255, 51, 0, 1)",
+                        "rgba(255, 102, 0, 1)",
+                        "rgba(255, 255, 0, 1)",
+                        "rgba(0, 153, 0, 1)",
+                        "rgba(0, 204, 153, 1)",
+                        "rgba(0, 153, 204, 1)"
+                      ],
+                      data: @service_chart_data
+                    }
+                  ]
+                }
+
+                puts @service_chart_data
+              %>
+              <h3>Number of searches by service</h3>
+              <%= doughnut_chart service_chart %>
+
+              <%
+                time_chart = {
+                  labels: ["12am", "1am", "2am", "3am", "4am", "5am", "6am", "7am", "8am", "9am", "10am", "11am",
+                    "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm"],
+                  datasets: [
+                    {
+                      backgroundColor: [
+                        "rgba(23, 16, 54, 0.6)",
+                        "rgba(23, 16, 54, 0.6)",
+                        "rgba(23, 16, 54, 0.6)",
+                        "rgba(23, 16, 54, 0.6)",
+                        "rgba(23, 16, 54, 0.6)",
+                        "rgba(23, 16, 54, 0.6)",
+                        "rgba(23, 16, 54, 0.6)",
+                        "rgba(23, 16, 54, 0.6)",
+                        "rgba(255, 255, 0, 0.6)",
+                        "rgba(255, 255, 0, 0.6)",
+                        "rgba(255, 255, 0, 0.6)",
+                        "rgba(255, 255, 0, 0.6)",
+                        "rgba(255, 255, 0, 0.6)",
+                        "rgba(255, 255, 0, 0.6)",
+                        "rgba(255, 255, 0, 0.6)",
+                        "rgba(255, 255, 0, 0.6)",
+                        "rgba(255, 255, 0, 0.6)",
+                        "rgba(255, 255, 0, 0.6)",
+                        "rgba(255, 255, 0, 0.6)",
+                        "rgba(255, 255, 0, 0.6)",
+                        "rgba(23, 16, 54, 0.6)",
+                        "rgba(23, 16, 54, 0.6)",
+                        "rgba(23, 16, 54, 0.6)",
+                        "rgba(23, 16, 54, 0.6)"
+                      ],
+                      data: @time_chart_data
+                    }
+                  ]
+                }
+                time_chart_options = {
+                  legend: {
+                    display: false
+                  }
+                }
+              %>
+              <h3>Number of searches by hour</h3>
+              <%= bar_chart time_chart, time_chart_options %>
+
+              <%
+                service_time_chart = {
+                  labels: ["12am", "1am", "2am", "3am", "4am", "5am", "6am", "7am", "8am", "9am", "10am", "11am",
+                    "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm"],
+                  datasets: [
+                    {
+                      label: "Shelter",
+                      backgroundColor: "rgba(51, 51, 255, 0.6)",
+                      data: @service_time_chart_data["Shelter"]
+                    },
+                    {
+                      label: "Food",
+                      backgroundColor: "rgba(153, 51, 255, 0.6)",
+                      data: @service_time_chart_data["Food"]
+                    },
+                    {
+                      label: "Medical",
+                      backgroundColor: "rgba(255, 51, 0, 0.6)",
+                      data: @service_time_chart_data["Medical"]
+                    },
+                    {
+                      label: "Hygiene",
+                      backgroundColor: "rgba(255, 102, 0, 0.6)",
+                      data: @service_time_chart_data["Hygiene"]
+                    },
+                    {
+                      label: "Technology",
+                      backgroundColor: "rgba(255, 255, 0, 0.6)",
+                      data: @service_time_chart_data["Technology"]
+                    },
+                    {
+                      label: "Legal",
+                      backgroundColor: "rgba(0, 153, 0, 0.6)",
+                      data: @service_time_chart_data["Legal"]
+                    },
+                    {
+                      label: "Learning",
+                      backgroundColor: "rgba(0, 204, 153, 0.6)",
+                      data: @service_time_chart_data["Learning"]
+                    },
+                    {
+                      label: "Crisis Lines",
+                      backgroundColor: "rgba(0, 153, 204, 0.6)",
+                      data: @service_time_chart_data["Crisis Lines"]
+                    }
+                  ]
+                }
+              %>
+              <h3>Searches by time and service</h3>
+              <%= bar_chart service_time_chart %>
+            </div>
+          <% elsif (@user.facilities.count > 0) %>
+            <% @user.facilities.each do |f| %>
+              <h3><%= link_to f.name, facility_path(f.id) %></h3>
+
+            <% end %>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSLM-Bv5YwI1Ecw2OrMDQF8fZxik6FTzs"></script>
+<script>
+  var map;
+  // Lat and long for learning exchange
+  var latitude = 49.279869;
+  var longitude = -123.099512;
+
+  function initialize() {
+    var myLocation = new google.maps.LatLng(latitude, longitude);
+    var mapOptions = {
+      center: myLocation,
+      zoom: 13
+    }
+
+    map = new google.maps.Map(document.getElementById('analytics-map'), mapOptions);
+
+    var rects = <%= raw @mapData.to_json %>
+    for (var i = 0; i < rects.length; i++) {
+      var rect = rects[i];
+      var rectangle = new google.maps.Rectangle({
+        fillColor: rect.fillColor,
+        fillOpacity: 0.35,
+        map: map,
+        bounds: {
+          north: rect.north,
+          south: rect.south,
+          east: rect.east,
+          west: rect.west
+        }
+      })
+    }
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>

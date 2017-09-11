@@ -6,9 +6,7 @@
         <p><%= mail_to(@user.email) %></p>
         <p>Registered Since <%= @user.created_at.strftime("%B %Y") %></p>
 
-        <% if current_user.admin %>
-          <%= render 'shared/admin_nav' %>
-        <% end %>
+        <%= render 'shared/admin_nav' %>
 
         <p><%= link_to "Add New Facility ", new_facility_path, class: "btn btn-primary"%> </p>
         <% @imps = Array.new %>

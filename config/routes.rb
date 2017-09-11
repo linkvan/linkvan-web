@@ -33,6 +33,7 @@ Linkvan::Application.routes.draw do
   get 'alerts' => 'alerts#index'
   get 'alerts/:id/active' => 'alerts#active'
   get 'alerts/:id/deactive' => 'alerts#deactive'
+  get 'users/:id/analytics' => 'analytics#show', as: 'analytics'
   get 'notices' => 'notices#index'
   get 'notices/list' => 'notices#list'
   get 'notice/:slug' => 'notices#view'
