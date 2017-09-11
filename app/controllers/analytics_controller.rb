@@ -33,11 +33,15 @@ class AnalyticsController < ApplicationController
         "Crisis Lines" => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       }
       Analytic.order(:time).each do |data|
-        time = data.time.localtime
-        secs = time.seconds_since_midnight()
-        hour = (secs / 3600).floor
-        @time_chart_data[hour] += 1
-        @service_time_chart_data[data.service][hour] += 1
+        puts data.service
+        case data.service
+        when "Shelter", "Food", "Medical", "Hygiene", "Technology", "Legal", "Learning", "Crisis Lines"
+            time = data.time.localtime
+            secs = time.seconds_since_midnight()
+            hour = (secs / 3600).floor
+            @time_chart_data[hour] += 1
+            @service_time_chart_data[data.service][hour] += 1
+        end
       end
     end
   end
