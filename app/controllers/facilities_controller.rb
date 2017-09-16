@@ -157,30 +157,30 @@ class FacilitiesController < ApplicationController
           cookies[:userid] = SecureRandom.uuid
         end
 
-        @analytic = Analytic.new do |a|
-          a.sessionID = session[:id]
-          a.time = Time.new
-          a.cookieID = cookies[:userid]
-          a.service = params[:scope]
-          a.lat = @latitude
-          a.long = @longitude
-        end
+        # @analytic = Analytic.new do |a|
+        #   a.sessionID = session[:id]
+        #   a.time = Time.new
+        #   a.cookieID = cookies[:userid]
+        #   a.service = params[:scope]
+        #   a.lat = @latitude
+        #   a.long = @longitude
+        # end
 
-        if @analytic.save
-          session[:current_data] = @analytic.id
-          puts "Test"
-          @facilities_near_yes.each_with_index do |f, i|
-            @option = ListedOption.new do |o|
-              o.analytic_id = @analytic.id
-              o.sessionID = session[:id]
-              o.time = @analytic.time
-              o.facility = f.name
-              o.position = i + 1
-              o.total = @facilities_near_yes.length
-            end
-            @option.save
-          end
-        end
+        # if @analytic.save
+        #   session[:current_data] = @analytic.id
+        #   puts "Test"
+        #   @facilities_near_yes.each_with_index do |f, i|
+        #     @option = ListedOption.new do |o|
+        #       o.analytic_id = @analytic.id
+        #       o.sessionID = session[:id]
+        #       o.time = @analytic.time
+        #       o.facility = f.name
+        #       o.position = i + 1
+        #       o.total = @facilities_near_yes.length
+        #     end
+        #     @option.save
+        #   end
+        # end
       end
 
       if !session[:current_data].present?
@@ -191,12 +191,12 @@ class FacilitiesController < ApplicationController
 
   def directions
     @facility = Facility.find(params[:id])
-    if session[:current_data] >= 0
-      @analytic = Analytic.find(session[:current_data])
-      @analytic.dirClicked = true
-      @analytic.dirType = "Walking"
-      @analytic.save
-    end
+    # if session[:current_data] >= 0
+    #   @analytic = Analytic.find(session[:current_data])
+    #   @analytic.dirClicked = true
+    #   @analytic.dirType = "Walking"
+    #   @analytic.save
+    # end
   end
 
   def options
@@ -224,13 +224,13 @@ class FacilitiesController < ApplicationController
     end
     add_breadcrumb @facility.name
 
-    if session[:current_data] != nil && session[:current_data] >= 0
-      @analytic = Analytic.find(session[:current_data])
-      @analytic.facility = @facility.id
-      @analytic.save
-    else
-      puts 'ERROR DATA NOT FOUND'
-    end
+    # if session[:current_data] != nil && session[:current_data] >= 0
+    #   @analytic = Analytic.find(session[:current_data])
+    #   @analytic.facility = @facility.id
+    #   @analytic.save
+    # else
+    #   puts 'ERROR DATA NOT FOUND'
+    # end
 
     #impressionist(@facility, @facility.name)
 	end
