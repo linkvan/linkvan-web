@@ -188,7 +188,7 @@
 
   <h2>Last Updated</h2>
   <div class="inset" id="last-updated">
-    <p><%= @facility.updated_at.to_date %></p>
+    <p><%=l @facility.updated_at, format: '%a, %d %b %Y' %></p>
   </div>
 <br>
 
