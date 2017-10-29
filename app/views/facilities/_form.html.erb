@@ -1,3 +1,13 @@
+<% services = [
+  ["shelter", "Shelter", "shelter_note"],
+  ["food", "Food", "food_note"],
+  ["medical", "Medical", "medical_note"],
+  ["hygiene", "Hygiene", "hygiene_note"],
+  ["technology", "Technology", "technology_note"],
+  ["legal", "Legal", "legal_note"],
+  ["learning", "Learning", "learning_note"]
+]%>
+
 <%= form_for(@facility) do |f| %>
   <% if @facility.errors.any? %>
   <div class="alert alert-danger" role="alert">
@@ -24,143 +34,102 @@
   <div class="form-group">
     <%= f.label :services %> - Select All Relevant Categories
     <%= f.hidden_field :services%>
-    <% if @facility.services.nil? %>
     <ul class="list-inline">
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">
-        <label for="scheck">Shelter</label>
-      </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">
-        <label for="fcheck">Food</label>
-      </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">
-        <label for="mcheck">Medical</label>
-      </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">
-        <label for="hcheck">Hygiene</label>
-      </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">
-        <label for="tcheck">Technology</label>
-      </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()">
-        <label for="acheck">Legal</label>
-      </li>
-      <li>
-        <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lclicked()">
-        <label for="lcheck">Learning</label>
-      </li>
-      <!-- <li>
-        <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()">
-        <label for="tscheck">Training Services</label>
-      </li> -->
+      <% services.each do |s| %>
+        <li>
+          <input
+            type="checkbox"
+            class="custom-checkbox services"
+            id="<%= s[0]%>"
+            name="<%= s[1]%>"
+            value="<%= s[1]%>"
+            data-note-id="<%= s[2]%>"
+            <% if @facility.services.present? && @facility.services.include?(s[1]) %>
+              checked
+            <% end %>
+          >
+          <label for="<%= s[0]%>">
+            <%= s[1]%>
+          </label>
+        </li>
+      <% end %>
     </ul>
-    <% else %>
-    <ul class="list-inline">
-      <li>
-        <% if @facility.services.include? "Shelter" %>
-        <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="scheck" name="Shelter" value="Shelter" onclick="sclicked()">
-        <% end %>
-        <label for="scheck">Shelter</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Food" %>
-        <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="fcheck" name="Food" value="Food" onclick="fclicked()">
-        <% end %>
-        <label for="fcheck">Food</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Medical" %>
-        <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="mcheck" name="Medical" value="Medical" onclick="mclicked()">
-        <% end %>
-        <label for="mcheck">Medical</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Hygiene" %>
-        <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="hcheck" name="Hygiene" value="Hygiene" onclick="hclicked()">
-        <% end %>
-        <label for="hcheck">Hygiene</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Technology" %>
-        <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="tcheck" name="Technology" value="Technology" onclick="tclicked()">
-        <% end %>
-        <label for="tcheck">Technology</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Legal" %>
-        <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="acheck" name="Legal" value="Legal" onclick="aclicked()">
-        <% end %>
-        <label for="acheck">Legal</label>
-      </li>
-      <li>
-        <% if @facility.services.include? "Learning" %>
-        <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="lcheck" name="Learning" value="Learning" onclick="lclicked()">
-        <% end %>
-        <label for="lcheck">Learning</label>
-      </li>
-      <!-- <li>
-        <% if @facility.services.include? "Training_Services" %>
-        <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()" checked>
-        <% else %>
-        <input type="checkbox" class="custom-checkbox" id="tscheck" name="Training_Services" value="Training_Services" onclick="tsclicked()">
-        <% end %>
-        <label for="tscheck">Training Services</label>
-      </li> -->
-    </ul>
-    <% end %>
   </div>
   <hr>
   <div class="form-group" id="service_notes">
     <p>
-        <b>Service Notes</b> - Add any notes relevant to specific services such as special hours, or eligibility concerns.<br>
-        Eg: "<i>Lunch served between 11:30am and 1:30pm</i>"
+      <b>Service Notes</b> - Add any notes relevant to specific services such as special hours, or eligibility concerns.<br>
+      Eg: "<i>Lunch served between 11:30am and 1:30pm</i>"
     </p>
-    <div id="shelter_note" class="col-md-4">
-        <%= f.label :shelter_note, "Shelter" %>
-        <%= f.text_area :shelter_note, rows: 7, class: "form-control" %>
+    <div
+      id="shelter_note"
+      class="col-md-4"
+      <% if @facility.services.nil? || @facility.services.exclude?("Shelter") %>
+        style="display:none"
+      <% end %>
+    >
+      <%= f.label :shelter_note, "Shelter" %>
+      <%= f.text_area :shelter_note, rows: 7, class: "form-control" %>
     </div>
-    <div id="food_note" class="col-md-4">
-        <%= f.label :food_note, "Food" %>
-        <%= f.text_area :food_note, rows: 7, class: "form-control" %>
+    <div
+      id="food_note"
+      class="col-md-4"
+      <% if @facility.services.nil? || @facility.services.exclude?("Food") %>
+        style="display:none"
+      <% end %>
+    >
+      <%= f.label :food_note, "Food" %>
+      <%= f.text_area :food_note, rows: 7, class: "form-control" %>
     </div>
-    <div id="medical_note" class="col-md-4">
-        <%= f.label :medical_note, "Medical" %>
-        <%= f.text_area :medical_note, rows: 7, class: "form-control" %>
+    <div
+      id="medical_note"
+      class="col-md-4"
+      <% if @facility.services.nil? || @facility.services.exclude?("Medical") %>
+        style="display:none"
+      <% end %>
+    >
+      <%= f.label :medical_note, "Medical" %>
+      <%= f.text_area :medical_note, rows: 7, class: "form-control" %>
     </div>
-    <div id="hygiene_note" class="col-md-4">
-        <%= f.label :hygiene_note, "Hygiene" %>
-        <%= f.text_area :hygiene_note, rows: 7, class: "form-control" %>
+    <div
+      id="hygiene_note"
+      class="col-md-4"
+      <% if @facility.services.nil? || @facility.services.exclude?("Hygiene") %>
+        style="display:none"
+      <% end %>
+    >
+      <%= f.label :hygiene_note, "Hygiene" %>
+      <%= f.text_area :hygiene_note, rows: 7, class: "form-control" %>
     </div>
-    <div id="technology_note" class="col-md-4">
-        <%= f.label :technology_note, "Technology" %>
-        <%= f.text_area :technology_note, rows: 7, class: "form-control" %>
+    <div
+      id="technology_note"
+      class="col-md-4"
+      <% if @facility.services.nil? || @facility.services.exclude?("Technology") %>
+        style="display:none"
+      <% end %>
+    >
+      <%= f.label :technology_note, "Technology" %>
+      <%= f.text_area :technology_note, rows: 7, class: "form-control" %>
     </div>
-    <div id="legal_note" class="col-md-4">
-        <%= f.label :legal_note, "Legal" %>
-        <%= f.text_area :legal_note, rows: 7, class: "form-control" %>
+    <div
+      id="legal_note"
+      class="col-md-4"
+      <% if @facility.services.nil? || @facility.services.exclude?("Legal") %>
+        style="display:none"
+      <% end %>
+    >
+      <%= f.label :legal_note, "Legal" %>
+      <%= f.text_area :legal_note, rows: 7, class: "form-control" %>
     </div>
-    <div id="learning_note" class="col-md-4">
-        <%= f.label :learning_note, "Learning" %>
-        <%= f.text_area :learning_note, rows: 7, class: "form-control" %>
+    <div
+      id="learning_note"
+      class="col-md-4"
+      <% if @facility.services.nil? || @facility.services.exclude?("Learning") %>
+        style="display:none"
+      <% end %>
+    >
+      <%= f.label :learning_note, "Learning" %>
+      <%= f.text_area :learning_note, rows: 7, class: "form-control" %>
     </div>
   </div>
   <div class="clearfix"></div>
@@ -508,199 +477,26 @@
 <% end %>
 
 <script>
-
-var chcheck;
-var yocheck;
-var adcheck;
-var secheck;
-
-var scheck;
-var fcheck;
-var mcheck;
-var hcheck;
-var tcheck;
-var acheck;
-var lcheck;
-// var tscheck;
-var finalservices = [];
+var initialServices = "<%= @facility.services %>";
+var finalservices = initialServices.split(" ");
 var finalsuitability = [];
 
-function chclicked(){
- var index;
- chcheck = document.getElementById('chcheck');
- if(chcheck.checked){
-   finalsuitability.push(chcheck.value);
- }else{
-   index = finalsuitability.indexOf(chcheck.value);
-   if (index > -1) {
-     finalsuitability.splice(index, 1);
-   }
- }
- document.getElementById('facility_suitability').value = finalsuitability.join(' ');
-};
-
-function yoclicked(){
- var index;
- yocheck = document.getElementById('yocheck');
- if(yocheck.checked){
-   finalsuitability.push(yocheck.value);
- }else{
-   index = finalsuitability.indexOf(yocheck.value);
-   if (index > -1) {
-     finalsuitability.splice(index, 1);
-   }
- }
- document.getElementById('facility_suitability').value = finalsuitability.join(' ');
-};
-
-function adclicked(){
- var index;
- adcheck = document.getElementById('adcheck');
- if(adcheck.checked){
-   finalsuitability.push(adcheck.value);
- }else{
-   index = finalsuitability.indexOf(adcheck.value);
-   if (index > -1) {
-     finalsuitability.splice(index, 1);
-   }
- }
- document.getElementById('facility_suitability').value = finalsuitability.join(' ');
-};
-
-function seclicked(){
- var index;
- secheck = document.getElementById('secheck');
- if(secheck.checked){
-   finalsuitability.push(secheck.value);
- }else{
-   index = finalsuitability.indexOf(secheck.value);
-   if (index > -1) {
-     finalsuitability.splice(index, 1);
-   }
- }
- document.getElementById('facility_suitability').value = finalsuitability.join(' ');
-};
-
-function sclicked(){
-  var index;
-  scheck = document.getElementById('scheck');
-  if(scheck.checked){
-    finalservices.push(scheck.value);
-    $('div#shelter_note').show();
-  }else{
-    index = finalservices.indexOf(scheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-    $('div#shelter_note').hide();
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
-};
-
-function fclicked(){
-  var index = 2;
-  fcheck = document.getElementById('fcheck');
-  if(fcheck.checked){
-    finalservices.push(fcheck.value);
-    $('div#food_note').show();
-  }else{
-    index = finalservices.indexOf(fcheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-    $('div#food_note').hide();
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
-};
-
-function mclicked(){
-  var index;
-  mcheck = document.getElementById('mcheck');
-  if(mcheck.checked){
-    finalservices.push(mcheck.value);
-    $('div#medical_note').show();
-  }else{
-    index = finalservices.indexOf(mcheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-    $('div#medical_note').hide();
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
-};
-
-function hclicked(){
-  var index;
-  hcheck = document.getElementById('hcheck');
-  if(hcheck.checked){
-    finalservices.push(hcheck.value);
-    $('div#hygiene_note').show();
-  }else{
-    index = finalservices.indexOf(hcheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-    $('div#hygiene_note').hide();
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
-};
-
-function tclicked(){
-  var index;
-  tcheck = document.getElementById('tcheck');
-  if(tcheck.checked){
-    finalservices.push(tcheck.value);
-    $('div#technology_note').show();
-  }else{
-    index = finalservices.indexOf(tcheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-    $('div#technology_note').hide();
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
-};
-
-function aclicked(){
-  var index;
-  acheck = document.getElementById('acheck');
-  if(acheck.checked){
-    finalservices.push(acheck.value);
-    $('div#legal_note').show();
-  }else{
-    index = finalservices.indexOf(acheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-    $('div#legal_note').hide();
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
-};
-
-function lclicked(){
-  var index;
-  lcheck = document.getElementById('lcheck');
-  if(lcheck.checked){
-    finalservices.push(lcheck.value);
-    $('div#learning_note').show();
-  }else{
-    index = finalservices.indexOf(lcheck.value);
-    if (index > -1) {
-      finalservices.splice(index, 1);
-    }
-    $('div#learning_note').hide();
-  }
-  document.getElementById('facility_services').value = finalservices.join(' ');
-};
-
 $(document).ready(function(){
-    sclicked();
-    fclicked();
-    mclicked();
-    hclicked();
-    tclicked();
-    aclicked();
-    lclicked();
+  // SERVICES selection
+  $("input.services").on('click', function() {
+    var noteId = $(this).data("note-id");
+    if (this.checked) {
+      finalservices.push(this.value);
+      $('div#' + noteId).show();
+    } else {
+      index = finalservices.indexOf(this.value);
+      if (index > -1) {
+        finalservices.splice(index, 1);
+      }
+      $('div#' + noteId).hide();
+    }
+    $('#facility_services').val(finalservices.join(' '));
+  })
 });
 
 var monhours = document.getElementById("mon-hours");
