@@ -7,7 +7,6 @@
 <h1><%=@facility.name %></h1>
 
 <h2>Welcomes</h2>
-  <p><%=@facility.welcomes %></p>
 <div class="inset" id="suitability">
   <ul>
     <% if isWelcome("female", @facility) %>
@@ -40,13 +39,13 @@
           <p>Youth</p>
         </li>
     <% end %>
-    <% if isWelcome("adults", @facility) %>
+    <% if isWelcome("adult", @facility) %>
         <li>
           <i class="linkvan-icon"><%= inline_svg('icons/age-adults.svg', size: '35px') %></i>
           <p>Adults</p>
         </li>
     <% end %>
-    <% if isWelcome("seniors", @facility) %>
+    <% if isWelcome("senior", @facility) %>
         <li>
           <i class="linkvan-icon"><%= inline_svg('icons/age-seniors.svg', size: '35px') %></i>
           <p>Seniors</p>

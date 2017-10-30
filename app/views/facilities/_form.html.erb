@@ -1,12 +1,23 @@
-<% services = [
-  ["shelter", "Shelter", "shelter_note"],
-  ["food", "Food", "food_note"],
-  ["medical", "Medical", "medical_note"],
-  ["hygiene", "Hygiene", "hygiene_note"],
-  ["technology", "Technology", "technology_note"],
-  ["legal", "Legal", "legal_note"],
-  ["learning", "Learning", "learning_note"]
-]%>
+<%
+  services = [
+    ["shelter", "Shelter", "shelter_note"],
+    ["food", "Food", "food_note"],
+    ["medical", "Medical", "medical_note"],
+    ["hygiene", "Hygiene", "hygiene_note"],
+    ["technology", "Technology", "technology_note"],
+    ["legal", "Legal", "legal_note"],
+    ["learning", "Learning", "learning_note"]
+  ]
+  welcomes = [
+    ["male", "Male"],
+    ["female", "Female"],
+    ["transgender", "Transgender"],
+    ["children", "Children"],
+    ["youth", "Youth"],
+    ["adult", "Adult"],
+    ["senior", "Senior"]
+  ]
+%>
 
 <%= form_for(@facility) do |f| %>
   <% if @facility.errors.any? %>
@@ -25,9 +36,28 @@
     <%= f.label :name %>
     <%= f.text_field :name, autofocus: true, class: "form-control" %>
   </div>
-  <div class="form-group form-group-inline">
+  <div class="form-group">
     <%= f.label :welcomes %>
-    <%= f.select :welcomes, [['All'], ['Women'], ['Men']] %>
+    <%= f.hidden_field :welcomes%>
+    <ul class="list-inline">
+      <% welcomes.each do |s| %>
+        <li>
+          <input
+            type="checkbox"
+            class="custom-checkbox welcomes"
+            id="<%= s[0]%>"
+            name="<%= s[1]%>"
+            value="<%= s[1]%>"
+            <% if @facility.welcomes.present? && (@facility.welcomes.include?(s[1]) || @facility.welcomes.include?("All")) %>
+              checked
+            <% end %>
+          >
+          <label for="<%= s[0]%>">
+            <%= s[1]%>
+          </label>
+        </li>
+      <% end %>
+    </ul>
   </div>
   <hr>
 
@@ -477,26 +507,45 @@
 <% end %>
 
 <script>
+<% if @facility.welcomes.present? && @facility.welcomes.include?("All") %>
+  var initialWelcomes = "<% welcomes.each do |s| %> <%= s[1]%><% end %>";
+<% else %>
+  var initialWelcomes = "<%= @facility.welcomes %>";  
+<% end %>
+var finalWelcomes = initialWelcomes.split(" ");
 var initialServices = "<%= @facility.services %>";
-var finalservices = initialServices.split(" ");
-var finalsuitability = [];
+var finalServices = initialServices.split(" ");
 
 $(document).ready(function(){
+  // WELCOMES selection
+  $('#facility_welcomes').val(initialWelcomes);
+  $("input.welcomes").on('click', function() {
+    if (this.checked) {
+      finalWelcomes.push(this.value);
+    } else {
+      index = finalWelcomes.indexOf(this.value);
+      if (index > -1) {
+        finalWelcomes.splice(index, 1);
+      }
+    }
+    $('#facility_welcomes').val(finalWelcomes.join(' '));
+  })
+
   // SERVICES selection
   $("input.services").on('click', function() {
     var noteId = $(this).data("note-id");
     if (this.checked) {
-      finalservices.push(this.value);
+      finalServices.push(this.value);
       $('div#' + noteId).show();
     } else {
-      index = finalservices.indexOf(this.value);
+      index = finalServices.indexOf(this.value);
       if (index > -1) {
-        finalservices.splice(index, 1);
+        finalServices.splice(index, 1);
       }
       $('div#' + noteId).hide();
     }
-    $('#facility_services').val(finalservices.join(' '));
-  })
+    $('#facility_services').val(finalServices.join(' '));
+  });
 });
 
 var monhours = document.getElementById("mon-hours");
