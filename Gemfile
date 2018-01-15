@@ -14,7 +14,7 @@ group :development, :test do
 end
 
 group :production do
-	'pg', '~> 0.20'
+	gem 'pg', '~> 0.20'
 end
 
 # Use SCSS for stylesheets
