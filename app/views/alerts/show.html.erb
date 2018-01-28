@@ -1,10 +1,21 @@
 <section id="alert">
   <div class="container">
     <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
+      <div id="main-alert" class="col-sm-8 col-sm-offset-2">
         <p><%= link_to "Go back to Alerts", alerts_path, class: "btn btn-link"%> </p>
-        <h3><%= @alert.title %></h3>
-        <p><%= simple_format(@alert.content) %></p>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>
+              <i class="linkvan-icon"><%= inline_svg('icons/alert.svg', size: '20px') %></i>
+              <%= @alert.title %>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <p><%= raw(@alert.content) %></p>
+          </div>
+        </div>
+        <br>
+        <br>
         <p>
           <strong>Active:</strong>
           <% if @alert.active %>

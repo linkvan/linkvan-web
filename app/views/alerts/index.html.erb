@@ -40,7 +40,7 @@
               <tr>
                 <th scope="row"><%= alert.id %></th>
                 <td><%= link_to alert.title, alert_path(alert.id) %></td>
-                <td><%= alert.content[0..50] %>...</td>
+                <td><%= strip_tags(alert.content)[0..50] %>...</td>
                 <td>
                   <% if alert.active %>
                     <%= link_to "ON", {controller: "alerts", action: "deactive", id: alert.id}, {class: "btn btn-xs btn-primary"} %>
