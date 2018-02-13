@@ -345,8 +345,8 @@ module FacilitiesHelper
 		return false
 	end
 
-	def isWelcome(category, facility)
-		return facility.welcomes.downcase.include?(category) || facility.welcomes.downcase.include?("all")
+	def isWelcome(category, welcomesArray)
+		return welcomesArray.include?(category) || welcomesArray.include?("all")
 	end
 	
 end
