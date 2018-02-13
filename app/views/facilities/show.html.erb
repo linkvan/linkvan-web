@@ -9,43 +9,44 @@
 <h2>Welcomes</h2>
 <div class="inset" id="suitability">
   <ul>
-    <% if isWelcome("female", @facility) %>
+    <% @welcomeArray = @facility.welcomes.downcase.split %>
+    <% if isWelcome("female", @welcomeArray) %>
         <li>
           <i class="linkvan-icon"><%= inline_svg('icons/female.svg', size: '30px') %></i>
           <p>Female</p>
         </li>
     <% end %>
-    <% if isWelcome("male", @facility) %>
+    <% if isWelcome("male", @welcomeArray) %>
         <li>
           <i class="linkvan-icon"><%= inline_svg('icons/male.svg', size: '30px') %></i>
           <p>Male</p>
         </li>
     <% end %>
-    <% if isWelcome("transgender", @facility) %>
+    <% if isWelcome("transgender", @welcomeArray) %>
         <li>
           <i class="linkvan-icon"><%= inline_svg('icons/transgender.svg', size: '30px') %></i>
           <p>Transgender</p>
         </li>
     <% end %>
-    <% if isWelcome("children", @facility) %>
+    <% if isWelcome("children", @welcomeArray) %>
         <li>
           <i class="linkvan-icon"><%= inline_svg('icons/age-children.svg', size: '30px') %></i>
           <p>Children</p>
         </li>
     <% end %>
-    <% if isWelcome("youth", @facility) %>
+    <% if isWelcome("youth", @welcomeArray) %>
         <li>
           <i class="linkvan-icon"><%= inline_svg('icons/age-youth.svg', size: '30px') %></i>
           <p>Youth</p>
         </li>
     <% end %>
-    <% if isWelcome("adult", @facility) %>
+    <% if isWelcome("adult", @welcomeArray) %>
         <li>
           <i class="linkvan-icon"><%= inline_svg('icons/age-adults.svg', size: '30px') %></i>
           <p>Adults</p>
         </li>
     <% end %>
-    <% if isWelcome("senior", @facility) %>
+    <% if isWelcome("senior", @welcomeArray) %>
         <li>
           <i class="linkvan-icon"><%= inline_svg('icons/age-seniors.svg', size: '30px') %></i>
           <p>Seniors</p>
