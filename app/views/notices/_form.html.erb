@@ -1,5 +1,3 @@
-<%= javascript_include_tag Ckeditor.cdn_url %>
-
 <%= form_for @notice, html: {class: "form-validate"} do |n| %>
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
@@ -10,7 +8,7 @@
       </div>
       <div class="form-group">
         <%= n.label :content, "Content" %>
-        <%= n.cktext_area :content %>
+        <%= n.text_area :content, :class => 'ckeditor' %>
       </div>
       <div class="form-group">
         <%= n.label :published, "Published" %>

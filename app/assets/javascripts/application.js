@@ -19,10 +19,14 @@
 //= require js.cookie.js
 //= require moment
 //= require Chart.min
-//= require ckeditor/init
-//= require_tree ./ckeditor
+//= require ckeditor-jquery
 
 $(document).ready(function () {
+  // Plugin: CKEditor-rails
+  $('.ckeditor').ckeditor({
+    // optional config
+  });
+
   // Plugin: Bootstrap Select
   $('select').selectpicker({
     width: 'auto'
