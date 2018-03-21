@@ -1,6 +1,6 @@
 CKEDITOR.config.toolbar = [
 	{ name: 'clipboard', items : [ 'Undo','Redo' ] },
-	{ name: 'basicstyles', items : ['Italic','Underline','Strike','-','RemoveFormat' ] },
+	{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','-','RemoveFormat' ] },
 	{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Blockquote',
 	'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ] },
 	{ name: 'links', items : [ 'Link','Unlink' ] },
