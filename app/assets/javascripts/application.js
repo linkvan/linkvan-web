@@ -20,13 +20,9 @@
 //= require moment
 //= require Chart.min
 //= require ckeditor-jquery
+//= require_tree ./ckeditor
 
 $(document).ready(function () {
-  // Plugin: CKEditor-rails
-  $('.ckeditor').ckeditor({
-    // optional config
-  });
-
   // Plugin: Bootstrap Select
   $('select').selectpicker({
     width: 'auto'
