@@ -159,39 +159,65 @@
   </div>
 </section>
 
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSLM-Bv5YwI1Ecw2OrMDQF8fZxik6FTzs"></script>-->
 <script>
-  var map;
-  // Lat and long for learning exchange
-  var latitude = 49.279869;
-  var longitude = -123.099512;
-  console.log('Script loaded')
-  function initialize() {
-    console.log('Initializing google maps')
-    var myLocation = new google.maps.LatLng(latitude, longitude);
-    var mapOptions = {
-      center: myLocation,
-      zoom: 13
-    }
+  var map, heatmap;
 
-    map = new google.maps.Map(document.getElementById('analytics-map'), mapOptions);
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('analytics-map'), {
+      zoom: 13,
+      center: {lat: 37.775, lng: -122.434},
+      mapTypeId: 'satellite'
+    });
 
-    var rects = <%= raw @mapData.to_json %>
-    for (var i = 0; i < rects.length; i++) {
-      var rect = rects[i];
-      var rectangle = new google.maps.Rectangle({
-        fillColor: rect.fillColor,
-        fillOpacity: 0.35,
-        map: map,
-        bounds: {
-          north: rect.north,
-          south: rect.south,
-          east: rect.east,
-          west: rect.west
-        }
-      })
-    }
+    heatmap = new google.maps.visualization.HeatmapLayer({
+      data: getPoints(),
+      map: map
+    });
   }
 
-  google.maps.event.addDomListener(window, 'load', initialize);
+  function getPoints() {
+    return [
+      <% @coordinates.each do |coord| %>
+        new google.maps.LatLng(<%= coord[0] %>, <%= coord[1] %>),
+      <% end %>
+    ];
+  }
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSLM-Bv5YwI1Ecw2OrMDQF8fZxik6FTzs&libraries=visualization&callback=initMap"></script>
+
+<script>
+  // var map;
+  // // Lat and long for learning exchange
+  // var latitude = 49.279869;
+  // var longitude = -123.099512;
+  // console.log('Script loaded')
+  // function initialize() {
+  //   console.log('Initializing google maps')
+  //   var myLocation = new google.maps.LatLng(latitude, longitude);
+  //   var mapOptions = {
+  //     center: myLocation,
+  //     zoom: 13
+  //   }
+
+  //   map = new google.maps.Map(document.getElementById('analytics-map'), mapOptions);
+
+  //   var rects = <%= raw @mapData.to_json %>
+  //   for (var i = 0; i < rects.length; i++) {
+  //     var rect = rects[i];
+  //     var rectangle = new google.maps.Rectangle({
+  //       fillColor: rect.fillColor,
+  //       fillOpacity: 0.35,
+  //       map: map,
+  //       bounds: {
+  //         north: rect.north,
+  //         south: rect.south,
+  //         east: rect.east,
+  //         west: rect.west
+  //       }
+  //     })
+  //   }
+  // }
+
+  // google.maps.event.addDomListener(window, 'load', initialize);
 </script>
