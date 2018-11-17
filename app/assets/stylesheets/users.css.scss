@@ -56,5 +56,13 @@
 		li:first-child {
 			padding-left: 30px;
 		}
-	}
+  }
+  
+  form.heatmap {
+    margin-bottom: 20px;
+
+    .input-group {
+      margin-bottom: 10px;
+    }
+  }
 }

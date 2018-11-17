@@ -11,6 +11,14 @@
           <% if (@user.admin == true) %>
             <div class="admin-data">
               <h3>Location Data</h3>
+              <form action="analytics" method="get" class="form-validate heatmap" role="search">
+                <div class="input-group col-sm-5">
+                  <span class="input-group-addon">Radius (km)</span>
+                  <%= text_field_tag :radius, @radius_field, class: "form-control", required: false %>
+                </div>
+
+                <%= submit_tag "Apply filter", :name => nil, class: "btn btn-primary" %>
+              </form>
               <div class="inset-gmap">
                 <div id="analytics-map" style="height:600px;"></div>
               </div>
@@ -18,9 +26,7 @@
           <% elsif (@user.facilities.count > 0) %>
             <% @user.facilities.each do |f| %>
               <h3><%= link_to f.name, facility_path(f.id) %></h3>
-
             <% end %>
-
           <% end %>
         </div>
       </div>
