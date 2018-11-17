@@ -32,11 +32,14 @@
               <div id="facilities-toggle">
                 <% user.facilities.each do |f| %>
                   <ul class="user-facilities">
-                    <li><%= link_to f.name, edit_facility_path(f.id) %></li>
+                    <li><%=f.name %></li>
+                    <li>Last updated: <%= f.updated_at.strftime("%B %d, %Y") %></li>
                     <li>
-                      <% @facVerified = f.verified ? "Verified" : "Not Verified" %>
+                      Status:
+                      <% @facVerified = f.verified ? "Live" : "Pending Review" %>
                       <%= link_to @facVerified, {:controller => "facilities", :action => "toggle_verify", :id => f.id} %>
                     </li>
+                    <li><%= link_to "Edit", edit_facility_path(f.id) %></li>
                   </ul>
                 <% end %>
               </div>
