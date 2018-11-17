@@ -10,6 +10,7 @@ class AnalyticsController < ApplicationController
     if (@user.admin)
       @coordinates = gridSort(Analytic.all, 0.001, 49.279869, -123.099512)
       @radius = getRequestRadius()
+      @radius_field = getRequestRadiusField()
 
       @raw_service_chart_data = Analytic.group(:service).count
       @service_chart_data = []
@@ -94,6 +95,14 @@ class AnalyticsController < ApplicationController
   end
 
   def getRequestRadius()
-    return request['radius'] ? Integer(request['radius']) * 1000 : 4000
+    return (request['radius'] && is_number?(request['radius'])) ? Float(request['radius']) * 1000 : 4000
+  end
+
+  def getRequestRadiusField()
+    return (request['radius'] && is_number?(request['radius'])) ? Float(request['radius']) : 4
+  end
+
+  def is_number? string
+    true if Float(string) rescue false
   end
 end
