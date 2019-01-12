@@ -14,9 +14,82 @@
               <form action="analytics" method="get" class="form-validate heatmap" role="search">
                 <div class="input-group col-sm-5">
                   <span class="input-group-addon">Radius (km)</span>
-                  <%= text_field_tag :radius, @radius_field, class: "form-control", required: false %>
+                  <input type="text" name="radius" class="form-control" value="<%= @radius_field %>"/>
                 </div>
-
+                <div class="input-group col-sm-12">
+                  <label class="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      value="shelter"
+                      name="services[]"
+                      <%= (@services.include? 'shelter') ? 'checked' : '' %>
+                    >
+                    Shelter
+                  </label>
+                  <label class="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      value="food"
+                      name="services[]"
+                      <%= (@services.include? 'food') ? 'checked' : '' %>
+                    >
+                    Food
+                  </label>
+                  <label class="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      value="medical"
+                      name="services[]"
+                      <%= (@services.include? 'medical') ? 'checked' : '' %>
+                    >
+                    Medical
+                  </label>
+                  <label class="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      value="hygiene"
+                      name="services[]"
+                      <%= (@services.include? 'hygiene') ? 'checked' : '' %>
+                    >
+                    Hygiene
+                  </label>
+                  <label class="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      value="technology"
+                      name="services[]"
+                      <%= (@services.include? 'technology') ? 'checked' : '' %>
+                    >
+                    Technology
+                  </label>
+                  <label class="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      value="legal"
+                      name="services[]"
+                      <%= (@services.include? 'legal') ? 'checked' : '' %>
+                    >
+                    Legal
+                  </label>
+                  <label class="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      value="learning"
+                      name="services[]"
+                      <%= (@services.include? 'learning') ? 'checked' : '' %>
+                    >
+                    Learning
+                  </label>
+                  <label class="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      value="crisislines"
+                      name="services[]"
+                      <%= (@services.include? 'crisislines') ? 'checked' : '' %>
+                    >
+                    Crisis Lines
+                  </label>
+                </div>
                 <%= submit_tag "Apply filter", :name => nil, class: "btn btn-primary" %>
               </form>
               <div class="inset-gmap">
