@@ -8,10 +8,11 @@ class AnalyticsController < ApplicationController
   def show
     @user = User.find(params[:id])
     if (@user.admin)
-      @coordinates = gridSort(Analytic.all, 0.001, 49.279869, -123.099512)
       @radius = getRequestRadius()
       @radius_field = getRequestRadiusField()
       @services = request['services'] || []
+      @analytics = Analytic.select {|item| @services.include? getServiceKey(item.service)}
+      @coordinates = gridSort(@analytics, 0.001, 49.279869, -123.099512)
 
       @raw_service_chart_data = Analytic.group(:service).count
       @service_chart_data = []
@@ -105,5 +106,19 @@ class AnalyticsController < ApplicationController
 
   def is_number? string
     true if Float(string) rescue false
+  end
+
+  def getServiceKey(service)
+    mapToKeys = {
+      "Shelter" => "shelter",
+      "Food" => "food",
+      "Medical" => "medical",
+      "Hygiene" => "hygiene",
+      "Technology" => "technology",
+      "Legal" => "legal",
+      "Learning" => "learning",
+      "Crisis Lines" => "crisislines",
+    }
+    return mapToKeys[service] || service
   end
 end

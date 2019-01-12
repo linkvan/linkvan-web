@@ -91,6 +91,10 @@
                   </label>
                 </div>
                 <%= submit_tag "Apply filter", :name => nil, class: "btn btn-primary" %>
+                <div>
+                  <br/>
+                  Total: <%= @coordinates.count %>
+                </div>
               </form>
               <div class="inset-gmap">
                 <div id="analytics-map" style="height:600px;"></div>
