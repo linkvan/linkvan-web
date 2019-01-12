@@ -11,7 +11,13 @@ class AnalyticsController < ApplicationController
       @radius = getRequestRadius()
       @radius_field = getRequestRadiusField()
       @services = request['services'] || []
-      @analytics = Analytic.select {|item| @services.include? getServiceKey(item.service)}
+
+      if (@services.count > 0) 
+        @analytics = Analytic.select {|item| @services.include? getServiceKey(item.service)}
+      else
+        @analytics = Analytic.all
+      end
+
       @coordinates = gridSort(@analytics, 0.001, 49.279869, -123.099512)
 
       @raw_service_chart_data = Analytic.group(:service).count
