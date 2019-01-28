@@ -11,13 +11,23 @@ class AnalyticsController < ApplicationController
       @radius = getRequestRadius()
       @radius_field = getRequestRadiusField()
       @services = request['services'] || []
+      @date_from = getRequestDateFrom()
+      @date_to = getRequestDateTo()
+
+      @analytics = Analytic.all
 
       if (@services.count > 0) 
-        @analytics = Analytic.select {|item| @services.include? getServiceKey(item.service)}
-      else
-        @analytics = Analytic.all
+        @analytics = @analytics.select {|item| @services.include? getServiceKey(item.service)}
       end
-
+      if (@date_from)
+        @analytics = @analytics.select {|item| Date.parse(item.time.to_s.split(' ')[0]) >= @date_from}
+        @date_from = @date_from.strftime("%d/%m/%Y")
+      end
+      if (@date_to)
+        @analytics = @analytics.select {|item| Date.parse(item.time.to_s.split(' ')[0]) <= @date_to}
+        @date_to = @date_to.strftime("%d/%m/%Y")
+      end
+      
       @coordinates = gridSort(@analytics, 0.001, 49.279869, -123.099512)
 
       @raw_service_chart_data = Analytic.group(:service).count
@@ -108,6 +118,14 @@ class AnalyticsController < ApplicationController
 
   def getRequestRadiusField()
     return (request['radius'] && is_number?(request['radius'])) ? Float(request['radius']) : 4
+  end
+
+  def getRequestDateFrom()
+    return DateTime.parse(request['datefrom']) rescue nil
+  end
+
+  def getRequestDateTo()
+    return DateTime.parse(request['dateto']) rescue nil
   end
 
   def is_number? string

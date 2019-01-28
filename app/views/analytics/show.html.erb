@@ -16,6 +16,20 @@
                   <span class="input-group-addon">Radius (km)</span>
                   <input type="text" name="radius" class="form-control" value="<%= @radius_field %>"/>
                 </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="input-group">
+                      <span class="input-group-addon">From</span>
+                      <input type="text" name="datefrom" class="form-control" placeholder="dd/mm/yyyy" value="<%= @date_from %>"/>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group">
+                      <span class="input-group-addon">To</span>
+                      <input type="text" name="dateto" class="form-control" placeholder="dd/mm/yyyy" value="<%= @date_to %>"/>
+                    </div>
+                  </div>
+                </div>
                 <div class="input-group col-sm-12">
                   <label class="checkbox-inline">
                     <input
