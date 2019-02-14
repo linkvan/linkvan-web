@@ -2,116 +2,176 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-8 col-sm-offset-2">
+        <% if (@user.admin == true) %>
+          <h1>Linkvan Admin</h1>
+        <% end %>
         <h2><%= @user.name %></h2>
         <p><%= mail_to(@user.email) %></p>
         <p>Registered Since <%= @user.created_at.strftime("%B %Y") %></p>
-
-        <%= render 'shared/admin_nav' %>
-
-        <p><%= link_to "Add New Facility ", new_facility_path, class: "btn btn-primary"%> </p>
-        <% @imps = Array.new %>
-        <% @facilitynames = Array.new %>
-        <% if (@user.admin == true) %>
-          <div class="admin-view">
-            <h1>LinkVan Admin</h1>
-            <%= link_to 'Download CSV list', users_path(format: :csv) %>
-
-            <h4><a href="#" id=facilities-button>Hide Facilities</a></h4>
-            <% @users.each do |user| %>
-              <ul class="user-info">
-                <li>
-                  <%= link_to user.name, user %>
-                  <% if user.admin == true %>(<b>Admin</b>)<% end %>
-                </li>
-                <li><%= user.email%></li>
-                <li>
-                  <% @userVerified = user.verified ? "Verified" : "Not Verified" %>
-                  <%= link_to @userVerified, {:controller => "users", :action => "toggle_verify", :id => user.id} %>
-                </li>
-              </ul>
-              <div id="facilities-toggle">
-                <% user.facilities.each do |f| %>
-                  <ul class="user-facilities">
-                    <li><%=f.name %></li>
-                    <li>Last updated: <%= f.updated_at.strftime("%B %d, %Y") %></li>
-                    <li>
-                      Status:
-                      <% @facVerified = f.verified ? "Live" : "Pending Review" %>
-                      <%= link_to @facVerified, {:controller => "facilities", :action => "toggle_verify", :id => f.id} %>
-                    </li>
-                    <li><%= link_to "Edit", edit_facility_path(f.id) %></li>
-                  </ul>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-
-          <div class="administered">
-            <h4><%= pluralize(@user.facilities.count, 'Facility') %> Available to Edit</h4>
-            <% @user.facilities.each do |f| %>
-              <ul class="user-facilities">
-                <li><%= link_to f.name, edit_facility_path(f.id) %></li>
-                <li>(Monthly View Count: <%= Impression.where(impressionable_id: f.id).count %>)</li>
-              </ul>
-              <% @imps.concat(Impression.where(impressionable_id: f.id)) %>
-              <% @facilitynames.push(f.name) %>
-            <% end %>
-          </div>
-          <br>
-          <h4><a href="#" id="report-button">Hide Reports</h4>
-          <div class="report" id="report">
-            <!--Div that will hold the dashboard-->
-            <h4>Reports</h4>
-            <div id="dashboard_div">
-              <!--Divs that will hold each control and chart-->
-
-              <div id="chart_div"></div>
-              <div id="filter_div"></div>
-            </div>
-
-            <div id="day_of_week_div"></div>
-
-            <div id="time_of_day_div"></div>
-          </div>
-        <% elsif (@user.facilities.count > 0) && (@user.admin != true)%>
-          <% if (@user.activation_email_sent == true) %>
-            <div class="alert alert-info" role="alert">Thank you for making an account with us. The LinkVan team will get in touch with you as soon as we can :)</div>
-          <% end %>
-          <div class="administered">
-            <h4><%= pluralize(@user.facilities.count, 'Facility') %> Available to Edit</h4>
-            <% @user.facilities.each do |f| %>
-              <ul class="user-facilities">
-                <li><%= link_to f.name, edit_facility_path(f.id) %></li>
-                <li>(Monthly View Count: <%= Impression.where(impressionable_id: f.id).count %>)</li>
-              </ul>
-              <% @imps.concat(Impression.where(impressionable_id: f.id)) %>
-              <% @facilitynames.push(f.name) %>
-            <% end %>
-          </div>
-          <h4><a href="#" id="report-button">Hide Reports</h4>
-          <div class="report" id="report">
-            <!--Div that will hold the dashboard-->
-            <h4>Reports</h4>
-            <div id="dashboard_div">
-              <!--Divs that will hold each control and chart-->
-
-              <div id="chart_div"></div>
-              <div id="filter_div"></div>
-            </div>
-
-            <div id="day_of_week_div"></div>
-
-            <div id="time_of_day_div"></div>
-          </div>
-        <%elsif @user.activation_email_sent%>
+        <br>
+        <% if (!@user.verified) %>
           <div class="alert alert-info" role="alert">Thank you for making an account with us. The LinkVan team will get in touch with you as soon as we can.
             <br>
             In the meantime you can add a new facility! :)
           </div>
-        <%else%>
-          <p><b>Step 2: </b>Almost ready! Please fill out the form below and a member of the LinkVan team will get in touch with you as soon as we can to finish setting up your account. :) </p>
-          <%= render 'messages/contact_form' %>
+        <% end %>
+        <p><%= link_to "Add New Facility ", new_facility_path, class: "btn btn-primary"%> </p>
+        <br>
+        <% if (@user.admin == true) %>
+            <%= link_to 'Download CSV list', users_path(format: :csv) %>
+            <br>
+        <% end %>
+        <br>
+
+        <%= render 'shared/admin_nav' %>
+        <br>
+
+        <!--Non admin user view. Verified and unverified user shown.-->
+        <% @imps = Array.new %>
+        <% @facilitynames = Array.new %>
+        <% if (@user.admin != true) %>
+            <div class="admin-view">
+              <ul id="admin-buttons" class="nav nav-tabs">
+                <li class="active">
+                  <a id=my-facilities-button>My Facilities</a>
+                </li>
+              </ul>
+            </div>
+            <div id="my-facilities-toggle">
+              <ul class="user-facilities">
+                <li><b>Facility Name</b></li>
+                <li></li>
+                <li><b>Last Updated</b></li>
+                <li><b>Status</b></li>
+              </ul>
+              <% @user.facilities.each do |f| %>
+                  <ul class="user-facilities" id="uf-<%= f.id %>">
+                    <li><%= link_to f.name, facility_path(f.id) %>  | <%= link_to "Edit", edit_facility_path(f.id) %></li>
+                    <li></li>
+                    <li class="updated"><%= (f.updated_at - 1.days).strftime("%m/%d/%Y")  %></li>
+                    <li><p class="status"><%= @facVerified = f.verified ? "Live" : "Pending Review" %></p></li>
+                  </ul>
+              <% end %>
+            </div>
+
+        <% else %>
+            <!--Admin user view.-->
+          <div class="admin-view">
+            <ul id="admin-buttons" class="nav nav-tabs">
+              <li class="active">
+                <a id=my-facilities-button>My Facilities</a>
+              </li>
+              <li class="">
+                <a id=all-users-button>All Users</a>
+              </li>
+              <li class="">
+                <a id=all-facilities-button>All Facilities</a>
+              </li>
+            </ul>
+          </div>
+            <br>
+
+            <div id="my-facilities-toggle">
+              <ul class="user-facilities">
+                <li><b>Facility Name </b></li>
+                <li></li>
+                <li><b>Last Updated</b></li>
+                <li><b>Live Status</b></li>
+              </ul>
+              <% @user.facilities.each do |f| %>
+                  <ul class="user-facilities" id="uf-<%= f.id %>">
+                    <li><%= link_to f.name, facility_path(f.id) %> | <%= link_to "Edit", edit_facility_path(f.id) %></li>
+                    <li></li>
+                    <li class="updated"><%= (f.updated_at - 1.days).strftime("%m/%d/%Y")  %></li>
+                    <li>
+                      <p class="status"><%= @facVerified = f.verified ? "Live" : "Pending Review" %></p>
+                      <label class="form-switch">
+                        <input type="checkbox" <%= f.verified ? "checked" : "" %>>
+                        <i data-toggle="<%= f.id %>" onclick="toggleFac(this);"></i>
+                      </label>
+                    </li>
+                  </ul>
+              <% end %>
+            </div>
+
+
+            <div id="all-users-toggle" style="display:none">
+              <ul class="user-info">
+                <li><b>User Name</b></li>
+                <li><b>Phone Number</b></li>
+                <li><b>Email</b></li>
+                <li><b>Live Status</b></li>
+              </ul>
+              <% @users.each do |user| %>
+                <ul class="user-info" id="u-<%= user.id %>">
+                  <li>
+                    <%= user.name %>
+                    <% if user.admin == true %>(<b>Admin</b>)<% end %>
+                    | <%= link_to "Edit", edit_user_path(@user) %>
+                  </li>
+                  <li><%= user.phone_number %></li>
+                  <li><%= user.email%></li>
+                  <li>
+                    <p class="status"><%= @userVerified = user.verified ? "Verified" : "Not Verified" %></p>
+                    <label class="form-switch">
+                      <input type="checkbox" <%= user.verified ? "checked" : "" %>>
+                      <i data-user-toggle="<%= user.id %>" onclick="toggleUser(this);"></i>
+                    </label>
+                  </li>
+                </ul>
+              <% end %>
+            </div>
+
+            <div id="all-facilities-toggle" style="display:none">
+              <ul class="user-facilities">
+                <li><b>Facility Name</b></li>
+                <li></li>
+                <li><b>Last Updated</b></li>
+                <li><b>Live Status</b></li>
+              </ul>
+              <% @users.each do |user| %>
+                  <% user.facilities.each do |f| %>
+                      <ul class="user-facilities" id="uf-<%= f.id %>">
+                        <li><%= link_to f.name, facility_path(f.id) %> | <%= link_to "Edit", edit_facility_path(f.id) %></li>
+                        <li></li>
+                        <li class="updated"><%= (f.updated_at - 1.days).strftime("%m/%d/%Y")  %></li>
+                        <li>
+                          <p class="status"><%= @facVerified = f.verified ? "Live" : "Pending Review" %></p>
+                          <label class="form-switch">
+                            <input type="checkbox" <%= f.verified ? "checked" : "" %>>
+                            <i data-toggle="<%= f.id %>" onclick="toggleFac(this);"></i>
+                          </label>
+                        </li>
+                      </ul>
+                  <% end %>
+              <% end %>
+            </div>
+
+        <% end %>
+          <br>
+        <h4>Reports</h4>
+        <h4><a href="#" id="report-button">Show Reports</a></h4>
+        <br>
+          <div class="report" id="report" style="display: none;">
+            <!--Div that will hold the dashboard-->
+            <div id="dashboard_div">
+              <!--Divs that will hold each control and chart-->
+
+              <div id="chart_div"></div>
+              <div id="filter_div"></div>
+            </div>
+
+            <div id="day_of_week_div"></div>
+
+            <div id="time_of_day_div"></div>
+          </div>
+
+        <% if (@user.facilities.count > 0) %>
+            <% @user.facilities.each do |f| %>
+              <% @facilitynames.push(f.name) %>
+            <% end %>
         <%end%>
+
         <ul class="list-inline text-center">
           <li><%= link_to 'Edit Account', edit_user_path(@user), class: "btn btn-link" %> |</li>
           <li><%= link_to 'Delete Account', @user,
@@ -125,6 +185,7 @@
 
 <%= content_tag :div, class: "temp_information", data: {facilitynames: @facilitynames, imps: @imps} do %>
 <% end %>
+
 
   <!--Load the AJAX API-->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -555,19 +616,90 @@ for(var j=0; j<imps.length; j++){
       }
 
       $(function() {
-        $('a#facilities-button').click(function(event) {
-          event.preventDefault();
-          $('div#facilities-toggle').toggle();
-          this.innerHTML =  (this.innerHTML == "Hide Facilities") ? "Show Facilities" : "Hide Facilities";
-        });
+          $('#admin-buttons li').click(function(event) {
+            var isActive = $(this).hasClass('active');
+            $('.active').removeClass('active');
+            if(!isActive) {
+                $(this).addClass('active');
+            }
+
+            $('div#all-users-toggle').hide();
+            $('div#all-facilities-toggle').hide();
+            $('div#my-facilities-toggle').hide();
+            var selected = $(this).children()[0].getAttribute("id");
+            switch(selected) {
+                case "all-users-button":
+                    $('div#all-users-toggle').show();
+                    break;
+                case "all-facilities-button":
+                    $('div#all-facilities-toggle').show();
+                    break;
+                case "my-facilities-button":
+                    $('div#my-facilities-toggle').show();
+                    break;
+            }
+          });
       });
 
-      $(function() {
-        $('a#report-button').click(function(event) {
-          $('div#report').toggle();
-          this.innerHTML =  (this.innerHTML == "Hide Reports") ? "Show Reports" : "Hide Reports";
+      function toggleUser(d, event) {
+          var id = d.getAttribute("data-user-toggle");
+          var url = "/users/" + id + "/toggle_verify";
+          $.ajax({
+              type: "GET",
+              url: url,
+              success: function(response) {
+                  var uid = "u-" + id;
+
+                  //Change the 'status' of the user
+                  var statusQuery = 'ul#' + uid + ' > li > p.status';
+                  document.querySelector(statusQuery).innerHTML = (response.verified ? "Verified" : "Not Verified");
+              }
+          });
+          // event.preventDefault();
+      };
+
+      function toggleFac(d, event) {
+        var id = d.getAttribute("data-toggle");
+        var url = "/facilities/" + id + "/toggle_verify"
+        $.ajax({
+          type: "GET",
+          url: url,
+          success: function(response) {
+            var ufid = "uf-" + id;
+
+            //Change the 'status' of the facility
+            var statusQuery = 'ul#'+ufid+' > li > p.status';
+            document.querySelector(statusQuery).innerHTML = (response.verified ? "Live" : "Pending Review");
+
+            //Change the 'last updated' field of the facility
+            var lastUpdatedQuery = 'ul#'+ufid+' > li.updated';
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            today = mm + '/' + dd + '/' + yyyy;
+            document.querySelector(lastUpdatedQuery).innerHTML = today;
+          }
         });
+        // event.preventDefault();
+      };
+
+      $(function() {
+          $('a#report-button').click(function (event) {
+              $('div#report').toggle();
+              this.innerHTML = (this.innerHTML == "Show Reports") ? "Hide Reports" : "Show Reports";
+          });
       });
+
+
 
 
     </script>
