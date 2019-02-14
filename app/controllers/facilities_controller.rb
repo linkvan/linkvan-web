@@ -240,13 +240,11 @@ class FacilitiesController < ApplicationController
     @facility = Facility.find(params[:id])
     if @facility.verified == true
       @facility.update_attribute(:verified, false)
-      @facility.save
-      redirect_to @current_user, notice: "Facility not verified"
     else
       @facility.update_attribute(:verified, true)
-      @facility.save
-      redirect_to @current_user, notice: "Facility verified"
     end
+    @facility.save
+    render json: {verified: @facility.verified}
   end
 
 	def edit

@@ -26,15 +26,15 @@ class UsersController < ApplicationController
   def toggle_verify
     @current_user = User.find(session[:user_id])
     @user = User.find(params[:id])
+    # if user is an admin, do not allow them to change status of another admin
+    # should also make sure admin is the one making the request
     if @user.verified == true
       @user.update_attribute(:verified, false)
-      @user.save
-      redirect_to @current_user, notice: "User is not verified"
     else
       @user.update_attribute(:verified, true)
-      @user.save
-      redirect_to @current_user, notice: "User is verified"
     end
+    @user.save
+    render json: {verified: @user.verified}
   end
 
 	def new

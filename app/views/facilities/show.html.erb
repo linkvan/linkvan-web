@@ -192,16 +192,24 @@
   </div>
 <br>
 
-<div>
+<% if current_user_admin? %>
+      <h2>Change Status of Facility</h2>
+      <div class="inset" id="last-updated">
+        <span><b>Facility Status: </b></span>
+        <p class="status"><%= @facVerified = @facility.verified ? "Live" : "Pending Review" %></p>
+        <label class="form-switch">
+          <input type="checkbox" <%= @facility.verified ? "checked" : "" %>>
+            <i id="toggle" data-toggle="<%= @facility.id %>" onclick="toggleCurrentFac(this);"></i>
+        </label>
+      </div>
+<% end %>
+  <br>
+
 <% if correct_user_or_admin? %>
-  <%= link_to "Edit", edit_facility_path%>
-  <% if current_user_admin? %>
-    <%= link_to "Delete", @facility, method: :delete, data: {confirm: 'Are you sure?'}%>
-  <% end %>
+  <h2><%= link_to "Edit Facility", edit_facility_path%></h2>
+  <h2><%= link_to "Delete Facility", @facility, method: :delete, data: {confirm: 'Are you sure?'}%></h2>
 <% end %>
 </div>
-</div>
-<!--</div>-->
 
 
 
@@ -209,6 +217,7 @@
 <%= content_tag :div, class: "temp_information", data: {jsevent: @facility} do %>
 <% end %>
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSLM-Bv5YwI1Ecw2OrMDQF8fZxik6FTzs"></script>
 <script>
 var jsevent = $('.temp_information').data('jsevent');
@@ -283,7 +292,28 @@ function moreInfo(service) {
         });
         $(id).fadeIn();
     }
-}
+};
+
+//var test = $(this).data("test");
+//console.log(test);
+
+
+function toggleCurrentFac(d,event) {
+    var id = d.getAttribute("data-toggle");
+    var url = "/facilities/" + id + "/toggle_verify";
+    $.ajax({
+        type: "GET",
+        url: url,
+        success: function(response) {
+            //Change the 'status' of the facility
+            var statusQuery = 'div > p.status';
+            document.querySelector(statusQuery).innerHTML = (response.verified ? "Live" : "Pending Review");
+
+        }
+    });
+    // event.preventDefault();
+};
+
 
 //Hover functionality
 $(function(){
@@ -308,5 +338,6 @@ $(function(){
         });
     })
 });
+
 
 </script>
