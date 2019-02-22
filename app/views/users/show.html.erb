@@ -15,13 +15,17 @@
             In the meantime you can add a new facility! :)
           </div>
         <% end %>
-        <p><%= link_to "Add New Facility ", new_facility_path, class: "btn btn-primary"%> </p>
-        <br>
-        <% if (@user.admin == true) %>
-            <%= link_to 'Download CSV list', users_path(format: :csv) %>
-            <br>
-        <% end %>
-        <br>
+        <div>
+          <p style="display:inline-block;"><%= link_to "Add New Facility ", new_facility_path, class: "btn btn-primary"%> </p>
+          <% if (@user.admin == true) %>
+              <p style="display:inline-block;"></p>
+              <p style="display:inline-block;"><%= link_to 'Download User CSV', users_path(format: :csv), class: "btn btn-primary"  %></p>
+              <p style="display:inline-block;"></p>
+              <p style="display:inline-block;"><%= link_to 'Download Facility CSV', facilities_path(format: :csv), class: "btn btn-primary"  %></p>
+          <% end %>
+          <br>
+          <br>
+        </div>
 
         <%= render 'shared/admin_nav' %>
         <br>
