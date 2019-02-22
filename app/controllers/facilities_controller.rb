@@ -8,6 +8,11 @@ class FacilitiesController < ApplicationController
     @facilities = Facility.all
     @alert = Alert.where(active: true).first
     @notices = Notice.where(published: true)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @facilities.to_csv, filename: "facilities-#{Date.today}.csv" }
+    end
   end
 
 

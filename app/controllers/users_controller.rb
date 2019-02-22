@@ -7,13 +7,9 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @facilities = Facility.where(verified: true)
     respond_to do |format|
       format.html
-      format.csv do
-        headers['Content-Disposition'] = "attachment; filename=\"user-facility-list\""
-        headers['Content-Type'] ||= 'csv/text'
-      end
+      format.csv { send_data @users.to_csv, filename: "users-#{Date.today}.csv" }
     end
   end
 
