@@ -12,6 +12,7 @@ Linkvan::Application.routes.draw do
   get "contact_form/create"
   resource :session
   resources :users
+  resources :facilities
 
   get 'facilities/options', to: 'facilities#options'
   get 'facilities/directions/:id', to: 'facilities#directions'
@@ -29,7 +30,7 @@ Linkvan::Application.routes.draw do
   get 'contact', to: 'messages#new', as: 'contact'
   post 'contact', to: 'messages#create'
   get 'users/:id/toggle_verify' => "users#toggle_verify"
-  get 'facilities/:id/toggle_verify' => "facilities#toggle_verify"
+  get 'facilities/:id/toggle_verify' => "facilities#toggle_verify", as: 'toggle_facilities'
   get 'alerts' => 'alerts#index'
   get 'alerts/:id/active' => 'alerts#active'
   get 'alerts/:id/deactive' => 'alerts#deactive'
