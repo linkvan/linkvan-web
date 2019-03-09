@@ -284,10 +284,11 @@ module FacilitiesHelper
 		if word == "all"
 			@facilities = Facility.all.where(:verified => true)
 		else
-		#
-		# @facilities = Facility.where("services ~* ?", word).where(:verified => true)
-		# if @facilities.exists?
-			@facilities = Facility.where("welcomes ~* ?", word).where(:verified => true)
+
+		@facilities = Facility
+			.where(["services LIKE ? OR welcomes LIKE ?", "%#{word}%", "%#{word}%"])
+			.where(["verified = ?", 1])
+
 		end
 	end
 
