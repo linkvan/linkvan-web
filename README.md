@@ -19,4 +19,4 @@ To execute the app on your computer proceed as follows:
 3. rails server
 4. load http://localhost:3000 on your web browser.
 
-Plase see the linkvan-web app [contribution guidelines](CONTRIBUTING.md) for  further details regarding how to contribute to the project.
+Please see the linkvan-web app [contribution guidelines](CONTRIBUTING.md) for  further details regarding how to contribute to the project.
