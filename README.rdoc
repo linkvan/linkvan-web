@@ -1,7 +1,0 @@
-== README
-
-linkvan-web is a Rails translation of Zendesk's awesome open source linksf project: https://github.com/zendesk/linksf.
-
-The purpose of linkvan-web is to connect people in need to the services they require.
-
-The latest version of linkvan can be found here: https://linkvan.ca/
