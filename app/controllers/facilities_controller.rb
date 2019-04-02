@@ -212,10 +212,10 @@ class FacilitiesController < ApplicationController
       if isKeyword
         keywordSearch(getKeyword(params[:search]))
       else
-        @facilities = Facility.search(params[:search]).where(:verified => true)
+        @facilities = Facility.search(params[:search]).verified?
       end
     else
-      @facilities = Facility.all.where(:verified => true)
+      @facilities = Facility.all.verified?
     end
   end
 
