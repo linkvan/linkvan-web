@@ -43,8 +43,7 @@ gem 'bcrypt', '3.1.10'
 gem 'rake-compiler', '~> 0.9.2'
 
 group :test do
-  gem 'rspec-rails', '~> 3.8'
-  # gem 'test-unit'
+  gem 'rspec', '>= 3'
 end
 
 gem 'impressionist'
