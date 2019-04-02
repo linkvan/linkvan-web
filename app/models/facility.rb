@@ -7,10 +7,15 @@ class Facility < ActiveRecord::Base
 
 	# is_impressionable
 
+	scope :verified?, -> {
+		where('verified = true') if (Rails.env.development? or Rails.env.test?)
+		where(verified: true) if Rails.env.production?
+	}
+
 	def self.search(search)
-		#where("name ILIKE ?", "%#{search}%") for production
-		#where("name LIKE ?", "%#{search}%") for development
-  		where("name ILIKE ?", "%#{search}%")
+		where("name ILIKE ?", "%#{search}%") if Rails.env.production?
+		where("lower(name) LIKE lower(?)", "%#{search}%") if (Rails.env.development? or Rails.env.test?)
+  		# where("name ILIKE ?", "%#{search}%")
 	end
 
 	def self.contains_service(service_query, prox, open, ulat, ulong)
