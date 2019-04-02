@@ -50,7 +50,9 @@ gem 'test-unit'
 
 gem 'rake-compiler', '~> 0.9.2'
 
-gem 'rspec', '>= 3'
+group :test do
+  gem 'rspec', '>= 3'
+end
 
 gem 'impressionist'
 
