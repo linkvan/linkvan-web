@@ -1,0 +1,74 @@
+# ..........................................
+
+open_all_day:
+    id: 85
+    name: Test
+    services: Legal
+    lat: 49.2792033
+    long: -123.09930370000001
+    open_all_day_mon: 1
+    open_all_day_tues: 1
+    open_all_day_wed: 1
+    open_all_day_thurs: 1
+    open_all_day_fri: 1
+    open_all_day_sat: 1
+    open_all_day_sun: 1
+    closed_all_day_mon: 0
+    closed_all_day_tues: 0
+    closed_all_day_wed: 0
+    closed_all_day_thurs: 0
+    closed_all_day_fri: 0
+    closed_all_day_sat: 0
+    closed_all_day_sun: 0
+    user_id: 1
+    verified: 1
+# ...
+
+# ..........................................
+close_all_day:
+    id: 88
+    name: test
+    services: Shelter Food
+    lat: 49.2792033
+    long: -123.09930359999998
+    open_all_day_mon: 0
+    open_all_day_tues: 0
+    open_all_day_wed: 0
+    open_all_day_thurs: 0
+    open_all_day_fri: 0
+    open_all_day_sat: 0
+    open_all_day_sun: 0
+    closed_all_day_mon: 1
+    closed_all_day_tues: 1
+    closed_all_day_wed: 1
+    closed_all_day_thurs: 1
+    closed_all_day_fri: 1
+    closed_all_day_sat: 1
+    closed_all_day_sun: 1
+    user_id: 1
+    verified: 1
+# ...
+
+# ..........................................
+open_all_day_nearby:
+    id: 100000
+    name: ZTest
+    services: Legal
+    lat: 49.2792030
+    long: -123.09930370000001
+    open_all_day_mon: 1
+    open_all_day_tues: 1
+    open_all_day_wed: 1
+    open_all_day_thurs: 1
+    open_all_day_fri: 1
+    open_all_day_sat: 1
+    open_all_day_sun: 1
+    closed_all_day_mon: 0
+    closed_all_day_tues: 0
+    closed_all_day_wed: 0
+    closed_all_day_thurs: 0
+    closed_all_day_fri: 0
+    closed_all_day_sat: 0
+    closed_all_day_sun: 0
+    user_id: 1
+    verified: 1
