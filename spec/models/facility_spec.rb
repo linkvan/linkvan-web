@@ -10,14 +10,14 @@ RSpec.describe Facility do
                 let(:open_all_day) { facilities(:open_all_day) }
                 ['Near', 'Name'].each { |prox|
                     context "prox='#{prox}'," do
-                        it "should return a facility if open='Yes'" do
+                        it "should return a facility for open='Yes'" do
                             service_string = open_all_day.services
                             ulat = open_all_day.lat
                             ulong = open_all_day.long
                             searched_facility = Facility.contains_service(service_string, prox, "Yes", ulat, ulong)
                             expect(searched_facility).to include(open_all_day)
                         end
-                        it "should not return a facility if open='No'" do
+                        it "should not return a facility for open='No'" do
                             service_string = open_all_day.services
                             ulat = open_all_day.lat
                             ulong = open_all_day.long
@@ -31,14 +31,14 @@ RSpec.describe Facility do
                 let(:close_all_day) { facilities(:close_all_day) }
                 ['Near', 'Name'].each { |prox|
                     context "prox='#{prox}'," do
-                        it "should return a facility if open='Yes'" do
+                        it "should return a facility for open='Yes'" do
                             service_string = close_all_day.services
                             ulat = close_all_day.lat
                             ulong = close_all_day.long
                             searched_facility = Facility.contains_service(service_string, prox, "Yes", ulat, ulong)
                             expect(searched_facility).to be_empty
                         end
-                        it "should not return a facility if open='No'" do
+                        it "should not return a facility for open='No'" do
                             service_string = close_all_day.services
                             ulat = close_all_day.lat
                             ulong = close_all_day.long
@@ -54,7 +54,7 @@ RSpec.describe Facility do
                 let(:open_all_day_nearby) { facilities(:open_all_day_nearby) }
 
                 it 'should sort by name' do
-                    expected_order = [open_all_day, open_all_day_nearby]
+                    expected_order = [open_all_day, open_all_day_nearby].sort_by(&:name)
                     service_string = open_all_day.services
                     ulat = open_all_day_nearby.lat
                     ulong = open_all_day_nearby.long
@@ -62,7 +62,7 @@ RSpec.describe Facility do
                     expect(searched_facility).to eq(expected_order)
                 end
                 it 'should sort by proximity' do
-                    expected_order = [open_all_day_nearby, open_all_day]  #/ using open_all_day_nearby as base to make sure it's sorting.
+                    expected_order = [open_all_day_nearby, open_all_day] #/ using open_all_day_nearby as base to make sure it's sorting.
                     service_string = open_all_day.services
                     ulat = open_all_day_nearby.lat
                     ulong = open_all_day_nearby.long
