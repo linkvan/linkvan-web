@@ -18,3 +18,7 @@
 .ruby-version
 
 .DS_Store
+
+# Ignore Visual Studio Code
+.vscode
+
