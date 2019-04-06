@@ -72,3 +72,28 @@ open_all_day_nearby:
     closed_all_day_sun: 0
     user_id: 1
     verified: 1
+# ...
+
+# ..........................................
+open_commercial:
+    id: 99
+    name: ZZTest
+    services: Technology
+    lat: 49.2792030
+    long: -123.09930370000001
+    open_all_day_mon: 0
+    open_all_day_tues: 0
+    open_all_day_wed: 0
+    open_all_day_thurs: 0
+    open_all_day_fri: 0
+    open_all_day_sat: 0
+    open_all_day_sun: 0
+    closed_all_day_mon: 0
+    closed_all_day_tues: 0
+    closed_all_day_wed: 0
+    closed_all_day_thurs: 0
+    closed_all_day_fri: 0
+    closed_all_day_sat: 0
+    closed_all_day_sun: 0
+    user_id: 1
+    verified: 1

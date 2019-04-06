@@ -19,6 +19,10 @@ class Facility < ActiveRecord::Base
 	end
 
 	def self.contains_service(service_query, prox, open, ulat, ulong)
+		# TODO: Currently this method (Needs fix to simplify):
+		#   - Fields like 'endsun_at' is using full DateTime, which makes
+		#         impossible to reasonable checks of open/closed facilities.
+		#	- This method also compares open and close times with 8.hours.ago.
 		arr = Array.new
 		distarr = Array.new
 		day = 8.hours.ago.wday
@@ -1507,7 +1511,7 @@ class Facility < ActiveRecord::Base
 	def open_soon_filter(facility_array)
 		temp_arr = Array.new
 		temp arr = facility_array
-		facility =
+		# facility =
 		#time difference between open and closed in seconds
 		tdiff = 30*60
 		t = Time.now
