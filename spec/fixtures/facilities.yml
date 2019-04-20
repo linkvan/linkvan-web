@@ -6,22 +6,22 @@ open_all_day:
     services: Legal
     lat: 49.2792033
     long: -123.09930370000001
-    open_all_day_mon: 1
-    open_all_day_tues: 1
-    open_all_day_wed: 1
-    open_all_day_thurs: 1
-    open_all_day_fri: 1
-    open_all_day_sat: 1
-    open_all_day_sun: 1
-    closed_all_day_mon: 0
-    closed_all_day_tues: 0
-    closed_all_day_wed: 0
-    closed_all_day_thurs: 0
-    closed_all_day_fri: 0
-    closed_all_day_sat: 0
-    closed_all_day_sun: 0
+    open_all_day_mon: true
+    open_all_day_tues: true
+    open_all_day_wed: true
+    open_all_day_thurs: true
+    open_all_day_fri: true
+    open_all_day_sat: true
+    open_all_day_sun: true
+    closed_all_day_mon: false
+    closed_all_day_tues: false
+    closed_all_day_wed: false
+    closed_all_day_thurs: false
+    closed_all_day_fri: false
+    closed_all_day_sat: false
+    closed_all_day_sun: false
     user_id: 1
-    verified: 1
+    verified: true
 # ...
 
 # ..........................................
@@ -31,22 +31,22 @@ close_all_day:
     services: Shelter Food
     lat: 49.2792033
     long: -123.09930359999998
-    open_all_day_mon: 0
-    open_all_day_tues: 0
-    open_all_day_wed: 0
-    open_all_day_thurs: 0
-    open_all_day_fri: 0
-    open_all_day_sat: 0
-    open_all_day_sun: 0
-    closed_all_day_mon: 1
-    closed_all_day_tues: 1
-    closed_all_day_wed: 1
-    closed_all_day_thurs: 1
-    closed_all_day_fri: 1
-    closed_all_day_sat: 1
-    closed_all_day_sun: 1
+    open_all_day_mon: false
+    open_all_day_tues: false
+    open_all_day_wed: false
+    open_all_day_thurs: false
+    open_all_day_fri: false
+    open_all_day_sat: false
+    open_all_day_sun: false
+    closed_all_day_mon: true
+    closed_all_day_tues: true
+    closed_all_day_wed: true
+    closed_all_day_thurs: true
+    closed_all_day_fri: true
+    closed_all_day_sat: true
+    closed_all_day_sun: true
     user_id: 1
-    verified: 1
+    verified: true
 # ...
 
 # ..........................................
@@ -56,22 +56,22 @@ open_all_day_nearby:
     services: Legal
     lat: 49.2792030
     long: -123.09930370000001
-    open_all_day_mon: 1
-    open_all_day_tues: 1
-    open_all_day_wed: 1
-    open_all_day_thurs: 1
-    open_all_day_fri: 1
-    open_all_day_sat: 1
-    open_all_day_sun: 1
-    closed_all_day_mon: 0
-    closed_all_day_tues: 0
-    closed_all_day_wed: 0
-    closed_all_day_thurs: 0
-    closed_all_day_fri: 0
-    closed_all_day_sat: 0
-    closed_all_day_sun: 0
+    open_all_day_mon: true
+    open_all_day_tues: true
+    open_all_day_wed: true
+    open_all_day_thurs: true
+    open_all_day_fri: true
+    open_all_day_sat: true
+    open_all_day_sun: true
+    closed_all_day_mon: false
+    closed_all_day_tues: false
+    closed_all_day_wed: false
+    closed_all_day_thurs: false
+    closed_all_day_fri: false
+    closed_all_day_sat: false
+    closed_all_day_sun: false
     user_id: 1
-    verified: 1
+    verified: true
 # ...
 
 # ..........................................
@@ -81,19 +81,19 @@ open_commercial:
     services: Technology
     lat: 49.2792030
     long: -123.09930370000001
-    open_all_day_mon: 0
-    open_all_day_tues: 0
-    open_all_day_wed: 0
-    open_all_day_thurs: 0
-    open_all_day_fri: 0
-    open_all_day_sat: 0
-    open_all_day_sun: 0
-    closed_all_day_mon: 0
-    closed_all_day_tues: 0
-    closed_all_day_wed: 0
-    closed_all_day_thurs: 0
-    closed_all_day_fri: 0
-    closed_all_day_sat: 0
-    closed_all_day_sun: 0
+    open_all_day_mon: false
+    open_all_day_tues: false
+    open_all_day_wed: false
+    open_all_day_thurs: false
+    open_all_day_fri: false
+    open_all_day_sat: false
+    open_all_day_sun: false
+    closed_all_day_mon: false
+    closed_all_day_tues: false
+    closed_all_day_wed: false
+    closed_all_day_thurs: false
+    closed_all_day_fri: false
+    closed_all_day_sat: false
+    closed_all_day_sun: false
     user_id: 1
-    verified: 1
+    verified: true
