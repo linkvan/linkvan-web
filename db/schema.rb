@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20170424013616) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "alerts", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
@@ -118,7 +121,7 @@ ActiveRecord::Schema.define(version: 20170424013616) do
     t.text     "learning_note"
   end
 
-  add_index "facilities", ["user_id"], name: "index_facilities_on_user_id"
+  add_index "facilities", ["user_id"], name: "index_facilities_on_user_id", using: :btree
 
   create_table "impressions", force: :cascade do |t|
     t.string   "impressionable_type"
@@ -136,14 +139,14 @@ ActiveRecord::Schema.define(version: 20170424013616) do
     t.datetime "updated_at"
   end
 
-  add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index"
-  add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index"
-  add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
-  add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
-  add_index "impressions", ["user_id"], name: "index_impressions_on_user_id"
+  add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index", using: :btree
+  add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index", using: :btree
+  add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index", using: :btree
+  add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", using: :btree
+  add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
   create_table "listed_options", force: :cascade do |t|
     t.integer  "analytic_id"
@@ -154,7 +157,7 @@ ActiveRecord::Schema.define(version: 20170424013616) do
     t.decimal  "total",       null: false
   end
 
-  add_index "listed_options", ["analytic_id"], name: "index_listed_options_on_analytic_id"
+  add_index "listed_options", ["analytic_id"], name: "index_listed_options_on_analytic_id", using: :btree
 
   create_table "notices", force: :cascade do |t|
     t.string   "title"
