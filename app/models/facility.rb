@@ -82,32 +82,31 @@ class Facility < ActiveRecord::Base
 
 		#first query db for any facility whose services contains the service_query
 		#and store in array arr
-		arr = Facility.search_by_services(service_query).is_verified
+		searched_facilities = Facility.search_by_services(service_query).is_verified
 
-		temp_arr = Array.new
-		dist_arr = Array.new
-		arr.each do |facility|
+		# Select facilities
+		selected_facilities = Array.new
+		searched_facilities.each do |facility|
 			if (open=="Yes")
 				if facility.is_open?(8.hours.ago)
-					temp_arr.push facility
-					dist_arr.push facility.distance(ulat, ulong)
+					selected_facilities.push facility
 				end
 			elsif (open=="No")
 				if facility.is_closed?(8.hours.ago)
-					temp_arr.push facility
-					dist_arr.push facility.distance(ulat, ulong)
+					selected_facilities.push facility
 				end
 			# else
 			#   # Only for Testing purposes (should delete these lines later)
 			# 	raise 'Error! Should not go into this one'
 			end
-		end #/arr.each
+		end #/searched_facilities.each
 
+		# Sorts out selected facilities.
 		ret_arr = Array.new
 		if (prox=="Near")
-			ret_arr = temp_arr.sort{ |f| f.distance(ulat, ulong) }
+			ret_arr = selected_facilities.sort{ |f| f.distance(ulat, ulong) }
 		elsif (prox=="Name")
-			ret_arr = temp_arr.sort_by(&:name)
+			ret_arr = selected_facilities.sort_by(&:name)
 		end #/prox == Near, Name
 
 		return ret_arr
