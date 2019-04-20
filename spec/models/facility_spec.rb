@@ -230,7 +230,7 @@ RSpec.describe Facility do
                                     # # Facility#contain_services compare facility time fields with '8.hours.ago'
                                     # #    I couldn't figure out exactly why, but I'm guessing it's been 
                                     # #    doing this because of Timezone (UTC x PST).
-                                    # FNL
+                                    # FNL - May be for Openning Soon facilities
                                     # TODO: SHOULD THIS PREVIOUS BEHAVIOUR STILL BE CONSIDERED? SEEMS TO BE A BUG
                                     # it 'should still return a facility when current time is equal to the start time' do
                                     #     ctime = time_obj(tdate, :morning)
@@ -249,7 +249,7 @@ RSpec.describe Facility do
                                         searched_facility = Facility.contains_service(service_string, prox, "No", ulat, ulong)
                                         expect(searched_facility).to be_empty
                                     end
-                                    # FNL
+                                    # FNL - May be for Closing Soon facilities
                                     # TODO: SHOULD THIS PREVIOUS BEHAVIOUR STILL BE CONSIDERED? SEEMS TO BE A BUG
                                     # it 'should not return a facility when current time is equal to close time' do
                                     #     allow(Time).to receive(:now).and_return(time_obj(tdate, :night)+8.hours)
