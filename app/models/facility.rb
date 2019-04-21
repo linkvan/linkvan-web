@@ -8,20 +8,14 @@ class Facility < ActiveRecord::Base
 	# is_impressionable
 
 	scope :is_verified, -> {
-		# where("verified = 't'") if (Rails.env.development? or Rails.env.test?)
-		# where(verified: true) if Rails.env.production?
 		where(verified: true)
 	}
 
 	def self.search(search)
-		# where("lower(name) LIKE lower(?)", "%#{search}%") if (Rails.env.development? or Rails.env.test?)
-		# where("name ILIKE ?", "%#{search}%") if Rails.env.production?
   		where("name ILIKE ?", "%#{search}%")
 	end #/search
 
 	def self.search_by_services(search)
-		# where("lower(services) LIKE lower(?)", "%#{search}%") if (Rails.env.development? or Rails.env.test?)
-		# where("services ILIKE ?", "%#{search}%") if Rails.env.production?
 		where("services ILIKE ?", "%#{search}%")
 	end #/search_by_services
 
@@ -72,19 +66,19 @@ class Facility < ActiveRecord::Base
 	end
 
 	def self.contains_service(service_query, prox, open, ulat, ulong)
-		# TODO: Currently this method (Needs fix to simplify):
-		#   - Fields like 'endsun_at' is using full DateTime, which makes
-		#         impossible reasonable checks of open/closed facilities.
+		# TODO: This method could be improved:
+		#   - Fields like 'endsun_at' are using full DateTime, which makes
+		#         impossible to reasonably check open/closed facilities.
 		#	- This method also compares open and close times with 8.hours.ago.
-		#         If this is related with timezone, we should probably change this.
+		#         If this is related with timezone, we should probably change it.
 		ulat = ulat.to_d
 		ulong = ulong.to_d
 
-		#first query db for any facility whose services contains the service_query
-		#and store in array arr
+		# First query db for any verified facility whose services contains the service_query
+		#   and store in searched_facilities
 		searched_facilities = Facility.search_by_services(service_query).is_verified
 
-		# Select facilities
+		# Select Opened/Closed facilities
 		selected_facilities = Array.new
 		searched_facilities.each do |facility|
 			if (open=="Yes")
@@ -95,9 +89,10 @@ class Facility < ActiveRecord::Base
 				if facility.is_closed?(8.hours.ago)
 					selected_facilities.push facility
 				end
-			# else
-			#   # Only for Testing purposes (should delete these lines later)
-			# 	raise 'Error! Should not go into this one'
+			else
+			  # Only for Testing purposes (should delete these lines later)
+			  return []
+			  # raise 'Error! Should not go into this one'
 			end
 		end #/searched_facilities.each
 
