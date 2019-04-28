@@ -19,7 +19,12 @@ class Facility < ActiveRecord::Base
 		where("services ILIKE ?", "%#{search}%")
 	end #/search_by_services
 
-	def is_open?(ctime = Time.now)
+	def self.adjusted_current_time
+		# Returns current server time subtracted by 8 hours.
+		8.hours.ago
+	end #/adjusted_current_time
+
+	def is_open?( ctime = Facility.adjusted_current_time )
 		cday = ctime.wday
 		weekdays = [ :sun, :mon, :tues, :wed, :thurs, :fri, :sat ]
 		wday = weekdays[cday]
@@ -36,24 +41,29 @@ class Facility < ActiveRecord::Base
 		return ret
 	end #/is_open?
 
-	def is_closed?(ctime = Time.now)
+	def is_closed?(ctime = Facility.adjusted_current_time)
 		!self.is_open?(ctime)
 	end #/is_closed?
 
 	def time_in_range?(ctime, wday)
-		open1  = translate_time(ctime, self["starts#{wday}_at"])
-		open2  = translate_time(ctime, self["starts#{wday}_at2"])
-		close1 = translate_time(ctime, self["ends#{wday}_at"])
-		close2 = translate_time(ctime, self["ends#{wday}_at2"])
+		# We consider Facilities opening in 5 mins as an Opened Facilty.
+		open1  = Facility.translate_time(ctime, self["starts#{wday}_at"])
+		open2  = Facility.translate_time(ctime, self["starts#{wday}_at2"])
+		close1 = Facility.translate_time(ctime, self["ends#{wday}_at"])
+		close2 = Facility.translate_time(ctime, self["ends#{wday}_at2"])
+		open1 = 5.minutes.until(open1)
+		open2 = 5.minutes.until(open2)
+		close1 = 5.minutes.until(close1)
+		close2 = 5.minutes.until(close2)
 
-		 if ( ctime >= open1 && ctime < close1 ) || (ctime >= open2 && ctime < close2 )
+		if ( ctime >= open1 && ctime < close1 ) || ( ctime >= open2 && ctime < close2 )
 			return true
-		 else
+		else
 			return false
-		 end
+		end
 	end #/time_in_range?
 
-	def translate_time(cdate, ftime)
+	def self.translate_time(cdate, ftime)
 		newdate = cdate.strftime('%Y-%m-%d')
 		newtime = ftime.to_s(:time)
 		newzone = ftime.zone
@@ -82,11 +92,11 @@ class Facility < ActiveRecord::Base
 		selected_facilities = Array.new
 		searched_facilities.each do |facility|
 			if (open=="Yes")
-				if facility.is_open?(8.hours.ago)
+				if facility.is_open?
 					selected_facilities.push facility
 				end
 			elsif (open=="No")
-				if facility.is_closed?(8.hours.ago)
+				if facility.is_closed?
 					selected_facilities.push facility
 				end
 			else
