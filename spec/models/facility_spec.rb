@@ -39,12 +39,9 @@ end #/time_obj
 RSpec.describe Facility do
 
     describe '#translate_time' do
-        before :each do
-            @facility = Facility.create!(fields_data)
-        end
         it 'should return ftime formated with date part of cdate' do
             right_translated_time = time_obj(:mon, :morning)
-            translated_time = @facility.translate_time(time_obj(:mon, :night), time_obj(:sun, :morning))
+            translated_time = Facility.translate_time(time_obj(:mon, :night), time_obj(:sun, :morning))
             expect(translated_time).to eq(right_translated_time)
         end
     end #/translate_time
@@ -76,33 +73,68 @@ RSpec.describe Facility do
             time_is_in_range = @facility.time_in_range?(ctime, wday)
             expect(time_is_in_range).to eq(false)
         end
-        it "should return false when ctime is equal to facility's close of that wday (mid day)" do
-            ctime = Time.zone.parse("2015-05-03 13:00:00")
-            wday = :mon
-            time_is_in_range = @facility.time_in_range?(ctime, wday)
-            expect(time_is_in_range).to eq(false)
-        end
-        it "should return false when ctime is equal to facility's close of that wday (end of day)" do
-            ctime = Time.zone.parse("2015-05-03 18:00:00")
-            wday = :mon
-            time_is_in_range = @facility.time_in_range?(ctime, wday)
-            expect(time_is_in_range).to eq(false)
-        end
-        it "should return true if ctime is equal to facility's open that wday (begin of day)" do
-            ctime = Time.zone.parse("2015-05-03 09:00:00")
-            wday = :mon
-            time_is_in_range = @facility.time_in_range?(ctime, wday)
-            expect(time_is_in_range).to eq(true)
-        end
-        it "should return true if ctime is equal to facility's open that wday (mid day)" do
-            ctime = Time.zone.parse("2015-05-03 14:00:00")
-            wday = :mon
-            time_is_in_range = @facility.time_in_range?(ctime, wday)
-            expect(time_is_in_range).to eq(true)
-        end
+        context "5 mins threshold" do
+            context "close time" do
+                it "should return true when ctime is 6 mins to facility's close of that wday (end of day)" do
+                    ctime = Time.zone.parse("2015-05-03 17:54:00")
+                    wday = :mon
+                    time_is_in_range = @facility.time_in_range?(ctime, wday)
+                    expect(time_is_in_range).to eq(true)
+                end
+                it "should return false when ctime is 5 mins to facility's close of that wday (end of day)" do
+                    ctime = Time.zone.parse("2015-05-03 17:55:00")
+                    wday = :mon
+                    time_is_in_range = @facility.time_in_range?(ctime, wday)
+                    expect(time_is_in_range).to eq(false)
+                end
+                it "should return true when ctime is 6 mins before facility's close time of that wday (mid day)" do
+                    ctime = Time.zone.parse("2015-05-03 12:54:00")
+                    wday = :mon
+                    time_is_in_range = @facility.time_in_range?(ctime, wday)
+                    expect(time_is_in_range).to eq(true)
+                end
+                it "should return false when ctime is 5 mins before facility's close time of that wday (mid day)" do
+                    ctime = Time.zone.parse("2015-05-03 12:55:00")
+                    wday = :mon
+                    time_is_in_range = @facility.time_in_range?(ctime, wday)
+                    expect(time_is_in_range).to eq(false)
+                end
+            end #/close time
+            context "open time" do
+                it "should return false if ctime is 6 mins before facility's open time that wday (begin of day)" do
+                    ctime = Time.zone.parse("2015-05-03 08:54:00")
+                    wday = :mon
+                    time_is_in_range = @facility.time_in_range?(ctime, wday)
+                    expect(time_is_in_range).to eq(false)
+                end
+                it "should return true if ctime is 5 mins before facility's open time that wday (begin of day)" do
+                    ctime = Time.zone.parse("2015-05-03 08:55:00")
+                    wday = :mon
+                    time_is_in_range = @facility.time_in_range?(ctime, wday)
+                    expect(time_is_in_range).to eq(true)
+                end
+                it "should return false if ctime is 6 mins before facility's open time that wday (mid day)" do
+                    ctime = Time.zone.parse("2015-05-03 13:54:00")
+                    wday = :mon
+                    time_is_in_range = @facility.time_in_range?(ctime, wday)
+                    expect(time_is_in_range).to eq(false)
+                end
+                it "should return true if ctime is 5 mins before facility's open time that wday (mid day)" do
+                    ctime = Time.zone.parse("2015-05-03 13:55:00")
+                    wday = :mon
+                    time_is_in_range = @facility.time_in_range?(ctime, wday)
+                    expect(time_is_in_range).to eq(true)
+                end
+            end #/open time
+        end #/5 mins threshold
 
     end #/time_in_range?
     describe '#is_open?' do
+        it "should call facility.time_in_range?" do
+            facility = Facility.create!(fields_data)
+            expect(facility).to receive(:time_in_range?)
+            facility.is_open?
+        end
         weekdays_hash.each { |wday, tdate|
 
             context "on #{wday}," do
