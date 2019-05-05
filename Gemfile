@@ -7,15 +7,8 @@ gem "geocoder"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 
-# Use sqlite3 as the database for Active Record
-
-group :development, :test do
-	gem 'sqlite3'
-end
-
-group :production do
-	gem 'pg', '~> 0.20'
-end
+# Use PostgreSQL as the database
+gem 'pg', '~> 0.20'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
@@ -46,12 +39,12 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '3.1.10'
 
-gem 'test-unit'
 
 gem 'rake-compiler', '~> 0.9.2'
 
 group :test do
-  gem 'rspec', '>= 3'
+  gem 'rspec-rails', '~> 3.8'
+  # gem 'test-unit'
 end
 
 gem 'impressionist'
