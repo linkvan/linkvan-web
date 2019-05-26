@@ -11,8 +11,13 @@ class Facility < ActiveRecord::Base
 		where(verified: true)
 	}
 
+	scope :keywordSearch, ->(word){
+		where(["services ILIKE ? OR welcomes ILIKE ?", "%#{word}%", "%#{word}%"]) unless word == 'all'
+	}
+
 	def self.search(search)
-  		where("name ILIKE ?", "%#{search}%")
+		return all if search.empty?
+    where("name ILIKE ?", "%#{search}%")
 	end #/search
 
 	def self.search_by_services(search)

@@ -208,16 +208,13 @@ class FacilitiesController < ApplicationController
   end
 
   def search
-    if params[:search]
-      if isKeyword
-        keywordSearch(getKeyword(params[:search]))
-      else
-        @facilities = Facility.search(params[:search]).is_verified
-      end
+    if isKeyword(params[:search])
+      @facilities = Facility.keywordSearch( getKeyword(params[:search]) )
     else
-      @facilities = Facility.all.is_verified
+      @facilities = Facility.search(params[:search]).is_verified
     end
-  end
+    @facilities.is_verified
+  end #/search
 
 
 
@@ -304,7 +301,53 @@ private
                                    :closed_all_day_thurs, :closed_all_day_fri, :closed_all_day_sat, :closed_all_day_sun, :r_pets, :r_id, :r_cart, :r_phone, :r_wifi,
                                       :second_time_mon, :second_time_tues, :second_time_wed, :second_time_thurs, :second_time_fri, :second_time_sat, :second_time_sun,
                                       :shelter_note, :food_note, :medical_note, :hygiene_note, :technology_note, :legal_note, :learning_note )
-	end
+	end #/facility_params
 
+  def getKeyword(word)
+		@word = word
+		@word = @word.strip
+		@word = @word.downcase
+		case @word
+		when "children", "child"
+			return @word = "children"
+		when "youth", "youths"
+			return @word = "youth"
+		when "adult", "adults"
+			return @word = "adult"
+		when "senior", "seniors"
+			return @word = "senior"
+		when "shelter", "house", "housing"
+			return @word = "Shelter"
+		when "food"
+			return @word = "Food"
+		when "medical"
+			return @word = "Medical"
+		when "hygiene", "clean", "cleaning", "shower"
+			return @word = "Hygiene"
+		when "technology", "computer", "tech"
+			return @word = "Technology"
+		when "legal", "law"
+			return @word = "Legal"
+		when "learning", "learn", "education", "teaching", "teach", "teacher"
+			return @word = "Learning"
+		when "suitability", "all", "facilities", "facility"
+			return @word = "all"
+		else
+			return @word
+		end
+	end #/getKeyword
 
-end
+  def isKeyword(search)
+    @word = params[:search]
+    @word = @word.strip
+    @word = @word.downcase
+    case @word
+    when "child", "children", "youth", "youths", "adult", "adults", "senior", "seniors", "suitability", "shelter", "house", "housing", "food", "medical", "hygiene", "clean", "cleaning", "shower", "technology", "computer", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher", "all", "facility", "facilities"
+      return true
+    else
+      return false
+    end
+  end #/isKeyword
+
+end #/FacilitiesController
+
