@@ -17,7 +17,7 @@ class Facility < ActiveRecord::Base
 
 	def self.search(search)
 		return all if search.empty?
-  		where("name ILIKE ?", "%#{search}%")
+    where("name ILIKE ?", "%#{search}%")
 	end #/search
 
 	def self.search_by_services(search)
