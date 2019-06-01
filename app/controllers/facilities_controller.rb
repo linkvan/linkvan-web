@@ -208,10 +208,12 @@ class FacilitiesController < ApplicationController
   end
 
   def search
+
     if isKeyword(params[:search])
       @facilities = Facility.keywordSearch( getKeyword(params[:search]) )
     else
       @facilities = Facility.search(params[:search]).is_verified
+
     end
     @facilities.is_verified
   end #/search
