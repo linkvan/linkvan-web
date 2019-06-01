@@ -234,64 +234,6 @@ module FacilitiesHelper
 		end
 	end
 
-	def isKeyword
-		@word = params[:search]
-		@word = @word.strip
-		@word = @word.downcase
-		case @word
-		when "child", "children", "youth", "youths", "adult", "adults", "senior", "seniors", "suitability", "shelter", "house", "housing", "food", "medical", "hygiene", "clean", "cleaning", "shower", "technology", "computer", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher", "all", "facility", "facilities"
-			return true
-		else
-			return false
-		end
-	end
-
-	def getKeyword(word)
-		@word = word
-		@word = @word.strip
-		@word = @word.downcase
-		case @word
-		when "children", "child"
-			return @word = "children"
-		when "youth", "youths"
-			return @word = "youth"
-		when "adult", "adults"
-			return @word = "adult"
-		when "senior", "seniors"
-			return @word = "senior"
-		when "shelter", "house", "housing"
-			return @word = "Shelter"
-		when "food"
-			return @word = "Food"
-		when "medical"
-			return @word = "Medical"
-		when "hygiene", "clean", "cleaning", "shower"
-			return @word = "Hygiene"
-		when "technology", "computer", "tech"
-			return @word = "Technology"
-		when "legal", "law"
-			return @word = "Legal"
-		when "learning", "learn", "education", "teaching", "teach", "teacher"
-			return @word = "Learning"
-		when "suitability", "all", "facilities", "facility"
-			return @word = "all"
-		else
-			return @word
-		end
-	end
-
-	def keywordSearch(word)
-		if word == "all"
-			@facilities = Facility.all.where(:verified => true)
-		else
-
-		@facilities = Facility
-			.where(["services LIKE ? OR welcomes LIKE ?", "%#{word}%", "%#{word}%"])
-			.where(["verified = ?", 1])
-
-		end
-	end
-
 	def willCloseSoon(facility)
 		columnByDay = {}
 		columnByDay['Mon'] = ['endsmon_at', 'open_all_day_mon']
