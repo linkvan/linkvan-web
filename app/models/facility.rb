@@ -89,6 +89,9 @@ class Facility < ActiveRecord::Base
 		ulat = ulat.to_d
 		ulong = ulong.to_d
 
+		# Using 30 mins delay to show "Opening Soon" and "Closing Soon" facilities.
+		ctime = Facility.adjusted_current_time + 30.minutes
+
 		# First query db for any verified facility whose services contains the service_query
 		#   and store in searched_facilities
 		searched_facilities = Facility.search_by_services(service_query).is_verified
@@ -97,11 +100,11 @@ class Facility < ActiveRecord::Base
 		selected_facilities = Array.new
 		searched_facilities.each do |facility|
 			if (open=="Yes")
-				if facility.is_open?
+				if facility.is_open?(ctime)
 					selected_facilities.push facility
 				end
 			elsif (open=="No")
-				if facility.is_closed?
+				if facility.is_closed?(ctime)
 					selected_facilities.push facility
 				end
 			else
