@@ -18,3 +18,9 @@
 .ruby-version
 
 .DS_Store
+
+# Ignore Visual Studio Code
+.vscode
+
+# Ignore JSON file on db folder.
+/db/*.json

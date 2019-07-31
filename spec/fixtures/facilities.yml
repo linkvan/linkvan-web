@@ -1,0 +1,99 @@
+# ..........................................
+
+open_all_day:
+    id: 85
+    name: Test
+    services: Legal
+    lat: 49.2792033
+    long: -123.09930370000001
+    open_all_day_mon: true
+    open_all_day_tues: true
+    open_all_day_wed: true
+    open_all_day_thurs: true
+    open_all_day_fri: true
+    open_all_day_sat: true
+    open_all_day_sun: true
+    closed_all_day_mon: false
+    closed_all_day_tues: false
+    closed_all_day_wed: false
+    closed_all_day_thurs: false
+    closed_all_day_fri: false
+    closed_all_day_sat: false
+    closed_all_day_sun: false
+    user_id: 1
+    verified: true
+# ...
+
+# ..........................................
+close_all_day:
+    id: 88
+    name: test
+    services: Shelter Food
+    lat: 49.2792033
+    long: -123.09930359999998
+    open_all_day_mon: false
+    open_all_day_tues: false
+    open_all_day_wed: false
+    open_all_day_thurs: false
+    open_all_day_fri: false
+    open_all_day_sat: false
+    open_all_day_sun: false
+    closed_all_day_mon: true
+    closed_all_day_tues: true
+    closed_all_day_wed: true
+    closed_all_day_thurs: true
+    closed_all_day_fri: true
+    closed_all_day_sat: true
+    closed_all_day_sun: true
+    user_id: 1
+    verified: true
+# ...
+
+# ..........................................
+open_all_day_nearby:
+    id: 100000
+    name: ZTest
+    services: Legal
+    lat: 49.2792030
+    long: -123.09930370000001
+    open_all_day_mon: true
+    open_all_day_tues: true
+    open_all_day_wed: true
+    open_all_day_thurs: true
+    open_all_day_fri: true
+    open_all_day_sat: true
+    open_all_day_sun: true
+    closed_all_day_mon: false
+    closed_all_day_tues: false
+    closed_all_day_wed: false
+    closed_all_day_thurs: false
+    closed_all_day_fri: false
+    closed_all_day_sat: false
+    closed_all_day_sun: false
+    user_id: 1
+    verified: true
+# ...
+
+# ..........................................
+open_commercial:
+    id: 99
+    name: ZZTest
+    services: Technology
+    lat: 49.2792030
+    long: -123.09930370000001
+    open_all_day_mon: false
+    open_all_day_tues: false
+    open_all_day_wed: false
+    open_all_day_thurs: false
+    open_all_day_fri: false
+    open_all_day_sat: false
+    open_all_day_sun: false
+    closed_all_day_mon: false
+    closed_all_day_tues: false
+    closed_all_day_wed: false
+    closed_all_day_thurs: false
+    closed_all_day_fri: false
+    closed_all_day_sat: false
+    closed_all_day_sun: false
+    user_id: 1
+    verified: true
