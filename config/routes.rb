@@ -1,12 +1,12 @@
 Linkvan::Application.routes.draw do
   #api routes
 
-  get 'api/facilities', to: 'api#all' #only enable if needed
-  get 'api/facilities/filter/:scope', to: 'api#filtered'
-  get 'api/facilities/filteredtest', to: 'api#filteredtest'
-  get 'api/facilities/search', to: 'api#search'
-  get 'api/facilities/:id', to: 'api#show'
-  get 'api/getchanges', to: "api#getchanges"
+  # get 'api/facilities', to: 'api#all' #only enable if needed
+  # get 'api/facilities/filter/:scope', to: 'api#filtered'
+  # get 'api/facilities/filteredtest', to: 'api#filteredtest'
+  # get 'api/facilities/search', to: 'api#search'
+  # get 'api/facilities/:id', to: 'api#show'
+  # get 'api/getchanges', to: "api#getchanges"
 
   get "contact_form/new"
   get "contact_form/create"
