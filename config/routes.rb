@@ -1,5 +1,18 @@
 Linkvan::Application.routes.draw do
-  #api routes
+#api routes
+namespace :api do
+  defaults format: :json do
+    resources :facilities, only: [:index, :create, :update]
+    put :login, to: 'auth#login'
+    get :logout, to: 'auth#logout'
+    resources :zones, only: [:index] do
+      member do
+        put :user, to: 'zones#assign_user'
+        delete :user, to: 'zones#unassign_user'
+      end #/member
+    end #/zones
+  end #defaults
+end #/api
 
   # get 'api/facilities', to: 'api#all' #only enable if needed
   # get 'api/facilities/filter/:scope', to: 'api#filtered'
