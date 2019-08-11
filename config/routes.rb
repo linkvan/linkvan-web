@@ -3,8 +3,8 @@ Linkvan::Application.routes.draw do
 namespace :api do
   defaults format: :json do
     resources :facilities, only: [:index, :create, :update]
-    put :login, to: 'auth#login'
-    get :logout, to: 'auth#logout'
+    post :login, to: 'sessions#create'
+    delete :logout, to: 'sessions#destroy'
     resources :zones, only: [:index] do
       member do
         put :user, to: 'zones#assign_user'

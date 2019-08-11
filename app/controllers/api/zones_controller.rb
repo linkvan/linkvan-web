@@ -1,4 +1,4 @@
-class Api::ZonesController < ApplicationController
+class Api::ZonesController < Api::ApplicationController
 
     # GET api/zones
     def index
@@ -8,12 +8,14 @@ class Api::ZonesController < ApplicationController
 
     # PUT api/zones/:id/user
     def assign_user
-      head :no_content
+			error_json = { error: 'Functionality still in development' }
+			render json: error_json, status: :unprocessable_entity
     end #/assign_user
 
     # DELETE api/zones/:id/user
     def unassign_user
-      head :no_content
+			error_json = { error: 'Functionality still in development' }
+			render json: error_json, status: :unprocessable_entity
     end #/unassign_user
 
 	
