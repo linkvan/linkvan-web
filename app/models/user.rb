@@ -1,12 +1,13 @@
 class User < ActiveRecord::Base
   has_secure_password
   has_many :facilities
-
+  has_and_belongs_to_many :zones
+  
   validates :name, presence: true
   validates :email, presence: true,
   					format: /\A\S+@\S+\z/,
-  					uniqueness: { case_sensitive: false}
-
+            uniqueness: { case_sensitive: false}
+  
   def self.authenticate(email, password)
   	user = User.find_by(email: email)
 	  user && user.authenticate(password)
@@ -22,6 +23,10 @@ class User < ActiveRecord::Base
         csv << attributes.map{ |attr| user.send(attr) }
       end
     end
+  end
+
+  def manages
+    Facility.where(zone: zone_ids)
   end
 
 end

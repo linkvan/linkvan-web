@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424013616) do
+ActiveRecord::Schema.define(version: 20190824231458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,9 +119,11 @@ ActiveRecord::Schema.define(version: 20170424013616) do
     t.text     "technology_note"
     t.text     "legal_note"
     t.text     "learning_note"
+    t.integer  "zone_id"
   end
 
   add_index "facilities", ["user_id"], name: "index_facilities_on_user_id", using: :btree
+  add_index "facilities", ["zone_id"], name: "index_facilities_on_zone_id", using: :btree
 
   create_table "impressions", force: :cascade do |t|
     t.string   "impressionable_type"
@@ -187,4 +189,20 @@ ActiveRecord::Schema.define(version: 20170424013616) do
     t.boolean  "verified",              default: false
   end
 
+  create_table "users_zones", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "zone_id", null: false
+  end
+
+  add_index "users_zones", ["user_id", "zone_id"], name: "index_users_zones_on_user_id_and_zone_id", using: :btree
+  add_index "users_zones", ["zone_id", "user_id"], name: "index_users_zones_on_zone_id_and_user_id", using: :btree
+
+  create_table "zones", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_foreign_key "facilities", "zones"
 end

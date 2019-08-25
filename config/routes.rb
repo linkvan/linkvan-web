@@ -4,11 +4,13 @@ namespace :api do
   defaults format: :json do
     resources :facilities, only: [:index, :create, :update]
     post :login, to: 'sessions#create'
+    get :login, to: 'sessions#create'
     delete :logout, to: 'sessions#destroy'
     resources :zones, only: [:index] do
       member do
-        put :user, to: 'zones#assign_user'
-        delete :user, to: 'zones#unassign_user'
+        get :admin, to: 'zones#list_admin'
+        post :admin, to: 'zones#add_admin'
+        delete :admin, to: 'zones#remove_admin'
       end #/member
     end #/zones
   end #defaults
