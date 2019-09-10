@@ -1,23 +1,45 @@
 class Api::ZonesController < Api::ApplicationController
+    before_action :require_admin, except: [:index]
 
     # GET api/zones
     def index
-      @response = { zones: [] }
+      @zones = Zone.all
+
+      @response = { zones: ZonesSerializer.new(@zones) }
       render json: @response, status: :ok
-      end #/index
+    end #/index
 
-    # PUT api/zones/:id/user
-    def assign_user
-			error_json = { error: 'Functionality still in development' }
-			render json: error_json, status: :unprocessable_entity
-    end #/assign_user
+    # GET api/zones/:id/admin
+    def list_admin
+      @zone = Zone.find params[:id]
+      @zone_admins = @zone.users
+      @responde = { users: @zone_admins }
+      render json: @responde, status: :ok
+    end #/list_admin
 
-    # DELETE api/zones/:id/user
-    def unassign_user
-			error_json = { error: 'Functionality still in development' }
-			render json: error_json, status: :unprocessable_entity
-    end #/unassign_user
+    # POST api/zones/:id/admin
+    def add_admin
+      @zone = Zone.find(params[:id])
+      @user = User.find(params[:user_id])
 
+      if (@user.zones << @zone)
+        render json: ZoneSerializer.new(@zone), status: :created
+      else
+        render nothing: true, status: :conflict
+      end
+    end #/add_admin
+
+    # DELETE api/zones/:id/admin
+    def remove_admin
+      @zone = Zone.find(params[:id])
+      @user = User.find(params[:user_id])
+
+      if @user.zones.delete @zone
+        render json: ZoneSerializer.new(@zone), status: :ok
+      else
+        render nothing: true, status: :conflict
+      end
+    end #/remove_admin
 	
 	# def filteredtest
   #     @fs = { :nearyes => Facility.where("id<=3"), :nearno => Facility.where("id>8")}.to_json
@@ -29,5 +51,13 @@ class Api::ZonesController < Api::ApplicationController
 	# 	@facility = Facility.find(params[:id])
 	# 	render :json => @facility.to_json
 	# end
+
+  private
+
+    def zone_params
+      params.permit(
+        :name, :description
+      )
+    end #/facility_params
 
 end #/ZonesController

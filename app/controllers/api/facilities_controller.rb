@@ -2,19 +2,17 @@ class Api::FacilitiesController < Api::ApplicationController
 
 	# GET api/facilities
 	def index
-		# TODO: Needs to filter to only facilities which user has admin rights
-		@facilities = Facility.is_verified
-		@response = { facilities: @facilities }
+		@facilities = Facility.managed_by current_user.id
+
+		@response = { facilities: FacilitiesSerializer.new(@facilities) }
 		render json: @response, status: :ok
 	end #/index
 
 	# POST api/facilities
 	def create
-		# TODO: Needs to make user admin of created facility
-		# @facilities = Facility.create!(facility_params)
-		@facility = Facility.create(facility_params)
+		@facility = current_user.create_facility(facility_params)
 		if @facility.errors.empty?
-			render json: @facility, status: :created
+			render json: FacilitySerializer.new(@facility), status: :created
 		else
 			error_json = { errors: @facility.errors }
 			render json: error_json, status: :unprocessable_entity
@@ -23,17 +21,16 @@ class Api::FacilitiesController < Api::ApplicationController
 	
 	# PUT api/facilities/:id
 	def update
-		# TODO: Needs to only allow changing facilities which user has admin rights
-		unless Facility.exists?(params[:id])
-			render nothing: true, status: :not_found
-			return true
-		end
-		@facilities = Facility.find(params[:id])
-		if @facilities.update(facility_params)
-			render json: @facilities, status: :ok
+		if current_user.manages.exists?(params[:id])
+			@facility = Facility.find(params[:id])
+			if @facility.update(facility_params)
+				render json: FacilitySerializer.new(@facility), status: :ok
+			else
+				error_json = { errors: @facility.errors }
+				render json: error_json, status: :unprocessable_entity
+			end
 		else
-			error_json = { errors: @facilities.errors }
-			render json: error_json, status: :unprocessable_entity
+			render nothing: true, status: :not_found
 		end
 	end #/update
 
@@ -53,7 +50,7 @@ class Api::FacilitiesController < Api::ApplicationController
 	def facility_params
 		params.permit(
 			:name, :welcomes, :services,
-			:address, :phone, :user_id,
+			:address, :phone,
 			:lat, :long, :verified,
 			:website, :description, :notes,
 			:r_pets, :r_id, :r_cart,
