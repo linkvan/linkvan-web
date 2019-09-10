@@ -40,7 +40,6 @@ class Api::ZonesController < Api::ApplicationController
         render nothing: true, status: :conflict
       end
     end #/remove_admin
-
 	
 	# def filteredtest
   #     @fs = { :nearyes => Facility.where("id<=3"), :nearno => Facility.where("id>8")}.to_json
