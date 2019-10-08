@@ -117,7 +117,7 @@ class Facility < ActiveRecord::Base
 		# Sorts out selected facilities.
 		ret_arr = Array.new
 		if (prox=="Near")
-			ret_arr = selected_facilities.sort{ |f| f.distance(ulat, ulong) }
+			ret_arr = selected_facilities.sort_by{ |f| f.distance(ulat, ulong) }
 		elsif (prox=="Name")
 			ret_arr = selected_facilities.sort_by(&:name)
 		end #/prox == Near, Name
