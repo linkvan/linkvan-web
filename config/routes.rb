@@ -1,12 +1,27 @@
 Linkvan::Application.routes.draw do
-  #api routes
+#api routes
+namespace :api do
+  defaults format: :json do
+    resources :facilities, only: [:index, :create, :update]
+    post :login, to: 'sessions#create'
+    get :login, to: 'sessions#create'
+    delete :logout, to: 'sessions#destroy'
+    resources :zones, only: [:index] do
+      member do
+        get :admin, to: 'zones#list_admin'
+        post :admin, to: 'zones#add_admin'
+        delete :admin, to: 'zones#remove_admin'
+      end #/member
+    end #/zones
+  end #defaults
+end #/api
 
-  get 'api/facilities', to: 'api#all' #only enable if needed
-  get 'api/facilities/filter/:scope', to: 'api#filtered'
-  get 'api/facilities/filteredtest', to: 'api#filteredtest'
-  get 'api/facilities/search', to: 'api#search'
-  get 'api/facilities/:id', to: 'api#show'
-  get 'api/getchanges', to: "api#getchanges"
+  # get 'api/facilities', to: 'api#all' #only enable if needed
+  # get 'api/facilities/filter/:scope', to: 'api#filtered'
+  # get 'api/facilities/filteredtest', to: 'api#filteredtest'
+  # get 'api/facilities/search', to: 'api#search'
+  # get 'api/facilities/:id', to: 'api#show'
+  # get 'api/getchanges', to: "api#getchanges"
 
   get "contact_form/new"
   get "contact_form/create"

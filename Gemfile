@@ -7,6 +7,8 @@ gem "geocoder"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 
+gem 'responders', '~> 2.0'
+
 # Use PostgreSQL as the database
 gem 'pg', '~> 0.20'
 
