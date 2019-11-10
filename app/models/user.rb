@@ -29,4 +29,57 @@ class User < ActiveRecord::Base
     Facility.where(zone: zone_ids)
   end
 
+  def manageable_users
+    return User.all if self.super_admin?
+    return self.collect_users if self.zone_admin?
+    return self
+  end
+
+  def can_manage?(user)
+    # SuperAdmins can manage all users
+    return true if self.super_admin?
+    # Non-SuperAdmins can't manage themselves
+    return false if self.id == user.id
+    # Zone Admins can manage all users from zone (but themselves)
+    return (zone_users.include?(user))
+  end
+
+  def super_admin?
+    return (self.admin && self.verified)
+  end
+
+  def zone_admin?
+    return (self.zones.any? && self.verified)
+  end
+
+  def facility_admin?
+    return (self.facilities.any? && self.verified)
+  end
+
+  def zone_users
+    return (self.collect_users)
+  end
+
+  def toggle_verified!
+    self.update(verified: !self.verified)
+  end
+
+  private
+
+  def collect_users_from(facilities)
+    facilities.map(&:user)
+  end
+
+  def collect_facilities_from(zones)
+    zones.map(&:facilities)
+  end
+
+  def collect_users
+    facilities  = collect_facilities_from(self.zones)
+    collect_users_from(facilities).uniq
+  end
+
+  
+  
+
 end
