@@ -7,6 +7,7 @@ class ZoneSerializer
 
     def as_json(tmp=nil)
         {
+            id: @zone.id,
             name: @zone.name,
             description: @zone.description,
             users: self.admins
