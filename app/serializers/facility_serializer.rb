@@ -7,6 +7,7 @@ class FacilitySerializer
 
     def as_json(tmp=nil)
         {
+            id: @facility.id,
             name: @facility.name,
             welcomes: self.welcomes,
             services: self.services,
@@ -16,7 +17,6 @@ class FacilitySerializer
             long: @facility.long,
             verified: @facility.verified,
             website: @facility.website,
-            description: @facility.description,
             notes: @facility.notes,
             r_pets: @facility.r_pets,
             r_id: @facility.r_id,
@@ -84,20 +84,18 @@ class FacilitySerializer
     end
 
     def zone
+        return [] if @facility.zone.nil?
         z = @facility.zone
-        {
-            id: z.id,
-            name: z.name
-        }
+        { id: z.id, name: z.name }
     end
 
     def welcomes
-        return '' if @facility.welcomes.nil?
+        return [] if @facility.welcomes.nil?
         @facility.welcomes.split(' ')
     end #/welcomes
     
     def services
-        return '' if @facility.services.nil?
+        return [] if @facility.services.nil?
         @facility.services.split(' ')
     end #/services
 
