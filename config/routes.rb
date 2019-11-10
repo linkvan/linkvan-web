@@ -3,6 +3,11 @@ Linkvan::Application.routes.draw do
 namespace :api do
   defaults format: :json do
     resources :facilities, only: [:index, :create, :update]
+    resources :users, only: [:index, :create, :update] do
+      member do
+        post :toggle_verified, to: 'users#toggle_verified'
+      end #/member
+    end #/users
     post :login, to: 'sessions#create'
     get :login, to: 'sessions#create'
     delete :logout, to: 'sessions#destroy'
