@@ -2,7 +2,7 @@ class Api::FacilitiesController < Api::ApplicationController
 
 	# GET api/facilities
 	def index
-		@facilities = Facility.managed_by current_user.id
+		@facilities = Facility.managed_by current_user
 
 		@response = { facilities: FacilitiesSerializer.new(@facilities) }
 		render json: @response, status: :ok
