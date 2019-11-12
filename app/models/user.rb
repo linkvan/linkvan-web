@@ -26,7 +26,9 @@ class User < ActiveRecord::Base
   end
 
   def manages
-    Facility.where(zone: zone_ids)
+    return Facility.all if self.super_admin?
+    return Facility.where(zone: zone_ids) if self.zone_admin?
+    return self.facilities
   end
 
   def manageable_users
