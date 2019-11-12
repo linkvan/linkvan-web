@@ -57,7 +57,7 @@ class Api::FacilitiesController < Api::ApplicationController
 			:r_phone, :r_wifi,
 			:shelter_note, :food_note, :medical_note,
 			:hygiene_note, :technology_note, :legal_note,
-			:learning_note,
+			:learning_note, :zone_id,
 			:startsmon_at, :endsmon_at,
 			:startstues_at, :endstues_at,
 			:startswed_at, :endswed_at,
