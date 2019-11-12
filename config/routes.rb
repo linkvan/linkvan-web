@@ -18,6 +18,7 @@ namespace :api do
         delete :admin, to: 'zones#remove_admin'
       end #/member
     end #/zones
+    get :run, to: 'zones#generate_facilities'
   end #defaults
 end #/api
 
