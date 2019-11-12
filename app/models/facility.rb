@@ -32,21 +32,7 @@ class Facility < ActiveRecord::Base
 	end #/managed_by?
 
 	def self.managed_by(user)
-		if user.respond_to? :id
-			user_id = user.id
-		else
-			return [] if user.nil?
-			user_id = user
-		end
-		facilities = Array.new
-
-		Facility.where(user_id: user_id).each do |fac|
-			facilities.push fac
-		end
-		User.find(user_id).manages.each do |fac|
-			facilities.push fac
-		end
-		facilities
+		user.manages
 	end #/owned_by
 
 	def self.search(search)
