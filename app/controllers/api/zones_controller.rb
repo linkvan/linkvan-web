@@ -50,7 +50,18 @@ class Api::ZonesController < Api::ApplicationController
 	# def show
 	# 	@facility = Facility.find(params[:id])
 	# 	render :json => @facility.to_json
-	# end
+  # end
+  
+  # This is a temporary route just to test file generation.
+  def generate_facilities
+    facilities_hash = {
+      v1: { facilities: Facility.is_verified.as_json }
+    }
+    File.open(args[:jsonfile], "w") do |f|
+      f.write JSON.pretty_generate( facilities_hash )
+    end
+  end #/generate_facilities
+  
 
   private
 
