@@ -10,7 +10,7 @@ class Api::FacilitiesController < Api::ApplicationController
 
 	# POST api/facilities
 	def create
-		@facility = current_user.create_facility(facility_params)
+		@facility = current_user.facilities.create(facility_params)
 		if @facility.errors.empty?
 			render json: FacilitySerializer.new(@facility), status: :created
 		else
