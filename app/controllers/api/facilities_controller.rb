@@ -12,6 +12,7 @@ class Api::FacilitiesController < Api::ApplicationController
 	def create
 		@facility = current_user.facilities.create(facility_params)
 		if @facility.errors.empty?
+			FacilityStaticGenerator.new.perform
 			render json: FacilitySerializer.new(@facility), status: :created
 		else
 			error_json = { errors: @facility.errors }
@@ -24,13 +25,14 @@ class Api::FacilitiesController < Api::ApplicationController
 		if current_user.manages.exists?(params[:id])
 			@facility = Facility.find(params[:id])
 			if @facility.update(facility_params)
+				FacilityStaticGenerator.new.perform
 				render json: FacilitySerializer.new(@facility), status: :ok
 			else
 				error_json = { errors: @facility.errors }
 				render json: error_json, status: :unprocessable_entity
 			end
 		else
-			render nothing: true, status: :not_found
+			head :not_found
 		end
 	end #/update
 
@@ -45,6 +47,12 @@ class Api::FacilitiesController < Api::ApplicationController
 	# 	render :json => @facility.to_json
 	# end
 
+	# GET /run
+	def generate_facilities
+		FacilitiesStaticGeneratorJob.new.perform
+		head :ok
+	end #/generate_faciltiies
+	
 	private
 
 	def facility_params

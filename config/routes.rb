@@ -3,6 +3,7 @@ Linkvan::Application.routes.draw do
 namespace :api do
   defaults format: :json do
     resources :facilities, only: [:index, :create, :update]
+    get :run, to: 'facilities#generate_facilities'
     resources :users, only: [:index, :create, :update] do
       member do
         post :toggle_verified, to: 'users#toggle_verified'
@@ -18,7 +19,6 @@ namespace :api do
         delete :admin, to: 'zones#remove_admin'
       end #/member
     end #/zones
-    get :run, to: 'zones#generate_facilities'
   end #defaults
 end #/api
 
