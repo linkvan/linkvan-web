@@ -97,10 +97,4 @@ Linkvan::Application.configure do
     authentication:       'plain',
     enable_starttls_auto: true  }
 
-  # Runs the code below after initilization of the app
-  config.after_initialize do
-    # Generates the static file '/facilities.json'.
-    FacilityStaticGeneratorJob.new.perform
-  end #/after_initialize
-
 end
