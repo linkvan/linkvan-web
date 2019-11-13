@@ -1,6 +1,7 @@
 class Api::SessionsController < Api::ApplicationController
 	skip_before_action :require_signin
 
+	# POST login
 	def create
 		if user = User.authenticate(params[:email], params[:password])
 			session[:user_id] = user.id
