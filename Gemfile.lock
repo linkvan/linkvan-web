@@ -94,7 +94,7 @@ GEM
       mini_portile2 (~> 2.3.0)
     pg (0.21.0)
     pg (0.21.0-x64-mingw32)
-    rack (1.6.8)
+    rack (1.6.12)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.10)
