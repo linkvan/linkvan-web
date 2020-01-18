@@ -7,12 +7,12 @@ class Api::SessionsController < Api::ApplicationController
 			if !cookies['non_data_user'].present?
 				cookies['non_data_user'] = 'true'
 			end
+			@response = { cookies: cookies }
+			render json: @response, status: :ok
 		else
 			error_json = { error: 'Email or Password invalid, please try again.' }
 			render json: error_json, status: :unauthorized
 		end
-		@response = { cookies: cookies }
-		render json: @response, status: :ok
 	end
 
 	def destroy
