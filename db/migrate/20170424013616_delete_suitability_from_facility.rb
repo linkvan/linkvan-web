@@ -1,4 +1,4 @@
-class DeleteSuitabilityFromFacility < ActiveRecord::Migration
+class DeleteSuitabilityFromFacility < ActiveRecord::Migration[4.2]
   def up
     remove_column :facilities, :suitability
   end
