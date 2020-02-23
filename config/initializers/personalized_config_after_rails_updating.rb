@@ -17,6 +17,8 @@ Rails.application.configure do
 
     config.active_record.time_zone_aware_types = [:datetime, :time]
 
+    # Mime::Type.register_alias "text/html", :iphone
+    
     ###########################
     # Changes made to new_framework_defaults.rb from Rails 4.2 to Rails 5.0
     # Enable per-form CSRF tokens. Previous versions had false.
