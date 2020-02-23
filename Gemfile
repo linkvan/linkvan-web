@@ -47,6 +47,8 @@ group :test do
   # gem 'test-unit'
 end
 
+gem 'bootstrap', '~> 4.0'
+
 gem "geocoder"
 
 gem 'impressionist'
