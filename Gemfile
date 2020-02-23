@@ -69,8 +69,10 @@ gem 'momentjs-rails'
 
 gem 'ckeditor_rails'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
+##########################
+# Added for Rails 5.1
+gem 'puma', '~> 3.12'
+group :development do
+  gem 'listen', '~> 3.2'
+end
+##########################
