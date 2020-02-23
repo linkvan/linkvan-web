@@ -1,7 +1,7 @@
 require 'bigdecimal'
 require 'bigdecimal/util'
 
-class Facility < ActiveRecord::Base
+class Facility < ApplicationRecord
 	belongs_to :user
 	belongs_to :zone
 
