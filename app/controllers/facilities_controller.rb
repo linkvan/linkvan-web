@@ -189,7 +189,7 @@ class FacilitiesController < ApplicationController
       end
 
       if !session[:current_data].present?
-        session[:current_data] = -1
+        session[:current_data] = nil
       end
 
     end
