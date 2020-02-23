@@ -2,8 +2,8 @@ require 'bigdecimal'
 require 'bigdecimal/util'
 
 class Facility < ApplicationRecord
-	belongs_to :user
-	belongs_to :zone
+	belongs_to :user, optional: true
+	belongs_to :zone, optional: true
 
 	validates :name, :lat, :long, :services, presence: true
 
