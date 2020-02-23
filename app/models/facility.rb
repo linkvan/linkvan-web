@@ -90,7 +90,6 @@ class Facility < ApplicationRecord
 
 	def self.translate_time(cdate, ftime)
 		newdate = cdate.strftime('%Y-%m-%d')
-		logger.info("ftime: #{ftime.class}; Class: #{ftime.class}")
 		newtime = ftime&.to_s(:time)
 		newzone = ftime&.zone
 		# cdate = ctime.strftime('%I:%M:%P')
