@@ -35,7 +35,8 @@ Rails.application.configure do
     Rails.application.config.active_record.belongs_to_required_by_default = true
 
     # Do not halt callback chains when a callback returns false. Previous versions had true.
-    ActiveSupport.halt_callback_chains_on_return_false = false
+    #   deprecated on Rails 5.2.
+    # ActiveSupport.halt_callback_chains_on_return_false = false
     # 
     ############################
 
