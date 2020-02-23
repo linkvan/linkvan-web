@@ -2,10 +2,8 @@ source 'https://rubygems.org'
 
 ruby '2.4.0'
 
-gem "geocoder"
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
+gem 'rails', '~> 5.0.0'
 
 gem 'responders', '~> 2.0'
 
@@ -13,13 +11,13 @@ gem 'responders', '~> 2.0'
 gem 'pg', '~> 0.20'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.2'
+gem 'sass-rails', '~> 5.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.2.2'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -45,9 +43,11 @@ gem 'bcrypt', '3.1.10'
 gem 'rake-compiler', '~> 0.9.2'
 
 group :test do
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails', '~> 3.9.0'
   # gem 'test-unit'
 end
+
+gem "geocoder"
 
 gem 'impressionist'
 
