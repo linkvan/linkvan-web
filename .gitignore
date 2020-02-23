@@ -17,6 +17,7 @@
 
 .ruby-version
 .ruby-gemset
+.rbenv-gemsets
 
 .DS_Store
 
