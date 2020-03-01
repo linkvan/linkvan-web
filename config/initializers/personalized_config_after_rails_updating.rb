@@ -12,7 +12,7 @@ Rails.application.configure do
         'icons.ttf',
         'icons.woff'
     ]
-    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+    config.assets.precompile << ["*.svg", "*.eot", "*.woff", "*.ttf"]
     # config.assets.enabled = true
 
     config.active_record.time_zone_aware_types = [:datetime, :time]
