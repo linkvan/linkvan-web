@@ -46,7 +46,8 @@ gem 'bcrypt', '3.1.10'
 gem 'rake-compiler', '~> 1.1.0'
 
 group :test do
-  gem 'rspec-rails', '~> 3.9.0'
+  gem 'rspec-rails', '~> 4.0.0.beta4'
+  gem 'rails-controller-testing'
   # gem 'test-unit'
 end
 
