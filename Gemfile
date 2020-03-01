@@ -71,7 +71,7 @@ gem 'chartjs-ror'
 
 gem 'momentjs-rails'
 
-gem 'ckeditor_rails'
+# gem 'ckeditor_rails'
 
 ##########################
 # Added for Rails 5.1
