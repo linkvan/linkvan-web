@@ -1,8 +1,6 @@
 Linkvan::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.assets.precompile += ['ckeditor/*']
-
   # Code is not reloaded between requests.
   config.cache_classes = false
 
