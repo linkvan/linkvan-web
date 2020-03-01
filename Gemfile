@@ -17,8 +17,7 @@ gem 'sass-rails', '~> 6.0'
 gem 'uglifier', '~> 4.2'
 
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-# TODO: Find out why webpacker is crashing the server
-# gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 4.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 5.0'

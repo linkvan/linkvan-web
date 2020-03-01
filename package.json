@@ -1,0 +1,12 @@
+{
+  "name": "linkvan-web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@rails/webpacker": "4.2.2"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.10.3"
+  }
+}

@@ -29,3 +29,9 @@
 
 # Ignore facilities.json under public.
 /public/facilities.json
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
