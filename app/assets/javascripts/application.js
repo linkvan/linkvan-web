@@ -11,6 +11,16 @@
 // about supported directives.
 //
 
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap.min
+//= require bootstrap-select.min
+//= require jquery.validate.min
+//= require jquery.mask.min
+//= require js.cookie.js
+//= require moment
+//= require Chart.min
+
 $(document).ready(function() {
     // Plugin: Bootstrap Select
     $('select').selectpicker({
