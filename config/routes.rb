@@ -1,4 +1,6 @@
 Linkvan::Application.routes.draw do
+  root to: 'facilities#index'
+
 #api routes
 namespace :api do
   defaults format: :json do
@@ -44,7 +46,6 @@ end #/api
   get 'disclaimer', to: 'disclaimer#index'
   get 'about', to: 'about#index'
   get 'images', to: 'images#index'
-  root 'facilities#index'
   get 'signup' => 'users#new'
   get "signin" => "sessions#new"
   get 'contact', to: 'messages#new', as: 'contact'
