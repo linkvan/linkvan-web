@@ -26,3 +26,6 @@
 
 # Ignore JSON file on db folder.
 /db/*.json
+
+# Ignore facilities.json under public.
+/public/facilities.json
