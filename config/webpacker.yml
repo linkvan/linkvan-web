@@ -75,9 +75,6 @@ development: &development
     watch_options:
       ignored: '**/node_modules/**'
 
-inception500:
-  <<: *development
-
 test:
   <<: *default
   compile: true
@@ -96,3 +93,6 @@ production:
 
   # Cache manifest.json for performance
   cache_manifest: true
+
+inception500:
+  <<: *production
