@@ -58,8 +58,6 @@ gem 'impressionist'
 
 gem 'mail'
 
-gem 'rails_12factor', group: :production
-
 gem 'tzinfo-data', platforms: [:x64_mingw, :mingw, :mswin]
 
 gem "breadcrumbs_on_rails"
