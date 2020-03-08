@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "UNLICENSED",
   "dependencies": {
-    "@rails/webpacker": "4.2.2"
+    "@rails/webpacker": "4.2.2",
+    "webpack": "^4.0.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.3"
