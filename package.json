@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "UNLICENSED",
   "dependencies": {
+    "@rails/activestorage": "^6.0.2-1",
+    "@rails/ujs": "^6.0.2-1",
     "@rails/webpacker": "4.2.2",
     "webpack": "^4.0.0"
   },
