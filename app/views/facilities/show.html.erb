@@ -9,7 +9,7 @@
 <h2>Welcomes</h2>
 <div class="inset" id="suitability">
   <ul>
-    <% @welcomeArray = @facility.welcomes&.downcase&.split %>
+    <% @welcomeArray = @facility.welcomes&.downcase&.split || [] %>
     <% if isWelcome("female", @welcomeArray) %>
         <li>
           <i class="linkvan-icon"><%= inline_svg_tag('icons/female.svg', size: '30px') %></i>
