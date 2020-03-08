@@ -206,6 +206,8 @@ module FacilitiesHelper
 
 
 	def format_tel(tel)
+		return '' if tel.blank?
+
 		if (tel[0] == "+")
 			return tel.gsub("+1", "")
 		else
