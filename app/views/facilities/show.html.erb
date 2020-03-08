@@ -106,7 +106,7 @@
 
 <!--max=71-->
 <div class="inset-website">
-  <p><strong>Website: </strong> <%= link_to truncate(@facility.website, length: 33), "http://" + @facility.website  %></p>
+  <p><strong>Website: </strong> <%= link_to truncate(@facility.website, length: 33), "http://" + @facility.website  if @facility.website.present? %></p>
 </div>
 
 <div id="inset-directions">
