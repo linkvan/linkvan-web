@@ -247,7 +247,7 @@ module FacilitiesHelper
 		currentTime = Time.new.in_time_zone("Pacific Time (US & Canada)")
 		fEndTime = facility[columnByDay[currentDay][0]]
 		convertedUserTime = 		Time.utc(2000, 01, 01, currentTime.hour, currentTime.min, 0)
-		convertedFacilityTime = Time.utc(2000, 01, 01, fEndTime.hour, fEndTime.min, 0)
+		convertedFacilityTime = Time.utc(2000, 01, 01, fEndTime&.hour || 0, fEndTime&.min || 0, 0)
 		
 		if facility[columnByDay[currentDay][1]]
 			return false
@@ -274,7 +274,7 @@ module FacilitiesHelper
 		currentTime = Time.new.in_time_zone("Pacific Time (US & Canada)")
 		fStartTime = facility[columnByDay[currentDay][0]]
 		convertedUserTime = 		Time.utc(2000, 01, 01, currentTime.hour, currentTime.min, 0)
-		convertedFacilityTime = Time.utc(2000, 01, 01, fStartTime.hour, fStartTime.min, 0)
+		convertedFacilityTime = Time.utc(2000, 01, 01, fStartTime&.hour || 0, fStartTime&.min || 0, 0)
 
 		if facility[columnByDay[currentDay][1]]
 			return false
