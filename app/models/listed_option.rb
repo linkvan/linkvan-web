@@ -1,3 +1,3 @@
-class ListedOption < ActiveRecord::Base
+class ListedOption < ApplicationRecord
   belongs_to :analytic
 end

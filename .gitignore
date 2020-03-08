@@ -17,6 +17,7 @@
 
 .ruby-version
 .ruby-gemset
+.rbenv-gemsets
 
 .DS_Store
 
@@ -25,3 +26,12 @@
 
 # Ignore JSON file on db folder.
 /db/*.json
+
+# Ignore facilities.json under public.
+/public/facilities.json
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

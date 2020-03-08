@@ -1,2 +1,2 @@
-class Anaylitic < ActiveRecord::Base
+class Anaylitic < ApplicationRecord
 end

@@ -7,7 +7,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title">
-          <i class="linkvan-icon"><%= inline_svg('icons/alert.svg', size: '20px') %></i>
+          <i class="linkvan-icon"><%= inline_svg_tag('icons/alert.svg', size: '20px') %></i>
           <%= @alert.title %>
         </h4>
       </div>
@@ -33,55 +33,55 @@
           <% if @alert %>
           <div class="pull-right">
             <button type="button" data-toggle="modal" data-target="#main-alert" class="btn btn-default display-alert">
-              <i class="linkvan-icon"><%= inline_svg('icons/alert.svg', size: '20px') %></i> Alert
+              <i class="linkvan-icon"><%= inline_svg_tag('icons/alert.svg', size: '20px') %></i> Alert
             </button>
           </div>
           <% end %>
         </div>
 
 				<a href="/facilities/filter/Shelter/" class="btn btn-default clearfix facilities-category">
-					<i class="linkvan-icon"><%= inline_svg('icons/shelter.svg', size: '30px') %></i>
+					<i class="linkvan-icon"><%= inline_svg_tag('icons/shelter.svg', size: '30px') %></i>
 					<span>Shelter</span>
 					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
 				</a>
 				<a href="/facilities/filter/Food/" class="btn btn-default clearfix facilities-category">
-					<i class="linkvan-icon"><%= inline_svg('icons/cutlery.svg', size: '30px') %></i>
+					<i class="linkvan-icon"><%= inline_svg_tag('icons/cutlery.svg', size: '30px') %></i>
 					<span>Food</span>
 					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
 				</a>
 				<a href="/facilities/filter/Medical/" class="btn btn-default clearfix facilities-category">
-					<i class="linkvan-icon"><%= inline_svg('icons/medical.svg', size: '30px') %></i>
+					<i class="linkvan-icon"><%= inline_svg_tag('icons/medical.svg', size: '30px') %></i>
 					<span>Medical</span>
 					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
 				</a>
 				<a href="/facilities/filter/Hygiene/" class="btn btn-default clearfix facilities-category">
-					<i class="linkvan-icon"><%= inline_svg('icons/hygiene.svg', size: '30px') %></i>
+					<i class="linkvan-icon"><%= inline_svg_tag('icons/hygiene.svg', size: '30px') %></i>
 					<span>Hygiene</span>
 					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
 				</a>
 				<a href="/facilities/filter/Technology/" class="btn btn-default clearfix facilities-category">
-					<i class="linkvan-icon"><%= inline_svg('icons/technology.svg', size: '30px') %></i>
+					<i class="linkvan-icon"><%= inline_svg_tag('icons/technology.svg', size: '30px') %></i>
 					<span>Technology</span>
 					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
 				</a>
 				<a href="/facilities/filter/Legal/" class="btn btn-default clearfix facilities-category">
-					<i class="linkvan-icon"><%= inline_svg('icons/advocacy.svg', size: '30px') %></i>
+					<i class="linkvan-icon"><%= inline_svg_tag('icons/advocacy.svg', size: '30px') %></i>
 					<span>Legal</span>
 					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
 				</a>
 				<a href="/facilities/filter/Learning" class="btn btn-default clearfix facilities-category">
-					<i class="linkvan-icon"><%= inline_svg('icons/learning.svg', size: '30px') %></i>
+					<i class="linkvan-icon"><%= inline_svg_tag('icons/learning.svg', size: '30px') %></i>
 					<span>Learning</span>
 					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
 				</a>
 				<a href="/crisis" class="btn btn-default clearfix facilities-category">
-					<i class="linkvan-icon"><%= inline_svg('icons/crisis.svg', size: '30px') %></i>
+					<i class="linkvan-icon"><%= inline_svg_tag('icons/crisis.svg', size: '30px') %></i>
 					<span>Crisis Lines</span>
 					<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
 				</a>
         <% if @notices.size > 0 %>
           <a href="/notices/list" class="btn btn-default clearfix facilities-category">
-            <i class="linkvan-icon"><%= inline_svg('icons/notices.svg', size: '30px') %></i>
+            <i class="linkvan-icon"><%= inline_svg_tag('icons/notices.svg', size: '30px') %></i>
             <span>Notices</span>
             <i class="glyphicon glyphicon-chevron-right chevron-right"></i>
           </a>

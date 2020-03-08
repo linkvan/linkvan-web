@@ -1,4 +1,4 @@
-class AddServiceNotes < ActiveRecord::Migration
+class AddServiceNotes < ActiveRecord::Migration[4.2]
   def up
       add_column :facilities, :shelter_note, :text
       add_column :facilities, :food_note, :text

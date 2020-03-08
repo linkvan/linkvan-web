@@ -1,4 +1,4 @@
-class ChangeFacilitySuitability < ActiveRecord::Migration
+class ChangeFacilitySuitability < ActiveRecord::Migration[4.2]
   def up
     change_column :facilities, :suitability, :string
     Facility.find_each do |f|
