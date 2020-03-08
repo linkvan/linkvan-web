@@ -1,4 +1,4 @@
-class AddMoreTimesToFacilities < ActiveRecord::Migration
+class AddMoreTimesToFacilities < ActiveRecord::Migration[4.2]
   def change
     add_column :facilities, :startsmon_at2, :time
     add_column :facilities, :endsmon_at2, :time

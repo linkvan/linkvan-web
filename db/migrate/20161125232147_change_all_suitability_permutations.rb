@@ -1,4 +1,4 @@
-class ChangeAllSuitabilityPermutations < ActiveRecord::Migration
+class ChangeAllSuitabilityPermutations < ActiveRecord::Migration[4.2]
   def change
     change_column :facilities, :suitability, :string
     Facility.find_each do |f|

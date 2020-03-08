@@ -1,4 +1,4 @@
-class AddAnalytics < ActiveRecord::Migration
+class AddAnalytics < ActiveRecord::Migration[4.2]
   def up
     create_table :analytics do |t|
       t.string :sessionID

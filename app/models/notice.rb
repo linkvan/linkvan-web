@@ -1,4 +1,4 @@
-class Notice < ActiveRecord::Base
+class Notice < ApplicationRecord
   enum notice_type: {
     general: 'general',
     covid19: 'covid19',

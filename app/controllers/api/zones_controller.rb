@@ -25,7 +25,7 @@ class Api::ZonesController < Api::ApplicationController
       if (@user.zones << @zone)
         render json: ZoneSerializer.new(@zone), status: :created
       else
-        render nothing: true, status: :conflict
+        head :conflict
       end
     end #/add_admin
 
@@ -37,7 +37,7 @@ class Api::ZonesController < Api::ApplicationController
       if @user.zones.delete @zone
         render json: ZoneSerializer.new(@zone), status: :ok
       else
-        render nothing: true, status: :conflict
+        head :conflict
       end
     end #/remove_admin
 	

@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   has_secure_password
   has_many :facilities
   has_and_belongs_to_many :zones

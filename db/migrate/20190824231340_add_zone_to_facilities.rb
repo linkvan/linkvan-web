@@ -1,4 +1,4 @@
-class AddZoneToFacilities < ActiveRecord::Migration
+class AddZoneToFacilities < ActiveRecord::Migration[4.2]
   def change
     add_reference :facilities, :zone, index: true, foreign_key: true
 
