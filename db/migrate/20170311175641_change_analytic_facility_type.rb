@@ -1,6 +1,6 @@
 class ChangeAnalyticFacilityType < ActiveRecord::Migration
   def up
-    change_column :analytics, :facility, :decimal
+    change_column :analytics, :facility, 'decimal USING CAST(facility AS decimal)'
   end
 
   def down
