@@ -58,8 +58,13 @@ end #/api
   get 'notices' => 'notices#index'
   get 'notices/list' => 'notices#list'
   get 'notice/:slug' => 'notices#view'
+  # get 'covid19' => 'notices#covid19'
   resources :alerts
-  resources :notices
+  resources :notices do
+    collection do
+      get :covid19
+    end
+  end
   resources :facilities
 
   # match "users/:id/toggle_verify" => "users#toggle_verify"

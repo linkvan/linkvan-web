@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190824231458) do
+ActiveRecord::Schema.define(version: 20200321192533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,12 @@ ActiveRecord::Schema.define(version: 20190824231458) do
     t.decimal  "long"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
+    t.string   "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "facilities", force: :cascade do |t|
@@ -166,8 +172,9 @@ ActiveRecord::Schema.define(version: 20190824231458) do
     t.string   "slug"
     t.text     "content"
     t.boolean  "published"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "notice_type"
   end
 
   create_table "statuses", force: :cascade do |t|
