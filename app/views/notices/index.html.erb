@@ -31,6 +31,7 @@
               <th>#</th>
               <th>Title</th>
               <th>Content</th>
+              <th>Type</th>
               <th>Status</th>
               <th></th>
             </tr>
@@ -41,6 +42,7 @@
                 <th scope="row"><%= notice.id %></th>
                 <td><%= link_to notice.title, notice_path(notice.id) %></td>
                 <td><%= strip_tags(notice.content)[0..50] %>...</td>
+                <td><%= notice.notice_type %></td>
                 <td>
                   <% if notice.published %>
                     <span class="label label-primary">Published</span>

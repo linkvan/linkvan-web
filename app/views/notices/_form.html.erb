@@ -7,6 +7,10 @@
         <%= n.hidden_field(:slug)%>
       </div>
       <div class="form-group">
+        <%= n.label :notice_type, "Type" %>
+        <%= n.select :notice_type, ['general', 'covid19']%>
+      </div>
+      <div class="form-group">
         <%= n.label :content, "Content" %>
         <%= n.text_area :content, :class => 'ckeditor' %>
       </div>

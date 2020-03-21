@@ -7,7 +7,8 @@ class FacilitiesController < ApplicationController
   def index
     @facilities = Facility.all
     @alert = Alert.where(active: true).first
-    @notices = Notice.where(published: true)
+    @notices = Notice.general.where(published: true)
+    @covid19 = Notice.covid19.where(published: true)
 
     respond_to do |format|
       format.html

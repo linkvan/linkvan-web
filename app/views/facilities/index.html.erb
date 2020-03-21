@@ -37,8 +37,15 @@
             </button>
           </div>
           <% end %>
-        </div>
-
+				</div>
+				
+				<% if @covid19.size > 0 %>
+					<a href="/notices/covid19" class="btn btn-default clearfix facilities-category">
+						<i class="linkvan-icon"><%= inline_svg('icons/virus.svg', size: '30px') %></i>
+						<span>COVID-19</span>
+						<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
+					</a>
+				<% end %>
 				<a href="/facilities/filter/Shelter/" class="btn btn-default clearfix facilities-category">
 					<i class="linkvan-icon"><%= inline_svg('icons/shelter.svg', size: '30px') %></i>
 					<span>Shelter</span>

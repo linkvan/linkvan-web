@@ -7,9 +7,9 @@ class NoticesController < ApplicationController
   end
   
   def covid19
-    @notice = Notice.find_by(notice_type: :covid19)
+    @notice = Notice.covid19.where(published: true).last
     if @notice.present?
-      render :show
+      render :view
     else
       redirect_to facilities_path
     end
@@ -61,7 +61,7 @@ class NoticesController < ApplicationController
 
   def list
     add_breadcrumb "Notices"
-		@notices = Notice.where(published: true).order(created_at: :desc)
+		@notices = Notice.where(published: true, notice_type: :general).order(created_at: :desc)
 	end
 
   def view
@@ -76,6 +76,6 @@ class NoticesController < ApplicationController
 
   def notice_params
   		params.require(:notice).
-    	permit(:title, :content, :published, :slug)
+    	permit(:title, :content, :published, :slug, :notice_type)
 	end
 end
