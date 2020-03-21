@@ -1,10 +1,19 @@
 class NoticesController < ApplicationController
-  before_action :require_signin, except: [:list, :view]
-  before_action :require_admin, except: [:list, :view]
+  before_action :require_signin, except: [:list, :view, :covid19]
+  before_action :require_admin, except: [:list, :view, :covid19]
 
   def index
 		@notices = Notice.order("id ASC").all
-	end
+  end
+  
+  def covid19
+    @notice = Notice.find_by(notice_type: :covid19)
+    if @notice.present?
+      render :show
+    else
+      redirect_to facilities_path
+    end
+  end
 
   def show
     @notice = Notice.find(params[:id])
