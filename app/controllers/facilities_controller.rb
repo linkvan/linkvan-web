@@ -173,7 +173,6 @@ class FacilitiesController < ApplicationController
 
         if @analytic.save
           session[:current_data] = @analytic.id
-          puts "Test"
           @facilities_near_yes.each_with_index do |f, i|
             @option = ListedOption.new do |o|
               o.analytic_id = @analytic.id
@@ -189,7 +188,7 @@ class FacilitiesController < ApplicationController
       end
 
       if !session[:current_data].present?
-        session[:current_data] = -1
+        session[:current_data] = nil
       end
 
     end

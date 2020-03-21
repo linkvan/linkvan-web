@@ -1,4 +1,4 @@
-class UsersZones < ActiveRecord::Base
+class UsersZones < ApplicationRecord
     belongs_to :user
     belongs_to :zone
 

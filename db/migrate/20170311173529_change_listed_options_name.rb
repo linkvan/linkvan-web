@@ -1,4 +1,4 @@
-class ChangeListedOptionsName < ActiveRecord::Migration
+class ChangeListedOptionsName < ActiveRecord::Migration[4.2]
   def up
     rename_table 'listedOptions', 'listed_options'
   end

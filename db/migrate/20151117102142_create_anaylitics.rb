@@ -1,4 +1,4 @@
-class CreateAnaylitics < ActiveRecord::Migration
+class CreateAnaylitics < ActiveRecord::Migration[4.2]
   def change
     create_table :anaylitics do |t|
       t.decimal :lat

@@ -1,4 +1,4 @@
-class AddSecondTimesToFacilities < ActiveRecord::Migration
+class AddSecondTimesToFacilities < ActiveRecord::Migration[4.2]
   def change
     add_column :facilities, :second_time_tues, :boolean, :default => false
     add_column :facilities, :second_time_wed, :boolean, :default => false

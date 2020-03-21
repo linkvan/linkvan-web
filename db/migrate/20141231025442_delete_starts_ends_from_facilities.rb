@@ -1,4 +1,4 @@
-class DeleteStartsEndsFromFacilities < ActiveRecord::Migration
+class DeleteStartsEndsFromFacilities < ActiveRecord::Migration[4.2]
   def change
   	remove_column :facilities, :startsmon_at, :datetime
   	remove_column :facilities, :endsmon_at, :datetime

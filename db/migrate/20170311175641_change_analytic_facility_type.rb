@@ -1,4 +1,4 @@
-class ChangeAnalyticFacilityType < ActiveRecord::Migration
+class ChangeAnalyticFacilityType < ActiveRecord::Migration[4.2]
   def up
     change_column :analytics, :facility, :decimal
   end

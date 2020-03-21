@@ -9,46 +9,46 @@
 <h2>Welcomes</h2>
 <div class="inset" id="suitability">
   <ul>
-    <% @welcomeArray = @facility.welcomes.downcase.split %>
+    <% @welcomeArray = @facility.welcomes&.downcase&.split || [] %>
     <% if isWelcome("female", @welcomeArray) %>
         <li>
-          <i class="linkvan-icon"><%= inline_svg('icons/female.svg', size: '30px') %></i>
+          <i class="linkvan-icon"><%= inline_svg_tag('icons/female.svg', size: '30px') %></i>
           <p>Female</p>
         </li>
     <% end %>
     <% if isWelcome("male", @welcomeArray) %>
         <li>
-          <i class="linkvan-icon"><%= inline_svg('icons/male.svg', size: '30px') %></i>
+          <i class="linkvan-icon"><%= inline_svg_tag('icons/male.svg', size: '30px') %></i>
           <p>Male</p>
         </li>
     <% end %>
     <% if isWelcome("transgender", @welcomeArray) %>
         <li>
-          <i class="linkvan-icon"><%= inline_svg('icons/transgender.svg', size: '30px') %></i>
+          <i class="linkvan-icon"><%= inline_svg_tag('icons/transgender.svg', size: '30px') %></i>
           <p>Transgender</p>
         </li>
     <% end %>
     <% if isWelcome("children", @welcomeArray) %>
         <li>
-          <i class="linkvan-icon"><%= inline_svg('icons/age-children.svg', size: '30px') %></i>
+          <i class="linkvan-icon"><%= inline_svg_tag('icons/age-children.svg', size: '30px') %></i>
           <p>Children</p>
         </li>
     <% end %>
     <% if isWelcome("youth", @welcomeArray) %>
         <li>
-          <i class="linkvan-icon"><%= inline_svg('icons/age-youth.svg', size: '30px') %></i>
+          <i class="linkvan-icon"><%= inline_svg_tag('icons/age-youth.svg', size: '30px') %></i>
           <p>Youth</p>
         </li>
     <% end %>
     <% if isWelcome("adult", @welcomeArray) %>
         <li>
-          <i class="linkvan-icon"><%= inline_svg('icons/age-adults.svg', size: '30px') %></i>
+          <i class="linkvan-icon"><%= inline_svg_tag('icons/age-adults.svg', size: '30px') %></i>
           <p>Adults</p>
         </li>
     <% end %>
     <% if isWelcome("senior", @welcomeArray) %>
         <li>
-          <i class="linkvan-icon"><%= inline_svg('icons/age-seniors.svg', size: '30px') %></i>
+          <i class="linkvan-icon"><%= inline_svg_tag('icons/age-seniors.svg', size: '30px') %></i>
           <p>Seniors</p>
         </li>
     <% end %>
@@ -63,25 +63,25 @@
       note = ""
       case service
           when "Shelter"
-              content = content_tag(:i, inline_svg('icons/shelter.svg', size: '25px'), class: "linkvan-icon")
+              content = content_tag(:i, inline_svg_tag('icons/shelter.svg', size: '25px'), class: "linkvan-icon")
               note += @facility.shelter_note ? @facility.shelter_note : ""
           when "Food"
-              content = content_tag(:i, inline_svg('icons/cutlery.svg', size: '25px'), class: "linkvan-icon")
+              content = content_tag(:i, inline_svg_tag('icons/cutlery.svg', size: '25px'), class: "linkvan-icon")
               note += @facility.food_note ? @facility.food_note : ""
           when "Medical"
-              content = content_tag(:i, inline_svg('icons/medical.svg', size: '25px'), class: "linkvan-icon")
+              content = content_tag(:i, inline_svg_tag('icons/medical.svg', size: '25px'), class: "linkvan-icon")
               note += @facility.medical_note ? @facility.medical_note : ""
           when "Hygiene"
-              content = content_tag(:i, inline_svg('icons/hygiene.svg', size: '25px'), class: "linkvan-icon")
+              content = content_tag(:i, inline_svg_tag('icons/hygiene.svg', size: '25px'), class: "linkvan-icon")
               note += @facility.hygiene_note ? @facility.hygiene_note : ""
           when "Technology"
-              content = content_tag(:i, inline_svg('icons/technology.svg', size: '25px'), class: "linkvan-icon")
+              content = content_tag(:i, inline_svg_tag('icons/technology.svg', size: '25px'), class: "linkvan-icon")
               note += @facility.technology_note ? @facility.technology_note : ""
           when "Legal"
-              content = content_tag(:i, inline_svg('icons/advocacy.svg', size: '25px'), class: "linkvan-icon")
+              content = content_tag(:i, inline_svg_tag('icons/advocacy.svg', size: '25px'), class: "linkvan-icon")
               note += @facility.legal_note ? @facility.legal_note : ""
           when "Learning"
-              content = content_tag(:i, inline_svg('icons/learning.svg', size: '25px'), class: "linkvan-icon")
+              content = content_tag(:i, inline_svg_tag('icons/learning.svg', size: '25px'), class: "linkvan-icon")
               note += @facility.learning_note ? @facility.learning_note : ""
           #else add error case?
 
@@ -106,7 +106,7 @@
 
 <!--max=71-->
 <div class="inset-website">
-  <p><strong>Website: </strong> <%= link_to truncate(@facility.website, length: 33), "http://" + @facility.website  %></p>
+  <p><strong>Website: </strong> <%= link_to truncate(@facility.website, length: 33), "http://" + @facility.website  if @facility.website.present? %></p>
 </div>
 
 <div id="inset-directions">
