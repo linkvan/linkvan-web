@@ -104,21 +104,21 @@ module FacilitiesHelper
 		services_arr.each do |s|
 			case s
 			when "Shelter"
-					content_arr += content_tag(:i, inline_svg('icons/shelter.svg', size: '30px'), class: "linkvan-icon service", id: "Shelter", onclick: "moreInfo('shelter');")
+					content_arr += content_tag(:i, inline_svg('icons/shelter.svg', size: '30px'), class: "linkvan-icon service", id: "Shelter")
    			when "Food"
-   				content_arr += content_tag(:i, inline_svg('icons/cutlery.svg', size: '30px'), class: "linkvan-icon service", id: "Food", onclick: "moreInfo('food');")
+   				content_arr += content_tag(:i, inline_svg('icons/cutlery.svg', size: '30px'), class: "linkvan-icon service", id: "Food")
    			when "Medical"
-   				content_arr += content_tag(:i, inline_svg('icons/medical.svg', size: '30px'), class: "linkvan-icon service", id: "Medical", onclick: "moreInfo('medical');")
+   				content_arr += content_tag(:i, inline_svg('icons/medical.svg', size: '30px'), class: "linkvan-icon service", id: "Medical")
    			when "Hygiene"
-   				content_arr += content_tag(:i, inline_svg('icons/hygiene.svg', size: '30px'), class: "linkvan-icon service", id: "Hygiene", onclick: "moreInfo('hygiene');")
+   				content_arr += content_tag(:i, inline_svg('icons/hygiene.svg', size: '30px'), class: "linkvan-icon service", id: "Hygiene")
    			when "Technology"
-					content_arr += content_tag(:i, inline_svg('icons/technology.svg', size: '30px'), class: "linkvan-icon service", id: "Technology", onclick: "moreInfo('technology');")
+					content_arr += content_tag(:i, inline_svg('icons/technology.svg', size: '30px'), class: "linkvan-icon service", id: "Technology")
 				when "Legal"
-					content_arr += content_tag(:i, inline_svg('icons/advocacy.svg', size: '30px'), class: "linkvan-icon service", id: "Legal", onclick: "moreInfo('legal');")
+					content_arr += content_tag(:i, inline_svg('icons/advocacy.svg', size: '30px'), class: "linkvan-icon service", id: "Legal")
 				when "Learning"
-					content_arr += content_tag(:i, inline_svg('icons/learning.svg', size: '30px'), class: "linkvan-icon service", id: "Learning", onclick: "moreInfo('learning');")
+					content_arr += content_tag(:i, inline_svg('icons/learning.svg', size: '30px'), class: "linkvan-icon service", id: "Learning")
 				when "Training_Services"
-					content_arr += content_tag(:i, inline_svg('icons/crisis.svg', size: '30px'), class: "linkvan-icon service", id: "Training",  onclick: "moreInfo('training');")
+					content_arr += content_tag(:i, inline_svg('icons/crisis.svg', size: '30px'), class: "linkvan-icon service", id: "Training")
 				#else add error case?
 			end #ends case
 		end
