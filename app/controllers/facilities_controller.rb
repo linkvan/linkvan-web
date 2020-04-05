@@ -9,6 +9,8 @@ class FacilitiesController < ApplicationController
     @alert = Alert.where(active: true).first
     @notices = Notice.general.where(published: true)
     @covid19 = Notice.covid19.where(published: true)
+    @warming_center = Notice.warming_center.where(published: true)
+    @cooling_center = Notice.cooling_center.where(published: true)
 
     respond_to do |format|
       format.html

@@ -1,6 +1,6 @@
 class NoticesController < ApplicationController
-  before_action :require_signin, except: [:list, :view, :covid19]
-  before_action :require_admin, except: [:list, :view, :covid19]
+  before_action :require_signin, except: [:list, :view, :covid19, :warming_center, :cooling_center]
+  before_action :require_admin, except: [:list, :view, :covid19, :warming_center, :cooling_center]
 
   def index
 		@notices = Notice.order("id ASC").all
@@ -8,6 +8,24 @@ class NoticesController < ApplicationController
   
   def covid19
     @notice = Notice.covid19.where(published: true).last
+    if @notice.present?
+      render :view
+    else
+      redirect_to facilities_path
+    end
+  end
+
+  def warming_center
+    @notice = Notice.warming_center.where(published: true).last
+    if @notice.present?
+      render :view
+    else
+      redirect_to facilities_path
+    end
+  end
+
+  def cooling_center
+    @notice = Notice.cooling_center.where(published: true).last
     if @notice.present?
       render :view
     else

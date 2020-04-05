@@ -58,11 +58,13 @@ end #/api
   get 'notices' => 'notices#index'
   get 'notices/list' => 'notices#list'
   get 'notice/:slug' => 'notices#view'
-  # get 'covid19' => 'notices#covid19'
+
   resources :alerts
   resources :notices do
     collection do
       get :covid19
+      get :warming_center
+      get :cooling_center
     end
   end
   resources :facilities
