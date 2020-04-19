@@ -39,6 +39,13 @@
           <% end %>
 				</div>
 				
+				<% if @covid19.size > 0 %>
+					<a href="/notices/covid19" class="btn btn-default clearfix facilities-category">
+						<i class="linkvan-icon"><%= inline_svg('icons/virus.svg', size: '30px') %></i>
+						<span>COVID-19</span>
+						<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
+					</a>
+				<% end %>
 				<a href="/facilities/filter/Overdose/" class="btn btn-default clearfix facilities-category">
 					<i class="linkvan-icon"><%= inline_svg('icons/overdose-prevention.svg', size: '30px') %></i>
 					<span>Overdose Prevention</span>
@@ -55,13 +62,6 @@
 					<a href="/notices/cooling_center" class="btn btn-default clearfix facilities-category">
 						<i class="linkvan-icon"><%= inline_svg('icons/warming-cooling.svg', size: '30px') %></i>
 						<span>Cooling Center</span>
-						<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
-					</a>
-				<% end %>
-				<% if @covid19.size > 0 %>
-					<a href="/notices/covid19" class="btn btn-default clearfix facilities-category">
-						<i class="linkvan-icon"><%= inline_svg('icons/virus.svg', size: '30px') %></i>
-						<span>COVID-19</span>
 						<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
 					</a>
 				<% end %>
