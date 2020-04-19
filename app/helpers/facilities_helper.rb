@@ -119,6 +119,8 @@ module FacilitiesHelper
 					content_arr += content_tag(:i, inline_svg('icons/learning.svg', size: '30px'), class: "linkvan-icon service", id: "Learning")
 				when "Training_Services"
 					content_arr += content_tag(:i, inline_svg('icons/crisis.svg', size: '30px'), class: "linkvan-icon service", id: "Training")
+				when "Overdose_Prevention"
+					content_arr += content_tag(:i, inline_svg('icons/overdose-prevention.svg', size: '30px'), class: "linkvan-icon service", id: "Overdose_Prevention")
 				#else add error case?
 			end #ends case
 		end

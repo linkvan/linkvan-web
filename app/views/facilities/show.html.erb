@@ -58,7 +58,9 @@
 <h2>Services</h2>
 <div class="inset" id="services">
   <p><%=display_services(@facility.services) %></p>
-  <% @facility.services.split.each do |service|
+  <%
+    content = "".html_safe
+    @facility.services.split.each do |service|
       id = service + "Note"
       note = ""
       case service
@@ -83,10 +85,13 @@
           when "Learning"
               content = content_tag(:i, inline_svg('icons/learning.svg', size: '25px'), class: "linkvan-icon")
               note += @facility.learning_note ? @facility.learning_note : ""
+          when "Overdose_Prevention"
+              content = content_tag(:i, inline_svg('icons/overdose-prevention.svg', size: '25px'), class: "linkvan-icon")
+              note += @facility.overdose_note ? @facility.overdose_note : ""  
           #else add error case?
 
       end #ends case
-      content = content_tag(:h3, content + content_tag(:span, service), class: "clearfix")
+      content = content_tag(:h3, content + content_tag(:span, service.downcase.titleize), class: "clearfix")
       content += content_tag(:p, note)
       content.html_safe
       %>

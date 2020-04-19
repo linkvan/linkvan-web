@@ -6,7 +6,8 @@
     ["hygiene", "Hygiene", "hygiene_note"],
     ["technology", "Technology", "technology_note"],
     ["legal", "Legal", "legal_note"],
-    ["learning", "Learning", "learning_note"]
+    ["learning", "Learning", "learning_note"],
+    ["overdose", "Overdose_Prevention", "overdose_note"],
   ]
   welcomes = [
     ["male", "Male"],
@@ -160,6 +161,16 @@
     >
       <%= f.label :learning_note, "Learning" %>
       <%= f.text_area :learning_note, rows: 7, class: "form-control" %>
+    </div>
+    <div
+      id="overdose_note"
+      class="col-md-4"
+      <% if @facility.services.nil? || @facility.services.exclude?("Overdose_Prevention") %>
+        style="display:none"
+      <% end %>
+    >
+      <%= f.label :overdose_note, "Overdose_Prevention" %>
+      <%= f.text_area :overdose_note, rows: 7, class: "form-control" %>
     </div>
   </div>
   <div class="clearfix"></div>
