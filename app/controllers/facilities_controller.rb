@@ -81,6 +81,11 @@ class FacilitiesController < ApplicationController
         @facilities_near_no = Facility.contains_service("Learning", "Near", "No", @latitude, @longitude)
         @facilities_name_yes = Facility.contains_service("Learning", "Name", "Yes", @latitude, @longitude)
         @facilities_name_no = Facility.contains_service("Learning", "Name", "No", @latitude, @longitude)
+      when 'Overdose'
+        @facilities_near_yes = Facility.contains_service("Overdose", "Near", "Yes", @latitude, @longitude)
+        @facilities_near_no = Facility.contains_service("Overdose", "Near", "No", @latitude, @longitude)
+        @facilities_name_yes = Facility.contains_service("Overdose", "Name", "Yes", @latitude, @longitude)
+        @facilities_name_no = Facility.contains_service("Overdose", "Name", "No", @latitude, @longitude)
       # when 'Training_Services'
       #   @facilities_near_yes = Facility.contains_service("Training_Services", "Near", "Yes", @latitude, @longitude)
       #   @facilities_near_no = Facility.contains_service("Training_Services", "Near", "No", @latitude, @longitude)
@@ -336,7 +341,9 @@ private
 		when "learning", "learn", "education", "teaching", "teach", "teacher"
 			return @word = "Learning"
 		when "suitability", "all", "facilities", "facility"
-			return @word = "all"
+      return @word = "all"
+    when "overdose", "prevention"
+			return @word = "Overdose"
 		else
 			return @word
 		end
@@ -347,7 +354,7 @@ private
     @word = @word.strip
     @word = @word.downcase
     case @word
-    when "child", "children", "youth", "youths", "adult", "adults", "senior", "seniors", "suitability", "shelter", "house", "housing", "food", "medical", "hygiene", "clean", "cleaning", "shower", "technology", "computer", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher", "all", "facility", "facilities"
+    when "child", "children", "youth", "youths", "adult", "adults", "senior", "seniors", "suitability", "shelter", "house", "housing", "food", "medical", "hygiene", "clean", "cleaning", "shower", "technology", "computer", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher", "all", "facility", "facilities", "overdose", "prevention"
       return true
     else
       return false
