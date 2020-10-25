@@ -1,3 +1,3 @@
-class Analytic < ActiveRecord::Base
+class Analytic < ApplicationRecord
 
 end

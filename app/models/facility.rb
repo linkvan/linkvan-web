@@ -1,9 +1,9 @@
 require 'bigdecimal'
 require 'bigdecimal/util'
 
-class Facility < ActiveRecord::Base
-	belongs_to :user
-	belongs_to :zone
+class Facility < ApplicationRecord
+	belongs_to :user, optional: true
+	belongs_to :zone, optional: true
 
 	validates :name, :lat, :long, :services, presence: true
 
@@ -90,8 +90,8 @@ class Facility < ActiveRecord::Base
 
 	def self.translate_time(cdate, ftime)
 		newdate = cdate.strftime('%Y-%m-%d')
-		newtime = ftime.to_s(:time)
-		newzone = ftime.zone
+		newtime = ftime&.to_s(:time)
+		newzone = ftime&.zone
 		# cdate = ctime.strftime('%I:%M:%P')
 		Time.parse("#{newdate} #{newtime} #{newzone}")
 	end #/translate_time

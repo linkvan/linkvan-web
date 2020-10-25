@@ -1,4 +1,4 @@
-class UserMailer < ActionMailer::Base
+class UserMailer < ApplicationMailer
   default from: "linkvanca@gmail.com"
 
   def welcome_email(user)

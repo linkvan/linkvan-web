@@ -104,24 +104,24 @@ module FacilitiesHelper
 		services_arr.each do |s|
 			case s
 			when "Shelter"
-					content_arr += content_tag(:i, inline_svg('icons/shelter.svg', size: '30px'), class: "linkvan-icon service", id: "Shelter")
-   			when "Food"
-   				content_arr += content_tag(:i, inline_svg('icons/cutlery.svg', size: '30px'), class: "linkvan-icon service", id: "Food")
-   			when "Medical"
-   				content_arr += content_tag(:i, inline_svg('icons/medical.svg', size: '30px'), class: "linkvan-icon service", id: "Medical")
-   			when "Hygiene"
-   				content_arr += content_tag(:i, inline_svg('icons/hygiene.svg', size: '30px'), class: "linkvan-icon service", id: "Hygiene")
-   			when "Technology"
-					content_arr += content_tag(:i, inline_svg('icons/technology.svg', size: '30px'), class: "linkvan-icon service", id: "Technology")
-				when "Legal"
-					content_arr += content_tag(:i, inline_svg('icons/advocacy.svg', size: '30px'), class: "linkvan-icon service", id: "Legal")
-				when "Learning"
-					content_arr += content_tag(:i, inline_svg('icons/learning.svg', size: '30px'), class: "linkvan-icon service", id: "Learning")
-				when "Training_Services"
-					content_arr += content_tag(:i, inline_svg('icons/crisis.svg', size: '30px'), class: "linkvan-icon service", id: "Training")
-				when "Overdose_Prevention"
-					content_arr += content_tag(:i, inline_svg('icons/overdose-prevention.svg', size: '30px'), class: "linkvan-icon service", id: "Overdose_Prevention")
-				#else add error case?
+				content_arr += content_tag(:i, inline_svg_tag('icons/shelter.svg', size: '30px'), class: "linkvan-icon service", id: "Shelter")
+			when "Food"
+				content_arr += content_tag(:i, inline_svg_tag('icons/cutlery.svg', size: '30px'), class: "linkvan-icon service", id: "Food")
+			when "Medical"
+				content_arr += content_tag(:i, inline_svg_tag('icons/medical.svg', size: '30px'), class: "linkvan-icon service", id: "Medical")
+			when "Hygiene"
+				content_arr += content_tag(:i, inline_svg_tag('icons/hygiene.svg', size: '30px'), class: "linkvan-icon service", id: "Hygiene")
+			when "Technology"
+				content_arr += content_tag(:i, inline_svg_tag('icons/technology.svg', size: '30px'), class: "linkvan-icon service", id: "Technology")
+			when "Legal"
+				content_arr += content_tag(:i, inline_svg_tag('icons/advocacy.svg', size: '30px'), class: "linkvan-icon service", id: "Legal")
+			when "Learning"
+				content_arr += content_tag(:i, inline_svg_tag('icons/learning.svg', size: '30px'), class: "linkvan-icon service", id: "Learning")
+			when "Training_Services"
+				content_arr += content_tag(:i, inline_svg_tag('icons/crisis.svg', size: '30px'), class: "linkvan-icon service", id: "Training")
+			when "Overdose_Prevention"
+				content_arr += content_tag(:i, inline_svg_tag('icons/overdose-prevention.svg', size: '30px'), class: "linkvan-icon service", id: "Overdose_Prevention")
+			#else add error case?
 			end #ends case
 		end
 
@@ -140,33 +140,33 @@ module FacilitiesHelper
 		case res
 		when "id"
 			if t_or_f
-				content_tag(:i, inline_svg('icons/idcard.svg', size: '24px'), class: "linkvan-icon")
+				content_tag(:i, inline_svg_tag('icons/idcard.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, inline_svg('icons/idcard.svg', size: '24px'), class: "linkvan-icon")
+				content_tag(:i, inline_svg_tag('icons/idcard.svg', size: '24px'), class: "linkvan-icon")
 			end
 		when "pets"
 			if t_or_f
-				content_tag(:i, inline_svg('icons/pawprint.svg', size: '24px'), class: "linkvan-icon")
+				content_tag(:i, inline_svg_tag('icons/pawprint.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, inline_svg('icons/pawprint.svg', size: '24px'), class: "linkvan-icon")
+				content_tag(:i, inline_svg_tag('icons/pawprint.svg', size: '24px'), class: "linkvan-icon")
 			end
 		when "cart"
 			if t_or_f
-				content_tag(:i, inline_svg('icons/cart.svg', size: '24px'), class: "linkvan-icon")
+				content_tag(:i, inline_svg_tag('icons/cart.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, inline_svg('icons/cart.svg', size: '24px'), class: "linkvan-icon")
+				content_tag(:i, inline_svg_tag('icons/cart.svg', size: '24px'), class: "linkvan-icon")
 			end
 		when "phone"
 			if t_or_f
-				content_tag(:i, inline_svg('icons/phone.svg', size: '24px'), class: "linkvan-icon")
+				content_tag(:i, inline_svg_tag('icons/phone.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, inline_svg('icons/phone.svg', size: '24px'), class: "linkvan-icon")
+				content_tag(:i, inline_svg_tag('icons/phone.svg', size: '24px'), class: "linkvan-icon")
 			end
 		else
 			if t_or_f
-				content_tag(:i, inline_svg('icons/wifi.svg', size: '24px'), class: "linkvan-icon")
+				content_tag(:i, inline_svg_tag('icons/wifi.svg', size: '24px'), class: "linkvan-icon")
 			else
-				content_tag(:i, inline_svg('icons/wifi.svg', size: '24px'), class: "linkvan-icon")
+				content_tag(:i, inline_svg_tag('icons/wifi.svg', size: '24px'), class: "linkvan-icon")
 			end
 		end
 	end
@@ -208,6 +208,8 @@ module FacilitiesHelper
 
 
 	def format_tel(tel)
+		return '' if tel.blank?
+
 		if (tel[0] == "+")
 			return tel.gsub("+1", "")
 		else
@@ -249,7 +251,7 @@ module FacilitiesHelper
 		currentTime = Time.new.in_time_zone("Pacific Time (US & Canada)")
 		fEndTime = facility[columnByDay[currentDay][0]]
 		convertedUserTime = 		Time.utc(2000, 01, 01, currentTime.hour, currentTime.min, 0)
-		convertedFacilityTime = Time.utc(2000, 01, 01, fEndTime.hour, fEndTime.min, 0)
+		convertedFacilityTime = Time.utc(2000, 01, 01, fEndTime&.hour || 0, fEndTime&.min || 0, 0)
 		
 		if facility[columnByDay[currentDay][1]]
 			return false
@@ -276,7 +278,7 @@ module FacilitiesHelper
 		currentTime = Time.new.in_time_zone("Pacific Time (US & Canada)")
 		fStartTime = facility[columnByDay[currentDay][0]]
 		convertedUserTime = 		Time.utc(2000, 01, 01, currentTime.hour, currentTime.min, 0)
-		convertedFacilityTime = Time.utc(2000, 01, 01, fStartTime.hour, fStartTime.min, 0)
+		convertedFacilityTime = Time.utc(2000, 01, 01, fStartTime&.hour || 0, fStartTime&.min || 0, 0)
 
 		if facility[columnByDay[currentDay][1]]
 			return false
