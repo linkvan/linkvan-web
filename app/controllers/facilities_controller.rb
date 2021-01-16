@@ -101,7 +101,7 @@ class FacilitiesController < ApplicationController
         if !(@services.nil?)
           servicesarr = @services.split(",")
         else
-          servicesarr = ["Shelter", "Food", "Medical", "Hygiene", "Technology", "Legal", "Learning"]
+          servicesarr = ["Shelter", "Food", "Medical", "Hygiene", "Technology", "Legal", "Learning", "Phone"]
         end
 
         @facilities_near_yes = []
@@ -343,7 +343,9 @@ private
 		when "suitability", "all", "facilities", "facility"
       return @word = "all"
     when "overdose", "prevention"
-			return @word = "Overdose"
+      return @word = "Overdose"
+    when "phone"
+			return @word = "Phone"
 		else
 			return @word
 		end
@@ -354,7 +356,7 @@ private
     @word = @word.strip
     @word = @word.downcase
     case @word
-    when "child", "children", "youth", "youths", "adult", "adults", "senior", "seniors", "suitability", "shelter", "house", "housing", "food", "medical", "hygiene", "clean", "cleaning", "shower", "technology", "computer", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher", "all", "facility", "facilities", "overdose", "prevention"
+    when "child", "children", "youth", "youths", "adult", "adults", "senior", "seniors", "suitability", "shelter", "house", "housing", "food", "medical", "hygiene", "clean", "cleaning", "shower", "technology", "computer", "tech", "legal", "law", "learning", "learn", "education", "teaching", "teach", "teacher", "all", "facility", "facilities", "overdose", "prevention", "phone"
       return true
     else
       return false

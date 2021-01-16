@@ -61,6 +61,8 @@
   <%
     content = "".html_safe
     @facility.services.split.each do |service|
+      next if service == 'Phone'
+
       id = service + "Note"
       note = ""
       case service
@@ -116,40 +118,6 @@
 
 <div id="inset-directions">
 </div>
-
-<!--<div class="description">-->
-
-<!--
-  <h2>Resources (In Progress)</h2>
-
-<table>
-  <tr>
-    <td><%= resource_icon_t_or_f?("id", @facility.r_id) %></td>
-    <td><%=resource_t_or_f?(@facility.r_id)%></td>
-    <td><%=resource_text_t_or_f?("id", @facility.r_id)%></td>
-  </tr>
-  <tr>
-    <td><%= resource_icon_t_or_f?("pets", @facility.r_pets) %></td>
-    <td><%=resource_t_or_f?(@facility.r_pets)%> </td>
-    <td><%=resource_text_t_or_f?("pets", @facility.r_pets)%></td>
-  </tr>
-  <tr>
-    <td><%= resource_icon_t_or_f?("cart", @facility.r_cart) %></td>
-    <td><%=resource_t_or_f?(@facility.r_cart)%></td>
-    <td><%=resource_text_t_or_f?("cart", @facility.r_cart)%></td>
-  </tr>
-  <tr>
-    <td><%= resource_icon_t_or_f?("phone", @facility.r_phone) %></td>
-    <td><%=resource_t_or_f?(@facility.r_phone)%></td>
-    <td> <%=resource_text_t_or_f?("phone", @facility.r_phone)%></td>
-  </tr>
-  <tr>
-    <td><%= resource_icon_t_or_f?("wifi", @facility.r_wifi) %></td>
-    <td><%=resource_t_or_f?(@facility.r_wifi)%></td>
-    <td><%=resource_text_t_or_f?("wifi", @facility.r_wifi)%></td>
-  </tr>
-</table>
--->
 
 <h2>Hours</h2>
   <div class="inset" id="hours">
