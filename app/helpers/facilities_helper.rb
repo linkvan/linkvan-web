@@ -121,91 +121,14 @@ module FacilitiesHelper
 					content_arr += content_tag(:i, inline_svg('icons/crisis.svg', size: '30px'), class: "linkvan-icon service", id: "Training")
 				when "Overdose_Prevention"
 					content_arr += content_tag(:i, inline_svg('icons/overdose-prevention.svg', size: '30px'), class: "linkvan-icon service", id: "Overdose_Prevention")
+				when "Phone"
+					content_arr += content_tag(:i, inline_svg('icons/phone.svg', size: '30px'), class: "linkvan-icon service", id: "Phone")
 				#else add error case?
 			end #ends case
 		end
 
 		return content_arr.html_safe
 	end
-
-	def resource_t_or_f?(t_or_f)
-		if t_or_f
-			content_tag(:i, nil, class: "glyphicon glyphicon-ok food-colour")
-		else
-			content_tag(:i, nil, class: "glyphicon glyphicon-remove medical-colour")
-		end
-	end
-
-	def resource_icon_t_or_f?(res, t_or_f)
-		case res
-		when "id"
-			if t_or_f
-				content_tag(:i, inline_svg('icons/idcard.svg', size: '24px'), class: "linkvan-icon")
-			else
-				content_tag(:i, inline_svg('icons/idcard.svg', size: '24px'), class: "linkvan-icon")
-			end
-		when "pets"
-			if t_or_f
-				content_tag(:i, inline_svg('icons/pawprint.svg', size: '24px'), class: "linkvan-icon")
-			else
-				content_tag(:i, inline_svg('icons/pawprint.svg', size: '24px'), class: "linkvan-icon")
-			end
-		when "cart"
-			if t_or_f
-				content_tag(:i, inline_svg('icons/cart.svg', size: '24px'), class: "linkvan-icon")
-			else
-				content_tag(:i, inline_svg('icons/cart.svg', size: '24px'), class: "linkvan-icon")
-			end
-		when "phone"
-			if t_or_f
-				content_tag(:i, inline_svg('icons/phone.svg', size: '24px'), class: "linkvan-icon")
-			else
-				content_tag(:i, inline_svg('icons/phone.svg', size: '24px'), class: "linkvan-icon")
-			end
-		else
-			if t_or_f
-				content_tag(:i, inline_svg('icons/wifi.svg', size: '24px'), class: "linkvan-icon")
-			else
-				content_tag(:i, inline_svg('icons/wifi.svg', size: '24px'), class: "linkvan-icon")
-			end
-		end
-	end
-
-	def resource_text_t_or_f?(res, t_or_f)
-		case res
-		when "id"
-			if t_or_f
-				content_tag(:h5, "ID IS required")
-			else
-				content_tag(:h5, "ID IS NOT required")
-			end
-		when "pets"
-			if t_or_f
-				content_tag(:h5, "Pets ARE allowed")
-			else
-				content_tag(:h5, "Pets ARE NOT allowed")
-			end
-		when "cart"
-			if t_or_f
-				content_tag(:h5, "Shopping carts ARE allowed")
-			else
-				content_tag(:h5, "Shopping carts ARE NOT allowed")
-			end
-		when "phone"
-			if t_or_f
-				content_tag(:h5, "Phones ARE available")
-			else
-				content_tag(:h5, "Phones ARE NOT available")
-			end
-		else
-			if t_or_f
-				content_tag(:h5, "Wi-Fi IS available")
-			else
-				content_tag(:h5, "Wi-Fi IS NOT available")
-			end
-		end
-	end
-
 
 	def format_tel(tel)
 		if (tel[0] == "+")
