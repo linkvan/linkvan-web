@@ -90,6 +90,9 @@
           when "Overdose_Prevention"
               content = content_tag(:i, inline_svg('icons/overdose-prevention.svg', size: '25px'), class: "linkvan-icon")
               note += @facility.overdose_note ? @facility.overdose_note : ""  
+          when "Water_Fountain"
+              content = content_tag(:i, inline_svg('icons/water-fountains.svg', size: '25px'), class: "linkvan-icon")
+              note += ""  
           #else add error case?
 
       end #ends case
