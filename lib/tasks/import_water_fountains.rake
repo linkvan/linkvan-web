@@ -62,6 +62,8 @@ namespace :import do
           lat: coordinates.second,
           long: coordinates.first,
           verified: true,
+          phone: '',
+          website: '',
         }
 
         [:sun, :mon, :tues, :wed, :thurs, :fri, :sat].each do |day|
