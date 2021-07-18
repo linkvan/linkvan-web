@@ -11,7 +11,7 @@ namespace :import do
   desc "import water fountains JSON file as facilities"
   task :water_fountains, [:jsonfile] => [:environment] do |t, args|
     jsonfilename = args[:jsonfile]
-    jsonfilename = Rails.root.join('db/drinking-fountains.json') if jsonfilename.blank?
+    jsonfilename = Rails.root.join('db/seed_data/drinking-fountains.json') if jsonfilename.blank?
     
     abort "Must provide a file to be processed. Aborting..." if jsonfilename.blank?
     abort "File #{jsonfilename} doens't exist. Aborting..." unless File.exists?(jsonfilename)
