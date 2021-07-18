@@ -123,6 +123,8 @@ module FacilitiesHelper
 					content_arr += content_tag(:i, inline_svg('icons/overdose-prevention.svg', size: '30px'), class: "linkvan-icon service", id: "Overdose_Prevention")
 				when "Phone"
 					content_arr += content_tag(:i, inline_svg('icons/phone.svg', size: '30px'), class: "linkvan-icon service", id: "Phone")
+				when "Water_Fountain"
+					content_arr += content_tag(:i, inline_svg('icons/water-fountains.svg', size: '30px'), class: "linkvan-icon service", id: "Phone")
 				#else add error case?
 			end #ends case
 		end
