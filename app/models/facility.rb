@@ -9,6 +9,8 @@ class Facility < ActiveRecord::Base
 
 	# is_impressionable
 
+  scope :water_fountains, -> { where(services: 'Water_Fountain') }
+
 	scope :is_verified, -> {
 		where(verified: true)
 	}

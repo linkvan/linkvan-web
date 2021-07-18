@@ -6,6 +6,8 @@ class FacilitiesController < ApplicationController
   include FacilitiesHelper
   def index
     @facilities = Facility.all
+    @water_fountains = Facility.water_fountains
+
     @alert = Alert.where(active: true).first
     @notices = Notice.general.where(published: true)
     @covid19 = Notice.covid19.where(published: true)
@@ -86,11 +88,11 @@ class FacilitiesController < ApplicationController
         @facilities_near_no = Facility.contains_service("Overdose", "Near", "No", @latitude, @longitude)
         @facilities_name_yes = Facility.contains_service("Overdose", "Name", "Yes", @latitude, @longitude)
         @facilities_name_no = Facility.contains_service("Overdose", "Name", "No", @latitude, @longitude)
-      # when 'Training_Services'
-      #   @facilities_near_yes = Facility.contains_service("Training_Services", "Near", "Yes", @latitude, @longitude)
-      #   @facilities_near_no = Facility.contains_service("Training_Services", "Near", "No", @latitude, @longitude)
-      #   @facilities_name_yes = Facility.contains_service("Training_Services", "Name", "Yes", @latitude, @longitude)
-      #   @facilities_name_no = Facility.contains_service("Training_Services", "Name", "No", @latitude, @longitude)
+      when 'WaterFountains'
+        @facilities_near_yes = Facility.contains_service("Water_Fountain", "Near", "Yes", @latitude, @longitude)
+        @facilities_near_no = Facility.contains_service("Water_Fountain", "Near", "No", @latitude, @longitude)
+        @facilities_name_yes = Facility.contains_service("Water_Fountain", "Name", "Yes", @latitude, @longitude)
+        @facilities_name_no = Facility.contains_service("Water_Fountain", "Name", "No", @latitude, @longitude)
       when 'Search'
         @sortby = params[:sortby]
         @hours = params[:hours]

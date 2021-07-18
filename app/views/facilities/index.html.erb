@@ -46,6 +46,15 @@
 						<i class="glyphicon glyphicon-chevron-right chevron-right"></i>
 					</a>
 				<% end %>
+
+                <% if @water_fountains.count.positive? %>
+                    <a href="/facilities/filter/WaterFountains/" class="btn btn-default clearfix facilities-category">
+                        <i class="linkvan-icon"><%= inline_svg('icons/water-fountains.svg', size: '30px') %></i>
+                        <span>Water Fountains</span>
+                        <i class="glyphicon glyphicon-chevron-right chevron-right"></i>
+                    </a>
+                <% end %>
+
 				<a href="/facilities/filter/Overdose/" class="btn btn-default clearfix facilities-category">
 					<i class="linkvan-icon"><%= inline_svg('icons/overdose-prevention.svg', size: '30px') %></i>
 					<span>Overdose Prevention</span>
