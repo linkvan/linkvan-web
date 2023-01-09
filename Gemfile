@@ -59,7 +59,7 @@ gem 'tzinfo-data', platforms: [:x64_mingw, :mingw, :mswin]
 
 gem "breadcrumbs_on_rails"
 
-gem 'inline_svg', '1.1.0'
+gem 'inline_svg', '1.7.2'
 
 gem 'chartjs-ror'
 
