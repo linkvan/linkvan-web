@@ -26,14 +26,26 @@
 
 default: &default
   adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
+  #database: <%= ENV['DATABASE_NAME'] %>
+  pool: 5
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   min_messages: WARNING
 
 development:
   <<: *default
-  database: linkvan_development
+  #url: <%= ENV['DATABASE_URL'] %>
+  database: <%= ENV['DATABASE_NAME'] || linkvan_web_development %>
+
 test:
   <<: *default
-  database: linkvan_test
-  
-
-  
+  database: linkvan_web_test
+ 
+production:
+  <<: *default
+  #url: <%= ENV['DATABASE_URL'] %>
+  #database: <%= ENV['DATABASE_NAME'] %>
+  #pool: 5
+  #username: <%= ENV['DATABASE_USER'] %>
+  #password: <%= ENV['DATABASE_PASSWORD'] %>

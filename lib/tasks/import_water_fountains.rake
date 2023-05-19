@@ -46,11 +46,11 @@ namespace :import do
 
       water_fountains.each do |data|
         count += 1
-        fountain_data = data['fields']
+        fountain_data = data
         name = fountain_data['name'].sub("\n", " ")
 
         puts "Processing water fountain with name '#{name}' [#{count}/#{total}]"
-        geom_data = fountain_data['geom']
+        geom_data = fountain_data.dig('geom', 'geometry')
         coordinates = geom_data['coordinates']
 
         facility_hash = {
